@@ -1,0 +1,13 @@
+.LeftMenu_box {
+  list-style-type: none;
+  margin:0;
+
+  &__item {
+    margin-bottom: 10px;
+    font-size: 26px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

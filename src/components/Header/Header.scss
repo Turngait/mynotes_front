@@ -1,0 +1,27 @@
+@import '../../config/variable.scss';
+
+.header_box {
+  padding: 15px;
+  background: $base-color;
+  color: #fff;
+  box-shadow: 0px 1px 3px #333;
+  text-shadow: 0 1px 2px #888;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    font-size: 30px;
+  }
+
+  &__link_item {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 20px;
+  
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
