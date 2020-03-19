@@ -1,0 +1,11 @@
+@import "../../config/variable.scss";
+
+.footer_box {
+  background-color: $base-color;
+  color: #fff;
+  padding: 6px 30px 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}

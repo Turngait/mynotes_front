@@ -6,8 +6,8 @@ const Header = () => {
     <header className="header_box">
       <h2 className="header_box__logo">MyNotes</h2>
       <nav>
-        <a className="header_box__link_item" href="#">Profile</a>
-        <a className="header_box__link_item" href="#">Sign Out</a>
+        <a className="header_box__link_item" href="/user">Profile</a>
+        <a className="header_box__link_item" href="/logout">Sign Out</a>
       </nav>
     </header>
   )

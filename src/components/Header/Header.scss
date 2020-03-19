@@ -1,25 +1,29 @@
 @import '../../config/variable.scss';
 
 .header_box {
-  padding: 15px;
-  background: $base-color;
+  padding: 6px 30px 7px;
+  background-color: $base-color;
   color: #fff;
-  box-shadow: 0px 1px 3px #333;
-  text-shadow: 0 1px 2px #888;
+  box-shadow: 0px 1px 4px #333;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 10;
 
   &__logo {
-    font-size: 30px;
+    font-size: 2rem;
   }
 
   &__link_item {
+    font-family: 'Franklin';
     color: #fff;
     text-decoration: none;
-    font-size: 20px;
-    margin-right: 20px;
-  
+    font-size: 1.5rem;
+    margin-right: 1.2rem;
+    
+    &:hover {
+      opacity: 0.7;
+    }
     &:last-child {
       margin-right: 0;
     }

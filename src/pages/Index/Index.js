@@ -17,14 +17,38 @@ class Index extends Component {
   }
 
   getToken = () => {
-    const obj = {
-      signUp: this.state.signUpActive
+    let auth = ''
+    let body = {}
+
+    if(this.state.signUpActive) {
+      auth = '/auth/signup'
+      body = {
+        email: this.state.signUpEmail,
+        pass: this.state.signUpPass,
+        name: this.state.signUpName
+      }
+    } else {
+      auth = '/auth/signin'
+      body = {
+        email: this.state.signInEmail,
+        pass: this.state.signInPass
+      }
     }
-    fetch(API_URL)
-    .then(res => {
-      return res.text()
+
+    fetch(API_URL+auth, {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(body)
     })
-    .then(data => this.setState({token: data}, ()=>console.log(this.state)))
+    .then(res => {
+      return res.json()
+    })
+    .then(data => {
+      console.log(data)
+    })
   }
 
   signUpToggleHandler = (val) => {

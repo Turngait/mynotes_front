@@ -1,10 +1,22 @@
+@import '../../../config/variable.scss';
+
 .LeftMenu_box {
+  font-family: $headers-font;
   list-style-type: none;
   margin:0;
+  padding: 5vh 4vw;
 
   &__item {
-    margin-bottom: 10px;
-    font-size: 26px;
+    margin-bottom: 13px;
+    font-size: 1.4rem;
+
+    &_link {
+      color: $dark-color;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
 
     &:last-child {
       margin-bottom: 0;
