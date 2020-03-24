@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import './UserAcc.scss';
+import './Dashboard.scss';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
 
 
-class UserAcc extends Component {
+class Dashboard extends Component {
   render() {
     return (
       <div className="flexbox">
@@ -25,4 +25,4 @@ class UserAcc extends Component {
   }
 }
 
-export default UserAcc;
+export default Dashboard;

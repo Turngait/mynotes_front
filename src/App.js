@@ -1,14 +1,17 @@
 import React from 'react';
+import {Route, Switch} from 'react-router-dom'
 import './App.scss';
 
 import Index from './pages/Index/Index';
-// import UserAcc from './pages/UserAcc/UserAcc';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 function App() {
   return (
     <>
-      <Index />
-      {/* <UserAcc /> */}
+    <Switch>
+      <Route path='/' exact component={Index}/>
+      <Route path='/dashboard' exact component={Dashboard} />
+    </Switch>
     </>
   );
 }

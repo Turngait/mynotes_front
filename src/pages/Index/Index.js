@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import './Index.scss';
-
+import {setToken, getToken, setInfo} from '../../store/User/user.actions'
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
 import { API_URL } from '../../config/api';
@@ -8,7 +9,6 @@ import { API_URL } from '../../config/api';
 class Index extends Component {
   state = {
     signUpActive: false,
-    token: '',
     signUpEmail:'',
     signUpPass: '',
     signUpName: '',
@@ -17,6 +17,7 @@ class Index extends Component {
   }
 
   getToken = () => {
+    console.log(this.props)
     let auth = ''
     let body = {}
 
@@ -47,7 +48,12 @@ class Index extends Component {
       return res.json()
     })
     .then(data => {
-      console.log(data)
+      if(data.status === 200) {
+        this.props.setToken(data.data.token)
+        this.props.setInfo(data.data)
+      } else {
+        console.log('Wrong')
+      }
     })
   }
 
@@ -103,4 +109,20 @@ class Index extends Component {
   }
 }
 
-export default Index;
+function mapStateToProps(state) {
+  return {
+    token: state.user.token,
+    email: state.user.email,
+    name: state.user.name
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setToken: (token) => dispatch(setToken(token)),
+    getToken: () => dispatch(getToken()),
+    setInfo: (user) => dispatch(setInfo(user))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index)
