@@ -5,6 +5,9 @@ import Footer from '../../components/Footer/Footer';
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
 
+/*
+  Dashboard component which render all section
+*/
 
 class Dashboard extends Component {
   render() {
