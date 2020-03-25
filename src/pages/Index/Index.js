@@ -1,10 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import './Index.scss';
-import {setToken, getToken, setInfo} from '../../store/User/user.actions'
-import SignIn from './SignIn/SignIn';
-import SignUp from './SignUp/SignUp';
-import { API_URL } from '../../config/api';
+import {getToken, signIn, signUp} from '../../store/User/user.actions'
+import SignIn from './SignIn/SignIn'
+import SignUp from './SignUp/SignUp'
 
 class Index extends Component {
   state = {
@@ -16,45 +15,12 @@ class Index extends Component {
     signInPass:''
   }
 
-  getToken = () => {
-    console.log(this.props)
-    let auth = ''
-    let body = {}
-
+  auth = async () => {
     if(this.state.signUpActive) {
-      auth = '/auth/signup'
-      body = {
-        email: this.state.signUpEmail,
-        pass: this.state.signUpPass,
-        name: this.state.signUpName
-      }
+      await this.props.signUp(this.state.signUpEmail, this.state.signUpName, this.state.signUpPass)
     } else {
-      auth = '/auth/signin'
-      body = {
-        email: this.state.signInEmail,
-        pass: this.state.signInPass
-      }
+      await this.props.signIn(this.state.signInEmail, this.state.signInPass)
     }
-
-    fetch(API_URL+auth, {
-      mode: 'cors',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(body)
-    })
-    .then(res => {
-      return res.json()
-    })
-    .then(data => {
-      if(data.status === 200) {
-        this.props.setToken(data.data.token)
-        this.props.setInfo(data.data)
-      } else {
-        console.log('Wrong')
-      }
-    })
   }
 
   signUpToggleHandler = (val) => {
@@ -84,6 +50,19 @@ class Index extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.getToken()
+    if (this.props.token) {
+      this.props.history.push('/dashboard')
+    }
+  }
+  componentDidUpdate() {
+    this.props.getToken()
+    if (this.props.token) {
+      this.props.history.push('/dashboard')
+    }
+  }
+
   render() {
     return (
       <div className="index">
@@ -100,9 +79,9 @@ class Index extends Component {
         {
         this.state.signUpActive 
         ? 
-          <SignUp onSubmit={this.getToken} getInfo={this.getUserInfo}/> 
+          <SignUp onSubmit={this.auth} getInfo={this.getUserInfo}/> 
         : 
-          <SignIn onSubmit={this.getToken} getInfo={this.getUserInfo}/>
+          <SignIn onSubmit={this.auth} getInfo={this.getUserInfo}/>
         }
       </div>
     )
@@ -119,9 +98,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setToken: (token) => dispatch(setToken(token)),
     getToken: () => dispatch(getToken()),
-    setInfo: (user) => dispatch(setInfo(user))
+    signIn: (login, pass) => dispatch(signIn(login, pass)),
+    signUp: (email, name, pass) => dispatch(signUp(email, name, pass))
   }
 }
 

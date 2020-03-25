@@ -14,18 +14,24 @@
     font-size: 2rem;
   }
 
-  &__link_item {
+  &__btn_item {
     font-family: 'Franklin';
     color: #fff;
     text-decoration: none;
     font-size: 1.5rem;
     margin-right: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
     
     &:hover {
       opacity: 0.7;
     }
     &:last-child {
       margin-right: 0;
+    }
+    &:focus {
+      outline: none;
     }
   }
 }

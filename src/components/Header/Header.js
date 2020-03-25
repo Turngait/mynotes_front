@@ -1,16 +1,24 @@
-import React from 'react';
-import './Header.scss';
+import React from 'react'
+import './Header.scss'
+import { connect } from 'react-redux'
+import { openProfile } from '../../store/Dashboard/dashboard.actions'
 
-const Header = () => {
+const Header = props => {
   return(
     <header className="header_box">
       <h2 className="header_box__logo">MyNotes</h2>
       <nav>
-        <a className="header_box__link_item" href="/user">Profile</a>
-        <a className="header_box__link_item" href="/logout">Sign Out</a>
+        <button onClick={props.openProfile} className="header_box__btn_item">Profile</button>
+        <button className="header_box__btn_item">Sign Out</button>
       </nav>
     </header>
   )
 }
 
-export default Header;
+function mapDispatchFromPorps(dispatch) {
+  return {
+    openProfile: () => dispatch(openProfile())
+  }
+}
+
+export default connect(null, mapDispatchFromPorps)(Header)

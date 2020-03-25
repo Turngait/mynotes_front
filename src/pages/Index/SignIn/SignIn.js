@@ -1,7 +1,7 @@
-import React from 'react';
-import './SignIn.scss';
-import Input2 from '../../../components/Input2/Input2';
-import Button1 from '../../../components/Button1/Button1';
+import React from 'react'
+import './SignIn.scss'
+import Input2 from '../../../components/Input2/Input2'
+import Button1 from '../../../components/Button1/Button1'
 
 const SignIn = props => {
   return (
@@ -13,4 +13,4 @@ const SignIn = props => {
   )
 }
 
-export default SignIn;
+export default SignIn
