@@ -79,9 +79,9 @@ class Index extends Component {
         {
         this.state.signUpActive 
         ? 
-          <SignUp onSubmit={this.auth} getInfo={this.getUserInfo}/> 
+          <SignUp onSubmit={this.auth} getInfo={this.getUserInfo} authMsg={this.props.authMsg}/> 
         : 
-          <SignIn onSubmit={this.auth} getInfo={this.getUserInfo}/>
+          <SignIn onSubmit={this.auth} getInfo={this.getUserInfo} authMsg={this.props.authMsg}/>
         }
       </div>
     )
@@ -92,7 +92,8 @@ function mapStateToProps(state) {
   return {
     token: state.user.token,
     email: state.user.email,
-    name: state.user.name
+    name: state.user.name,
+    authMsg: state.user.authMsg
   }
 }
 

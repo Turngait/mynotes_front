@@ -1,7 +1,8 @@
 const initialState = {
   token: false,
   email: '',
-  name: ''
+  name: '',
+  authMsg: ''
 }
 
 export default function userReducer (state = initialState, action) {
@@ -9,18 +10,29 @@ export default function userReducer (state = initialState, action) {
     case 'SET_TOKEN':
       return {
         ...state,
-        token: action.payload
+        token: action.payload,
+        authMsg: ''
       }
     case 'GET_TOKEN':
       return {
         ...state,
         token: action.payload
       }
+    case 'REMOVE_TOKEN':
+      return {
+        ...state,
+        token: false
+      }
     case 'SET_INFO':
       return {
         ...state,
         email: action.email,
         name: action.name
+      }
+    case 'SET_MSG':
+      return {
+        ...state,
+        authMsg: action.payload
       }
     default:
       return state

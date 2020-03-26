@@ -33,6 +33,7 @@ export function signIn(login, pass) {
         })
       } else {
         console.log('Wrong')
+        dispatch(setAuthMsg('Wrong email or password!'))
       }
     })
   }
@@ -59,6 +60,7 @@ export function signUp (email, name, pass) {
     })
     .then(data => {
       if(data.status === 202) {
+        dispatch(setAuthMsg('Registration is complete!'))
         dispatch({
           type: 'SET_INFO',
           email: data.data.email,
@@ -67,6 +69,15 @@ export function signUp (email, name, pass) {
       } else {
         console.log('Wrong')
       }
+    })
+  }
+}
+
+export function logOut() {
+  return(dispatch) => {
+    localStorage.removeItem('token')
+    dispatch({
+      type: 'REMOVE_TOKEN'
     })
   }
 }
@@ -113,6 +124,15 @@ export function setInfo(user) {
       type: 'SET_INFO',
       email: user.email,
       name: user.name
+    })
+  }
+}
+
+export function setAuthMsg(msg) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_MSG',
+      payload: msg
     })
   }
 }

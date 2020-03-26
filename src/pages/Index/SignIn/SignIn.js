@@ -6,6 +6,7 @@ import Button1 from '../../../components/Button1/Button1'
 const SignIn = props => {
   return (
     <form className="signIn">
+      <span>{props.authMsg}</span>
       <Input2 onChange={props.getInfo} inputId='signInEmail' type="email" name="email" placeholder="Enter your e-mail..." />
       <Input2 onChange={props.getInfo} inputId='signInPass' type="password" name="pass" placeholder="Enter your password..." />
       <Button1 value='Sign In' onClick={props.onSubmit}/>

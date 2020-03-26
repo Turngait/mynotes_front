@@ -7,7 +7,7 @@ import LeftMenu from './LeftMenu/LeftMenu'
 import MyFinance from './MyFinance/MyFinance'
 import Wishlist from './Wishlist/Wishlist'
 import Profile from './Profile/Profile'
-import { getToken } from '../../store/User/user.actions'
+import { getToken, logOut } from '../../store/User/user.actions'
 
 /*
   Dashboard component which render all section
@@ -21,10 +21,15 @@ class Dashboard extends Component {
     }
   }
 
+  logOut = () => {
+    this.props.logOut()
+    this.props.history.push('/')
+  }
+
   render() {
     return (
       <div className="flexbox">
-        <Header />
+        <Header logOut={this.logOut} />
         <main className="main_box">
           <aside className="main_box__menu">
             <LeftMenu />
@@ -51,7 +56,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getToken: () => dispatch(getToken())
+    getToken: () => dispatch(getToken()),
+    logOut: () => dispatch(logOut())
   }
 }
 

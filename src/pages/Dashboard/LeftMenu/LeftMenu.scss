@@ -4,22 +4,26 @@
   font-family: $headers-font;
   list-style-type: none;
   margin:0;
-  padding: 5vh 4vw;
+  padding: 3vh 0;
 
   &__item {
-    margin-bottom: 13px;
     font-size: 1.4rem;
 
     &_btn {
+      padding: 2vh 2vw;
+      min-width: 15vw;
       font-size: 1.4rem;
       color: $dark-color;
       background: none;
       border: none;
       text-decoration: underline;
       cursor: pointer;
+      box-sizing: border-box;
+      text-align: right;
 
       &:hover {
-        opacity: 0.7;
+        background-color: $light-base-color;
+        color: #fff;
       }
       &:focus {
         outline: none;

@@ -9,7 +9,7 @@ const Header = props => {
       <h2 className="header_box__logo">MyNotes</h2>
       <nav>
         <button onClick={props.openProfile} className="header_box__btn_item">Profile</button>
-        <button className="header_box__btn_item">Sign Out</button>
+        <button onClick={props.logOut} className="header_box__btn_item">Sign Out</button>
       </nav>
     </header>
   )
