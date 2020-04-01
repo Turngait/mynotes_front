@@ -1,5 +1,106 @@
-.wishlist__logo {
-  text-decoration: underline;
-  letter-spacing: 1px;
-  font-size: 26px;
+@import "../../../config/variable.scss";
+
+.wList_headerBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &__logo {
+    text-decoration: underline;
+    letter-spacing: 1px;
+    font-size: 26px;
+    flex-basis: 10vw;
+  }
+
+  &__sorting {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 600;
+    display: none;
+  }
+
+  &__addButton {
+    min-width: 150px;
+    height: 100%;
+    padding: 1vh 3vw;
+    border: none;
+    border-radius: 3px;
+    background-color: $base-color;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $dark-base-color;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__sortBtn {
+    border: none;
+    background: none;
+    margin-left: 2vw;
+    text-decoration: underline;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.wList_main_box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1vw;
+  
+  &__filter_box {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &__item {
+      margin-bottom: 1vh;
+    }
+  }
+
+  &__items_box {
+    flex: 1;
+
+    &__item {
+      border: 1px solid $base-color;
+      border-radius: 2px;
+      max-width: 80%;
+      margin-right: 0;
+      margin-left: auto;
+
+      &_header {
+        padding: 1vh 2vw;
+        background-color: $base-color;
+        color: #fff;
+        text-align: right;
+        font-size: 1.3rem;
+      }
+
+      &_text {
+        padding: 1vh 2vw;
+        font-size: 1rem;
+        line-height: 1.5rem;
+
+        &_data {
+          display: block;
+          text-align: right;
+          margin-bottom: 0.4vh;
+        }
+      }
+    }
+  }
 }

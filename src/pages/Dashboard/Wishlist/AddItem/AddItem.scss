@@ -1,0 +1,69 @@
+@import "../../../../config/variable.scss";
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.add_wlist_item_box {
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  &__input {
+    margin-bottom: 2.5vh;
+    border: none;
+    border-radius: 2px;
+    background-color: #fff;
+    padding: 0.5vh 1vw;
+    font-size: 1rem;
+  }
+
+  &__txtarea {
+    margin-bottom: 2.5vh;
+    border: none;
+    border-radius: 2px;
+    background-color: #fff;
+    padding: 0.5vh 1vw;
+    font-size: 1.3rem;
+    min-height: 10vh;
+  }
+  
+  &__opt {
+    margin-bottom: 2.5vh;
+    display: flex;
+    justify-content: space-evenly;
+
+    &_sel{
+      border: 1px solid $dark-base-color;
+      padding: 0.3vh 2vw;
+      background-color: #fff;
+      min-width: 10vw;
+    }
+  }
+
+  &__send {
+    margin: auto;
+    display: block;
+    min-width: 30%;
+    padding: 1vh 2vw;
+    font-size: 1rem;
+    background-color: #fff;
+    color: $dark-base-color;
+    border: solid 1px $dark-base-color;
+    border-radius: 2px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $dark-base-color;
+      color:#fff;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

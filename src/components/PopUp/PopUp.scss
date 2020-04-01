@@ -1,0 +1,14 @@
+@import "../../config/variable.scss";
+
+.popup_box {
+  top: 15%;
+  left: 27%;
+  color: #fff;
+  text-align: center;
+  min-width: 40%;
+  position: absolute;
+  padding: 2vh 3vw;
+  background-color: $base-color;
+  border-radius: 3px;
+  z-index: 99999999;
+}

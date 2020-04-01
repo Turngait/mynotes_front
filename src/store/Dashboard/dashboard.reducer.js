@@ -1,6 +1,6 @@
 const initialState = {
-  wlistOpen: false,
-  financeOpen: true,
+  wlistOpen: true,
+  financeOpen: false,
   profileOpen: false
 }
 
