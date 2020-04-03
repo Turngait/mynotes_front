@@ -13,7 +13,7 @@
       padding: 2vh 2vw;
       min-width: 15vw;
       font-size: 1.4rem;
-      color: $dark-color;
+      color: #fff;
       background: none;
       border: none;
       text-decoration: underline;
@@ -22,8 +22,7 @@
       text-align: right;
 
       &:hover {
-        background-color: $light-base-color;
-        color: #fff;
+        opacity: 0.7;
       }
       &:focus {
         outline: none;

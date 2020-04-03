@@ -9,8 +9,9 @@ const Footer = () => {
         <br/>
         Terms and Conditions
       </div>
-      <div>
-        Socio
+      <div className="footer_box__socio">
+        <img className="footer_box__socio__item" src="pic/vk.png" alt="vk"/>
+        <img className="footer_box__socio__item" src="pic/fb.png" alt="fb"/>
       </div>
     </footer>
   )

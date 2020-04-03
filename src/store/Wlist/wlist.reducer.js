@@ -1,5 +1,11 @@
 const initialState = {
-  wlistOpen: true
+  wlistOpen: false,
+  wlistName: '',
+  wlistPrice: '',
+  wlistLink: '',
+  wlistText: '',
+  wlistGroup: 'MustHave',
+  wlistPriority: 4
 }
 
 export default function wlistReducer(state = initialState, action) {
@@ -14,6 +20,36 @@ export default function wlistReducer(state = initialState, action) {
         ...state,
         wlistOpen: false
       }
+    case 'SET_WLIST_NAME':
+      return {
+        ...state,
+        wlistName: action.payload
+      }
+    case 'SET_WLIST_PRICE':
+      return {
+        ...state,
+        wlistPrice: action.payload
+      }
+    case 'SET_WLIST_LINK':
+      return {
+        ...state,
+        wlistLink: action.payload
+      }
+    case 'SET_WLIST_TEXT':
+      return {
+        ...state,
+        wlistText: action.payload
+      }
+    case 'SET_WLIST_PRIORITY':
+      return {
+        ...state,
+        wlistPriority: action.payload
+      }
+    case 'SET_WLIST_GROUP': 
+    return {
+      ...state,
+      wlistGroup: action.payload
+    }
     default: 
     return state
   }

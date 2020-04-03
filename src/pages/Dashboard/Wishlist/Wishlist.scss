@@ -58,49 +58,52 @@
 }
 
 .wList_main_box {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1vw;
-  
-  &__filter_box {
-    display: none;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    &__item {
-      margin-bottom: 1vh;
-    }
-  }
+  margin-top: 2vw;
 
   &__items_box {
-    flex: 1;
-
     &__item {
       border: 1px solid $base-color;
       border-radius: 2px;
-      max-width: 80%;
-      margin-right: 0;
-      margin-left: auto;
+      max-width: 94%;
+      margin: auto;
 
       &_header {
         padding: 1vh 2vw;
         background-color: $base-color;
         color: #fff;
-        text-align: right;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+
+        &__control {
+          float: right;
+        }
+
+        &__info {
+          margin-right: 15px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
       }
 
       &_text {
-        padding: 1vh 2vw;
+        margin: 0;
+        padding: 1vh 2vw 1.5vh;
         font-size: 1rem;
         line-height: 1.5rem;
-
-        &_data {
-          display: block;
-          text-align: right;
-          margin-bottom: 0.4vh;
-        }
       }
     }
+
+    &__link {
+      display: block;
+      margin-top: 10px;
+      color: $dark-color;
+      font-size: 1.2rem;
+    }
   }
+}
+
+.edit {
+  margin-right: 15px;
+  cursor: pointer;
 }
