@@ -22,20 +22,30 @@ const Wishlist = props => {
 
       <div className="wList_main_box">
         <div className="wList_main_box__items_box">
-          <div className="wList_main_box__items_box__item">
-            <div className="wList_main_box__items_box__item_header">
-              <span className="wList_main_box__items_box__item_header__info">3. Item name.</span>
-              <span className="wList_main_box__items_box__item_header__info">02.10.2019</span>
-              <span className="wList_main_box__items_box__item_header__info">Priority 3</span>
-              <span className="wList_main_box__items_box__item_header__info">Group: Name</span>
-              <span className="wList_main_box__items_box__item_header__info">Price: 20 000</span>
-              <span className="wList_main_box__items_box__item_header__control"><i className="fas edit fa-edit"></i> <i className="fas fa-times"></i></span>
-            </div>
-            <p className="wList_main_box__items_box__item_text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-              <a href="ya.ru" className="wList_main_box__items_box__link">Link</a>
-            </p>
-          </div>
+          {
+            props.wlists ?
+            props.wlists.map((item, key) => {
+              return (
+                <div key={key} className="wList_main_box__items_box__item">
+                  <div className="wList_main_box__items_box__item_header">
+                    <span className="wList_main_box__items_box__item_header__info">{item.name}</span>
+                    <span className="wList_main_box__items_box__item_header__info">02.10.2019</span>
+                    <span className="wList_main_box__items_box__item_header__info">Priority {item.priority}</span>
+                    <span className="wList_main_box__items_box__item_header__info">Group: {item.group}</span>
+                    <span className="wList_main_box__items_box__item_header__info">Price: {item.price}</span>
+                    <span className="wList_main_box__items_box__item_header__control"><i className="fas edit fa-edit"></i> <i className="fas fa-times"></i></span>
+                  </div>
+                  <p className="wList_main_box__items_box__item_text">
+                    {item.text}
+                    <a href="ya.ru" className="wList_main_box__items_box__link">Link</a>
+                  </p>
+                </div>
+              )
+            })
+            :
+            <p>No wishlist's items</p>
+          }
+
         </div>
       </div>
     </>
@@ -44,7 +54,8 @@ const Wishlist = props => {
 
 function mapStateToProps (state) {
   return {
-    wlistOpen: state.wlist.wlistOpen
+    wlistOpen: state.wlist.wlistOpen,
+    wlists: state.wlist.wlist
   }
 }
 

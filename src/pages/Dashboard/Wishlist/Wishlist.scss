@@ -64,8 +64,9 @@
     &__item {
       border: 1px solid $base-color;
       border-radius: 2px;
-      max-width: 94%;
+      max-width: 100%;
       margin: auto;
+      margin-bottom: 2vh;
 
       &_header {
         padding: 1vh 2vw;

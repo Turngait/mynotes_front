@@ -10,22 +10,31 @@
     font-size: 1.4rem;
 
     &_btn {
-      padding: 2vh 2vw;
+      padding: 1vh 2vw 1vh 0;
+      margin-left: 2vw;
+      margin-top: 1vh;
       min-width: 15vw;
       font-size: 1.4rem;
       color: #fff;
       background: none;
       border: none;
-      text-decoration: underline;
       cursor: pointer;
       box-sizing: border-box;
       text-align: right;
 
       &:hover {
-        opacity: 0.7;
+        background-color: #00A6CB;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
       }
       &:focus {
         outline: none;
+      }
+
+      &_active {
+        background-color: rgba(0,166,203,0.7);
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
       }
     }
 

@@ -5,14 +5,16 @@ import PopUp from '../../../../components/PopUp/PopUp'
 import {setName, setText, setLink, setPrice, setPriority, setWlistItem, setGroup} from '../../../../store/Wlist/wlist.actions'
 
 const AddItem = props => {
-  const {name, link, price, text, priority, group} = props
+  
+  const {name, link, price, text, priority, group, token} = props
   const data = {
     name,
     link,
     price,
     text,
     priority,
-    group
+    group,
+    token
   }
   return (
     <PopUp>
@@ -53,7 +55,8 @@ function mapStateToProps(state){
     price: state.wlist.wlistPrice,
     text: state.wlist.wlistText,
     group: state.wlist.wlistGroup,
-    priority: state.wlist.wlistPriority
+    priority: state.wlist.wlistPriority,
+    token: state.user.token
   }
 }
 function mapDispatchToProsp(dispatch) {

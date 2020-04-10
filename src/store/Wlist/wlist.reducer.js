@@ -5,7 +5,8 @@ const initialState = {
   wlistLink: '',
   wlistText: '',
   wlistGroup: 'MustHave',
-  wlistPriority: 4
+  wlistPriority: 4,
+  wlist:[]
 }
 
 export default function wlistReducer(state = initialState, action) {
@@ -46,10 +47,15 @@ export default function wlistReducer(state = initialState, action) {
         wlistPriority: action.payload
       }
     case 'SET_WLIST_GROUP': 
-    return {
-      ...state,
-      wlistGroup: action.payload
-    }
+      return {
+        ...state,
+        wlistGroup: action.payload
+      }
+    case 'SET_WLISTS':
+      return {
+        ...state,
+        wlist: action.payload
+      }
     default: 
     return state
   }

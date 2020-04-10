@@ -78,5 +78,24 @@ export function setWlistItem (data) {
       },
       body: JSON.stringify(data)
     })
+    .then(res => {
+      if (res.status === 204) {
+        dispatch(wlistClose())
+        dispatch(getWlistItem(data.token))
+      }
+    })
+  }
+}
+
+export function getWlistItem (token) {
+  return (dispatch) => {
+    fetch(API_URL + '/wlist/' + token)
+    .then(res => {return res.json()})
+    .then(data => {
+      dispatch({
+        type: 'SET_WLISTS',
+        payload: data.data
+      })
+    })
   }
 }

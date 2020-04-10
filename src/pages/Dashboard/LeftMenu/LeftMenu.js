@@ -6,12 +6,35 @@ import { openFinance, openWlist } from '../../../store/Dashboard/dashboard.actio
 const LeftMenu = (props) => {
   return (
     <ul className="LeftMenu_box">
-      <li className="LeftMenu_box__item"><button onClick={props.openFinance} className="LeftMenu_box__item_btn">MyFinances</button></li>
-      <li className="LeftMenu_box__item"><button onClick={props.openWlist} className="LeftMenu_box__item_btn">WishList</button></li>
+      <li className="LeftMenu_box__item">
+        {
+          props.financeOpen ? 
+          <button onClick={props.openFinance} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">MyFinances</button>
+          :
+          <button onClick={props.openFinance} className="LeftMenu_box__item_btn">MyFinances</button>
+        }
+        
+      </li>
+      <li className="LeftMenu_box__item">
+        {
+          props.wlistOpen
+          ?
+          <button onClick={props.openWlist} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">WishList</button>
+          :
+          <button onClick={props.openWlist} className="LeftMenu_box__item_btn">WishList</button>
+        }
+      </li>
       {/* <li className="LeftMenu_box__item"><button href="/todolist" className="LeftMenu_box__item_btn">ToDoList</button></li>
       <li className="LeftMenu_box__item"><button href="/notes" className="LeftMenu_box__item_btn">Notes</button></li> */}
     </ul>
   )
+}
+
+function mapStateToProps(state) {
+  return {
+    wlistOpen: state.dashboard.wlistOpen,
+    financeOpen: state.dashboard.financeOpen
+  }
 }
 
 function mapDispatchToPRops(dispatch) {
@@ -21,4 +44,4 @@ function mapDispatchToPRops(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToPRops)(LeftMenu)
+export default connect(mapStateToProps, mapDispatchToPRops)(LeftMenu)
