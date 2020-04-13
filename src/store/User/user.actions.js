@@ -66,6 +66,8 @@ export function signUp (email, name, pass) {
           email: data.data.email,
           name: data.data.name
         })
+      } else if (data.status === 208) {
+        dispatch(setAuthMsg('User already exist!'))
       } else {
         console.log('Wrong')
       }

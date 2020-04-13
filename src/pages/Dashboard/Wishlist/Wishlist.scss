@@ -23,11 +23,12 @@
     min-width: 150px;
     height: 100%;
     padding: 1vh 3vw;
-    border: none;
+    border: 1px solid $dark-base-color;
     border-radius: 3px;
     background-color: $base-color;
     color: #fff;
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
 
     &:hover {
@@ -58,7 +59,7 @@
 }
 
 .wList_main_box {
-  margin-top: 2vw;
+  margin-top: 1vh;
 
   &__items_box {
     &__item {
@@ -69,10 +70,11 @@
       margin-bottom: 2vh;
 
       &_header {
-        padding: 1vh 2vw;
+        padding: 1vh 1vw;
         background-color: $base-color;
         color: #fff;
         font-size: 1.2rem;
+        font-weight: 600;
 
         &__control {
           float: right;
@@ -89,9 +91,17 @@
 
       &_text {
         margin: 0;
-        padding: 1vh 2vw 1.5vh;
+        padding: 1vh 1vw 1.5vh;
         font-size: 1rem;
         line-height: 1.5rem;
+      }
+
+      &_del {
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.7;
+        }
       }
     }
 

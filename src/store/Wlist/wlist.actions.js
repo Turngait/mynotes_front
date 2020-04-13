@@ -58,7 +58,6 @@ export function setPriority(val) {
 }
 
 export function setGroup(val) {
-  console.log(val)
   return (dispatch) => {
     dispatch({
       type: 'SET_WLIST_GROUP',
@@ -69,7 +68,6 @@ export function setGroup(val) {
 
 export function setWlistItem (data) {
   return (dispatch) => {
-    console.log(data)
     fetch(API_URL+'/wlist/add', {
       mode: 'cors',
       method: 'POST',

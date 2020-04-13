@@ -33,7 +33,7 @@ const Wishlist = props => {
                     <span className="wList_main_box__items_box__item_header__info">Priority {item.priority}</span>
                     <span className="wList_main_box__items_box__item_header__info">Group: {item.group}</span>
                     <span className="wList_main_box__items_box__item_header__info">Price: {item.price}</span>
-                    <span className="wList_main_box__items_box__item_header__control"><i className="fas edit fa-edit"></i> <i className="fas fa-times"></i></span>
+                    <span className="wList_main_box__items_box__item_header__control"><i className="fas edit fa-edit"></i> <i className="wList_main_box__items_box__item_del fas fa-times"></i></span>
                   </div>
                   <p className="wList_main_box__items_box__item_text">
                     {item.text}
