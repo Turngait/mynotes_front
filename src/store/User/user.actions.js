@@ -33,7 +33,7 @@ export function signIn(login, pass) {
         })
       } else {
         console.log('Wrong')
-        dispatch(setAuthMsg('Wrong email or password!'))
+        dispatch(setErrorhMsg('Wrong email or password!'))
       }
     })
   }
@@ -59,15 +59,18 @@ export function signUp (email, name, pass) {
       return res.json()
     })
     .then(data => {
+      if (data.errors) {
+        dispatch(setErrorhMsg(data.errors.errors[0].msg))
+      }
       if(data.status === 202) {
-        dispatch(setAuthMsg('Registration is complete!'))
+        dispatch(setSuccesshMsg('Registration is complete!'))
         dispatch({
           type: 'SET_INFO',
           email: data.data.email,
           name: data.data.name
         })
       } else if (data.status === 208) {
-        dispatch(setAuthMsg('User already exist!'))
+        dispatch(setErrorhMsg('User already exist!'))
       } else {
         console.log('Wrong')
       }
@@ -130,10 +133,19 @@ export function setInfo(user) {
   }
 }
 
-export function setAuthMsg(msg) {
+export function setSuccesshMsg(msg) {
   return (dispatch) => {
     dispatch({
-      type: 'SET_MSG',
+      type: 'SET_SUC_MSG',
+      payload: msg
+    })
+  }
+}
+
+export function setErrorhMsg(msg) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_ERR_MSG',
       payload: msg
     })
   }

@@ -2,7 +2,8 @@ const initialState = {
   token: false,
   email: '',
   name: '',
-  authMsg: ''
+  successMsg: '',
+  errorMsg: ''
 }
 
 export default function userReducer (state = initialState, action) {
@@ -29,10 +30,15 @@ export default function userReducer (state = initialState, action) {
         email: action.email,
         name: action.name
       }
-    case 'SET_MSG':
+    case 'SET_SUC_MSG':
       return {
         ...state,
-        authMsg: action.payload
+        successMsg: action.payload
+      }
+    case 'SET_ERR_MSG':
+      return {
+        ...state,
+        errorMsg: action.payload
       }
     default:
       return state

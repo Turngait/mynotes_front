@@ -9,6 +9,26 @@ export function wlistOpen () {
 export function wlistClose() {
   return (dispatch) => {
     dispatch({type: 'CLOSE_ADD_MENU'})
+    dispatch({
+      type: 'SET_ERR_MSG_WLIST',
+      payload: ''
+    })
+  }
+}
+
+export function wGroupOpen () {
+  return (dispatch) => {
+    dispatch({
+      type: 'OPEN_ADD_GROUP_MENU'
+    })
+  }
+}
+
+export function wGroupClose () {
+  return (dispatch) => {
+    dispatch({
+      type: 'CLOSE_ADD_GROUP_MENU'
+    })
   }
 }
 
@@ -80,6 +100,21 @@ export function setWlistItem (data) {
       if (res.status === 204) {
         dispatch(wlistClose())
         dispatch(getWlistItem(data.token))
+        dispatch({
+          type: 'SET_ERR_MSG_WLIST',
+          payload: ''
+        })
+        return
+      } else {
+        return res.json()
+      }
+    })
+    .then(data => {
+      if(data) {
+        dispatch({
+          type: 'SET_ERR_MSG_WLIST',
+          payload: data.errors.errors[0].msg
+        })
       }
     })
   }
@@ -94,6 +129,52 @@ export function getWlistItem (token) {
         type: 'SET_WLISTS',
         payload: data.data
       })
+    })
+  }
+}
+
+export function deleteWlistItem (data) {
+  return (dispatch) => {
+    const {target, token} = data
+
+    fetch(API_URL + '/wlist/' + target.dataset.itemId + '/' + token, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      mode: 'cors'
+    })
+    .then(res => {
+      if(res.status === 204) {
+        dispatch(getWlistItem(token))
+      }
+    })
+  }
+}
+
+export function setGroupTitle (title) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_WLIST_GROUP_ITEM',
+      payload: title
+    })
+  }
+}
+
+export function addGroup (data) {
+  return (dispatch) => {
+    fetch(API_URL + '/wlist/addGroup',
+      {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+      }
+    )
+    .then(res => {
+      console.log(res)
     })
   }
 }

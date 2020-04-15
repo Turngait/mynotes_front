@@ -3,6 +3,11 @@
 .index {
   text-align: center;
   height: 100%;
+
+  &__msg_box {
+    margin: 0;
+    margin-top: 10px;
+  }
   
   &__logo{
     color: $dark-color;
@@ -32,4 +37,12 @@
   &__sign_active {
     color: $light-base-color;
   }
+}
+
+.sucMsg {
+  color: green;
+}
+
+.errorMsg {
+  color: red;
 }

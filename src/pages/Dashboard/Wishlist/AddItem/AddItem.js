@@ -19,7 +19,13 @@ const AddItem = props => {
   return (
     <PopUp>
       <i onClick={props.onClose} className="fas fa-times close"></i>
-      <h3>Add Wishlist Item</h3>
+      <h3 className="add_wlist__header">Add Wishlist Item</h3>
+      {
+        props.errorMsg ?
+          <span className="errorsMsg">{props.errorMsg}</span>
+          : 
+          null
+      }
       <form className="add_wlist_item_box">
         <input onChange={(event) => props.setName(event.target.value)} className="add_wlist_item_box__input" type="text" name="name" placeholder="Item name..."/>
         <input onChange={(event) => props.setPrice(event.target.value)} className="add_wlist_item_box__input" type="text" name="price" placeholder="Item price..."/>
@@ -42,7 +48,7 @@ const AddItem = props => {
           </select>
         </div>
 
-        <button onClick={() => props.setWlistItem(data)} className="add_wlist_item_box__send" type="button">Send</button>
+        <button onClick={() => props.setWlistItem(data)} className="add_wlist_item_box__send" type="button">Add</button>
       </form>
     </PopUp>
   )
@@ -56,7 +62,8 @@ function mapStateToProps(state){
     text: state.wlist.wlistText,
     group: state.wlist.wlistGroup,
     priority: state.wlist.wlistPriority,
-    token: state.user.token
+    token: state.user.token,
+    errorMsg: state.wlist.errorMsg
   }
 }
 function mapDispatchToProsp(dispatch) {

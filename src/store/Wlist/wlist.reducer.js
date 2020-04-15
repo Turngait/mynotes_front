@@ -1,12 +1,15 @@
 const initialState = {
   wlistOpen: false,
+  wlistGroupOpen: false,
   wlistName: '',
   wlistPrice: '',
   wlistLink: '',
   wlistText: '',
   wlistGroup: 'MustHave',
   wlistPriority: 4,
-  wlist:[]
+  wlistGroupTitle: '',
+  wlist:[],
+  errorMsg: ''
 }
 
 export default function wlistReducer(state = initialState, action) {
@@ -20,6 +23,16 @@ export default function wlistReducer(state = initialState, action) {
       return {
         ...state,
         wlistOpen: false
+      }
+    case 'OPEN_ADD_GROUP_MENU':
+      return {
+        ...state,
+        wlistGroupOpen: true
+      }
+    case 'CLOSE_ADD_GROUP_MENU':
+      return {
+        ...state,
+        wlistGroupOpen: false
       }
     case 'SET_WLIST_NAME':
       return {
@@ -51,10 +64,20 @@ export default function wlistReducer(state = initialState, action) {
         ...state,
         wlistGroup: action.payload
       }
+    case 'SET_WLIST_GROUP_ITEM':
+      return {
+        ...state,
+        wlistGroupTitle: action.payload
+      }
     case 'SET_WLISTS':
       return {
         ...state,
         wlist: action.payload
+      }
+    case 'SET_ERR_MSG_WLIST':
+      return {
+        ...state,
+        errorMsg: action.payload
       }
     default: 
     return state

@@ -75,13 +75,17 @@ class Index extends Component {
         <button onClick={() => this.signUpToggleHandler(true)} 
           className={`index__sign_btn ${this.state.signUpActive ? 'index__sign_active' : null}`}
         >Sign Up</button>
+      <div className="index__msg_box">
+        <span className="sucMsg">{this.props.sucessMsg}</span>
+        <span className="errorMsg">{this.props.errorMsg}</span>
+      </div>
         
         {
         this.state.signUpActive 
         ? 
-          <SignUp onSubmit={this.auth} getInfo={this.getUserInfo} authMsg={this.props.authMsg}/> 
+          <SignUp onSubmit={this.auth} getInfo={this.getUserInfo}/> 
         : 
-          <SignIn onSubmit={this.auth} getInfo={this.getUserInfo} authMsg={this.props.authMsg}/>
+          <SignIn onSubmit={this.auth} getInfo={this.getUserInfo}/>
         }
       </div>
     )
@@ -93,7 +97,8 @@ function mapStateToProps(state) {
     token: state.user.token,
     email: state.user.email,
     name: state.user.name,
-    authMsg: state.user.authMsg
+    sucessMsg: state.user.successMsg,
+    errorMsg: state.user.errorMsg
   }
 }
 
