@@ -34,12 +34,17 @@ const AddItem = props => {
         </textarea>
 
         <div className="add_wlist_item_box__opt">
-          
-          <select defaultValue={props.group} onChange={(event) => props.setGroup(event.target.value)} className="add_wlist_item_box__opt_sel">
-            <option value="Group1">MustHave</option>
-            <option value="Group2">Group2</option>
+        <select defaultValue={props.group} onChange={(event) => props.setGroup(event.target.value)} className="add_wlist_item_box__opt_sel">
+          <option value="0">MustHave</option>
+          {
+            props.groups.length > 0 ?
+            props.groups.map((group, key) => {
+              return (<option key={key} value={group.id}>{group.title}</option>)
+            })
+            :
+            null
+          }
           </select>
-
           <select onChange={(event) => props.setPriority(event.target.value)} defaultValue={props.priority} className="add_wlist_item_box__opt_sel">
             <option value="1">Priority 1</option>
             <option value="2">Priority 2</option>
@@ -62,6 +67,7 @@ function mapStateToProps(state){
     text: state.wlist.wlistText,
     group: state.wlist.wlistGroup,
     priority: state.wlist.wlistPriority,
+    groups: state.wlist.wlistGroups,
     token: state.user.token,
     errorMsg: state.wlist.errorMsg
   }

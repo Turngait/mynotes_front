@@ -6,6 +6,7 @@ const initialState = {
   wlistLink: '',
   wlistText: '',
   wlistGroup: 'MustHave',
+  wlistGroups: [],
   wlistPriority: 4,
   wlistGroupTitle: '',
   wlist:[],
@@ -72,7 +73,8 @@ export default function wlistReducer(state = initialState, action) {
     case 'SET_WLISTS':
       return {
         ...state,
-        wlist: action.payload
+        wlist: action.payload.wlsits,
+        wlistGroups: action.payload.groups
       }
     case 'SET_ERR_MSG_WLIST':
       return {

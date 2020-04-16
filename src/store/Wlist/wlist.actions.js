@@ -127,7 +127,10 @@ export function getWlistItem (token) {
     .then(data => {
       dispatch({
         type: 'SET_WLISTS',
-        payload: data.data
+        payload: {
+          wlsits: data.data.wlists,
+          groups: data.data.groups
+        }
       })
     })
   }
@@ -174,7 +177,9 @@ export function addGroup (data) {
       }
     )
     .then(res => {
-      console.log(res)
-    })
+      if(res.status === 204) {
+        dispatch(wGroupClose())
+      }
+     })
   }
 }
