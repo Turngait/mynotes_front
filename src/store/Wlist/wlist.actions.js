@@ -179,7 +179,18 @@ export function addGroup (data) {
     .then(res => {
       if(res.status === 204) {
         dispatch(wGroupClose())
+        return
+      } else {
+        return res.json()
       }
-     })
+    })
+    .then(data => {
+      if(data) {
+        dispatch({
+          type: 'SET_ERR_MSG_WLIST',
+          payload: data.errors.errors[0].msg
+        })
+      }
+    })
   }
 }

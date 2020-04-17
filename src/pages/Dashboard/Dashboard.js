@@ -23,6 +23,14 @@ class Dashboard extends Component {
     this.props.getWlistItem(token)
   }
 
+  componentDidUpdate() {
+    const token = this.props.getToken()
+    if (!token) {
+      this.props.history.push('/')
+    }
+    this.props.getWlistItem(token)
+  }
+
   logOut = () => {
     this.props.logOut()
     this.props.history.push('/')
