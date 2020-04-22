@@ -9,6 +9,7 @@ import Wishlist from './Wishlist/Wishlist'
 import Profile from './Profile/Profile'
 import { getToken, logOut } from '../../store/User/user.actions'
 import {getWlistItem} from '../../store/Wlist/wlist.actions'
+import {getCostItems} from '../../store/Finance/finance.actions'
 
 /*
   Dashboard component which render all section
@@ -20,6 +21,7 @@ class Dashboard extends Component {
     if (!token) {
       this.props.history.push('/')
     }
+    this.props.getCostItems(token)
     this.props.getWlistItem(token)
   }
 
@@ -28,6 +30,7 @@ class Dashboard extends Component {
     if (!token) {
       this.props.history.push('/')
     }
+    this.props.getCostItems(token)
     this.props.getWlistItem(token)
   }
 
@@ -68,7 +71,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getToken: () => dispatch(getToken()),
     logOut: () => dispatch(logOut()),
-    getWlistItem: (token) => dispatch(getWlistItem(token))
+    getWlistItem: (token) => dispatch(getWlistItem(token)),
+    getCostItems: (token) => dispatch(getCostItems(token))
   }
 }
 

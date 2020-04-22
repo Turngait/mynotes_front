@@ -29,6 +29,7 @@
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
+    margin-right: 2vw;
 
     &:hover {
       background-color: $dark-base-color;
@@ -36,6 +37,10 @@
 
     &:focus {
       outline: none;
+    }
+
+    &:last-child {
+      margin-right: 0;
     }
   }
 }
