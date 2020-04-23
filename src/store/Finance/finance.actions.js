@@ -66,10 +66,11 @@ export function getCostItems(token) {
     fetch(API_URL + '/fin/cost/get/' + token)
     .then(res => {return res.json()})
     .then(data => {
-      const {groups} = data
+      const {groups, costs} = data
         dispatch({
           type: 'SET_COSTS',
-          groups
+          groups,
+          costs
         })
     })
   }
@@ -103,6 +104,10 @@ export function addCostItem(data) {
       mode: 'cors',
       body: JSON.stringify(data)
     })
-    .then(res => console.log(res))
+    .then(res => {
+      if (res.status === 204) {
+        dispatch(closeAddCost())
+      }
+    })
   }
 }

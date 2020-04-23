@@ -6,6 +6,7 @@ import {openAddCost, openAddCostGroup} from '../../../store/Finance/finance.acti
 import './MyFinance.scss';
 
 const MyFinance = props => {
+  const {costs} = props;
   return (
     <>
     {
@@ -37,20 +38,27 @@ const MyFinance = props => {
 
       <div className="myFin_mainBox">
         <span className="myFin_mainBox__date">April 15, 2020</span>
-
-        <div className="myFin_mainBox__item">
-            <div className="myFin_mainBox__item_header">
-              <span className="myFin_mainBox__item_header__info">3. Item name.</span>
-              <span className="myFin_mainBox__item_header__info">Price: 20 000</span>
-              <span className="myFin_mainBox__item_header__info">02.10.2019</span>
-              <span className="myFin_mainBox__item_header__info">Group: Name</span>
-              <span className="myFin_mainBox__item_header__control"><i className="fas edit fa-edit"></i> <i className="fas fa-times"></i></span>
-            </div>
-            <p className="myFin_mainBox__item_text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-            </p>
-        </div>
-
+        {
+          costs.length > 0 ?
+          costs.map((item, key) => {
+            return (
+              <div key={key} className="myFin_mainBox__item">
+                <div className="myFin_mainBox__item_header">
+                  <span className="myFin_mainBox__item_header__info">{item.title}</span>
+                  <span className="myFin_mainBox__item_header__info">Cost: {item.amount}</span>
+                  <span className="myFin_mainBox__item_header__info">{item.date}</span>
+                  <span className="myFin_mainBox__item_header__info">Group: Name</span>
+                  <span className="myFin_mainBox__item_header__control"><i className="fas edit fa-edit"></i> <i className="fas fa-times"></i></span>
+                </div>
+                <p className="myFin_mainBox__item_text">
+                  {item.descrition}
+                </p>
+              </div>
+            )
+          })
+          :
+          null
+        }
       </div>
     </>
   );
@@ -59,7 +67,8 @@ const MyFinance = props => {
 function mapStateToProps (state) {
   return {
     isAddCostOpen: state.finance.addCostOpen,
-    isAddCostGroupOpen: state.finance.addCostGroupOpen
+    isAddCostGroupOpen: state.finance.addCostGroupOpen,
+    costs: state.finance.costs
   };
 }
 

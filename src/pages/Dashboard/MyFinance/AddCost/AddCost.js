@@ -49,7 +49,7 @@ const AddCost = props => {
           </select>
         </div>
 
-        <button onClick={() => props.addCostItem(props.cost)} className="add_wlist_item_box__send" type="button">Add</button>
+        <button onClick={() => props.addCostItem({cost: props.cost, token: props.token})} className="add_wlist_item_box__send" type="button">Add</button>
       </form>
     </PopUp>
   )
@@ -59,7 +59,8 @@ function mapStateToProps (state) {
   return {
     cost: state.finance.cost,
     groups: state.finance.groups,
-    wlist: state.wlist.wlist
+    wlist: state.wlist.wlist,
+    token: state.user.token
   }
 }
 

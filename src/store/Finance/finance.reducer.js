@@ -8,6 +8,7 @@ const InitialState = {
     amount: 0,
     wlistItem: '0'
   },
+  costs: [],
   groups: [],
   groupTitle: ''
 }
@@ -82,7 +83,8 @@ export default function financeReducer (state = InitialState, action) {
     case 'SET_COSTS':
       return {
         ...state,
-        groups: action.groups
+        groups: action.groups,
+        costs: action.costs
       }
     default:
       return state
