@@ -9,6 +9,10 @@ export function openAddCost() {
 export function closeAddCost() {
   return (dispatch) => {
     dispatch({type: 'CLOSE_ADD_COST'})
+    dispatch({
+      type: 'SET_ADD_COST_ERROR',
+      payload: ''
+    })
   };
 }
 
@@ -86,9 +90,22 @@ export function addGroupToDB(data) {
       mode: 'cors',
       body: JSON.stringify(data)
     })
-    .then(res => {
+    .then(async res => {
       if (res.status === 204) {
         dispatch(closeAddCostGroup())
+        dispatch({
+          type: 'SET_ADD_GROUP_ERROR',
+          payload: ''
+        })
+      } else if (res.status === 422) {
+        const data = await res.json();
+        if (data.errors) {
+          const {errors} = data.errors;
+          dispatch({
+            type: 'SET_ADD_GROUP_ERROR',
+            payload: errors[0].msg
+          })
+        }
       }
     })
   }
@@ -104,10 +121,54 @@ export function addCostItem(data) {
       mode: 'cors',
       body: JSON.stringify(data)
     })
-    .then(res => {
+    .then(async res => {
       if (res.status === 204) {
         dispatch(closeAddCost())
+      } else if (res.status === 422) {
+        const data = await res.json();
+        if (data.errors) {
+          const {errors} = data.errors;
+          dispatch({
+            type: 'SET_ADD_COST_ERROR',
+            payload: errors[0].msg
+          })
+        }
       }
     })
+  }
+}
+
+export function deleteCostItem(data) {
+  return (dispatch) => {
+    const {target, token} = data;
+    const id = target.dataset.itemId;
+
+    fetch(API_URL + '/fin/cost/' + id + '/' + token, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      mode: 'cors'
+    })
+    .then(res => {
+      if(res.status === 204) {
+        dispatch(getCostItems(token))
+      }
+    })
+  }
+}
+
+export function showGroupName (data) {
+  return (dispatch) => {
+    const {id_group} = data.item;
+    if (data.groups) {
+      for(let group of data.groups) {
+        if (group._id === id_group) {
+          return group.title
+        }
+      }
+    }
+
+    return 'None'
   }
 }

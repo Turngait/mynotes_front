@@ -10,7 +10,9 @@ const InitialState = {
   },
   costs: [],
   groups: [],
-  groupTitle: ''
+  groupTitle: '',
+  addGroupError: '',
+  addCostError: ''
 }
 
 export default function financeReducer (state = InitialState, action) {
@@ -85,6 +87,16 @@ export default function financeReducer (state = InitialState, action) {
         ...state,
         groups: action.groups,
         costs: action.costs
+      }
+    case 'SET_ADD_GROUP_ERROR':
+      return {
+        ...state,
+        addGroupError: action.payload,
+      }
+    case 'SET_ADD_COST_ERROR':
+      return {
+        ...state,
+        addCostError: action.payload,
       }
     default:
       return state

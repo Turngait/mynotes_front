@@ -50,6 +50,7 @@
   width: 100%;
   border-top: 1px solid $dark-color;
   color: $dark-color;
+  margin-bottom: 4vh;
 
   &__date {
     font-size: 1.4rem;
@@ -97,4 +98,8 @@
       color: $dark-color;
       font-size: 1.2rem;
     }
+}
+
+.deleteCostItem {
+  cursor: pointer;
 }

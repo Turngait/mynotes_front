@@ -60,7 +60,8 @@ function mapStateToProps (state) {
     cost: state.finance.cost,
     groups: state.finance.groups,
     wlist: state.wlist.wlist,
-    token: state.user.token
+    token: state.user.token,
+    errorMsg: state.finance.addCostError
   }
 }
 

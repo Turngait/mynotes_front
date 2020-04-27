@@ -2,7 +2,7 @@ import React from 'react';
 import AddCost from './AddCost/AddCost';
 import AddGroup from './AddGroup/AddGroup'
 import {connect} from 'react-redux';
-import {openAddCost, openAddCostGroup} from '../../../store/Finance/finance.actions';
+import {openAddCost, openAddCostGroup, showGroupName, deleteCostItem} from '../../../store/Finance/finance.actions';
 import './MyFinance.scss';
 
 const MyFinance = props => {
@@ -41,14 +41,16 @@ const MyFinance = props => {
         {
           costs.length > 0 ?
           costs.map((item, key) => {
+            const group_name = props.showGroupName({item, groups:props.groups});
+
             return (
               <div key={key} className="myFin_mainBox__item">
                 <div className="myFin_mainBox__item_header">
                   <span className="myFin_mainBox__item_header__info">{item.title}</span>
                   <span className="myFin_mainBox__item_header__info">Cost: {item.amount}</span>
                   <span className="myFin_mainBox__item_header__info">{item.date}</span>
-                  <span className="myFin_mainBox__item_header__info">Group: Name</span>
-                  <span className="myFin_mainBox__item_header__control"><i className="fas edit fa-edit"></i> <i className="fas fa-times"></i></span>
+                  <span className="myFin_mainBox__item_header__info">Group: {group_name}</span>
+                  <span className="myFin_mainBox__item_header__control"><i className="fas edit fa-edit"></i> <i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={item._id} className="fas deleteCostItem fa-times"></i></span>
                 </div>
                 <p className="myFin_mainBox__item_text">
                   {item.descrition}
@@ -68,14 +70,18 @@ function mapStateToProps (state) {
   return {
     isAddCostOpen: state.finance.addCostOpen,
     isAddCostGroupOpen: state.finance.addCostGroupOpen,
-    costs: state.finance.costs
+    costs: state.finance.costs,
+    groups: state.finance.groups,
+    token: state.user.token
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     openAddCost: () => dispatch(openAddCost()),
-    openAddCostGroup: () => dispatch(openAddCostGroup())
+    openAddCostGroup: () => dispatch(openAddCostGroup()),
+    showGroupName: (data) => dispatch(showGroupName(data)),
+    deleteCostItem: (data) => dispatch(deleteCostItem(data))
   };
 }
 

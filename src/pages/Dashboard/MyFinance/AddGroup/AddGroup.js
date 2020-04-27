@@ -32,7 +32,8 @@ const AddGroup = props => {
 function mapStateToProps (state) {
   return {
     groupTitle: state.finance.groupTitle,
-    token: state.user.token
+    token: state.user.token,
+    errorMsg: state.finance.addGroupError
   }
 }
 
