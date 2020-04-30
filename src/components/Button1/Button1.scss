@@ -1,17 +1,27 @@
 @import "../../config/variable.scss";
 
 .Button1 {
-  border: none;
-  border-radius: 2px;
-  background: $base-color;
+  min-width: 150px;
+  height: 100%;
+  padding: 1vh 3vw;
+  border: 1px solid $dark-base-color;
+  border-radius: 3px;
+  background-color: $base-color;
   color: #fff;
-  margin: auto;
-  min-width: 160px;
-  font-size: 1.2rem;
-  padding: 8px 4px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  margin-right: 2vw;
 
   &:hover {
     background: $dark-base-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 }

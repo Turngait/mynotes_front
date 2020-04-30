@@ -1,9 +1,10 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import AddItem from './AddItem/AddItem'
-import AddGroup from './AddGroup/AddGroup'
-import './Wishlist.scss'
-import {wlistOpen, wlistClose, wGroupOpen, wGroupClose, deleteWlistItem} from '../../../store/Wlist/wlist.actions'
+import React from 'react';
+import { connect } from 'react-redux';
+import AddItem from './AddItem/AddItem';
+import AddGroup from './AddGroup/AddGroup';
+import Button from '../../../components/Button1/Button1';
+import './Wishlist.scss';
+import {wlistOpen, wlistClose, wGroupOpen, wGroupClose, deleteWlistItem} from '../../../store/Wlist/wlist.actions';
 
 const Wishlist = props => {
   return (
@@ -20,8 +21,8 @@ const Wishlist = props => {
           <button className="wList_headerBox__sortBtn"><i className="fas fa-caret-up"></i>date</button>
         </p>
         <div>
-          <button onClick={props.wlistOpenF} className="wList_headerBox__addButton">Add Item</button>
-          <button onClick={props.wGroupOpenF} className="wList_headerBox__addButton">Add Group</button>
+          <Button onClick={props.wlistOpenF} title='Add Item' />
+          <Button onClick={props.wGroupOpenF} title='Add Group' />
         </div>
       </div>
 

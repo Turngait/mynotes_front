@@ -58,6 +58,12 @@ export function setCostWlistItem(data) {
   };
 }
 
+export function setCostDate(data) {
+  return (dispatch) => {
+    dispatch({type: 'SET_COST_DATE', payload: data})
+  };
+}
+
 export function setCostGroupTitle(data) {
   return (dispatch) => {
     dispatch({type: 'SET_COST_GROUP_TITLE', payload: data})

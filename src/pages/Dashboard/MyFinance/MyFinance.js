@@ -1,7 +1,9 @@
 import React from 'react';
 import AddCost from './AddCost/AddCost';
-import AddGroup from './AddGroup/AddGroup'
+import AddGroup from './AddGroup/AddGroup';
+import Button from '../../../components/Button1/Button1'
 import {connect} from 'react-redux';
+import {formateDate} from '../../../helpers';
 import {openAddCost, openAddCostGroup, showGroupName, deleteCostItem} from '../../../store/Finance/finance.actions';
 import './MyFinance.scss';
 
@@ -31,8 +33,8 @@ const MyFinance = props => {
           <button className="myFin_headerBox__sortBtn"><i className="fas fa-caret-up"></i>date</button>
         </p>
         <div>
-          <button onClick={props.openAddCostGroup} className="myFin_headerBox__addButton">Add Group</button>
-          <button onClick={props.openAddCost} className="myFin_headerBox__addButton">Add Cost</button>
+          <Button onClick={props.openAddCost} title="Add Cost" />
+          <Button onClick={props.openAddCostGroup} title="Add Group" />
         </div>
       </div>
 
@@ -48,7 +50,7 @@ const MyFinance = props => {
                 <div className="myFin_mainBox__item_header">
                   <span className="myFin_mainBox__item_header__info">{item.title}</span>
                   <span className="myFin_mainBox__item_header__info">Cost: {item.amount}</span>
-                  <span className="myFin_mainBox__item_header__info">{item.date}</span>
+                  <span className="myFin_mainBox__item_header__info">{formateDate(item.date)}</span>
                   <span className="myFin_mainBox__item_header__info">Group: {group_name}</span>
                   <span className="myFin_mainBox__item_header__control"><i className="fas edit fa-edit"></i> <i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={item._id} className="fas deleteCostItem fa-times"></i></span>
                 </div>

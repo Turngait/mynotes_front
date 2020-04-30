@@ -6,7 +6,8 @@ const InitialState = {
     descrition: '',
     group: 'none',
     amount: 0,
-    wlistItem: '0'
+    wlistItem: '0',
+    date: new Date().toISOString().slice(0,10)
   },
   costs: [],
   groups: [],
@@ -75,6 +76,14 @@ export default function financeReducer (state = InitialState, action) {
         cost: {
           ...state.cost,
           wlistItem: action.payload
+        }
+      }
+    case 'SET_COST_DATE':
+      return {
+        ...state,
+        cost: {
+          ...state.cost,
+          date: action.payload
         }
       }
     case 'SET_COST_GROUP_TITLE':

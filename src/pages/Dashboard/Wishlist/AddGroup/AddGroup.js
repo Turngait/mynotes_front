@@ -1,8 +1,10 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import './AddGroup.scss'
-import PopUp from '../../../../components/PopUp/PopUp'
-import {addGroup, setGroupTitle} from '../../../../store/Wlist/wlist.actions'
+import React from 'react';
+import { connect } from 'react-redux';
+import './AddGroup.scss';
+import PopUp from '../../../../components/PopUp/PopUp';
+import Input2 from '../../../../components/Input2/Input2';
+import ButtonPopUp from '../../../../components/ButtonPopUp/ButtonPopUp';
+import {addGroup, setGroupTitle} from '../../../../store/Wlist/wlist.actions';
 
 const AddGroup = props => {
   const {title, token} = props
@@ -21,8 +23,8 @@ const AddGroup = props => {
           null
       }
       <form className="add_wlist_item_box">
-        <input onChange={(event) => props.setGroupTitle(event.target.value)} className="add_wlist_item_box__input" type="text" name="name" placeholder="Group name..."/>
-        <button onClick={() => props.addGroup(data)} className="add_wlist_item_box__send" type="button">Add</button>
+        <Input2 onChange={(event) => props.setGroupTitle(event.target.value)} type="text" name="name" placeholder="Group name..."/>
+        <ButtonPopUp onClick={() => props.addGroup(data)} title="Add" />
       </form>
     </PopUp>
   )

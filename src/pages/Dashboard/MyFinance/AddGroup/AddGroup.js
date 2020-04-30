@@ -1,6 +1,8 @@
 import React from 'react';
 import './AddGroup.scss';
 import PopUp from '../../../../components/PopUp/PopUp';
+import Input2 from '../../../../components/Input2/Input2';
+import ButtonPopUp from '../../../../components/ButtonPopUp/ButtonPopUp';
 import {connect} from 'react-redux';
 import {closeAddCostGroup, setCostGroupTitle, addGroupToDB} from '../../../../store/Finance/finance.actions'
 
@@ -22,8 +24,8 @@ const AddGroup = props => {
           null
       }
       <form className="add_wlist_item_box">
-        <input onChange={(event) => props.setCostGroupTitle(event.target.value)} className="add_wlist_item_box__input" type="text" name="name" placeholder="Group name..."/>
-        <button onClick={() => props.addGroupToDB(data)} className="add_wlist_item_box__send" type="button">Add</button>
+        <Input2 onChange={(event) => props.setCostGroupTitle(event.target.value)} type="text" name="name" placeholder="Group name..." />
+        <ButtonPopUp onClick={() => props.addGroupToDB(data)} type="button" title="Add" />
       </form>
     </PopUp>
   );

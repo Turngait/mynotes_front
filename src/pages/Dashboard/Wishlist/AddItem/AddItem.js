@@ -1,8 +1,11 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import './AddItem.scss'
-import PopUp from '../../../../components/PopUp/PopUp'
-import {setName, setText, setLink, setPrice, setPriority, setWlistItem, setGroup} from '../../../../store/Wlist/wlist.actions'
+import React from 'react';
+import { connect } from 'react-redux';
+import './AddItem.scss';
+import PopUp from '../../../../components/PopUp/PopUp';
+import Input2 from '../../../../components/Input2/Input2';
+import Input2UnReq from '../../../../components/Input2/Input2UnRequired';
+import ButtonPopUp from '../../../../components/ButtonPopUp/ButtonPopUp';
+import {setName, setText, setLink, setPrice, setPriority, setWlistItem, setGroup} from '../../../../store/Wlist/wlist.actions';
 
 const AddItem = props => {
   
@@ -27,9 +30,9 @@ const AddItem = props => {
           null
       }
       <form className="add_wlist_item_box">
-        <input onChange={(event) => props.setName(event.target.value)} className="add_wlist_item_box__input" type="text" name="name" placeholder="Item name..."/>
-        <input onChange={(event) => props.setPrice(event.target.value)} className="add_wlist_item_box__input" type="text" name="price" placeholder="Item price..."/>
-        <input onChange={(event) => props.setLink(event.target.value)} className="add_wlist_item_box__input" type="text" name="link" placeholder="Item link (if exist)..."/>
+        <Input2 onChange={(event) => props.setName(event.target.value)} type="text" name="name" placeholder="Item name..."/>
+        <Input2 onChange={(event) => props.setPrice(event.target.value)} type="text" name="price" placeholder="Item price..."/>
+        <Input2UnReq onChange={(event) => props.setLink(event.target.value)} type="text" name="link" placeholder="Item link (if exist)..."/>
         <textarea onChange={(event) => props.setText(event.target.value)} className="add_wlist_item_box__txtarea" name="text" placeholder="Description...">
         </textarea>
 
@@ -53,7 +56,7 @@ const AddItem = props => {
           </select>
         </div>
 
-        <button onClick={() => props.setWlistItem(data)} className="add_wlist_item_box__send" type="button">Add</button>
+        <ButtonPopUp onClick={() => props.setWlistItem(data)} title="Add" />
       </form>
     </PopUp>
   )

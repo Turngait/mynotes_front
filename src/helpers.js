@@ -1,5 +1,9 @@
-export function showGroupName (item, groups) {
-  const {id_group} = item;
-
-  console.log(id_group)
+export function formateDate(date) {
+  var dateFormated = new Date(date);
+  var options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric'
+  };
+  return dateFormated.toLocaleString('ru', options);
 }

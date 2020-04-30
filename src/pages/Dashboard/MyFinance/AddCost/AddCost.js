@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './AddCost.scss';
 import PopUp from '../../../../components/PopUp/PopUp';
-import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostWlistItem} from '../../../../store/Finance/finance.actions'
+import Input2 from '../../../../components/Input2/Input2';
+import ButtonPopUp from '../../../../components/ButtonPopUp/ButtonPopUp';
+import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostWlistItem, setCostDate} from '../../../../store/Finance/finance.actions'
 
 const AddCost = props => {
   return (
@@ -16,8 +18,9 @@ const AddCost = props => {
           null
       }
       <form className="add_wlist_item_box">
-        <input onChange={(event) => props.setCostTitle(event.target.value)} className="add_wlist_item_box__input" type="text" name="title" placeholder="Title of cost..."/>
-        <input onChange={(event) => props.setCostAmmount(event.target.value)} className="add_wlist_item_box__input" type="text" name="amount" placeholder="Amount of cost..."/>
+        <Input2 onChange={(event) => props.setCostDate(event.target.value)} value={new Date().toISOString().slice(0,10)} type="date" name="date"/>
+        <Input2 onChange={(event) => props.setCostTitle(event.target.value)} type="text" name="title" placeholder="Title of cost..."/>
+        <Input2 onChange={(event) => props.setCostAmmount(event.target.value)} type="text" name="amount" placeholder="Amount of cost..."/>
         <textarea onChange={(event) => props.setCostDescription(event.target.value)} className="add_wlist_item_box__txtarea" name="description" placeholder="Description to cost.."></textarea>
         <div className="add_wlist_item_box__opt">
           <select onChange={(event) => props.setCostGroup(event.target.value)} className="add_wlist_item_box__opt_sel">
@@ -49,7 +52,7 @@ const AddCost = props => {
           </select>
         </div>
 
-        <button onClick={() => props.addCostItem({cost: props.cost, token: props.token})} className="add_wlist_item_box__send" type="button">Add</button>
+        <ButtonPopUp onClick={() => props.addCostItem({cost: props.cost, token: props.token})} title="Add" />
       </form>
     </PopUp>
   )
@@ -73,7 +76,8 @@ function mapDispatchToProps (dispatch) {
     setCostAmmount: (amount) => dispatch(setCostAmmount(amount)),
     setCostDescription: (description) => dispatch(setCostDescription(description)),
     setCostGroup: (data) => dispatch(setCostGroup(data)),
-    setCostWlistItem: (data) => dispatch(setCostWlistItem(data))
+    setCostWlistItem: (data) => dispatch(setCostWlistItem(data)),
+    setCostDate: (data) => dispatch(setCostDate(data))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddCost);

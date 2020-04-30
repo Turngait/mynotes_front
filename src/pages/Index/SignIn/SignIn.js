@@ -8,7 +8,7 @@ const SignIn = props => {
     <form className="signIn">
       <Input2 onChange={props.getInfo} inputId='signInEmail' type="email" name="email" placeholder="Enter your e-mail..." />
       <Input2 onChange={props.getInfo} inputId='signInPass' type="password" name="pass" placeholder="Enter your password..." />
-      <Button1 value='Sign In' onClick={props.onSubmit}/>
+      <Button1 title='Sign In' onClick={props.onSubmit}/>
     </form>
   )
 }
