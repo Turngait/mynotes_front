@@ -88,7 +88,7 @@ export function setGroup(val) {
 
 export function setWlistItem (data) {
   return (dispatch) => {
-    fetch(API_URL+'/wlist/add', {
+    fetch(API_URL+'/wlist/item/add', {
       mode: 'cors',
       method: 'POST',
       headers: {
@@ -140,7 +140,7 @@ export function deleteWlistItem (data) {
   return (dispatch) => {
     const {target, token} = data
 
-    fetch(API_URL + '/wlist/' + target.dataset.itemId + '/' + token, {
+    fetch(API_URL + '/wlist/item/' + target.dataset.itemId + '/' + token, {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -166,7 +166,7 @@ export function setGroupTitle (title) {
 
 export function addGroup (data) {
   return (dispatch) => {
-    fetch(API_URL + '/wlist/addGroup',
+    fetch(API_URL + '/wlist/group/add',
       {
         mode: 'cors',
         method: 'POST',

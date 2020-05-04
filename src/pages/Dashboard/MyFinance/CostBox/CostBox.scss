@@ -1,0 +1,60 @@
+@import "../../../../config/variable.scss";
+
+.myFin_mainBox {
+  margin-top: 2vh;
+  width: 100%;
+  border-top: 1px solid $dark-color;
+  color: $dark-color;
+  margin-bottom: 3vh;
+
+  &__date {
+    font-size: 1.4rem;
+    line-height: 3rem;
+  }
+
+    &__item {
+      border: 1px solid $base-color;
+      border-radius: 2px;
+      max-width: 100%;
+      margin: auto;
+      margin-bottom: 1vh;
+      box-shadow: 0 1px 3px #333;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &_header {
+        padding: 1vh 1vw;
+        background-color: $base-color;
+        color: #fff;
+        font-size: 1.4rem;
+
+        &__control {
+          float: right;
+        }
+
+        &__info {
+          margin-right: 15px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      &_text {
+        margin: 0;
+        padding: 1vh 1vw 1.5vh;
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+    }
+
+    &__link {
+      display: block;
+      margin-top: 10px;
+      color: $dark-color;
+      font-size: 1.2rem;
+    }
+}

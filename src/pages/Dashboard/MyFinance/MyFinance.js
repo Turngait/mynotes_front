@@ -1,14 +1,15 @@
 import React from 'react';
 import AddCost from './AddCost/AddCost';
 import AddGroup from './AddGroup/AddGroup';
-import Button from '../../../components/Button1/Button1'
+import Button from '../../../components/Button1/Button1';
+import CostBox from './CostBox/CostBox';
 import {connect} from 'react-redux';
-import {formateDate} from '../../../helpers';
-import {openAddCost, openAddCostGroup, showGroupName, deleteCostItem} from '../../../store/Finance/finance.actions';
+import {openAddCost, openAddCostGroup} from '../../../store/Finance/finance.actions';
 import './MyFinance.scss';
 
 const MyFinance = props => {
   const {costs} = props;
+
   return (
     <>
     {
@@ -37,33 +38,16 @@ const MyFinance = props => {
           <Button onClick={props.openAddCostGroup} title="Add Group" />
         </div>
       </div>
-
-      <div className="myFin_mainBox">
-        <span className="myFin_mainBox__date">April 15, 2020</span>
         {
           costs.length > 0 ?
           costs.map((item, key) => {
-            const group_name = props.showGroupName({item, groups:props.groups});
-
             return (
-              <div key={key} className="myFin_mainBox__item">
-                <div className="myFin_mainBox__item_header">
-                  <span className="myFin_mainBox__item_header__info">{item.title}</span>
-                  <span className="myFin_mainBox__item_header__info">Cost: {item.amount}</span>
-                  <span className="myFin_mainBox__item_header__info">{formateDate(item.date)}</span>
-                  <span className="myFin_mainBox__item_header__info">Group: {group_name}</span>
-                  <span className="myFin_mainBox__item_header__control"><i className="fas edit fa-edit"></i> <i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={item._id} className="fas deleteCostItem fa-times"></i></span>
-                </div>
-                <p className="myFin_mainBox__item_text">
-                  {item.descrition}
-                </p>
-              </div>
+              <CostBox item={item} key={key} />
             )
           })
           :
           null
         }
-      </div>
     </>
   );
 }
@@ -81,9 +65,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
   return {
     openAddCost: () => dispatch(openAddCost()),
-    openAddCostGroup: () => dispatch(openAddCostGroup()),
-    showGroupName: (data) => dispatch(showGroupName(data)),
-    deleteCostItem: (data) => dispatch(deleteCostItem(data))
+    openAddCostGroup: () => dispatch(openAddCostGroup())
   };
 }
 

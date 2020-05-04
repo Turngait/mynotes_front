@@ -3,7 +3,7 @@
 .myFinance__logo {
   text-decoration: underline;
   letter-spacing: 1px;
-  font-size: 26px;
+  font-size: 2.3rem;
 }
 
 .myFin_headerBox {
@@ -43,61 +43,6 @@
       margin-right: 0;
     }
   }
-}
-
-.myFin_mainBox {
-  margin-top: 4vh;
-  width: 100%;
-  border-top: 1px solid $dark-color;
-  color: $dark-color;
-  margin-bottom: 4vh;
-
-  &__date {
-    font-size: 1.4rem;
-    line-height: 3rem;
-  }
-
-    &__item {
-      border: 1px solid $base-color;
-      border-radius: 2px;
-      max-width: 100%;
-      margin: auto;
-      margin-top: 1vh;
-
-
-      &_header {
-        padding: 1vh 1vw;
-        background-color: $base-color;
-        color: #fff;
-        font-size: 1.2rem;
-
-        &__control {
-          float: right;
-        }
-
-        &__info {
-          margin-right: 15px;
-
-          &:last-child {
-            margin-right: 0;
-          }
-        }
-      }
-
-      &_text {
-        margin: 0;
-        padding: 1vh 1vw 1.5vh;
-        font-size: 1rem;
-        line-height: 1.5rem;
-      }
-    }
-
-    &__link {
-      display: block;
-      margin-top: 10px;
-      color: $dark-color;
-      font-size: 1.2rem;
-    }
 }
 
 .deleteCostItem {
