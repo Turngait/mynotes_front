@@ -12,6 +12,12 @@
     line-height: 3rem;
   }
 
+  &__spentByDay {
+    font-size: 1.4rem;
+    line-height: 3rem;
+    float: right;
+  }
+
     &__item {
       border: 1px solid $base-color;
       border-radius: 2px;
