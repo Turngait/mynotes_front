@@ -1,6 +1,7 @@
 const InitialState = {
   addCostOpen: false,
   addCostGroupOpen: false,
+  costPeriod: new Date().toISOString().slice(0,7),
   cost: {
     title: '',
     descrition: '',
@@ -106,6 +107,11 @@ export default function financeReducer (state = InitialState, action) {
       return {
         ...state,
         addCostError: action.payload,
+      }
+    case 'SET_COST_PERIOD':
+      return {
+        ...state,
+        costPeriod: action.payload,
       }
     default:
       return state

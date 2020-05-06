@@ -18,7 +18,7 @@ const AddCost = props => {
           null
       }
       <form className="add_wlist_item_box">
-        <Input2 onChange={(event) => props.setCostDate(event.target.value)} value={new Date().toISOString().slice(0,10)} type="date" name="date"/>
+        <Input2 onChange={(event) => props.setCostDate(event.target.value)} value={props.cost.date} type="date" name="date"/>
         <Input2 onChange={(event) => props.setCostTitle(event.target.value)} type="text" name="title" placeholder="Title of cost..."/>
         <Input2 onChange={(event) => props.setCostAmmount(event.target.value)} type="text" name="amount" placeholder="Amount of cost..."/>
         <textarea onChange={(event) => props.setCostDescription(event.target.value)} className="add_wlist_item_box__txtarea" name="description" placeholder="Description to cost.."></textarea>

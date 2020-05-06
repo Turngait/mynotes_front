@@ -15,7 +15,7 @@ const Costitem = props => {
         <span className="myFin_mainBox__item_header__info">Cost: {props.item.amount}</span>
         <span className="myFin_mainBox__item_header__info">{formateDate(props.item.date)}</span>
         <span className="myFin_mainBox__item_header__info">Group: {group_name}</span>
-        <span className="myFin_mainBox__item_header__control"><i className="fas edit fa-edit"></i> <i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={props.item._id} className="fas deleteCostItem fa-times"></i></span>
+        <span className="myFin_mainBox__item_header__control"><i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={props.item._id} className="fas deleteCostItem fa-times"></i></span>
       </div>
       {
         props.item.descrition ? 

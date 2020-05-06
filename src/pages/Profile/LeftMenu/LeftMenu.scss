@@ -1,0 +1,46 @@
+@import '../../../config/variable.scss';
+
+.LeftMenu_box {
+  font-family: $headers-font;
+  list-style-type: none;
+  margin:0;
+  padding: 3vh 0;
+
+  &__item {
+    font-size: 1.4rem;
+
+    &_btn {
+      padding: 1vh 2vw 1vh 0;
+      margin-left: 2vw;
+      margin-top: 1vh;
+      min-width: 15vw;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      box-sizing: border-box;
+      text-align: right;
+
+      &:hover {
+        background-color: #00A6CB;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+      &:focus {
+        outline: none;
+      }
+
+      &_active {
+        background-color: rgba(0,166,203,0.7);
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
