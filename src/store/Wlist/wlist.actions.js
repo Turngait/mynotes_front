@@ -194,3 +194,22 @@ export function addGroup (data) {
     })
   }
 }
+
+export function deleteWlistGroup(data) {
+  return (dispatch) => {
+    const { token, target } = data;
+    const id = target.dataset.itemId;
+    fetch(API_URL + '/wlist/group/delete/' + id + '/' + token, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      mode: 'cors'
+    })
+    .then(res => {
+      if (res.status === 204) {
+        dispatch(getWlistItem(token))
+      }
+    })
+  }
+}

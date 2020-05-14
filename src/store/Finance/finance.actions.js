@@ -73,16 +73,6 @@ export function setCostGroupTitle(data) {
 
 export function getCostItems(token) {
   return (dispatch) => {
-    // fetch(API_URL + '/fin/cost/get/' + token)
-    // .then(res => {return res.json()})
-    // .then(data => {
-    //   const {groups, costs} = data
-    //     dispatch({
-    //       type: 'SET_COSTS',
-    //       groups,
-    //       costs
-    //     })
-    // })
     const period = new Date().toISOString().slice(0,7);
     fetch(API_URL + '/fin/cost/get/' + period + '/' + token)
     .then(res => {return res.json()})
@@ -206,6 +196,25 @@ export function getCostForPeriod (data) {
         type: 'SET_COST_PERIOD',
         payload: data.period
       })
+    })
+  }
+}
+
+export function deleteCostGroup(data) {
+  return (dispatch) => {
+    const { token, target } = data;
+    const id = target.dataset.itemId;
+    fetch(API_URL + '/fin/group/delete/' + id + '/' + token, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      mode: 'cors'
+    })
+    .then(res => {
+      if (res.status === 204) {
+        dispatch(getCostItems(token))
+      }
     })
   }
 }

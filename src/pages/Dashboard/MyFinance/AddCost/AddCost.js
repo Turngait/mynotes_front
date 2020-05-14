@@ -4,6 +4,8 @@ import './AddCost.scss';
 import PopUp from '../../../../components/PopUp/PopUp';
 import Input2 from '../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../components/ButtonPopUp/ButtonPopUp';
+import Select1 from '../../../../components/Select1/Select1';
+import Textarea1 from '../../../../components/Textarea1/Textarea1';
 import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostWlistItem, setCostDate} from '../../../../store/Finance/finance.actions'
 
 const AddCost = props => {
@@ -21,9 +23,9 @@ const AddCost = props => {
         <Input2 onChange={(event) => props.setCostDate(event.target.value)} value={props.cost.date} type="date" name="date"/>
         <Input2 onChange={(event) => props.setCostTitle(event.target.value)} type="text" name="title" placeholder="Title of cost..."/>
         <Input2 onChange={(event) => props.setCostAmmount(event.target.value)} type="text" name="amount" placeholder="Amount of cost..."/>
-        <textarea onChange={(event) => props.setCostDescription(event.target.value)} className="add_wlist_item_box__txtarea" name="description" placeholder="Description to cost.."></textarea>
+        <Textarea1 onChange={(event) => props.setCostDescription(event.target.value)} name="description" placeholder="Description to cost.."></Textarea1>
         <div className="add_wlist_item_box__opt">
-          <select onChange={(event) => props.setCostGroup(event.target.value)} className="add_wlist_item_box__opt_sel">
+          <Select1 onChange={(event) => props.setCostGroup(event.target.value)}>
             <option value='none'>None</option>
             {
               props.groups.length > 0 ?
@@ -36,8 +38,8 @@ const AddCost = props => {
               null
             }
             <option value='0'>Other</option>
-          </select>
-          <select onChange={(event) => {props.setCostWlistItem(event.target.value)}} className="add_wlist_item_box__opt_sel">
+          </Select1>
+          <Select1 onChange={(event) => {props.setCostWlistItem(event.target.value)}}>
             <option value="0">None</option>
             {
               props.wlist.length > 0 ?
@@ -49,7 +51,7 @@ const AddCost = props => {
               :
               null
             }
-          </select>
+          </Select1>
         </div>
 
         <ButtonPopUp onClick={() => props.addCostItem({cost: props.cost, token: props.token})} title="Add" />

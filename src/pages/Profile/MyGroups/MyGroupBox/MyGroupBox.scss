@@ -1,0 +1,9 @@
+.myGroupBox {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+
+  &__item {
+    flex-basis: 40%;
+  }
+}

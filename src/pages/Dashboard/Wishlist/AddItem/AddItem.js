@@ -5,6 +5,8 @@ import PopUp from '../../../../components/PopUp/PopUp';
 import Input2 from '../../../../components/Input2/Input2';
 import Input2UnReq from '../../../../components/Input2/Input2UnRequired';
 import ButtonPopUp from '../../../../components/ButtonPopUp/ButtonPopUp';
+import Select1 from '../../../../components/Select1/Select1';
+import Textarea1 from '../../../../components/Textarea1/Textarea1';
 import {setName, setText, setLink, setPrice, setPriority, setWlistItem, setGroup} from '../../../../store/Wlist/wlist.actions';
 
 const AddItem = props => {
@@ -33,11 +35,11 @@ const AddItem = props => {
         <Input2 onChange={(event) => props.setName(event.target.value)} type="text" name="name" placeholder="Item name..."/>
         <Input2 onChange={(event) => props.setPrice(event.target.value)} type="text" name="price" placeholder="Item price..."/>
         <Input2UnReq onChange={(event) => props.setLink(event.target.value)} type="text" name="link" placeholder="Item link (if exist)..."/>
-        <textarea onChange={(event) => props.setText(event.target.value)} className="add_wlist_item_box__txtarea" name="text" placeholder="Description...">
-        </textarea>
+        <Textarea1 onChange={(event) => props.setText(event.target.value)} name="text" placeholder="Description...">
+        </Textarea1>
 
         <div className="add_wlist_item_box__opt">
-        <select defaultValue={props.group} onChange={(event) => props.setGroup(event.target.value)} className="add_wlist_item_box__opt_sel">
+        <Select1 onChange={(event) => props.setGroup(event.target.value)}>
           <option value="0">MustHave</option>
           {
             props.groups.length > 0 ?
@@ -47,13 +49,13 @@ const AddItem = props => {
             :
             null
           }
-          </select>
-          <select onChange={(event) => props.setPriority(event.target.value)} defaultValue={props.priority} className="add_wlist_item_box__opt_sel">
+          </Select1>
+          <Select1 onChange={(event) => props.setPriority(event.target.value)}>
             <option value="1">Priority 1</option>
             <option value="2">Priority 2</option>
             <option value="3">Priority 3</option>
             <option value="4">Priority 4</option>
-          </select>
+          </Select1>
         </div>
 
         <ButtonPopUp onClick={() => props.setWlistItem(data)} title="Add" />

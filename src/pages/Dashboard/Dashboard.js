@@ -6,7 +6,6 @@ import Footer from '../../components/Footer/Footer'
 import LeftMenu from './LeftMenu/LeftMenu'
 import MyFinance from './MyFinance/MyFinance'
 import Wishlist from './Wishlist/Wishlist'
-import Profile from './Profile/Profile'
 import { getToken, logOut } from '../../store/User/user.actions'
 import {getWlistItem} from '../../store/Wlist/wlist.actions'
 import {getCostItems} from '../../store/Finance/finance.actions'
@@ -50,7 +49,6 @@ class Dashboard extends Component {
           <section className="main_box__info">
             {this.props.financeOpen ? <MyFinance/> : null}
             {this.props.wlistOpen ? <Wishlist/> : null}
-            {this.props.profileOpen ? <Profile/> : null}
           </section>
         </main>
         <Footer/>
