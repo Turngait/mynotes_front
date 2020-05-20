@@ -9,9 +9,13 @@ const LeftMenu = (props) => {
       <li className="LeftMenu_box__item">
         {
           props.financeOpen ? 
-          <button onClick={props.openFinance} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">MyFinances</button>
+          <>
+            <button onClick={props.openFinance} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">MyFinances</button>
+            <button onClick={props.openFinance} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Costs</button>
+            <button onClick={props.openFinance} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Incomes</button>
+          </>
           :
-          <button onClick={props.openFinance} className="LeftMenu_box__item_btn">MyFinances</button>
+            <button onClick={props.openFinance} className="LeftMenu_box__item_btn">MyFinances</button>
         }
         
       </li>

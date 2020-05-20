@@ -10,6 +10,7 @@
     font-size: 1.4rem;
 
     &_btn {
+      display: block;
       padding: 1vh 2vw 1vh 0;
       margin-left: 2vw;
       margin-top: 1vh;
@@ -43,4 +44,10 @@
       margin-bottom: 0;
     }
   }
+}
+
+.submenu {
+  font-size: 1.2rem !important;
+  margin-top: 0.4vh !important;
+  padding: 0.5vh 2vw 0.5vh 0 !important;
 }

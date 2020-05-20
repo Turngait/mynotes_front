@@ -1,7 +1,6 @@
 import React from 'react';
 import './CostItem.scss';
 import {connect} from 'react-redux';
-import {formateDate} from '../../../../../helpers';
 import {showGroupName, deleteCostItem} from '../../../../../store/Finance/finance.actions';
 
 
@@ -11,11 +10,10 @@ const Costitem = props => {
   return (
     <div className="myFin_mainBox__item">
       <div className="myFin_mainBox__item_header">
+        <span className="myFin_mainBox__item_header__info">RUR {props.item.amount}</span>
         <span className="myFin_mainBox__item_header__info">{props.item.title}</span>
-        <span className="myFin_mainBox__item_header__info">Cost: {props.item.amount}</span>
-        <span className="myFin_mainBox__item_header__info">{formateDate(props.item.date)}</span>
         <span className="myFin_mainBox__item_header__info">Group: {group_name}</span>
-        <span className="myFin_mainBox__item_header__control"><i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={props.item._id} className="fas deleteCostItem fa-times"></i></span>
+        <span className="myFin_mainBox__item_header__control"><i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={props.item._id} className="fas deleteCostItem fa-times-circle"></i></span>
       </div>
       {
         props.item.descrition ? 

@@ -78,6 +78,7 @@ export function getCostItems(token) {
     .then(res => {return res.json()})
     .then(data => {
       const {groups, items} = data.data.costs;
+      console.log(items)
       dispatch({
         type: 'SET_COSTS',
         groups,

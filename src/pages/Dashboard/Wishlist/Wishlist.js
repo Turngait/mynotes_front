@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import AddItem from './AddItem/AddItem';
 import AddGroup from './AddGroup/AddGroup';
 import Button from '../../../components/Button1/Button1';
+import Heading1 from '../../../components/Heading1/Heading1';
 import WlistItem from './WlistItem/WlistItem';
 import './Wishlist.scss';
 import {wlistOpen, wlistClose, wGroupOpen, wGroupClose} from '../../../store/Wlist/wlist.actions';
@@ -13,7 +14,7 @@ const Wishlist = props => {
       {props.wlistOpen ? <AddItem onClose={props.wlistCloseF}/> : null }
       {props.wlistGroupOpen ? <AddGroup onClose={props.wGroupCloseF}/> : null }
       <div className="wList_headerBox">
-        <h3 className="wList_headerBox__logo">Wishlist</h3>
+        <Heading1 title='Wishlist' />
         <p className="wList_headerBox__sorting">
           Sort by: 
           <button className="wList_headerBox__sortBtn"><i className="fas fa-caret-up"></i>priority</button>

@@ -12,10 +12,15 @@
     line-height: 3rem;
   }
 
-  &__spentByDay {
+  &__spentByDay,
+  &__spentByMonth {
     font-size: 1.4rem;
     line-height: 3rem;
     float: right;
+  }
+
+  &__spentByDay {
+    margin-right: 3vw;
   }
 
     &__item {

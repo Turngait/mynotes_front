@@ -12,6 +12,7 @@ const InitialState = {
   },
   costs: [],
   groups: [],
+  costsByPeriod: 0,
   groupTitle: '',
   addGroupError: '',
   addCostError: ''

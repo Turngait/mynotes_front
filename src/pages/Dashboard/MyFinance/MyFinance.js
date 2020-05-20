@@ -3,6 +3,7 @@ import AddCost from './AddCost/AddCost';
 import AddGroup from './AddGroup/AddGroup';
 import Button from '../../../components/Button1/Button1';
 import Input2 from '../../../components/Input2/Input2';
+import Heading1 from '../../../components/Heading1/Heading1';
 import CostBox from './CostBox/CostBox';
 import {connect} from 'react-redux';
 import {openAddCost, openAddCostGroup, getCostForPeriod} from '../../../store/Finance/finance.actions';
@@ -26,7 +27,7 @@ const MyFinance = props => {
         null
     }
       <div className="myFin_headerBox">
-        <h3 className="myFinance__logo">MyFinance</h3>
+        <Heading1 title='MyFinance: Costs' />
         <div>
           <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.costPeriod} type="month" name="date"/>
         </div>

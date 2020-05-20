@@ -2,11 +2,12 @@ import React from 'react';
 import './MyGroups.scss';
 import {connect} from 'react-redux';
 import MyGroupBox from './MyGroupBox/MyGroupBox';
+import Heading1 from '../../../components/Heading1/Heading1';
 
 const MyGroups = props => {
   return (
     <>
-      <h1>MyGroups</h1>
+      <Heading1 title='MyGroups' />
       <MyGroupBox />
     </>
   )
