@@ -1,6 +1,6 @@
 {
   "name": "my-finance",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "private": true,
   "dependencies": {
     "node-sass": "^4.13.0",

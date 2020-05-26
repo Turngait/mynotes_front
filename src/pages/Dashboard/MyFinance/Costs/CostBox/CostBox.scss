@@ -1,4 +1,4 @@
-@import "../../../../config/variable.scss";
+@import "../../../../../config/variable.scss";
 
 .myFin_mainBox {
   margin-top: 2vh;
@@ -6,6 +6,7 @@
   border-top: 1px solid $dark-color;
   color: $dark-color;
   margin-bottom: 3vh;
+
 
   &__date {
     font-size: 1.4rem;

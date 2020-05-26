@@ -1,0 +1,28 @@
+@import "../../../../config/variable.scss";
+
+.myFinance__logo {
+  text-decoration: underline;
+  letter-spacing: 1px;
+  font-size: 2.3rem;
+}
+
+.myFin_headerBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &__sorting {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 600;
+    display: none;
+  }
+  &__costsByPeriod {
+    margin-left: 1vw;
+    font-size: 1.3rem;
+  }
+}
+
+.deleteCostItem {
+  cursor: pointer;
+}

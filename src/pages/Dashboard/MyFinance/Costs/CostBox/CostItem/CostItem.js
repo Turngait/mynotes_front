@@ -1,7 +1,7 @@
 import React from 'react';
 import './CostItem.scss';
 import {connect} from 'react-redux';
-import {showGroupName, deleteCostItem} from '../../../../../store/Finance/finance.actions';
+import {showGroupName, deleteCostItem} from '../../../../../../store/Finance/finance.actions';
 
 
 const Costitem = props => {

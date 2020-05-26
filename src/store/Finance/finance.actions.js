@@ -1,4 +1,4 @@
-import {API_URL} from '../../config/api'
+import {API_URL} from '../../config/api';
 
 export function openAddCost() {
   return (dispatch) => {
@@ -26,6 +26,18 @@ export function closeAddCostGroup() {
   return (dispatch) => {
     dispatch({type: 'CLOSE_ADD_COST_GROUP'})
   };
+}
+
+export function openCosts() {
+  return(dispatch) => {
+    dispatch({type: 'OPEN_COSTS_SUBSCREEN'})
+  }
+}
+
+export function openIncomes() {
+  return(dispatch) => {
+    dispatch({type: 'OPEN_INCOMES_SUBSCREEN'})
+  }
 }
 
 export function setCostTitle(data) {
@@ -78,7 +90,6 @@ export function getCostItems(token) {
     .then(res => {return res.json()})
     .then(data => {
       const {groups, items} = data.data.costs;
-      console.log(items)
       dispatch({
         type: 'SET_COSTS',
         groups,

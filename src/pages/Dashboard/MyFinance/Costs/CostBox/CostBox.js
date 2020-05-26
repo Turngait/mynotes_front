@@ -1,7 +1,7 @@
 import React from 'react';
 import './CostBox.scss';
 import CostItem from './CostItem/CostItem';
-import {formateDate} from '../../../../helpers';
+import {formateDate} from '../../../../../helpers';
 
 
 const CostBox = props => {

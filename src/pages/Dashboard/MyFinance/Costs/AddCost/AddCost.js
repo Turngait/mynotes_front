@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './AddCost.scss';
-import PopUp from '../../../../components/PopUp/PopUp';
-import Input2 from '../../../../components/Input2/Input2';
-import ButtonPopUp from '../../../../components/ButtonPopUp/ButtonPopUp';
-import Select1 from '../../../../components/Select1/Select1';
-import Textarea1 from '../../../../components/Textarea1/Textarea1';
-import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostWlistItem, setCostDate} from '../../../../store/Finance/finance.actions'
+import PopUp from '../../../../../components/PopUp/PopUp';
+import Input2 from '../../../../../components/Input2/Input2';
+import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
+import Select1 from '../../../../../components/Select1/Select1';
+import Textarea1 from '../../../../../components/Textarea1/Textarea1';
+import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostWlistItem, setCostDate} from '../../../../../store/Finance/finance.actions'
 
 const AddCost = props => {
   return (

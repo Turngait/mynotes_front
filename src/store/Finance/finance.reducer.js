@@ -1,6 +1,9 @@
 const InitialState = {
   addCostOpen: false,
   addCostGroupOpen: false,
+  addIncomeOpen: false,
+  isCostOpen: true,
+  isIncomesOpen: false,
   costPeriod: new Date().toISOString().slice(0,7),
   cost: {
     title: '',
@@ -15,7 +18,15 @@ const InitialState = {
   costsByPeriod: 0,
   groupTitle: '',
   addGroupError: '',
-  addCostError: ''
+  addCostError: '',
+  incomes: [],
+  income: {
+    title: '',
+    descrition: '',
+    amount: '',
+    date: new Date().toISOString().slice(0,10)
+  },
+  incomePeriod: new Date().toISOString().slice(0,7)
 }
 
 export default function financeReducer (state = InitialState, action) {
@@ -39,6 +50,28 @@ export default function financeReducer (state = InitialState, action) {
       return {
         ...state,
         addCostGroupOpen: false
+      }
+    case 'OPEN_ADD_INCOME':
+      return {
+        ...state,
+        addIncomeOpen: true
+      }
+    case 'CLOSE_ADD_INCOME':
+      return {
+        ...state,
+        addIncomeOpen: false
+      }
+    case 'OPEN_COSTS_SUBSCREEN':
+      return {
+        ...state,
+        isCostOpen: true,
+        isIncomesOpen: false
+      }
+    case 'OPEN_INCOMES_SUBSCREEN':
+      return {
+        ...state,
+        isCostOpen: false,
+        isIncomesOpen: true
       }
     case 'SET_COST_TITLE':
       return {
@@ -113,6 +146,38 @@ export default function financeReducer (state = InitialState, action) {
       return {
         ...state,
         costPeriod: action.payload,
+      }
+    case 'SET_INCOME_TITLE':
+      return {
+        ...state,
+        income: {
+          ...state.income,
+          title: action.payload
+        }
+      }
+    case 'SET_INCOME_DESCRIPTION':
+      return {
+        ...state,
+        income: {
+          ...state.income,
+          descrition: action.payload
+        }
+      }
+    case 'SET_INCOME_AMOUNT':
+      return {
+        ...state,
+        income: {
+          ...state.income,
+          amount: action.payload
+        }
+      }
+    case 'SET_INCOME_DATE':
+      return {
+        ...state,
+        income: {
+          ...state.income,
+          date: action.payload
+        }
       }
     default:
       return state

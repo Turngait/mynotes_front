@@ -1,7 +1,8 @@
-import React from 'react'
-import './LeftMenu.scss'
-import { connect } from 'react-redux'
-import { openFinance, openWlist } from '../../../store/Dashboard/dashboard.actions'
+import React from 'react';
+import './LeftMenu.scss';
+import { connect } from 'react-redux';
+import { openFinance, openWlist } from '../../../store/Dashboard/dashboard.actions';
+import { openCosts, openIncomes } from '../../../store/Finance/finance.actions';
 
 const LeftMenu = (props) => {
   return (
@@ -11,8 +12,8 @@ const LeftMenu = (props) => {
           props.financeOpen ? 
           <>
             <button onClick={props.openFinance} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">MyFinances</button>
-            <button onClick={props.openFinance} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Costs</button>
-            <button onClick={props.openFinance} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Incomes</button>
+            <button onClick={props.openCosts} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Costs</button>
+            <button onClick={props.openIncomes} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Incomes</button>
           </>
           :
             <button onClick={props.openFinance} className="LeftMenu_box__item_btn">MyFinances</button>
@@ -44,7 +45,9 @@ function mapStateToProps(state) {
 function mapDispatchToPRops(dispatch) {
   return {
     openWlist: () => dispatch(openWlist()),
-    openFinance: () => dispatch(openFinance())
+    openFinance: () => dispatch(openFinance()),
+    openCosts: () => dispatch(openCosts()),
+    openIncomes: () => dispatch(openIncomes())
   }
 }
 

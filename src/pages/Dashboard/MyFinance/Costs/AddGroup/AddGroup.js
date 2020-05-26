@@ -1,10 +1,10 @@
 import React from 'react';
 import './AddGroup.scss';
-import PopUp from '../../../../components/PopUp/PopUp';
-import Input2 from '../../../../components/Input2/Input2';
-import ButtonPopUp from '../../../../components/ButtonPopUp/ButtonPopUp';
+import PopUp from '../../../../../components/PopUp/PopUp';
+import Input2 from '../../../../../components/Input2/Input2';
+import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import {connect} from 'react-redux';
-import {closeAddCostGroup, setCostGroupTitle, addGroupToDB} from '../../../../store/Finance/finance.actions'
+import {closeAddCostGroup, setCostGroupTitle, addGroupToDB} from '../../../../../store/Finance/finance.actions'
 
 const AddGroup = props => {
   const {groupTitle, token} = props;

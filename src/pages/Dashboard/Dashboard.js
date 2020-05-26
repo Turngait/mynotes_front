@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import './Dashboard.scss'
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
-import LeftMenu from './LeftMenu/LeftMenu'
-import MyFinance from './MyFinance/MyFinance'
-import Wishlist from './Wishlist/Wishlist'
-import { getToken, logOut } from '../../store/User/user.actions'
-import {getWlistItem} from '../../store/Wlist/wlist.actions'
-import {getCostItems} from '../../store/Finance/finance.actions'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import './Dashboard.scss';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import LeftMenu from './LeftMenu/LeftMenu';
+import MyFinance from './MyFinance/MyFinance';
+import Wishlist from './Wishlist/Wishlist';
+import { getToken, logOut } from '../../store/User/user.actions';
+import {getWlistItem} from '../../store/Wlist/wlist.actions';
+import {getCostItems} from '../../store/Finance/finance.actions';
 
 /*
   Dashboard component which render all section
