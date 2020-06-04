@@ -8,7 +8,8 @@ import MyFinance from './MyFinance/MyFinance';
 import Wishlist from './Wishlist/Wishlist';
 import { getToken, logOut } from '../../store/User/user.actions';
 import {getWlistItem} from '../../store/Wlist/wlist.actions';
-import {getCostItems} from '../../store/Finance/finance.actions';
+import {getCostItems} from '../../store/Costs/costs.actions';
+import {getIncomes} from '../../store/Incomes/income.action';
 
 /*
   Dashboard component which render all section
@@ -22,6 +23,7 @@ class Dashboard extends Component {
     }
     this.props.getCostItems(token)
     this.props.getWlistItem(token)
+    this.props.getIncomes(token)
   }
 
   componentDidUpdate() {
@@ -31,6 +33,7 @@ class Dashboard extends Component {
     }
     this.props.getCostItems(token)
     this.props.getWlistItem(token)
+    this.props.getIncomes(token)
   }
 
   logOut = () => {
@@ -70,7 +73,8 @@ function mapDispatchToProps(dispatch) {
     getToken: () => dispatch(getToken()),
     logOut: () => dispatch(logOut()),
     getWlistItem: (token) => dispatch(getWlistItem(token)),
-    getCostItems: (token) => dispatch(getCostItems(token))
+    getCostItems: (token) => dispatch(getCostItems(token)),
+    getIncomes: (token) => dispatch(getIncomes(token))
   }
 }
 

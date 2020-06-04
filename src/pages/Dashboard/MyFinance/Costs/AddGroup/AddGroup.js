@@ -4,7 +4,7 @@ import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import {connect} from 'react-redux';
-import {closeAddCostGroup, setCostGroupTitle, addGroupToDB} from '../../../../../store/Finance/finance.actions'
+import {closeAddCostGroup, setCostGroupTitle, addGroupToDB} from '../../../../../store/Costs/costs.actions'
 
 const AddGroup = props => {
   const {groupTitle, token} = props;
@@ -33,9 +33,9 @@ const AddGroup = props => {
 
 function mapStateToProps (state) {
   return {
-    groupTitle: state.finance.groupTitle,
+    groupTitle: state.costs.groupTitle,
     token: state.user.token,
-    errorMsg: state.finance.addGroupError
+    errorMsg: state.costs.addGroupError
   }
 }
 

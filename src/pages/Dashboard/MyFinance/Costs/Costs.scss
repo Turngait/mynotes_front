@@ -23,6 +23,12 @@
   }
 }
 
+.myFin{
+  &__noContent {
+    font-size: 2rem;
+  }
+}
+
 .deleteCostItem {
   cursor: pointer;
 }

@@ -12,8 +12,18 @@ const LeftMenu = (props) => {
           props.financeOpen ? 
           <>
             <button onClick={props.openFinance} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">MyFinances</button>
-            <button onClick={props.openCosts} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Costs</button>
-            <button onClick={props.openIncomes} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Incomes</button>
+            {
+              props.isCostOpen ?
+                <button onClick={props.openCosts} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu LeftMenu_box__item_btn_active">Costs</button>
+              :
+                <button onClick={props.openCosts} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Costs</button>
+            }
+            {
+              props.isIncomesOpen ?
+              <button onClick={props.openIncomes} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu LeftMenu_box__item_btn_active">Incomes</button>
+              :
+                <button onClick={props.openIncomes} className="LeftMenu_box__item_btn LeftMenu_box__item_btn submenu">Incomes</button>
+            }
           </>
           :
             <button onClick={props.openFinance} className="LeftMenu_box__item_btn">MyFinances</button>
@@ -38,7 +48,9 @@ const LeftMenu = (props) => {
 function mapStateToProps(state) {
   return {
     wlistOpen: state.dashboard.wlistOpen,
-    financeOpen: state.dashboard.financeOpen
+    financeOpen: state.dashboard.financeOpen,
+    isCostOpen: state.costs.isCostOpen,
+    isIncomesOpen: state.costs.isIncomesOpen
   }
 }
 

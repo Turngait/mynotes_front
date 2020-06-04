@@ -6,7 +6,7 @@ import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import Select1 from '../../../../../components/Select1/Select1';
 import Textarea1 from '../../../../../components/Textarea1/Textarea1';
-import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostWlistItem, setCostDate} from '../../../../../store/Finance/finance.actions'
+import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostWlistItem, setCostDate} from '../../../../../store/Costs/costs.actions'
 
 const AddCost = props => {
   return (
@@ -62,11 +62,11 @@ const AddCost = props => {
 
 function mapStateToProps (state) {
   return {
-    cost: state.finance.cost,
-    groups: state.finance.groups,
+    cost: state.costs.cost,
+    groups: state.costs.groups,
     wlist: state.wlist.wlist,
     token: state.user.token,
-    errorMsg: state.finance.addCostError
+    errorMsg: state.costs.addCostError
   }
 }
 

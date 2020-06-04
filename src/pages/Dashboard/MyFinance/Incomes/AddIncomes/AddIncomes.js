@@ -5,7 +5,7 @@ import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import Textarea1 from '../../../../../components/Textarea1/Textarea1';
-import {closeAddIncome, setIncomeTitle, setIncomeAmmount, setIncomeDescription, setIncomeDate, addIncomeItem} from '../../../../../store/Finance/income.action';
+import {closeAddIncome, setIncomeTitle, setIncomeAmmount, setIncomeDescription, setIncomeDate, addIncomeItem} from '../../../../../store/Incomes/income.action';
 
 const AddIncome = props => {
   return (
@@ -31,7 +31,7 @@ const AddIncome = props => {
 
 function mapStateToProps (state) {
   return {
-    income: state.finance.income,
+    income: state.income.income,
     token: state.user.token
   }
 }

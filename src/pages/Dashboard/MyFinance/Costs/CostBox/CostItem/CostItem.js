@@ -1,7 +1,7 @@
 import React from 'react';
 import './CostItem.scss';
 import {connect} from 'react-redux';
-import {showGroupName, deleteCostItem} from '../../../../../../store/Finance/finance.actions';
+import {showGroupName, deleteCostItem} from '../../../../../../store/Costs/costs.actions';
 
 
 const Costitem = props => {
@@ -29,7 +29,7 @@ const Costitem = props => {
 
 function mapStateToProps (state) {
   return {
-    groups: state.finance.groups,
+    groups: state.costs.groups,
     token: state.user.token
   };
 }

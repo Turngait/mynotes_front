@@ -6,10 +6,11 @@ import Input2 from '../../../../components/Input2/Input2';
 import IncomeBox from './IncomeBox/IncomeBox';
 import AddIncome from './AddIncomes/AddIncomes';
 import {connect} from 'react-redux';
-import {openAddIncome} from '../../../../store/Finance/income.action';
+import {openAddIncome} from '../../../../store/Incomes/income.action';
 
 
 const Incomes = props => {
+  console.log(props)
   return (
     <>
       {
@@ -28,15 +29,25 @@ const Incomes = props => {
             <Button onClick={props.openAddIncome} title="Add Income" />
           </div>
       </div>
-      <IncomeBox />
+      {
+        props.incomeItems ?
+        props.incomeItems.map((income, key) => {
+          return (
+            <IncomeBox key={key} {...income} />
+          )
+        })
+        :
+          null
+      }
     </>
   );
 };
 
 function mapStateToprops(state) {
   return {
-    addIncomeOpen: state.finance.addIncomeOpen,
-    incomePeriod: state.finance.incomePeriod
+    addIncomeOpen: state.income.addIncomeOpen,
+    incomePeriod: state.income.incomePeriod,
+    incomeItems: state.income.incomes
   }
 }
 

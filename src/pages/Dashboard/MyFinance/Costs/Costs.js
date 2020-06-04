@@ -6,7 +6,7 @@ import Input2 from '../../../../components/Input2/Input2';
 import Heading1 from '../../../../components/Heading1/Heading1';
 import CostBox from './CostBox/CostBox';
 import {connect} from 'react-redux';
-import {openAddCost, openAddCostGroup, getCostForPeriod} from '../../../../store/Finance/finance.actions';
+import {openAddCost, openAddCostGroup, getCostForPeriod} from '../../../../store/Costs/costs.actions';
 import './Costs.scss';
 
 const Costs = props => {
@@ -44,7 +44,7 @@ const Costs = props => {
             )
           })
           :
-          null
+          <p className="myFin__noContent">No costs in this month.</p>
         }
     </>
   );
@@ -52,11 +52,11 @@ const Costs = props => {
 
 function mapStateToProps (state) {
   return {
-    isAddCostOpen: state.finance.addCostOpen,
-    isAddCostGroupOpen: state.finance.addCostGroupOpen,
-    costs: state.finance.costs,
-    groups: state.finance.groups,
-    costPeriod: state.finance.costPeriod,
+    isAddCostOpen: state.costs.addCostOpen,
+    isAddCostGroupOpen: state.costs.addCostGroupOpen,
+    costs: state.costs.costs,
+    groups: state.costs.groups,
+    costPeriod: state.costs.costPeriod,
     token: state.user.token
   };
 }
