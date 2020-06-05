@@ -51,6 +51,7 @@ export function getIncomes(token) {
 
 export function addIncomeItem(data) {
   return (dispatch) => {
+    const {token} = data;
 
     fetch(API_URL + '/fin/income/add', {
       method: 'POST',
@@ -60,9 +61,38 @@ export function addIncomeItem(data) {
       mode: 'cors',
       body: JSON.stringify(data)
     })
+    .then(async res => {
+      if(res.status === 204) {
+        dispatch({type: 'CLOSE_ADD_INCOME'});
+        dispatch({type: 'CLEAR_INCOME'});
+        dispatch(getIncomes(token));
+        return;
+      } else if(res.status === 422) {
+        const data = await res.json()
+        if(data.errors) {
+          const {errors} = data.errors
+          dispatch({type:'SET_ADD_INCOME_ERROR', payload: errors[0].msg})
+        }
+      }
+    })
+  }
+}
+
+export function deleteIncome(data) {
+  return (dispatch) => {
+    const {target, token} = data;
+    const id = target.dataset.itemId;
+
+    fetch(API_URL + '/fin/income/delete/' + token + '/' + id, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      mode: 'cors'
+    })
     .then(res => {
       if(res.status === 204) {
-        dispatch({type: 'CLOSE_ADD_INCOME'})
+        dispatch(getIncomes(token));
       }
     })
   }

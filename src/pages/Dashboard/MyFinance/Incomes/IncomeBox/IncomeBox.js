@@ -16,7 +16,7 @@ const IncomeBox = props => {
         props.items.length > 0 ?
           props.items.map((item, key) => {
             return (
-              <IncomeItem {...item}/>
+              <IncomeItem {...item} key={key}/>
             )
           })
         :

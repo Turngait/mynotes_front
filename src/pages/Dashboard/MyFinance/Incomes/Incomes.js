@@ -10,7 +10,6 @@ import {openAddIncome} from '../../../../store/Incomes/income.action';
 
 
 const Incomes = props => {
-  console.log(props)
   return (
     <>
       {
@@ -33,7 +32,7 @@ const Incomes = props => {
         props.incomeItems ?
         props.incomeItems.map((income, key) => {
           return (
-            <IncomeBox key={key} {...income} />
+            <IncomeBox {...income} key={key} />
           )
         })
         :

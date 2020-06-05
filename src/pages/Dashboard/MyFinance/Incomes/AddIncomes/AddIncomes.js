@@ -12,12 +12,12 @@ const AddIncome = props => {
     <PopUp>
       <i onClick={props.closeAddIncome} className="fas fa-times close"></i>
       <h3 className="add_wlist__header">Add Incomes</h3>
-      {/* {
-        props.errorMsg ?
-          <span className="errorsMsg">{props.errorMsg}</span>
+      {
+        props.addIncomeError ?
+          <span className="errorsMsg">{props.addIncomeError}</span>
           : 
           null
-      } */}
+      }
       <form className="add_wlist_item_box">
         <Input2 onChange={(event) => props.setIncomeDate(event.target.value)} value={props.income.date} type="date" name="date"/>
         <Input2 onChange={(event) => props.setIncomeTitle(event.target.value)} type="text" name="title" placeholder="Title of cost..."/>
@@ -32,7 +32,8 @@ const AddIncome = props => {
 function mapStateToProps (state) {
   return {
     income: state.income.income,
-    token: state.user.token
+    token: state.user.token,
+    addIncomeError: state.income.addIncomeError
   }
 }
 

@@ -8,6 +8,7 @@ const InitialState = {
     amount: '',
     date: new Date().toISOString().slice(0,10)
   },
+  addIncomeError: '',
   incomePeriod: new Date().toISOString().slice(0,7)
 }
 
@@ -58,6 +59,21 @@ export default function incomeReducer(state = InitialState, action) {
         income: {
           ...state.income,
           date: action.payload
+        }
+      }
+    case 'SET_ADD_INCOME_ERROR':
+      return {
+        ...state,
+        addIncomeError: action.payload
+      }
+    case 'CLEAR_INCOME':
+      return {
+        ...state,
+        income: {
+          title: '',
+          descrition: '',
+          amount: '',
+          date: new Date().toISOString().slice(0,10)
         }
       }
     default:

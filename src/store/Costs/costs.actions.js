@@ -132,6 +132,7 @@ export function addGroupToDB(data) {
 
 export function addCostItem(data) {
   return(dispatch) => {
+    const {token} =data;
     fetch(API_URL + '/fin/cost/add', {
       method: 'POST',
       headers: {
@@ -143,6 +144,7 @@ export function addCostItem(data) {
     .then(async res => {
       if (res.status === 204) {
         dispatch(closeAddCost())
+        dispatch(getCostItems(token))
       } else if (res.status === 422) {
         const data = await res.json();
         if (data.errors) {
