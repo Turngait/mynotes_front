@@ -7,6 +7,8 @@ import LeftMenu from './LeftMenu/LeftMenu';
 import MyData from './MyData/MyData';
 import MyGroups from './MyGroups/MyGroups';
 import { getToken, logOut } from '../../store/User/user.actions';
+import {getUserInfo} from '../../store/User/user.actions';
+
 
 /*
   Profile component which render all section
@@ -17,6 +19,8 @@ class Profile extends Component {
     const token = this.props.getToken()
     if (!token) {
       this.props.history.push('/')
+    } else {
+      this.props.getUserInfo(token)
     }
   }
 
@@ -65,7 +69,8 @@ class Profile extends Component {
 function mapStateToProps(state) {
   return {
     isMyDataOpen: state.profile.isMyDataOpen,
-    isMyGroupsOpen: state.profile.isMyGroupsOpen
+    isMyGroupsOpen: state.profile.isMyGroupsOpen,
+    token: state.user.token
   }
 }
 
@@ -73,6 +78,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getToken: () => dispatch(getToken()),
     logOut: () => dispatch(logOut()),
+    getUserInfo: (token) => dispatch(getUserInfo(token)) 
   }
 }
 

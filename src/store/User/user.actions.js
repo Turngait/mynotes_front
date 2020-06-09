@@ -29,7 +29,8 @@ export function signIn(login, pass) {
         dispatch({
           type: 'SET_INFO',
           email: data.data.email,
-          name: data.data.name
+          name: data.data.name,
+          balance: data.data.balance
         })
       } else {
         console.log('Wrong')
@@ -123,12 +124,56 @@ export function getToken() {
   }
 }
 
+export function getUserInfo(token) {
+  return (dispatch) => {
+    fetch(API_URL+'/auth/user/' + token)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      dispatch(setInfo(data.data))
+    })
+  }
+}
+
 export function setInfo(user) {
   return (dispatch) => {
     dispatch({
       type: 'SET_INFO',
       email: user.email,
-      name: user.name
+      name: user.name,
+      balance: user.balance
+    })
+  }
+}
+
+export function setBalance(balance) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_USER_BALANCE',
+      payload: Number(balance)
+    })
+  }
+}
+
+export function saveBalance(data) {
+  return (dispatch) => {
+    fetch(API_URL + '/fin/balance', {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => {
+      if(res.status === 204) {
+        dispatch(setSuccesshMsg('Balance saved'));
+        setTimeout(() => dispatch(setSuccesshMsg('')), 4000);
+      } else {
+        dispatch(setErrorhMsg('Server error'));
+        setTimeout(() => dispatch(setErrorhMsg('')), 4000);
+      }
     })
   }
 }

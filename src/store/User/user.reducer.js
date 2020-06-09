@@ -3,7 +3,8 @@ const initialState = {
   email: '',
   name: '',
   successMsg: '',
-  errorMsg: ''
+  errorMsg: '',
+  balance: 0
 }
 
 export default function userReducer (state = initialState, action) {
@@ -28,7 +29,13 @@ export default function userReducer (state = initialState, action) {
       return {
         ...state,
         email: action.email,
-        name: action.name
+        name: action.name,
+        balance: action.balance
+      }
+    case 'SET_USER_BALANCE':
+      return {
+        ...state,
+        balance: action.payload
       }
     case 'SET_SUC_MSG':
       return {
