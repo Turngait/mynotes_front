@@ -97,3 +97,24 @@ export function deleteIncome(data) {
     })
   }
 }
+
+export function getIncomeForPeriod (data) {
+  return (dispatch) => {
+    console.log(data)
+    // fetch(API_URL + '/fin/income/get/' + data.period + '/' + data.token)
+    // .then(res => {return res.json()})
+    // .then(data => {
+    //   const {groups, items} = data.data.costs;
+    //   dispatch({
+    //     type: 'SET_COSTS',
+    //     groups,
+    //     costs: items
+    //   })
+
+    //   dispatch({
+    //     type: 'SET_COST_PERIOD',
+    //     payload: data.period
+    //   })
+    // })
+  }
+}

@@ -194,6 +194,21 @@ export function showGroupName (data) {
   }
 }
 
+export function getGroupId (data) {
+  return (dispatch) => {
+    const {id_group} = data.item;
+    if (data.groups) {
+      for(let group of data.groups) {
+        if (group._id === id_group) {
+          return group._id
+        }
+      }
+    }
+
+    return 'None'
+  }
+}
+
 export function getCostForPeriod (data) {
   return (dispatch) => {
     fetch(API_URL + '/fin/cost/get/' + data.period + '/' + data.token)
@@ -229,6 +244,21 @@ export function deleteCostGroup(data) {
       if (res.status === 204) {
         dispatch(getCostItems(token))
       }
+    })
+  }
+}
+
+export function costGroupFilter(data) {
+  return (dispatch) => {
+    fetch(API_URL + '/fin/cost/group/' + data.token + '/' + data.id_group + '/' + data.period)
+    .then(res => {return res.json()})
+    .then(data => {
+      const {groups, items} = data.data.costs;
+      dispatch({
+        type: 'SET_COSTS',
+        groups,
+        costs: items
+      })
     })
   }
 }
