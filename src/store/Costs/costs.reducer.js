@@ -24,7 +24,8 @@ const InitialState = {
     descrition: '',
     amount: '',
     date: new Date().toISOString().slice(0,10)
-  }
+  },
+  isCostsFiltered: false
 }
 
 export default function costsReducer (state = InitialState, action) {
@@ -166,6 +167,11 @@ export default function costsReducer (state = InitialState, action) {
           ...state.income,
           date: action.payload
         }
+      }
+    case 'SET_ISFILTERED':
+      return {
+        ...state,
+        isCostsFiltered: action.payload
       }
     default:
       return state

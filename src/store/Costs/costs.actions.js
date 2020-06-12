@@ -94,7 +94,8 @@ export function getCostItems(token) {
         type: 'SET_COSTS',
         groups,
         costs: items
-      })
+      });
+      dispatch(togleCostFiltered(false));
     })
   }
 }
@@ -258,7 +259,18 @@ export function costGroupFilter(data) {
         type: 'SET_COSTS',
         groups,
         costs: items
-      })
+      });
+      dispatch(togleCostFiltered(true))
     })
+  }
+}
+
+
+export function togleCostFiltered(data) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_ISFILTERED',
+      payload: Boolean(data)
+    });
   }
 }

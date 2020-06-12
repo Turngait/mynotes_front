@@ -6,7 +6,7 @@ import Input2 from '../../../../components/Input2/Input2';
 import Heading1 from '../../../../components/Heading1/Heading1';
 import CostBox from './CostBox/CostBox';
 import {connect} from 'react-redux';
-import {openAddCost, openAddCostGroup, getCostForPeriod} from '../../../../store/Costs/costs.actions';
+import {openAddCost, openAddCostGroup, getCostForPeriod, getCostItems} from '../../../../store/Costs/costs.actions';
 import './Costs.scss';
 
 const Costs = props => {
@@ -32,6 +32,11 @@ const Costs = props => {
           <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.costPeriod} type="month" name="date"/>
         </div>
         <div>
+          {
+            props.isCostsFiltered ?
+              <Button onClick={() => props.getCostItems(props.token)} title="Сбросить фильтр" />
+            : null
+          }
           <Button onClick={props.openAddCost} title="Add Cost" />
           <Button onClick={props.openAddCostGroup} title="Add Group" />
         </div>
@@ -57,7 +62,8 @@ function mapStateToProps (state) {
     costs: state.costs.costs,
     groups: state.costs.groups,
     costPeriod: state.costs.costPeriod,
-    token: state.user.token
+    token: state.user.token,
+    isCostsFiltered: state.costs.isCostsFiltered
   };
 }
 
@@ -65,7 +71,8 @@ function mapDispatchToProps(dispatch) {
   return {
     openAddCost: () => dispatch(openAddCost()),
     openAddCostGroup: () => dispatch(openAddCostGroup()),
-    getCostForPeriod: (period) => dispatch(getCostForPeriod(period))
+    getCostForPeriod: (period) => dispatch(getCostForPeriod(period)),
+    getCostItems: (data) => dispatch(getCostItems(data))
   };
 }
 
