@@ -7,8 +7,11 @@ import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import Select1 from '../../../../../components/Select1/Select1';
 import Textarea1 from '../../../../../components/Textarea1/Textarea1';
 import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostWlistItem, setCostDate} from '../../../../../store/Costs/costs.actions'
+import { useTranslation } from 'react-i18next';
 
 const AddCost = props => {
+  const { t } = useTranslation();
+
   return (
     <PopUp>
       <i onClick={props.closeAddCost} className="fas fa-times close"></i>
@@ -21,9 +24,9 @@ const AddCost = props => {
       }
       <form className="add_wlist_item_box">
         <Input2 onChange={(event) => props.setCostDate(event.target.value)} value={props.cost.date} type="date" name="date"/>
-        <Input2 onChange={(event) => props.setCostTitle(event.target.value)} type="text" name="title" placeholder="Title of cost..."/>
-        <Input2 onChange={(event) => props.setCostAmmount(event.target.value)} type="text" name="amount" placeholder="Amount of cost..."/>
-        <Textarea1 onChange={(event) => props.setCostDescription(event.target.value)} name="description" placeholder="Description to cost.."></Textarea1>
+        <Input2 onChange={(event) => props.setCostTitle(event.target.value)} type="text" name="title" placeholder={t('costs.titleofCost') + '...'}/>
+        <Input2 onChange={(event) => props.setCostAmmount(event.target.value)} type="text" name="amount" placeholder={t('costs.amount') + "..."}/>
+        <Textarea1 onChange={(event) => props.setCostDescription(event.target.value)} name="description" placeholder={t('costs.description') + "..."}></Textarea1>
         <div className="add_wlist_item_box__opt">
           <Select1 onChange={(event) => props.setCostGroup(event.target.value)}>
             <option value='none'>None</option>
@@ -54,7 +57,7 @@ const AddCost = props => {
           </Select1>
         </div>
 
-        <ButtonPopUp onClick={() => props.addCostItem({cost: props.cost, token: props.token})} title="Add" />
+        <ButtonPopUp onClick={() => props.addCostItem({cost: props.cost, token: props.token})} title={t('costs.addBtn')} />
       </form>
     </PopUp>
   )

@@ -4,14 +4,17 @@ import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import {connect} from 'react-redux';
-import {closeAddCostGroup, setCostGroupTitle, addGroupToDB} from '../../../../../store/Costs/costs.actions'
+import {closeAddCostGroup, setCostGroupTitle, addGroupToDB} from '../../../../../store/Costs/costs.actions';
+import { useTranslation } from 'react-i18next';
+
 
 const AddGroup = props => {
   const {groupTitle, token} = props;
   const data = {
     token,
     groupTitle
-  }
+  };
+  const { t } = useTranslation();
 
   return (
     <PopUp>
@@ -24,8 +27,8 @@ const AddGroup = props => {
           null
       }
       <form className="add_wlist_item_box">
-        <Input2 onChange={(event) => props.setCostGroupTitle(event.target.value)} type="text" name="name" placeholder="Group name..." />
-        <ButtonPopUp onClick={() => props.addGroupToDB(data)} type="button" title="Add" />
+        <Input2 onChange={(event) => props.setCostGroupTitle(event.target.value)} type="text" name="name" placeholder={t('costs.groupName') + "..."} />
+        <ButtonPopUp onClick={() => props.addGroupToDB(data)} type="button" title={t('costs.addBtn')} />
       </form>
     </PopUp>
   );

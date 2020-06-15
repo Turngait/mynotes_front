@@ -8,9 +8,11 @@ import CostBox from './CostBox/CostBox';
 import {connect} from 'react-redux';
 import {openAddCost, openAddCostGroup, getCostForPeriod, getCostItems} from '../../../../store/Costs/costs.actions';
 import './Costs.scss';
+import { useTranslation } from 'react-i18next';
 
 const Costs = props => {
   const {costs} = props;
+  const { t } = useTranslation();
 
   return (
     <>
@@ -27,7 +29,7 @@ const Costs = props => {
         null
     }
       <div className="myFin_headerBox">
-        <Heading1 title='MyFinance: Costs' />
+        <Heading1 title={'MyFinance: ' + t("costs.header")} />
         <div>
           <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.costPeriod} type="month" name="date"/>
         </div>
@@ -37,8 +39,8 @@ const Costs = props => {
               <Button onClick={() => props.getCostItems(props.token)} title="Сбросить фильтр" />
             : null
           }
-          <Button onClick={props.openAddCost} title="Add Cost" />
-          <Button onClick={props.openAddCostGroup} title="Add Group" />
+          <Button onClick={props.openAddCost} title={t('costs.addCost')} />
+          <Button onClick={props.openAddCostGroup} title={t('costs.addGroup')} />
         </div>
       </div>
         {
@@ -49,7 +51,7 @@ const Costs = props => {
             )
           })
           :
-          <p className="myFin__noContent">No costs in this month.</p>
+          <p className="myFin__noContent">{t('costs.noCosts')}</p>
         }
     </>
   );

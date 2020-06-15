@@ -6,8 +6,11 @@ import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import Textarea1 from '../../../../../components/Textarea1/Textarea1';
 import {closeAddIncome, setIncomeTitle, setIncomeAmmount, setIncomeDescription, setIncomeDate, addIncomeItem} from '../../../../../store/Incomes/income.action';
+import { useTranslation } from 'react-i18next';
 
 const AddIncome = props => {
+  const { t } = useTranslation();
+
   return (
     <PopUp>
       <i onClick={props.closeAddIncome} className="fas fa-times close"></i>
@@ -20,10 +23,10 @@ const AddIncome = props => {
       }
       <form className="add_wlist_item_box">
         <Input2 onChange={(event) => props.setIncomeDate(event.target.value)} value={props.income.date} type="date" name="date"/>
-        <Input2 onChange={(event) => props.setIncomeTitle(event.target.value)} type="text" name="title" placeholder="Title of cost..."/>
-        <Input2 onChange={(event) => props.setIncomeAmmount(event.target.value)} type="text" name="amount" placeholder="Amount of cost..."/>
-        <Textarea1 onChange={(event) => props.setIncomeDescription(event.target.value)} name="description" placeholder="Description to cost.."></Textarea1>
-        <ButtonPopUp onClick={() => props.addIncomeItem({income: props.income, token: props.token})} title="Add" />
+        <Input2 onChange={(event) => props.setIncomeTitle(event.target.value)} type="text" name="title" placeholder={t('incomes.titleofIncome') + "..."}/>
+        <Input2 onChange={(event) => props.setIncomeAmmount(event.target.value)} type="text" name="amount" placeholder={t('incomes.amount') + "..."}/>
+        <Textarea1 onChange={(event) => props.setIncomeDescription(event.target.value)} name="description" placeholder={t('incomes.description') + "..."}></Textarea1>
+        <ButtonPopUp onClick={() => props.addIncomeItem({income: props.income, token: props.token})} title={t('incomes.addBtn')} />
       </form>
     </PopUp>
   )
