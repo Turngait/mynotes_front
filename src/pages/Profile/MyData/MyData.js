@@ -1,27 +1,27 @@
 import React from 'react';
 import './MyData.scss';
 import Heading1 from '../../../components/Heading1/Heading1';
-import Input1 from '../../../components/Input1/Input1';
 import Button1 from '../../../components/Button1/Button1';
+import Statistics from './Statistics/Statistics';
+import Settings from './Settings/Settings';
 import {connect} from 'react-redux';
-import {setBalance, saveBalance} from '../../../store/User/user.actions';
+import {toggleSettingsWindow} from '../../../store/Profile/profile.action';
 
 const MyData = props => {
   return (
     <>
+    {
+      props.isSettingsOpen ?
+        <Settings />
+      :
+        null
+    }
+    <div className="profileBox__headerBox">
       <Heading1 title='MyData' />
+      <Button1 title='Settings' onClick={() => props.toggleSettingsWindow(true)}/>
+    </div>
       <div className="profileBox">
-        <div className="profileBox__balanceBox">
-          <h3 className="profileBox__balanceBox__header">Your balance</h3>
-          {
-            props.successMsg ?
-              <p className="profileBox__balanceBox__successMsg">{props.successMsg}</p>
-            : null
-          }
-          <Input1 onChange={event => props.setBalance(event.target.value)} placeholder="Enter yourbalance..." value={props.balance}/>
-          <br></br>
-          <Button1 onClick={() => props.saveBalance({token: props.token, balance: props.balance})} title='Set Balance'/>
-        </div>
+        <Statistics />
       </div>
     </>
   )
@@ -31,14 +31,14 @@ function mapStateToProps(state) {
   return {
     balance: state.user.balance,
     token: state.user.token,
-    successMsg: state.user.successMsg
+    successMsg: state.user.successMsg,
+    isSettingsOpen: state.profile.isSettingsOpen
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    setBalance: (data) => dispatch(setBalance(data)),
-    saveBalance: (data) => dispatch(saveBalance(data))
+    toggleSettingsWindow: (data) => dispatch(toggleSettingsWindow(data))
   }
 }
 

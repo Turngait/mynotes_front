@@ -1,12 +1,20 @@
 .profileBox {
-  margin-top:3vh;
+  margin-top:2vh;
   border-top: 1px solid #333;
-  padding-top: 3vh;
+  padding-top: 2vh;
+
+  &__headerBox {
+    display: flex;
+    justify-content: space-between;
+  }
 
   &__balanceBox {
+    margin-bottom: 3vh;
     &__header {
+      text-align: left;
       font-size: 1.5rem;
-      margin-bottom: 1vh;
+      border-bottom: 1px solid #fff;
+      margin-bottom: 1.3vh;
     }
 
     &__successMsg {

@@ -29,6 +29,7 @@ const resources = {
         'amount': 'Сумма',
         'description': 'Подробное описание',
         'addBtn': 'Добавить',
+        'noIncomes': 'Нет доходов за этот период'
       }
     }
   }

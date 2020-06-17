@@ -32,14 +32,14 @@ const Incomes = props => {
           </div>
       </div>
       {
-        props.incomeItems ?
+        props.incomeItems.length > 0 ?
         props.incomeItems.map((income, key) => {
           return (
             <IncomeBox {...income} key={key} />
           )
         })
         :
-          null
+          <p className="myFin__noContent">{t('incomes.noIncomes')}</p>
       }
     </>
   );

@@ -25,16 +25,17 @@ export function signIn(login, pass) {
         dispatch({
           type: 'SET_TOKEN',
           payload: data.data.token
-        })
+        });
         dispatch({
           type: 'SET_INFO',
           email: data.data.email,
           name: data.data.name,
           balance: data.data.balance
-        })
+        });
+        dispatch(setSuccesshMsg(''));
+        dispatch(setErrorhMsg(''));
       } else {
-        console.log('Wrong')
-        dispatch(setErrorhMsg('Wrong email or password!'))
+        dispatch(setErrorhMsg('Wrong email or password!'));
       }
     })
   }
@@ -64,14 +65,16 @@ export function signUp (email, name, pass) {
         dispatch(setErrorhMsg(data.errors.errors[0].msg))
       }
       if(data.status === 202) {
-        dispatch(setSuccesshMsg('Registration is complete!'))
+        dispatch(setSuccesshMsg('Registration is complete!'));
         dispatch({
           type: 'SET_INFO',
           email: data.data.email,
           name: data.data.name
-        })
+        });
+        setTimeout(() => dispatch(setSuccesshMsg('')), 3000);
       } else if (data.status === 208) {
-        dispatch(setErrorhMsg('User already exist!'))
+        dispatch(setErrorhMsg('User already exist!'));
+        setTimeout(() => dispatch(setErrorhMsg('')), 3000);
       } else {
         console.log('Wrong')
       }

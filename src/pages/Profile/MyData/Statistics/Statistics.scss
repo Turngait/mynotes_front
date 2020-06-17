@@ -1,0 +1,16 @@
+@import '../../../../config/variable.scss';
+
+.stat_box {
+  &__header {
+    width: 50%;
+    font-size: 1.5rem;
+    margin-bottom: 1vh;
+    border-bottom: 1px solid $dark-color;
+  }
+
+  &__item {
+    margin: 0;
+    margin-bottom: 1vh;
+    font-size: 1.3rem;
+  }
+}

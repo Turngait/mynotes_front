@@ -1,6 +1,7 @@
 const initialState = {
   isMyDataOpen: true,
-  isMyGroupsOpen: false
+  isMyGroupsOpen: false,
+  isSettingsOpen: false
 }
 
 export default function profileReducer (state = initialState, action) {
@@ -16,6 +17,11 @@ export default function profileReducer (state = initialState, action) {
         ...state,
         isMyDataOpen: false,
         isMyGroupsOpen: true
+      }
+    case 'CHANGE_IS_OPEN_SETTINGS':
+      return {
+        ...state,
+        isSettingsOpen: action.payload
       }
     default:
       return state

@@ -95,6 +95,10 @@ export function getCostItems(token) {
         groups,
         costs: items
       });
+      dispatch({
+        type: 'SET_COSTS_BY_PERIOD',
+        payload: items[0].spentByThisMonth
+      });
       dispatch(togleCostFiltered(false));
     })
   }

@@ -43,7 +43,8 @@ export function getIncomes(token) {
     .then(res => {return res.json()})
     .then(data => {
       if(data.status === 200) {
-        dispatch({type: 'SET_INCOMES', payload: data.data.incomes})
+        dispatch({type: 'SET_INCOMES', payload: data.data.incomes});
+        dispatch({type: 'SET_INCOMES_BY_PERIOD', payload: data.data.incomes[0].incomeByThisMonth});
       }
     })
   }
@@ -100,21 +101,15 @@ export function deleteIncome(data) {
 
 export function getIncomeForPeriod (data) {
   return (dispatch) => {
-    console.log(data)
-    // fetch(API_URL + '/fin/income/get/' + data.period + '/' + data.token)
-    // .then(res => {return res.json()})
-    // .then(data => {
-    //   const {groups, items} = data.data.costs;
-    //   dispatch({
-    //     type: 'SET_COSTS',
-    //     groups,
-    //     costs: items
-    //   })
+    fetch(API_URL + '/fin/income/get/' + data.period + '/' + data.token)
+    .then(res => {return res.json()})
+    .then(data => {
+      dispatch({type: 'SET_INCOMES', payload: data.data.incomes})
 
-    //   dispatch({
-    //     type: 'SET_COST_PERIOD',
-    //     payload: data.period
-    //   })
-    // })
+      dispatch({
+        type: 'SET_INCOME_PERIOD',
+        payload: data.period
+      })
+    })
   }
 }

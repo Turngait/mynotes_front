@@ -1,0 +1,12 @@
+.settings {
+  &__header {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 2vh;
+  }
+  
+  &__box {
+    display: flex;
+    justify-content: space-between;
+  }
+}

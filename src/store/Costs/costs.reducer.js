@@ -136,37 +136,10 @@ export default function costsReducer (state = InitialState, action) {
         ...state,
         costPeriod: action.payload,
       }
-    case 'SET_INCOME_TITLE':
+    case 'SET_COSTS_BY_PERIOD':
       return {
         ...state,
-        income: {
-          ...state.income,
-          title: action.payload
-        }
-      }
-    case 'SET_INCOME_DESCRIPTION':
-      return {
-        ...state,
-        income: {
-          ...state.income,
-          descrition: action.payload
-        }
-      }
-    case 'SET_INCOME_AMOUNT':
-      return {
-        ...state,
-        income: {
-          ...state.income,
-          amount: action.payload
-        }
-      }
-    case 'SET_INCOME_DATE':
-      return {
-        ...state,
-        income: {
-          ...state.income,
-          date: action.payload
-        }
+        costsByPeriod: action.payload
       }
     case 'SET_ISFILTERED':
       return {
