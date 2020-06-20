@@ -90,15 +90,18 @@ export function getCostItems(token) {
     .then(res => {return res.json()})
     .then(data => {
       const {groups, items} = data.data.costs;
+      if (items.length > 0) {
+        dispatch({
+          type: 'SET_COSTS_BY_PERIOD',
+          payload: items[0].spentByThisMonth
+        });
+      } 
       dispatch({
         type: 'SET_COSTS',
         groups,
         costs: items
       });
-      dispatch({
-        type: 'SET_COSTS_BY_PERIOD',
-        payload: items[0].spentByThisMonth
-      });
+
       dispatch(togleCostFiltered(false));
     })
   }

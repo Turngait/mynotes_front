@@ -87,6 +87,11 @@ export default function incomeReducer(state = InitialState, action) {
           date: new Date().toISOString().slice(0,10)
         }
       }
+    case 'EMPTY_INCOMES':
+      return {
+        ...state,
+        incomes: [],
+      }
     default:
       return state
   }

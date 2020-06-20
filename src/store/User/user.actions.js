@@ -17,14 +17,20 @@ export function signIn(login, pass) {
       body: JSON.stringify(body)
     })
     .then(res => {
-      return res.json()
+      return res.json();
     })
     .then(data => {
       if(data.status === 200) {
-        localStorage.setItem('token', data.data.token)
+        localStorage.setItem('token', data.data.token);
+        localStorage.setItem('local', data.data.settings.local);
+        localStorage.setItem('currency', data.data.settings.currency);
         dispatch({
           type: 'SET_TOKEN',
           payload: data.data.token
+        });
+        dispatch({
+          type: 'SET_SETTINGS',
+          payload: data.data.settings
         });
         dispatch({
           type: 'SET_INFO',
@@ -84,10 +90,14 @@ export function signUp (email, name, pass) {
 
 export function logOut() {
   return(dispatch) => {
-    localStorage.removeItem('token')
-    dispatch({
-      type: 'REMOVE_TOKEN'
-    })
+    localStorage.removeItem('token');
+    localStorage.removeItem('currency');
+    localStorage.removeItem('local');
+    dispatch({type: 'REMOVE_TOKEN'});
+    dispatch({type: 'REMOVE_SETTINGS'});
+    dispatch({type: 'EMPTY_INCOMES'});
+    dispatch({type: 'EMPTY_COSTS'});
+    dispatch({type: 'EMPTY_WLISTS'});
   }
 }
 
@@ -124,6 +134,19 @@ export function getToken() {
     }
 
     return token
+  }
+}
+
+export function getSettings() {
+  return (dispatch) => {
+    const settings = {
+      currency: localStorage.getItem('currency'),
+      local: localStorage.getItem('local')
+    };
+    dispatch({
+      type: 'SET_SETTINGS',
+      payload: settings
+    });
   }
 }
 

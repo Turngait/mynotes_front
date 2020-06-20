@@ -4,7 +4,11 @@ const initialState = {
   name: '',
   successMsg: '',
   errorMsg: '',
-  balance: 0
+  balance: 0,
+  settings: {
+    locale: 'ru',
+    currency: 'RUR'
+  }
 }
 
 export default function userReducer (state = initialState, action) {
@@ -15,6 +19,11 @@ export default function userReducer (state = initialState, action) {
         token: action.payload,
         authMsg: ''
       }
+    case 'SET_SETTINGS': 
+      return {
+        ...state,
+        settings: action.payload
+      }
     case 'GET_TOKEN':
       return {
         ...state,
@@ -24,6 +33,14 @@ export default function userReducer (state = initialState, action) {
       return {
         ...state,
         token: false
+      }
+    case 'REMOVE_SETTINGS':
+      return {
+        ...state,
+        settings: {
+          locale: 'ru',
+          currency: 'RUR'
+        }
       }
     case 'SET_INFO':
       return {

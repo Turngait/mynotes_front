@@ -7,9 +7,9 @@ const Statistics = props => {
   return (
     <div className="stat_box">
       <h3 className="stat_box__header">Статистика</h3>
-      <p className="stat_box__item">Потрачено: RUR {props.costs}</p>
-      <p className="stat_box__item">Получено: RUR {props.incomes}</p>
-      <p className="stat_box__item">Разница: RUR {total}</p>
+      <p className="stat_box__item">Потрачено: {props.currency} {props.costs}</p>
+      <p className="stat_box__item">Получено: {props.currency} {props.incomes}</p>
+      <p className="stat_box__item">Разница: {props.currency} {total}</p>
     </div>
   )
 }
@@ -17,7 +17,8 @@ const Statistics = props => {
 function mapStateToProps(state) {
   return {
     costs: state.costs.costsByPeriod,
-    incomes: state.income.incomesByPeriod
+    incomes: state.income.incomesByPeriod,
+    currency: state.user.settings.currency
   }
 }
 

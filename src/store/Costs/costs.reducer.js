@@ -146,6 +146,13 @@ export default function costsReducer (state = InitialState, action) {
         ...state,
         isCostsFiltered: action.payload
       }
+
+    case 'EMPTY_COSTS':
+      return {
+        ...state,
+        costs: [],
+        groups: [],
+      }
     default:
       return state
   }

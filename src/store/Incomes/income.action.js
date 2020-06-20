@@ -44,7 +44,10 @@ export function getIncomes(token) {
     .then(data => {
       if(data.status === 200) {
         dispatch({type: 'SET_INCOMES', payload: data.data.incomes});
-        dispatch({type: 'SET_INCOMES_BY_PERIOD', payload: data.data.incomes[0].incomeByThisMonth});
+
+        if (data.data.incomes.length > 0) {
+          dispatch({type: 'SET_INCOMES_BY_PERIOD', payload: data.data.incomes[0].incomeByThisMonth});
+        }
       }
     })
   }

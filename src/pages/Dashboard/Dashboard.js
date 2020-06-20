@@ -6,7 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
 import Wishlist from './Wishlist/Wishlist';
-import { getToken, logOut } from '../../store/User/user.actions';
+import { getToken, getSettings, logOut } from '../../store/User/user.actions';
 import {getWlistItem} from '../../store/Wlist/wlist.actions';
 import {getCostItems} from '../../store/Costs/costs.actions';
 import {getIncomes} from '../../store/Incomes/income.action';
@@ -17,7 +17,8 @@ import {getIncomes} from '../../store/Incomes/income.action';
 
 class Dashboard extends Component {
   componentDidMount() {
-    const token = this.props.getToken()
+    const token = this.props.getToken();
+    this.props.getSettings();
     if (!token) {
       this.props.history.push('/')
     }
@@ -27,7 +28,9 @@ class Dashboard extends Component {
   }
 
   componentDidUpdate() {
-    const token = this.props.getToken()
+    const token = this.props.getToken();
+    this.props.getSettings();
+
     if (!token) {
       this.props.history.push('/')
     }
@@ -71,6 +74,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getToken: () => dispatch(getToken()),
+    getSettings: () => dispatch(getSettings()),
     logOut: () => dispatch(logOut()),
     getWlistItem: (token) => dispatch(getWlistItem(token)),
     getCostItems: (token) => dispatch(getCostItems(token)),

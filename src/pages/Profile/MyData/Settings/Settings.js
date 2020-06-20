@@ -46,16 +46,42 @@ const Settings = props => {
             </div>
 
           </div>
-          <div className="profileBox__balanceBox">
-            <h3 className="profileBox__balanceBox__header">Your balance</h3>
-            {
-              props.successMsg ?
-                <p className="profileBox__balanceBox__successMsg">{props.successMsg}</p>
-              : null
-            }
-            <Input1 onChange={event => props.setBalance(event.target.value)} placeholder="Enter yourbalance..." value={props.balance}/>
-            <br></br>
-            <Button onClick={() => props.saveBalance({token: props.token, balance: props.balance})} title='Set Balance'/>
+          <div>
+            <div className="profileBox__balanceBox">
+              <h3 className="profileBox__balanceBox__header">Your balance</h3>
+              {
+                props.successMsg ?
+                  <p className="profileBox__balanceBox__successMsg">{props.successMsg}</p>
+                : null
+              }
+              <Input1 onChange={event => props.setBalance(event.target.value)} placeholder="Enter yourbalance..." value={props.balance}/>
+              <br></br>
+              <Button onClick={() => props.saveBalance({token: props.token, balance: props.balance})} title='Set Balance'/>
+            </div>
+
+            <div className="profileBox__balanceBox">
+              <h3 className="profileBox__balanceBox__header">Your currency</h3>
+              {
+                props.successMsg ?
+                  <p className="profileBox__balanceBox__successMsg">{props.successMsg}</p>
+                : null
+              }
+              <Input1 placeholder="Enter your currency..." value={props.currency}/>
+              <br></br>
+              <Button title='Set Currency'/>
+            </div>
+
+            <div className="profileBox__balanceBox">
+              <h3 className="profileBox__balanceBox__header">Your language</h3>
+              {
+                props.successMsg ?
+                  <p className="profileBox__balanceBox__successMsg">{props.successMsg}</p>
+                : null
+              }
+              <Input1 placeholder="Enter your lang..." value={props.local}/>
+              <br></br>
+              <Button title='Save'/>
+            </div>
           </div>
         </div>
 
@@ -70,6 +96,10 @@ function mapStateToProps (state) {
     name: state.user.name,
     token: state.user.token,
     successMsg: state.user.successMsg,
+    currency: state.user.settings.currency,
+    local: state.user.settings.local
+
+
   }
 }
 

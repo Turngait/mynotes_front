@@ -6,6 +6,7 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   ru: {
     translation: {
+      "appname": 'MyNotes',
       "costs": {
         "header": 'Расходы',
         "addCost": 'Добавить расход',
@@ -30,6 +31,11 @@ const resources = {
         'description': 'Подробное описание',
         'addBtn': 'Добавить',
         'noIncomes': 'Нет доходов за этот период'
+      },
+      "menu": {
+        'dashboard': 'Главная',
+        'profile': 'Личный кабинет',
+        'signout': 'Выход'
       }
     }
   }

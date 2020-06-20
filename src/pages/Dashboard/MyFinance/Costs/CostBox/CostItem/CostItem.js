@@ -13,7 +13,7 @@ const Costitem = props => {
   return (
     <div className="myFin_mainBox__item">
       <div className="myFin_mainBox__item_header">
-        <span className="myFin_mainBox__item_header__info">RUR {props.item.amount}</span>
+        <span className="myFin_mainBox__item_header__info">{props.currency} {props.item.amount}</span>
         <span className="myFin_mainBox__item_header__info">{props.item.title}</span>
         <span onClick={() => props.costGroupFilter({id_group: group_id, period: props.period, token: props.token})} className="myFin_mainBox__item_header__info filter_group">
           {t("costs.group")}: {group_name}
@@ -36,7 +36,8 @@ function mapStateToProps (state) {
   return {
     groups: state.costs.groups,
     token: state.user.token,
-    period: state.costs.costPeriod
+    period: state.costs.costPeriod,
+    currency: state.user.settings.currency
   };
 }
 

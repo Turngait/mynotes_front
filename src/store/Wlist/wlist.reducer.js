@@ -81,6 +81,12 @@ export default function wlistReducer(state = initialState, action) {
         ...state,
         errorMsg: action.payload
       }
+    case 'EMPTY_WLISTS':
+      return {
+        ...state,
+        wlist:[],
+        wlistGroups: [],
+      }
     default: 
     return state
   }

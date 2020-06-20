@@ -6,7 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyData from './MyData/MyData';
 import MyGroups from './MyGroups/MyGroups';
-import { getToken, logOut } from '../../store/User/user.actions';
+import { getToken, getSettings, logOut } from '../../store/User/user.actions';
 import {getUserInfo} from '../../store/User/user.actions';
 
 
@@ -16,7 +16,8 @@ import {getUserInfo} from '../../store/User/user.actions';
 
 class Profile extends Component {
   componentDidMount() {
-    const token = this.props.getToken()
+    const token = this.props.getToken();
+    this.props.getSettings();
     if (!token) {
       this.props.history.push('/')
     } else {
@@ -25,7 +26,8 @@ class Profile extends Component {
   }
 
   componentDidUpdate() {
-    const token = this.props.getToken()
+    const token = this.props.getToken();
+    this.props.getSettings();
     if (!token) {
       this.props.history.push('/')
     }
@@ -77,6 +79,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getToken: () => dispatch(getToken()),
+    getSettings: () => dispatch(getSettings()),
     logOut: () => dispatch(logOut()),
     getUserInfo: (token) => dispatch(getUserInfo(token)) 
   }
