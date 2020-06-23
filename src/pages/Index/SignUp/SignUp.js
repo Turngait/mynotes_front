@@ -1,7 +1,7 @@
 import React from 'react'
 import './SignUp.scss'
 import Input2 from '../../../components/Input2/Input2'
-import Button1 from '../../../components/Button1/Button1'
+import Button from '../../../components/ButtonPopUp/ButtonPopUp'
 
 const SignUp = props => {
   return (
@@ -9,7 +9,7 @@ const SignUp = props => {
       <Input2 onChange={props.getInfo} inputId='SignUpEmail' type="email" name="email" placeholder="Enter your e-mail..." />
       <Input2 onChange={props.getInfo} inputId='signUpName' type="text" name="name" placeholder="Enter your name..." />
       <Input2 onChange={props.getInfo} inputId='signUpPass' type="password" name="pass" placeholder="Enter your password..." />
-      <Button1 onClick={props.onSubmit} title = 'Sign In'/>
+      <Button onClick={props.onSubmit} title = 'Sign In'/>
     </form>
   )
 }

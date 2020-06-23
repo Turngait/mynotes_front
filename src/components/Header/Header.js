@@ -13,9 +13,16 @@ const Header = props => {
     <header className="header_box">
       <h2 className="header_box__logo">{t('appname')}</h2>
       <nav>
-        <NavLink to="/dashboard" className="header_box__btn_item">{t('menu.dashboard')}</NavLink>
-        <NavLink to="/profile" className="header_box__btn_item">{t('menu.profile')}</NavLink>
-        <button onClick={props.logOut} className="header_box__btn_item">{t('menu.signout')}</button>
+        {
+          !props.mainPage ?
+          <>
+            <NavLink to="/dashboard" className="header_box__btn_item">{t('menu.dashboard')}</NavLink>
+            <NavLink to="/profile" className="header_box__btn_item">{t('menu.profile')}</NavLink>
+            <button onClick={props.logOut} className="header_box__btn_item">{t('menu.signout')}</button>
+          </>
+          : null
+        }
+
       </nav>
     </header>
   )

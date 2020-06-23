@@ -1,3 +1,4 @@
+
 const initialState = {
   token: false,
   email: '',
@@ -8,6 +9,10 @@ const initialState = {
   settings: {
     locale: 'ru',
     currency: 'RUR'
+  },
+  pass: {
+    old: '',
+    new: ''
   }
 }
 
@@ -53,6 +58,32 @@ export default function userReducer (state = initialState, action) {
       return {
         ...state,
         balance: action.payload
+      }
+    case 'SET_USER_NAME':
+      return {
+        ...state,
+        name: action.payload
+      }
+    case 'SET_USER_EMAIL':
+      return {
+        ...state,
+        email: action.payload
+      }
+    case 'SET_USER_OLD_PASS':
+      return {
+        ...state,
+        pass: {
+          ...state.pass,
+          old: action.payload
+        }
+      }
+    case 'SET_USER_NEW_PASS':
+      return {
+        ...state,
+        pass: {
+          ...state.pass,
+          new: action.payload
+        }
       }
     case 'SET_SUC_MSG':
       return {

@@ -182,6 +182,49 @@ export function setBalance(balance) {
   }
 }
 
+export function setUserName(name) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_USER_NAME',
+      payload: name
+    })
+  }
+}
+
+export function setUserEmail(email) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_USER_EMAIL',
+      payload: email
+    })
+  }
+}
+
+export function saveNewUserData(data) {
+  return (dispatch) => {
+    fetch(API_URL + '/auth/user/setdata', {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => {
+      if(res.status === 204) {
+        dispatch(setSuccesshMsg('Data saved!'));
+        setTimeout(() => dispatch(setSuccesshMsg('')), 4000);
+      } else if(res.status === 403) {
+        dispatch(setErrorhMsg('Access denied'));
+        setTimeout(() => dispatch(setErrorhMsg('')), 4000);
+      } else {
+        dispatch(setErrorhMsg('Server error'));
+        setTimeout(() => dispatch(setErrorhMsg('')), 4000);
+      }
+    })
+  }
+}
+
 export function saveBalance(data) {
   return (dispatch) => {
     fetch(API_URL + '/fin/balance', {
@@ -196,6 +239,46 @@ export function saveBalance(data) {
       if(res.status === 204) {
         dispatch(setSuccesshMsg('Balance saved'));
         setTimeout(() => dispatch(setSuccesshMsg('')), 4000);
+      } else {
+        dispatch(setErrorhMsg('Server error'));
+        setTimeout(() => dispatch(setErrorhMsg('')), 4000);
+      }
+    })
+  }
+}
+
+export function setPasswords(data) {
+  return (dispatch) => {
+    if(data.type === 'old') {
+      dispatch({type: 'SET_USER_OLD_PASS', payload: data.pass});
+    } else if(data.type === 'new') {
+      dispatch({type: 'SET_USER_NEW_PASS', payload: data.pass});
+    }
+  }
+}
+
+export function setNewPassword(data) {
+  return (dispatch) => {
+    console.log(data)
+  }
+}
+export function changePassword(data) {
+  return (dispatch) => {
+    fetch(API_URL + '/auth/user/changepassword',{
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => {
+      if(res.status === 204) {
+        dispatch(setSuccesshMsg('Password saved!'));
+        setTimeout(() => dispatch(setSuccesshMsg('')), 4000);
+      } else if(res.status === 403) {
+        dispatch(setErrorhMsg('Old password incorrect'));
+        setTimeout(() => dispatch(setErrorhMsg('')), 4000);
       } else {
         dispatch(setErrorhMsg('Server error'));
         setTimeout(() => dispatch(setErrorhMsg('')), 4000);

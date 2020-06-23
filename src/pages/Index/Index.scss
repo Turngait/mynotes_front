@@ -1,8 +1,42 @@
 @import "../../config/variable.scss";
 
 .index {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
+
+  &__box {
+    flex-grow: 1;
+    background: url('/pic/bcg_main.png') no-repeat;
+    background-size: 100%;
+    background-position-y: -20vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 4vw 7px;
+
+    &__signBox {
+      flex-basis: 30vw;
+      height: 50vh;
+      margin-top:10vh;
+      background-color: #00A6CB;
+      text-align: center;
+      border-radius: 3px;
+      padding: 5vh 0;
+    }
+
+    &__text {
+      color: #fff;
+      font-size: 1.4rem;
+      width: 80%;
+    }
+
+    &__iconsBox {
+      display: flex;
+      width: 40vw;
+      justify-content: space-between;
+    }
+  }
 
   &__msg_box {
     margin: 0;
@@ -10,11 +44,11 @@
   }
   
   &__logo{
-    color: $dark-color;
+    color: #fff;
     font-size: 90px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    text-shadow: 0px 4px 1px #777;
+    margin-top: 10vh;
+    margin-bottom: 20px;
+    text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
   }
 
   &__sign_btn {
@@ -30,12 +64,12 @@
       outline: none;
     }
     &:hover {
-      color: $base-color;
+      color: #fff;
     }
   }
 
   &__sign_active {
-    color: $light-base-color;
+    color: #fff;
   }
 }
 

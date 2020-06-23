@@ -15,3 +15,4 @@ export function toggleSettingsWindow (data) {
     disptch({type: 'CHANGE_IS_OPEN_SETTINGS', payload: data})
   }
 }
+
