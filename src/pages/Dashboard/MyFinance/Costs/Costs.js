@@ -30,10 +30,10 @@ const Costs = props => {
     }
       <div className="myFin_headerBox">
         <Heading1 title={'MyFinance: ' + t("costs.header")} />
-        <div>
+        <div className="myFin_headerBox__periodBox">
           <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.costPeriod} type="month" name="date"/>
         </div>
-        <div>
+        <div className="myFin_headerBox__btnBox">
           {
             props.isCostsFiltered ?
               <Button onClick={() => props.getCostItems(props.token)} title="Сбросить фильтр" />

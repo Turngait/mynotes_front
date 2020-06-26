@@ -21,3 +21,18 @@
   bottom: 0;
   z-index: 99999999;
 }
+
+@media all and (min-width: 0) and (max-width: 1000px) {
+  .popup_box {
+    min-width: 80%;
+    left: 10%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 720px) {
+  .popup_box {
+    min-width: 90%;
+    left: 1%;
+    top: 5%;
+  }
+}

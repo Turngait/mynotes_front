@@ -7,3 +7,9 @@
     flex-basis: 40%;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 500px) {
+  .myGroupBox {
+    display: block;
+  }
+}

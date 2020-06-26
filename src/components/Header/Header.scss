@@ -1,7 +1,7 @@
 @import '../../config/variable.scss';
 
 .header_box {
-  padding: 6px 4vw 7px;
+  padding: 1.2vh 4vw 1.2vh;
   background-color: $base-color;
   color: #fff;
   box-shadow: 0px 1px 4px #333;
@@ -35,4 +35,27 @@
       outline: none;
     }
   }
+}
+
+@media all and (min-width: 0) and (max-width: 560px) {
+  .header_box {
+  display: block;
+  }
+  .header_box__btn_item {
+    margin-right: 0.3rem;
+  }
+
+}
+
+@media all and (min-width: 0) and (max-width: 400px) {
+  .header_box__nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header_box__btn_item {
+    margin-top: 1vh;
+  }
+
 }

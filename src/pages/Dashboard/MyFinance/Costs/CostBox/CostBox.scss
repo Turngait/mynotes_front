@@ -70,3 +70,22 @@
       font-size: 1.2rem;
     }
 }
+
+@media all and (min-width: 0) and (max-width: 500px) {
+  .myFin_mainBox__spentByDay,
+  .myFin_mainBox__spentByMonth {
+    float: none;
+    display: block;
+    line-height: normal;
+  }
+  .myFin_mainBox__item_header__control {
+    float: none;
+  }
+  .myFin_mainBox__item_header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .myFin_mainBox__item_header__info {
+    margin-right: 5px;
+  }
+}

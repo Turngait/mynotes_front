@@ -15,3 +15,9 @@
     margin-bottom: 0;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 330px) {
+  .Input2 {
+    font-size: 1rem;
+  }
+}

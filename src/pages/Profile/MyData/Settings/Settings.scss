@@ -10,3 +10,9 @@
     justify-content: space-between;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 570px)  {
+  .settings__box {
+    display: block;
+  }
+}

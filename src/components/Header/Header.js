@@ -12,7 +12,7 @@ const Header = props => {
   return(
     <header className="header_box">
       <h2 className="header_box__logo">{t('appname')}</h2>
-      <nav>
+      <nav className="header_box__nav">
         {
           !props.mainPage ?
           <>

@@ -25,3 +25,10 @@
     margin-right: 0;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 620px) {
+  .Button1 {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+  }
+}

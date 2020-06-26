@@ -10,12 +10,14 @@ const Statistics = props => {
       <p className="stat_box__item">Потрачено: {props.currency} {props.costs}</p>
       <p className="stat_box__item">Получено: {props.currency} {props.incomes}</p>
       <p className="stat_box__item">Разница: {props.currency} {total}</p>
+      <p className="stat_box__item">Баланс: {props.currency} {props.balance}</p>
     </div>
   )
 }
 
 function mapStateToProps(state) {
   return {
+    balance: state.user.balance,
     costs: state.costs.costsByPeriod,
     incomes: state.income.incomesByPeriod,
     currency: state.user.settings.currency

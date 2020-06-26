@@ -1,0 +1,23 @@
+.policy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  &_main {
+    flex-grow: 1;
+    padding: 2vh 4vw;
+
+    &__header1 {
+      font-size: 2rem;
+    }
+    &__header2 {
+      font-size: 1.5rem;
+    }
+
+    &__text {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+    }
+  }
+}

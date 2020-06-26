@@ -32,3 +32,17 @@
 .deleteCostItem {
   cursor: pointer;
 }
+
+@media all and (min-width: 0) and (max-width: 1400px) {
+  .myFin_headerBox {
+    flex-wrap: wrap;
+
+    &__btnBox,
+    &__periodBox   {
+      margin-top: 2vh;
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
+}
+

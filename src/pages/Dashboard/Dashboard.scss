@@ -22,3 +22,9 @@
     padding: 5vh 4vw 0 4vw;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 720px) {
+  .main_box {
+    display: block !important;
+  }
+}
