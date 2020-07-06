@@ -104,14 +104,15 @@ export function deleteIncome(data) {
 
 export function getIncomeForPeriod (data) {
   return (dispatch) => {
-    fetch(API_URL + '/fin/income/get/' + data.period + '/' + data.token)
+    const {period} = data;
+    fetch(API_URL + '/fin/income/get/' + period + '/' + data.token)
     .then(res => {return res.json()})
     .then(data => {
       dispatch({type: 'SET_INCOMES', payload: data.data.incomes})
 
       dispatch({
         type: 'SET_INCOME_PERIOD',
-        payload: data.period
+        payload: period
       })
     })
   }

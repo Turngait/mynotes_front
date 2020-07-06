@@ -219,7 +219,8 @@ export function getGroupId (data) {
 
 export function getCostForPeriod (data) {
   return (dispatch) => {
-    fetch(API_URL + '/fin/cost/get/' + data.period + '/' + data.token)
+    const {period} = data;
+    fetch(API_URL + '/fin/cost/get/' + period + '/' + data.token)
     .then(res => {return res.json()})
     .then(data => {
       const {groups, items} = data.data.costs;
@@ -231,7 +232,7 @@ export function getCostForPeriod (data) {
 
       dispatch({
         type: 'SET_COST_PERIOD',
-        payload: data.period
+        payload: period
       })
     })
   }

@@ -19,7 +19,8 @@ class Profile extends Component {
     const token = this.props.getToken();
     this.props.getSettings();
     if (!token) {
-      this.props.history.push('/')
+      this.props.history.push('/');
+      return null;
     } else {
       this.props.getUserInfo(token)
     }
@@ -29,7 +30,8 @@ class Profile extends Component {
     const token = this.props.getToken();
     this.props.getSettings();
     if (!token) {
-      this.props.history.push('/')
+      this.props.history.push('/');
+      return null;
     }
   }
 

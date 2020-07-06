@@ -8,7 +8,7 @@ import MyFinance from './MyFinance/MyFinance';
 import Wishlist from './Wishlist/Wishlist';
 import { getToken, getSettings, logOut } from '../../store/User/user.actions';
 import {getWlistItem} from '../../store/Wlist/wlist.actions';
-import {getCostItems} from '../../store/Costs/costs.actions';
+import {getCostItems, getCostForPeriod} from '../../store/Costs/costs.actions';
 import {getIncomes} from '../../store/Incomes/income.action';
 
 /*
@@ -21,6 +21,7 @@ class Dashboard extends Component {
     this.props.getSettings();
     if (!token) {
       this.props.history.push('/')
+      return null;
     }
     this.props.getCostItems(token)
     this.props.getWlistItem(token)
@@ -32,9 +33,10 @@ class Dashboard extends Component {
     this.props.getSettings();
 
     if (!token) {
-      this.props.history.push('/')
+      this.props.history.push('/');
+      return null;
     }
-    this.props.getCostItems(token)
+    this.props.getCostForPeriod({period:this.props.costPeriod, token: token})
     this.props.getWlistItem(token)
     this.props.getIncomes(token)
   }
@@ -67,7 +69,8 @@ function mapStateToProps(state) {
   return {
     wlistOpen: state.dashboard.wlistOpen,
     financeOpen: state.dashboard.financeOpen,
-    profileOpen: state.dashboard.profileOpen
+    profileOpen: state.dashboard.profileOpen,
+    costPeriod: state.costs.costPeriod
   }
 }
 
@@ -78,6 +81,7 @@ function mapDispatchToProps(dispatch) {
     logOut: () => dispatch(logOut()),
     getWlistItem: (token) => dispatch(getWlistItem(token)),
     getCostItems: (token) => dispatch(getCostItems(token)),
+    getCostForPeriod: (data) => dispatch(getCostForPeriod(data)),
     getIncomes: (token) => dispatch(getIncomes(token))
   }
 }

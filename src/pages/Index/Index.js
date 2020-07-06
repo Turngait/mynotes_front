@@ -87,11 +87,11 @@ class Index extends Component {
           <div className="index__box__signBox">
             <button onClick={() => this.signUpToggleHandler(false)} 
               className={`index__sign_btn ${!this.state.signUpActive ? 'index__sign_active' : null}`}
-            >Sign In</button>
+            >Войти</button>
             |
             <button onClick={() => this.signUpToggleHandler(true)} 
               className={`index__sign_btn ${this.state.signUpActive ? 'index__sign_active' : null}`}
-            >Sign Up</button>
+            >Создать</button>
             <div className="index__msg_box">
               <span className="sucMsg">{this.props.sucessMsg}</span>
               <span className="errorMsg">{this.props.errorMsg}</span>

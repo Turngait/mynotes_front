@@ -6,9 +6,9 @@ import Button from '../../../components/ButtonPopUp/ButtonPopUp'
 const SignIn = props => {
   return (
     <form className="signIn">
-      <Input2 onChange={props.getInfo} inputId='signInEmail' type="email" name="email" placeholder="Enter your e-mail..." />
-      <Input2 onChange={props.getInfo} inputId='signInPass' type="password" name="pass" placeholder="Enter your password..." />
-      <Button title='Sign In' onClick={props.onSubmit}/>
+      <Input2 onChange={props.getInfo} inputId='signInEmail' type="email" name="email" placeholder="Введите Ваш e-mail..." />
+      <Input2 onChange={props.getInfo} inputId='signInPass' type="password" name="pass" placeholder="Введите Ваш пароль..." />
+      <Button title='Войти' onClick={props.onSubmit}/>
     </form>
   )
 }
