@@ -1,0 +1,90 @@
+@import '../../../config/variable.scss';
+
+.LeftMenu_box {
+  font-family: $headers-font;
+  list-style-type: none;
+  margin:0;
+  padding: 3vh 0;
+
+  &__item {
+    font-size: 1.4rem;
+
+    &_btn {
+      display: block;
+      padding: 1vh 2vw 1vh 0;
+      margin-left: 2vw;
+      margin-top: 1vh;
+      min-width: 15vw;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      box-sizing: border-box;
+      text-align: right;
+
+      &:hover {
+        background-color: #00A6CB;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+      &:focus {
+        outline: none;
+      }
+
+      &_active {
+        background-color: rgba(0,166,203,0.7);
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.submenu {
+  font-size: 1.2rem !important;
+  margin-top: 0.4vh !important;
+  padding: 0.5vh 2vw 0.5vh 0 !important;
+}
+
+@media all and (min-width: 0) and (max-width: 900px) {
+  .LeftMenu_box__item_btn {
+    padding: 1vh 1vw 1vh 1vw !important;
+    margin-left: 0vw !important;
+    text-align: left !important;
+  }
+  .submenu {
+    padding: 1vh 1vw 1vh 1vw !important;
+    margin-top: 2vh !important;
+    margin-right: 0vw !important;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 720px) {
+  .LeftMenu_box,
+  .LeftMenu_box__item {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .LeftMenu_box__item:first-child {
+    flex-grow: 1 !important;
+  }
+
+  .LeftMenu_box {
+    padding: 1vh 0 !important;
+  }
+
+  .LeftMenu_box__item_btn {
+    padding: 1vh 1vw 1vh 1vw !important;
+    margin-top: 0vw !important;
+    text-align: center !important;
+    font-size: 1.2rem !important;
+  }
+}

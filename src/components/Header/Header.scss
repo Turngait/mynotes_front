@@ -1,27 +1,66 @@
 @import '../../config/variable.scss';
 
 .header_box {
-  padding: 15px;
-  background: $base-color;
+  padding: 1.2vh 4vw 1.2vh;
+  background-color: $base-color;
   color: #fff;
-  box-shadow: 0px 1px 3px #333;
-  text-shadow: 0 1px 2px #888;
+  box-shadow: 0px 1px 4px #333;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 10;
 
   &__logo {
-    font-size: 30px;
+    font-size: 2rem;
+    font-weight: 500;
+
+    &_link {
+      color: #fff;
+      text-decoration: none;
+    }
   }
 
-  &__link_item {
+  &__btn_item {
+    font-family: 'Franklin';
     color: #fff;
     text-decoration: none;
-    font-size: 20px;
-    margin-right: 20px;
-  
+    font-size: 1.5rem;
+    margin-right: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 0.7;
+    }
     &:last-child {
       margin-right: 0;
     }
+    &:focus {
+      outline: none;
+    }
   }
+}
+
+@media all and (min-width: 0) and (max-width: 560px) {
+  .header_box {
+  display: block;
+  }
+  .header_box__btn_item {
+    margin-right: 0.3rem;
+  }
+
+}
+
+@media all and (min-width: 0) and (max-width: 400px) {
+  .header_box__nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header_box__btn_item {
+    margin-top: 1vh;
+  }
+
 }

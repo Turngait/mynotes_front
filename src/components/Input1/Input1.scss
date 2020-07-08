@@ -1,0 +1,16 @@
+@import "../../config/variable.scss";
+
+.Input1 {
+  border: 1px solid $side-color;
+  border-radius: 3px;
+  padding: 0.5vh 1vw;
+  font-size: 1.2rem;
+  margin-bottom: 1vh;
+
+  &:focus {
+    outline: none;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

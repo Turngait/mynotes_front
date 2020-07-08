@@ -1,12 +1,57 @@
+@import "../../config/variable.scss";
+
 .index {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
+
+  &__box {
+    flex-grow: 1;
+    background: url('/pic/bcg_main.png') no-repeat;
+    background-size: 100%;
+    background-position-y: -20vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 4vw 7px;
+
+    &__signBox {
+      flex-basis: 30vw;
+      height: 50vh;
+      margin-top:10vh;
+      background-color: #00A6CB;
+      text-align: center;
+      border-radius: 3px;
+      padding: 5vh 0;
+    }
+
+    &__text {
+      color: #fff;
+      font-size: 1.4rem;
+      width: 80%;
+    }
+
+    &__iconsBox {
+      display: flex;
+      width: 40vw;
+      justify-content: space-between;
+    }
+  }
+
+  &__msg_box {
+    margin: 0;
+    margin-top: 10px;
+    padding: 1vh 1vw;
+    background: #fff;
+
+  }
   
   &__logo{
+    color: #fff;
     font-size: 90px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    text-shadow: 1px 1px 3px #333;
+    margin-top: 10vh;
+    margin-bottom: 20px;
+    text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
   }
 
   &__sign_btn {
@@ -15,18 +60,70 @@
     font-family: 'Franklin';
     text-decoration: underline;
     font-size: 24px;
-    color: #292929;
+    color: $dark-color;
     cursor: pointer;
 
     &:focus {
       outline: none;
     }
     &:hover {
-      color: #0967b6;
+      color: #fff;
     }
   }
 
   &__sign_active {
-    color: #0967b6;
+    color: #fff;
+  }
+}
+
+.sucMsg {
+  color: green;
+  font-size: 1.2rem;
+}
+
+.errorMsg {
+  color: rgb(110, 1, 1);
+  font-size: 1.2rem;
+
+}
+
+@media all and (min-width: 0) and (max-width: 1200px) {
+  .index__box__signBox {
+    flex-basis: 50vw;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 1000px) {
+  .index__box {
+    display: block;
+  }
+
+  .index__box__signBox {
+    width: 50vw;
+    margin:auto;
+    margin-top: 5vh;
+    height: auto;
+  }
+
+}
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .index__box {
+    background-image: none;
+    background-color: $side-color;
+  }
+
+  .index__box__signBox {
+    width: 80vw;
+  }
+}
+
+
+@media all and (min-width: 0) and (max-width: 400px) {
+  .index__box__iconsBox__item {
+    width: 45%;
+  }
+  .index__logo {
+    font-size: 4rem;
   }
 }

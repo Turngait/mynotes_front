@@ -1,9 +1,11 @@
+@import "../../config/variable.scss";
+
 .Input2 {
-  border: 1px solid #0967b6;
-  border-radius: 2px;
-  font-size: 20px;
-  padding: 5px 6px;
-  margin-bottom: 30px;
+  border: 1px solid $base-color;
+  border-radius: 3px;
+  padding: 0.5vh 1vw;
+  font-size: 1.3rem;
+  margin-bottom: 1vh;
 
   &:focus {
     outline: none;
@@ -11,5 +13,11 @@
   }
   &:last-child {
     margin-bottom: 0;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 330px) {
+  .Input2 {
+    font-size: 1rem;
   }
 }

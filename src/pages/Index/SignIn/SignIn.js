@@ -1,16 +1,18 @@
 import React from 'react';
 import './SignIn.scss';
 import Input2 from '../../../components/Input2/Input2';
-import Button1 from '../../../components/Button1/Button1';
+import Button from '../../../components/ButtonPopUp/ButtonPopUp';
+import {NavLink} from 'react-router-dom';
 
 const SignIn = props => {
   return (
     <form className="signIn">
-      <Input2 onChange={props.getInfo} inputId='signInEmail' type="email" name="email" placeholder="Enter your e-mail..." />
-      <Input2 onChange={props.getInfo} inputId='signInPass' type="password" name="pass" placeholder="Enter your password..." />
-      <Button1 value='Sign In' onClick={props.onSubmit}/>
+      <Input2 onChange={props.getInfo} inputId='signInEmail' type="email" name="email" placeholder="Введите Ваш e-mail..." />
+      <Input2 onChange={props.getInfo} inputId='signInPass' type="password" name="pass" placeholder="Введите Ваш пароль..." />
+      <Button title='Войти' onClick={props.onSubmit}/>
+      <NavLink to="/recovery" className="signIn__recovery_link">Восстановить пароль.</NavLink>
     </form>
   )
 }
 
-export default SignIn;
+export default SignIn

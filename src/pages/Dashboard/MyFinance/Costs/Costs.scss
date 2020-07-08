@@ -1,0 +1,48 @@
+@import "../../../../config/variable.scss";
+
+.myFinance__logo {
+  text-decoration: underline;
+  letter-spacing: 1px;
+  font-size: 2.3rem;
+}
+
+.myFin_headerBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &__sorting {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 600;
+    display: none;
+  }
+  &__costsByPeriod {
+    margin-left: 1vw;
+    font-size: 1.3rem;
+  }
+}
+
+.myFin{
+  &__noContent {
+    font-size: 2rem;
+  }
+}
+
+.deleteCostItem {
+  cursor: pointer;
+}
+
+@media all and (min-width: 0) and (max-width: 1400px) {
+  .myFin_headerBox {
+    flex-wrap: wrap;
+
+    &__btnBox,
+    &__periodBox   {
+      margin-top: 2vh;
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
+}
+

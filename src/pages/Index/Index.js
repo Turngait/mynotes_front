@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import './Index.scss';
-
+import {getToken, signIn, signUp} from '../../store/User/user.actions';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
-import { API_URL } from '../../config/api';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 class Index extends Component {
   state = {
     signUpActive: false,
-    token: '',
     signUpEmail:'',
     signUpPass: '',
     signUpName: '',
@@ -16,15 +17,12 @@ class Index extends Component {
     signInPass:''
   }
 
-  getToken = () => {
-    const obj = {
-      signUp: this.state.signUpActive
+  auth = async () => {
+    if(this.state.signUpActive) {
+      await this.props.signUp(this.state.signUpEmail, this.state.signUpName, this.state.signUpPass)
+    } else {
+      await this.props.signIn(this.state.signInEmail, this.state.signInPass)
     }
-    fetch(API_URL)
-    .then(res => {
-      return res.text()
-    })
-    .then(data => this.setState({token: data}, ()=>console.log(this.state)))
   }
 
   signUpToggleHandler = (val) => {
@@ -54,29 +52,88 @@ class Index extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.getToken()
+    if (this.props.token) {
+      this.props.history.push('/dashboard')
+    }
+  }
+  componentDidUpdate() {
+    this.props.getToken()
+    if (this.props.token) {
+      this.props.history.push('/dashboard')
+    }
+  }
+
   render() {
     return (
       <div className="index">
-        <h1 className="index__logo">MyNotes</h1>
+        <Header mainPage={true} />
+        <div className="index__box">
+          <div>
+            <h1 className="index__logo">MyNotes</h1>
+            <p className="index__box__text">
+              Приложение по учету личным финансам. С ним Вы сможете легко вести статистику и учет своих личных финансов.
+            </p>
+            <div className="index__box__iconsBox">
+              <img className="index__box__iconsBox__item" src="/pic/main/main_1.png" alt="main promo"/>
+              <img className="index__box__iconsBox__item" src="/pic/main/main_2.png" alt="main promo"/>
+              <img className="index__box__iconsBox__item" src="/pic/main/main_3.png" alt="main promo"/>
+              <img className="index__box__iconsBox__item" src="/pic/main/main_4.png" alt="main promo"/>
+              <img className="index__box__iconsBox__item" src="/pic/main/main_5.png" alt="main promo"/>
+            </div>
+          </div>
 
-        <button onClick={() => this.signUpToggleHandler(false)} 
-          className={`index__sign_btn ${!this.state.signUpActive ? 'index__sign_active' : null}`}
-        >Sign In</button>
+          <div className="index__box__signBox">
+            <button onClick={() => this.signUpToggleHandler(false)} 
+              className={`index__sign_btn ${!this.state.signUpActive ? 'index__sign_active' : null}`}
+            >Войти</button>
+            |
+            <button onClick={() => this.signUpToggleHandler(true)} 
+              className={`index__sign_btn ${this.state.signUpActive ? 'index__sign_active' : null}`}
+            >Создать</button>
+            {
+              this.props.sucessMsg || this.props.errorMsg ?
+                <div className="index__msg_box">
+                  <span className="sucMsg">{this.props.sucessMsg}</span>
+                  <span className="errorMsg">{this.props.errorMsg}</span>
+                </div>
+                :
+                null
+            }
 
-        <button onClick={() => this.signUpToggleHandler(true)} 
-          className={`index__sign_btn ${this.state.signUpActive ? 'index__sign_active' : null}`}
-        >Sign Up</button>
-        
-        {
-        this.state.signUpActive 
-        ? 
-          <SignUp onSubmit={this.getToken} getInfo={this.getUserInfo}/> 
-        : 
-          <SignIn onSubmit={this.getToken} getInfo={this.getUserInfo}/>
-        }
+            
+            {
+            this.state.signUpActive 
+            ? 
+              <SignUp onSubmit={this.auth} getInfo={this.getUserInfo}/> 
+            : 
+              <SignIn onSubmit={this.auth} getInfo={this.getUserInfo}/>
+            }
+          </div>
+        </div>
+        <Footer />
       </div>
     )
   }
 }
 
-export default Index;
+function mapStateToProps(state) {
+  return {
+    token: state.user.token,
+    email: state.user.email,
+    name: state.user.name,
+    sucessMsg: state.user.successMsg,
+    errorMsg: state.user.errorMsg
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getToken: () => dispatch(getToken()),
+    signIn: (login, pass) => dispatch(signIn(login, pass)),
+    signUp: (email, name, pass) => dispatch(signUp(email, name, pass))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

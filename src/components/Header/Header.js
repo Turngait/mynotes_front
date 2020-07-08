@@ -1,16 +1,37 @@
 import React from 'react';
 import './Header.scss';
+import { connect } from 'react-redux';
+import {NavLink} from 'react-router-dom';
+import { openProfile } from '../../store/Dashboard/dashboard.actions';
+import { useTranslation } from 'react-i18next';
 
-const Header = () => {
+
+const Header = props => {
+  const { t } = useTranslation();
+
   return(
     <header className="header_box">
-      <h2 className="header_box__logo">MyNotes</h2>
-      <nav>
-        <a className="header_box__link_item" href="#">Profile</a>
-        <a className="header_box__link_item" href="#">Sign Out</a>
+      <h2 className="header_box__logo"><NavLink to="/" className="header_box__logo_link">{t('appname')}</NavLink></h2>
+      <nav className="header_box__nav">
+        {
+          !props.mainPage ?
+          <>
+            <NavLink to="/dashboard" className="header_box__btn_item">{t('menu.dashboard')}</NavLink>
+            <NavLink to="/profile" className="header_box__btn_item">{t('menu.profile')}</NavLink>
+            <button onClick={props.logOut} className="header_box__btn_item">{t('menu.signout')}</button>
+          </>
+          : null
+        }
+
       </nav>
     </header>
   )
 }
 
-export default Header;
+function mapDispatchFromPorps(dispatch) {
+  return {
+    openProfile: () => dispatch(openProfile())
+  }
+}
+
+export default connect(null, mapDispatchFromPorps)(Header)

@@ -1,3 +1,3 @@
-const API_URL = 'http://api.turngait.ru/'
+const API_URL = 'http://localhost:8081'
 
 export {API_URL}
