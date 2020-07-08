@@ -41,6 +41,9 @@
   &__msg_box {
     margin: 0;
     margin-top: 10px;
+    padding: 1vh 1vw;
+    background: #fff;
+
   }
   
   &__logo{
@@ -75,8 +78,52 @@
 
 .sucMsg {
   color: green;
+  font-size: 1.2rem;
 }
 
 .errorMsg {
-  color: red;
+  color: rgb(110, 1, 1);
+  font-size: 1.2rem;
+
+}
+
+@media all and (min-width: 0) and (max-width: 1200px) {
+  .index__box__signBox {
+    flex-basis: 50vw;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 1000px) {
+  .index__box {
+    display: block;
+  }
+
+  .index__box__signBox {
+    width: 50vw;
+    margin:auto;
+    margin-top: 5vh;
+    height: auto;
+  }
+
+}
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .index__box {
+    background-image: none;
+    background-color: $side-color;
+  }
+
+  .index__box__signBox {
+    width: 80vw;
+  }
+}
+
+
+@media all and (min-width: 0) and (max-width: 400px) {
+  .index__box__iconsBox__item {
+    width: 45%;
+  }
+  .index__logo {
+    font-size: 4rem;
+  }
 }

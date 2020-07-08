@@ -8,8 +8,8 @@ import {deleteWlistGroup} from '../../../../store/Wlist/wlist.actions';
 const MyGroupBox = props => {
   return (
     <div className="myGroupBox">
-      <MyGroupBoxItem groups={props.costGroups} token={props.token} onDelete={props.deleteCostGroup} title="Costs"/>
-      <MyGroupBoxItem groups={props.wlistGroups} token={props.token} onDelete={props.deleteWlistGroup} title="Wlists"/>
+      <MyGroupBoxItem groups={props.costGroups} token={props.token} onDelete={props.deleteCostGroup} title="Расходы"/>
+      <MyGroupBoxItem groups={props.wlistGroups} token={props.token} onDelete={props.deleteWlistGroup} title="Пожелания"/>
     </div>
   );
 }

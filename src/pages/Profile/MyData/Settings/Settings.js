@@ -43,10 +43,10 @@ const Settings = props => {
           </div>
           <div>
             <div className="profileBox__balanceBox">
-              <h3 className="profileBox__balanceBox__header">Your balance</h3>
+              <h3 className="profileBox__balanceBox__header">Ваш баланс</h3>
               <Input1 onChange={event => props.setBalance(event.target.value)} placeholder="Enter yourbalance..." value={props.balance}/>
               <br></br>
-              <Button onClick={() => props.saveBalance({token: props.token, balance: props.balance})} title='Set Balance'/>
+              <Button onClick={() => props.saveBalance({token: props.token, balance: props.balance})} title='Сохранить'/>
             </div>
 
             {/* <div className="profileBox__balanceBox">

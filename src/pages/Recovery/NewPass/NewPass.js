@@ -37,10 +37,7 @@ const NewPass = props => {
         })
       })
       .then(res => {
-        return res.json(); 
-      })
-      .then(data => {
-        if (data.isChange) {
+        if(res.status === 204) {
           setIsChange(true);
         }
       })

@@ -11,7 +11,7 @@ const Header = props => {
 
   return(
     <header className="header_box">
-      <h2 className="header_box__logo">{t('appname')}</h2>
+      <h2 className="header_box__logo"><NavLink to="/" className="header_box__logo_link">{t('appname')}</NavLink></h2>
       <nav className="header_box__nav">
         {
           !props.mainPage ?

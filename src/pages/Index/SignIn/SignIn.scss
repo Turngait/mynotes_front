@@ -6,4 +6,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  &__recovery_link {
+    margin-top:1vh;
+    color: #fff;
+  }
 }

@@ -18,7 +18,7 @@ const MyData = props => {
     }
     <div className="profileBox__headerBox">
       <Heading1 title='MyData' />
-      <Button1 title='Settings' onClick={() => props.toggleSettingsWindow(true)}/>
+      <Button1 title='Настройки' onClick={() => props.toggleSettingsWindow(true)}/>
     </div>
       <div className="profileBox">
         <Statistics />

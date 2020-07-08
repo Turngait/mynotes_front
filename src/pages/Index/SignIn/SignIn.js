@@ -10,7 +10,7 @@ const SignIn = props => {
       <Input2 onChange={props.getInfo} inputId='signInEmail' type="email" name="email" placeholder="Введите Ваш e-mail..." />
       <Input2 onChange={props.getInfo} inputId='signInPass' type="password" name="pass" placeholder="Введите Ваш пароль..." />
       <Button title='Войти' onClick={props.onSubmit}/>
-      <NavLink to="/recovery"p>Восстановить пароль.</NavLink>
+      <NavLink to="/recovery" className="signIn__recovery_link">Восстановить пароль.</NavLink>
     </form>
   )
 }

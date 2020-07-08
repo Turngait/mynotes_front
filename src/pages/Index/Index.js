@@ -73,7 +73,7 @@ class Index extends Component {
           <div>
             <h1 className="index__logo">MyNotes</h1>
             <p className="index__box__text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              Приложение по учету личным финансам. С ним Вы сможете легко вести статистику и учет своих личных финансов.
             </p>
             <div className="index__box__iconsBox">
               <img className="index__box__iconsBox__item" src="/pic/main/main_1.png" alt="main promo"/>
@@ -92,10 +92,16 @@ class Index extends Component {
             <button onClick={() => this.signUpToggleHandler(true)} 
               className={`index__sign_btn ${this.state.signUpActive ? 'index__sign_active' : null}`}
             >Создать</button>
-            <div className="index__msg_box">
-              <span className="sucMsg">{this.props.sucessMsg}</span>
-              <span className="errorMsg">{this.props.errorMsg}</span>
-            </div>
+            {
+              this.props.sucessMsg || this.props.errorMsg ?
+                <div className="index__msg_box">
+                  <span className="sucMsg">{this.props.sucessMsg}</span>
+                  <span className="errorMsg">{this.props.errorMsg}</span>
+                </div>
+                :
+                null
+            }
+
             
             {
             this.state.signUpActive 

@@ -15,7 +15,7 @@ const AddCost = props => {
   return (
     <PopUp>
       <i onClick={props.closeAddCost} className="fas fa-times close"></i>
-      <h3 className="add_wlist__header">Add Cost</h3>
+      <h3 className="add_wlist__header">Добавить расход</h3>
       {
         props.errorMsg ?
           <span className="errorsMsg">{props.errorMsg}</span>

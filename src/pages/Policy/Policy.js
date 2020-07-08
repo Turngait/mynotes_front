@@ -6,7 +6,7 @@ import Footer from '../../components/Footer/Footer';
 const Policy = props => {
   return (
     <div className="policy">
-      <Header />
+      <Header mainPage={true} />
       <main className="policy_main">
         <h2 className="policy_main__header1">Политика в отношении обработки персональных данных</h2>
         <p className="policy_main__text">

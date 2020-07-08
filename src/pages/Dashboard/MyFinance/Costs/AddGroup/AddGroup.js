@@ -19,7 +19,7 @@ const AddGroup = props => {
   return (
     <PopUp>
       <i onClick={props.closeAddCostGroup} className="fas fa-times close"></i>
-      <h3 className="add_wlist__header">Add Cost's Group</h3>
+      <h3 className="add_wlist__header">Добавить группу расходов</h3>
       {
         props.errorMsg ?
           <span className="errorsMsg">{props.errorMsg}</span>

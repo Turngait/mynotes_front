@@ -13,6 +13,11 @@
   &__logo {
     font-size: 2rem;
     font-weight: 500;
+
+    &_link {
+      color: #fff;
+      text-decoration: none;
+    }
   }
 
   &__btn_item {

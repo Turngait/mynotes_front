@@ -13,7 +13,7 @@
     flex-basis: 57%;
 
     &__item {
-      width: 2.2vw;
+      width: 5%;
       margin-right: 2vw;
       vertical-align: bottom;
     }
@@ -25,5 +25,33 @@
     &_link {
       color: #fff;
     }
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 1000px) {
+  .footer_box__socio__item {
+    width: 10%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 800px)  {
+  .footer_box__socio {
+    flex-basis: auto;
+  }
+  .footer_box__socio__item {
+    width: 30%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 500px) {
+  .footer_box {
+    display: block;
+  }
+  .footer_box__socio {
+    text-align: center;
+    margin-top: 3vh;
+  }
+  .footer_box__socio__item {
+    width: 10%;
   }
 }

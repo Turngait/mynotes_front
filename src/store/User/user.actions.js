@@ -42,6 +42,7 @@ export function signIn(login, pass) {
         dispatch(setErrorhMsg(''));
       } else {
         dispatch(setErrorhMsg('Wrong email or password!'));
+        setTimeout(() => dispatch(setErrorhMsg(false)), 4000);
       }
     })
   }

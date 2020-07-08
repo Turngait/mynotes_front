@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="footer_box__info">
         2020. MyNotes.
         <br/>
-        <NavLink to="/policy" className="footer_box__info_link">{t('footer.terms')}</NavLink>
+        <NavLink target="_blank" to="/policy" className="footer_box__info_link">{t('footer.terms')}</NavLink>
       </div>
       <div className="footer_box__socio">
         <img className="footer_box__socio__item" src="pic/vk.png" alt="vk"/>
