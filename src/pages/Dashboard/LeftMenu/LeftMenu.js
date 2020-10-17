@@ -34,7 +34,7 @@ const LeftMenu = (props) => {
         }
         
       </li>
-      <li className="LeftMenu_box__item">
+      {/* <li className="LeftMenu_box__item">
         {
           props.wlistOpen
           ?
@@ -42,7 +42,7 @@ const LeftMenu = (props) => {
           :
           <button onClick={props.openWlist} className="LeftMenu_box__item_btn">WishList</button>
         }
-      </li>
+      </li> */}
       {/* <li className="LeftMenu_box__item"><button href="/todolist" className="LeftMenu_box__item_btn">ToDoList</button></li>
       <li className="LeftMenu_box__item"><button href="/notes" className="LeftMenu_box__item_btn">Notes</button></li> */}
     </ul>

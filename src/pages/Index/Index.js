@@ -73,7 +73,7 @@ class Index extends Component {
           <div>
             <h1 className="index__logo">MyNotes</h1>
             <p className="index__box__text">
-              Приложение по учету личным финансам. С ним Вы сможете легко вести статистику и учет своих личных финансов.
+              Здесь Вы сможете легко вести статистику и учет своих личных финансов.
             </p>
             <div className="index__box__iconsBox">
               <img className="index__box__iconsBox__item" src="/pic/main/main_1.png" alt="main promo"/>
