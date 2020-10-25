@@ -1,4 +1,6 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import './Incomes.scss';
 import Heading1 from '../../../../components/Heading1/Heading1';
 import Button from '../../../../components/Button1/Button1';
@@ -7,7 +9,7 @@ import IncomeBox from './IncomeBox/IncomeBox';
 import AddIncome from './AddIncomes/AddIncomes';
 import {connect} from 'react-redux';
 import {openAddIncome, getIncomeForPeriod} from '../../../../store/Incomes/income.action';
-import { useTranslation } from 'react-i18next';
+
 
 
 const Incomes = props => {

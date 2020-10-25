@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
 import './Index.scss';
 import {getToken, signIn, signUp} from '../../store/User/user.actions';
 import SignIn from './SignIn/SignIn';
@@ -88,7 +89,6 @@ class Index extends Component {
             <button onClick={() => this.signUpToggleHandler(false)} 
               className={`index__sign_btn ${!this.state.signUpActive ? 'index__sign_active' : null}`}
             >Войти</button>
-            |
             <button onClick={() => this.signUpToggleHandler(true)} 
               className={`index__sign_btn ${this.state.signUpActive ? 'index__sign_active' : null}`}
             >Создать</button>
