@@ -15,7 +15,6 @@ const MyGroups = props => {
 
 function mapStateToProps(state) {
   return {
-    wlistGroups: state.wlist.wlistGroups,
     costGroups: state.finance.groups
   }
 }

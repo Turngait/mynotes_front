@@ -64,11 +64,6 @@ export function setCostGroup(data) {
   };
 }
 
-export function setCostWlistItem(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_WLIST_ITEM', payload: data})
-  };
-}
 
 export function setCostDate(data) {
   return (dispatch) => {
@@ -84,26 +79,22 @@ export function setCostGroupTitle(data) {
 
 
 export function getCostItems(token) {
-  return (dispatch) => {
+  return async (dispatch) => {
     const period = new Date().toISOString().slice(0,7);
-    fetch(API_URL + '/fin/cost/get/' + period + '/' + token)
-    .then(res => {return res.json()})
-    .then(data => {
-      const {groups, items} = data.data.costs;
-      if (items.length > 0) {
-        dispatch({
-          type: 'SET_COSTS_BY_PERIOD',
-          payload: items[0].spentByThisMonth
-        });
-      } 
-      dispatch({
-        type: 'SET_COSTS',
-        groups,
-        costs: items
-      });
-
-      dispatch(togleCostFiltered(false));
-    })
+    const {data} = await fetch(API_URL + '/fin/cost/get/' + period + '/' + token)
+    .then(res => res.json())
+    if (data && data.length < 0) return;
+    const {groups, costs} = data.costs;
+    dispatch({
+      type: 'SET_COSTS_BY_PERIOD',
+      payload: costs.spentByPeriod
+    });
+    dispatch({
+      type: 'SET_COSTS',
+      groups,
+      costs: costs
+    });
+    dispatch(togleCostFiltered(false));
   }
 }
 
@@ -223,11 +214,11 @@ export function getCostForPeriod (data) {
     fetch(API_URL + '/fin/cost/get/' + period + '/' + data.token)
     .then(res => {return res.json()})
     .then(data => {
-      const {groups, items} = data.data.costs;
+      const {groups, costs} = data.data.costs;
       dispatch({
         type: 'SET_COSTS',
         groups,
-        costs: items
+        costs
       })
 
       dispatch({

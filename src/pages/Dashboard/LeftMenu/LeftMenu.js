@@ -1,7 +1,7 @@
 import React from 'react';
 import './LeftMenu.scss';
 import { connect } from 'react-redux';
-import { openFinance, openWlist } from '../../../store/Dashboard/dashboard.actions';
+import { openFinance} from '../../../store/Dashboard/dashboard.actions';
 import { openCosts, openIncomes } from '../../../store/Finance/finance.actions';
 import { useTranslation } from 'react-i18next';
 
@@ -34,24 +34,12 @@ const LeftMenu = (props) => {
         }
         
       </li>
-      {/* <li className="LeftMenu_box__item">
-        {
-          props.wlistOpen
-          ?
-          <button onClick={props.openWlist} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">WishList</button>
-          :
-          <button onClick={props.openWlist} className="LeftMenu_box__item_btn">WishList</button>
-        }
-      </li> */}
-      {/* <li className="LeftMenu_box__item"><button href="/todolist" className="LeftMenu_box__item_btn">ToDoList</button></li>
-      <li className="LeftMenu_box__item"><button href="/notes" className="LeftMenu_box__item_btn">Notes</button></li> */}
     </ul>
   )
 }
 
 function mapStateToProps(state) {
   return {
-    wlistOpen: state.dashboard.wlistOpen,
     financeOpen: state.dashboard.financeOpen,
     isCostOpen: state.costs.isCostOpen,
     isIncomesOpen: state.costs.isIncomesOpen
@@ -60,7 +48,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToPRops(dispatch) {
   return {
-    openWlist: () => dispatch(openWlist()),
     openFinance: () => dispatch(openFinance()),
     openCosts: () => dispatch(openCosts()),
     openIncomes: () => dispatch(openIncomes())

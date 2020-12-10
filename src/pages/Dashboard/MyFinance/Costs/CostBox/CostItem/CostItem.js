@@ -21,9 +21,9 @@ const Costitem = props => {
         <span className="myFin_mainBox__item_header__control"><i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={props.item._id} className="fas deleteCostItem fa-times-circle"></i></span>
       </div>
       {
-        props.item.descrition ? 
+        props.item.description ? 
         <p className="myFin_mainBox__item_text">
-          {props.item.descrition}
+          {props.item.description}
         </p>
         :
         null

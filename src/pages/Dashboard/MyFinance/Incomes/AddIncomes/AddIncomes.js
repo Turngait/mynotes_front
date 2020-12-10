@@ -14,14 +14,14 @@ const AddIncome = props => {
   return (
     <PopUp>
       <i onClick={props.closeAddIncome} className="fas fa-times close"></i>
-      <h3 className="add_wlist__header">Add Incomes</h3>
+      <h3 className="addItem_header">Добавить доход</h3>
       {
         props.addIncomeError ?
           <span className="errorsMsg">{props.addIncomeError}</span>
           : 
           null
       }
-      <form className="add_wlist_item_box">
+      <form className="addItem_box">
         <Input2 onChange={(event) => props.setIncomeDate(event.target.value)} value={props.income.date} type="date" name="date"/>
         <Input2 onChange={(event) => props.setIncomeTitle(event.target.value)} type="text" name="title" placeholder={t('incomes.titleofIncome') + "..."}/>
         <Input2 onChange={(event) => props.setIncomeAmmount(event.target.value)} type="text" name="amount" placeholder={t('incomes.amount') + "..."}/>

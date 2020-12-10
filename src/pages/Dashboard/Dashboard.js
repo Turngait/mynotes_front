@@ -5,9 +5,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
-// import Wishlist from './Wishlist/Wishlist';
 import { getToken, getSettings, logOut } from '../../store/User/user.actions';
-// import {getWlistItem} from '../../store/Wlist/wlist.actions';
 import {getCostItems, getCostForPeriod} from '../../store/Costs/costs.actions';
 import {getIncomes} from '../../store/Incomes/income.action';
 
@@ -23,9 +21,8 @@ class Dashboard extends Component {
       this.props.history.push('/')
       return null;
     }
-    this.props.getCostItems(token)
-    // this.props.getWlistItem(token)
-    this.props.getIncomes(token)
+    this.props.getCostItems(token);
+    this.props.getIncomes(token);
   }
 
   componentDidUpdate() {
@@ -37,7 +34,6 @@ class Dashboard extends Component {
       return null;
     }
     this.props.getCostForPeriod({period:this.props.costPeriod, token: token})
-    // this.props.getWlistItem(token)
     this.props.getIncomes(token)
   }
 
@@ -56,7 +52,6 @@ class Dashboard extends Component {
           </aside>
           <section className="main_box__info">
             {this.props.financeOpen ? <MyFinance/> : null}
-            {/* {this.props.wlistOpen ? <Wishlist/> : null} */}
           </section>
         </main>
         <Footer/>
@@ -67,7 +62,6 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    // wlistOpen: state.dashboard.wlistOpen,
     financeOpen: state.dashboard.financeOpen,
     profileOpen: state.dashboard.profileOpen,
     costPeriod: state.costs.costPeriod
@@ -79,7 +73,6 @@ function mapDispatchToProps(dispatch) {
     getToken: () => dispatch(getToken()),
     getSettings: () => dispatch(getSettings()),
     logOut: () => dispatch(logOut()),
-    // getWlistItem: (token) => dispatch(getWlistItem(token)),
     getCostItems: (token) => dispatch(getCostItems(token)),
     getCostForPeriod: (data) => dispatch(getCostForPeriod(data)),
     getIncomes: (token) => dispatch(getIncomes(token))

@@ -19,14 +19,14 @@ const AddGroup = props => {
   return (
     <PopUp>
       <i onClick={props.closeAddCostGroup} className="fas fa-times close"></i>
-      <h3 className="add_wlist__header">Добавить группу расходов</h3>
+      <h3 className="addItem_header">Добавить группу расходов</h3>
       {
         props.errorMsg ?
           <span className="errorsMsg">{props.errorMsg}</span>
           : 
           null
       }
-      <form className="add_wlist_item_box">
+      <form className="addItem_box">
         <Input2 onChange={(event) => props.setCostGroupTitle(event.target.value)} type="text" name="name" placeholder={t('costs.groupName') + "..."} />
         <ButtonPopUp onClick={() => props.addGroupToDB(data)} type="button" title={t('costs.addBtn')} />
       </form>

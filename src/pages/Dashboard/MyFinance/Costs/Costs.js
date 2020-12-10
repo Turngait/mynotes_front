@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 const Costs = props => {
   const {costs} = props;
+  console.log(costs)
   const { t } = useTranslation();
 
   return (
@@ -46,6 +47,7 @@ const Costs = props => {
         {
           costs.length > 0 ?
           costs.map((item, key) => {
+            console.log(item)
             return (
               <CostBox item={item} key={key} />
             )

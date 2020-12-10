@@ -9,7 +9,6 @@ const InitialState = {
     descrition: '',
     group: 'none',
     amount: 0,
-    wlistItem: '0',
     date: new Date().toISOString().slice(0,10)
   },
   costs: [],
