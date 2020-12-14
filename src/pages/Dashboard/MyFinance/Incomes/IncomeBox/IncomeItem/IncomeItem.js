@@ -12,8 +12,8 @@ const IncomeItem = props => {
         <span className="myFin_mainBox__item_header__control"><i onClick={(event) => props.deleteIncome({target: event.target, token: props.token})} data-item-id={props._id} className="fas deleteCostItem fa-times-circle"></i></span>
       </div>
       {
-        props.text ?
-          <p className="myFin_mainBox__item_text">{props.text}</p>
+        props.description ?
+          <p className="myFin_mainBox__item_text">{props.description}</p>
         :
           null
       }

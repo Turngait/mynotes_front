@@ -253,11 +253,11 @@ export function costGroupFilter(data) {
     fetch(API_URL + '/fin/cost/group/' + data.token + '/' + data.id_group + '/' + data.period)
     .then(res => {return res.json()})
     .then(data => {
-      const {groups, items} = data.data.costs;
+      const {groups, costs} = data.data.costs;
       dispatch({
         type: 'SET_COSTS',
         groups,
-        costs: items
+        costs
       });
       dispatch(togleCostFiltered(true))
     })
