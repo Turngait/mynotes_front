@@ -1,8 +1,10 @@
 import React from 'react';
-import './MyGroupBox.scss';
 import {connect} from 'react-redux';
+
 import MyGroupBoxItem from './MyGroupBoxItem/MyGroupBoxItem';
-import {deleteCostGroup} from '../../../../store/Finance/finance.actions';
+import {deleteCostGroup} from '../../../../store/Costs/costs.actions';
+
+import './MyGroupBox.scss';
 
 const MyGroupBox = props => {
   return (
@@ -14,7 +16,7 @@ const MyGroupBox = props => {
 
 function mapStateToProps(state) {
   return {
-    costGroups: state.finance.groups,
+    costGroups: state.costs.groups,
     token: state.user.token
   }
 }

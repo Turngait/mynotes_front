@@ -1,17 +1,5 @@
 import {API_URL} from '../../config/api';
 
-export function openAddIncome() {
-  return (dispatch) => {
-    dispatch({type: 'OPEN_ADD_INCOME'})
-  }
-}
-
-export function closeAddIncome() {
-  return (dispatch) => {
-    dispatch({type: 'CLOSE_ADD_INCOME'})
-  }
-}
-
 export function setIncomeTitle(data) {
   return (dispatch) => {
     dispatch({type: 'SET_INCOME_TITLE', payload: data})

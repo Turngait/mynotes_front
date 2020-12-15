@@ -1,45 +1,5 @@
 import {API_URL} from '../../config/api';
 
-export function openAddCost() {
-  return (dispatch) => {
-    dispatch({type: 'OPEN_ADD_COST'})
-  };
-}
-
-export function closeAddCost() {
-  return (dispatch) => {
-    dispatch({type: 'CLOSE_ADD_COST'})
-    dispatch({
-      type: 'SET_ADD_COST_ERROR',
-      payload: ''
-    })
-  };
-}
-
-export function openAddCostGroup() {
-  return (dispatch) => {
-    dispatch({type: 'OPEN_ADD_COST_GROUP'})
-  };
-}
-
-export function closeAddCostGroup() {
-  return (dispatch) => {
-    dispatch({type: 'CLOSE_ADD_COST_GROUP'})
-  };
-}
-
-export function openCosts() {
-  return(dispatch) => {
-    dispatch({type: 'OPEN_COSTS_SUBSCREEN'})
-  }
-}
-
-export function openIncomes() {
-  return(dispatch) => {
-    dispatch({type: 'OPEN_INCOMES_SUBSCREEN'})
-  }
-}
-
 export function setCostTitle(data) {
   return (dispatch) => {
     dispatch({type: 'SET_COST_TITLE', payload: data})
@@ -110,7 +70,6 @@ export function addGroupToDB(data) {
     })
     .then(async res => {
       if (res.status === 204) {
-        dispatch(closeAddCostGroup())
         dispatch({
           type: 'SET_ADD_GROUP_ERROR',
           payload: ''
@@ -142,7 +101,6 @@ export function addCostItem(data) {
     })
     .then(async res => {
       if (res.status === 204) {
-        dispatch(closeAddCost())
         dispatch(getCostItems(token))
       } else if (res.status === 422) {
         const data = await res.json();

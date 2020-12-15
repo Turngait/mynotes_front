@@ -1,8 +1,10 @@
 import React from 'react';
-import './MyGroups.scss';
 import {connect} from 'react-redux';
+
 import MyGroupBox from './MyGroupBox/MyGroupBox';
 import Heading1 from '../../../components/Heading1/Heading1';
+
+import './MyGroups.scss';
 
 const MyGroups = props => {
   return (
@@ -15,7 +17,7 @@ const MyGroups = props => {
 
 function mapStateToProps(state) {
   return {
-    costGroups: state.finance.groups
+    costGroups: state.costs.groups
   }
 }
 

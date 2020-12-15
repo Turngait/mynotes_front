@@ -1,6 +1,4 @@
 const InitialState = {
-  isIncomesOpen: false,
-  addIncomeOpen: false,
   incomes: [],
   income: {
     title: '',
@@ -19,16 +17,6 @@ export default function incomeReducer(state = InitialState, action) {
       return {
         ...state,
         incomes: action.payload
-      }
-    case 'OPEN_ADD_INCOME':
-      return {
-        ...state,
-        addIncomeOpen: true
-      }
-    case 'CLOSE_ADD_INCOME':
-      return {
-        ...state,
-        addIncomeOpen: false
       }
     case 'SET_INCOME_TITLE':
       return {

@@ -1,20 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './AddCost.scss';
+import { useTranslation } from 'react-i18next';
+
 import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import Select1 from '../../../../../components/Select1/Select1';
 import Textarea1 from '../../../../../components/Textarea1/Textarea1';
-import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostDate} from '../../../../../store/Costs/costs.actions'
-import { useTranslation } from 'react-i18next';
+
+import {addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostDate} from '../../../../../store/Costs/costs.actions'
+
+import './AddCost.scss';
 
 const AddCost = props => {
   const { t } = useTranslation();
 
   return (
     <PopUp>
-      <i onClick={props.closeAddCost} className="fas fa-times close"></i>
+      <i onClick={() => props.setIsAddCostOpen(false)} className="fas fa-times close"></i>
       <h3 className="addItem_header">Добавить расход</h3>
       {
         props.errorMsg ?
@@ -61,7 +64,6 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    closeAddCost: () => dispatch(closeAddCost()),
     addCostItem: (data) => dispatch(addCostItem(data)),
     setCostTitle: (title) => dispatch(setCostTitle(title)),
     setCostAmmount: (amount) => dispatch(setCostAmmount(amount)),

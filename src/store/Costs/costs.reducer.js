@@ -1,8 +1,4 @@
 const InitialState = {
-  addCostOpen: false,
-  addCostGroupOpen: false,
-  isCostOpen: true,
-  isIncomesOpen: false,
   costPeriod: new Date().toISOString().slice(0,7),
   cost: {
     title: '',
@@ -29,38 +25,6 @@ const InitialState = {
 
 export default function costsReducer (state = InitialState, action) {
   switch (action.type) {
-    case 'OPEN_ADD_COST':
-      return {
-        ...state,
-        addCostOpen: true
-      }
-    case 'CLOSE_ADD_COST':
-      return {
-        ...state,
-        addCostOpen: false
-      }
-    case 'OPEN_ADD_COST_GROUP':
-      return {
-        ...state,
-        addCostGroupOpen: true
-      }
-    case 'CLOSE_ADD_COST_GROUP':
-      return {
-        ...state,
-        addCostGroupOpen: false
-      }
-    case 'OPEN_COSTS_SUBSCREEN':
-      return {
-        ...state,
-        isCostOpen: true,
-        isIncomesOpen: false
-      }
-    case 'OPEN_INCOMES_SUBSCREEN':
-      return {
-        ...state,
-        isCostOpen: false,
-        isIncomesOpen: true
-      }
     case 'SET_COST_TITLE':
       return {
         ...state,
@@ -91,14 +55,6 @@ export default function costsReducer (state = InitialState, action) {
         cost: {
           ...state.cost,
           group: action.payload
-        }
-      }
-    case 'SET_COST_WLIST_ITEM':
-      return {
-        ...state,
-        cost: {
-          ...state.cost,
-          wlistItem: action.payload
         }
       }
     case 'SET_COST_DATE':

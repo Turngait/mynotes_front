@@ -1,36 +1,29 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import {connect} from 'react-redux';
 
-import './Incomes.scss';
 import Heading1 from '../../../../components/Heading1/Heading1';
 import Button from '../../../../components/Button1/Button1';
 import Input2 from '../../../../components/Input2/Input2';
 import IncomeBox from './IncomeBox/IncomeBox';
 import AddIncome from './AddIncomes/AddIncomes';
-import {connect} from 'react-redux';
-import {openAddIncome, getIncomeForPeriod} from '../../../../store/Incomes/income.action';
 
+import {getIncomeForPeriod} from '../../../../store/Incomes/income.action';
 
+import './Incomes.scss';
 
 const Incomes = props => {
   const { t } = useTranslation();
+  const [isAddIncomeOpen, setIsAddIncomeOpen] = React.useState(false);
 
   return (
     <>
-      {
-        props.addIncomeOpen
-        ?
-          <AddIncome />
-        :
-          null
-      }
+      {isAddIncomeOpen ? <AddIncome setIsAddIncomeOpen={setIsAddIncomeOpen}/> : null}
       <div className="myFin_headerBox">
-        <Heading1 title={"MyFinance: " + t('incomes.header')} />
-        <div>
+        <Heading1 title={t('incomes.header')} />
+          <div className="myFin_headerBox__btnBox">
             <Input2 onChange={(event) => props.getIncomeForPeriod({period:event.target.value, token: props.token})} value={props.incomePeriod} type="month" name="date"/>
-          </div>
-          <div>
-            <Button onClick={props.openAddIncome} title={t('incomes.addIncome')} />
+            <Button onClick={setIsAddIncomeOpen} title={t('incomes.addIncome')} />
           </div>
       </div>
       {
@@ -49,7 +42,6 @@ const Incomes = props => {
 
 function mapStateToprops(state) {
   return {
-    addIncomeOpen: state.income.addIncomeOpen,
     incomePeriod: state.income.incomePeriod,
     incomeItems: state.income.incomes,
     token: state.user.token
@@ -58,7 +50,6 @@ function mapStateToprops(state) {
 
 function mapDispatchToprops (dispatch) {
   return {
-    openAddIncome: () => dispatch(openAddIncome()),
     getIncomeForPeriod: (data) => dispatch(getIncomeForPeriod(data))
   }
 }

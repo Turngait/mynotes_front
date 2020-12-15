@@ -1,9 +1,11 @@
 import React from 'react';
-import './CostBox.scss';
-import CostItem from './CostItem/CostItem';
-import {formateDate} from '../../../../../helpers';
 import { useTranslation } from 'react-i18next';
 
+import CostItem from './CostItem/CostItem';
+
+import {formateDate} from '../../../../../helpers';
+
+import './CostBox.scss';
 
 const CostBox = props => {
   const { t } = useTranslation();

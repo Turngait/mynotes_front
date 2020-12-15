@@ -1,47 +1,43 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 import AddCost from './AddCost/AddCost';
 import AddGroup from './AddGroup/AddGroup';
+import CostBox from './CostBox/CostBox';
+
 import Button from '../../../../components/Button1/Button1';
 import Input2 from '../../../../components/Input2/Input2';
-import Heading1 from '../../../../components/Heading1/Heading1';
-import CostBox from './CostBox/CostBox';
-import {connect} from 'react-redux';
-import {openAddCost, openAddCostGroup, getCostForPeriod, getCostItems} from '../../../../store/Costs/costs.actions';
+import Heading from '../../../../components/Heading1/Heading1';
+
+import {getCostForPeriod, getCostItems} from '../../../../store/Costs/costs.actions';
+
 import './Costs.scss';
-import { useTranslation } from 'react-i18next';
 
 const Costs = props => {
   const {costs} = props;
-  console.log(costs)
   const { t } = useTranslation();
+  const [isAddCostOpen, setIsAddCostOpen] = React.useState(false);
+  const [isAddCostGroupOpen, setIsAddCostGroupOpen] = React.useState(false);
 
   return (
     <>
-    {
-      props.isAddCostOpen ? 
-        <AddCost/>
-        :
-        null
-    }
-    {
-      props.isAddCostGroupOpen ?
-        <AddGroup />
-        : 
-        null
-    }
+      { isAddCostOpen ? <AddCost setIsAddCostOpen={setIsAddCostOpen}/> : null }
+      { isAddCostGroupOpen ? <AddGroup setIsAddCostGroupOpen={setIsAddCostGroupOpen}/> : null }
       <div className="myFin_headerBox">
-        <Heading1 title={'MyFinance: ' + t("costs.header")} />
+        <Heading title={t("costs.header")} />
         <div className="myFin_headerBox__periodBox">
-          <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.costPeriod} type="month" name="date"/>
         </div>
         <div className="myFin_headerBox__btnBox">
+          <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.costPeriod} type="month" name="date"/>
+
           {
             props.isCostsFiltered ?
               <Button onClick={() => props.getCostItems(props.token)} title="Сбросить фильтр" />
             : null
           }
-          <Button onClick={props.openAddCost} title={t('costs.addCost')} />
-          <Button onClick={props.openAddCostGroup} title={t('costs.addGroup')} />
+          <Button onClick={setIsAddCostOpen} title={t('costs.addCost')} />
+          <Button onClick={setIsAddCostGroupOpen} title={t('costs.addGroup')} />
         </div>
       </div>
         {
@@ -61,8 +57,6 @@ const Costs = props => {
 
 function mapStateToProps (state) {
   return {
-    isAddCostOpen: state.costs.addCostOpen,
-    isAddCostGroupOpen: state.costs.addCostGroupOpen,
     costs: state.costs.costs,
     groups: state.costs.groups,
     costPeriod: state.costs.costPeriod,
@@ -73,8 +67,6 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    openAddCost: () => dispatch(openAddCost()),
-    openAddCostGroup: () => dispatch(openAddCostGroup()),
     getCostForPeriod: (period) => dispatch(getCostForPeriod(period)),
     getCostItems: (data) => dispatch(getCostItems(data))
   };

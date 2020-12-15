@@ -1,19 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './Dashboard.scss';
+
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
+
 import { getToken, getSettings, logOut } from '../../store/User/user.actions';
 import {getCostItems, getCostForPeriod} from '../../store/Costs/costs.actions';
 import {getIncomes} from '../../store/Incomes/income.action';
+
+import './Dashboard.scss';
 
 /*
   Dashboard component which render all section
 */
 
 class Dashboard extends Component {
+  state = {
+    incomeOpen: false,
+    costOpen: true
+  }
+
+  openCostHandler = () => {
+    this.setState({
+      costOpen: true,
+      incomeOpen: false
+    })
+  }
+
+  openIncomeHandler = () => {
+    this.setState({
+      incomeOpen: true,
+      costOpen: false
+    })
+  }
+
   componentDidMount() {
     const token = this.props.getToken();
     this.props.getSettings();
@@ -48,10 +71,18 @@ class Dashboard extends Component {
         <Header logOut={this.logOut} />
         <main className="main_box">
           <aside className="main_box__menu">
-            <LeftMenu />
+            <LeftMenu 
+              incomeOpen={this.state.incomeOpen} 
+              costOpen={this.state.costOpen}
+              openCostHandler={this.openCostHandler}
+              openIncomeHandler={this.openIncomeHandler}
+            />
           </aside>
           <section className="main_box__info">
-            {this.props.financeOpen ? <MyFinance/> : null}
+            <MyFinance
+              incomeOpen={this.state.incomeOpen} 
+              costOpen={this.state.costOpen}
+            />
           </section>
         </main>
         <Footer/>
@@ -62,8 +93,6 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    financeOpen: state.dashboard.financeOpen,
-    profileOpen: state.dashboard.profileOpen,
     costPeriod: state.costs.costPeriod
   }
 }

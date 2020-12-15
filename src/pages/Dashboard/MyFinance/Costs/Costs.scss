@@ -11,6 +11,13 @@
   justify-content: space-between;
   align-items: flex-start;
 
+  &__btnBox {
+    min-width: 50rem;
+    max-width: 90rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__sorting {
     flex: 1;
     font-size: 1rem;

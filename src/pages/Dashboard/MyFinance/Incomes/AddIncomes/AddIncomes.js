@@ -1,19 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './AddIncomes.scss';
+import { useTranslation } from 'react-i18next';
+
 import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import Textarea1 from '../../../../../components/Textarea1/Textarea1';
-import {closeAddIncome, setIncomeTitle, setIncomeAmmount, setIncomeDescription, setIncomeDate, addIncomeItem} from '../../../../../store/Incomes/income.action';
-import { useTranslation } from 'react-i18next';
+
+import {setIncomeTitle, setIncomeAmmount, setIncomeDescription, setIncomeDate, addIncomeItem} from '../../../../../store/Incomes/income.action';
+
+import './AddIncomes.scss';
 
 const AddIncome = props => {
   const { t } = useTranslation();
 
   return (
     <PopUp>
-      <i onClick={props.closeAddIncome} className="fas fa-times close"></i>
+      <i onClick={() => props.setIsAddIncomeOpen(false)} className="fas fa-times close"></i>
       <h3 className="addItem_header">Добавить доход</h3>
       {
         props.addIncomeError ?
@@ -42,7 +45,6 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    closeAddIncome: () => dispatch(closeAddIncome()),
     setIncomeTitle: (data) => dispatch(setIncomeTitle(data)),
     setIncomeAmmount: (data) => dispatch(setIncomeAmmount(data)),
     setIncomeDescription: (data) => dispatch(setIncomeDescription(data)),

@@ -1,9 +1,10 @@
 import React from 'react';
-import './IncomeBox.scss';
-import IncomeItem from './IncomeItem/IncomeItem';
-import {formateDate} from '../../../../../helpers';
 import { useTranslation } from 'react-i18next';
 
+import IncomeItem from './IncomeItem/IncomeItem';
+import {formateDate} from '../../../../../helpers';
+
+import './IncomeBox.scss';
 
 const IncomeBox = props => {
   const { t } = useTranslation();

@@ -1,12 +1,14 @@
 import React from 'react';
-import './AddGroup.scss';
+import { useTranslation } from 'react-i18next';
+import {connect} from 'react-redux';
+
 import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
-import {connect} from 'react-redux';
-import {closeAddCostGroup, setCostGroupTitle, addGroupToDB} from '../../../../../store/Costs/costs.actions';
-import { useTranslation } from 'react-i18next';
 
+import {setCostGroupTitle, addGroupToDB} from '../../../../../store/Costs/costs.actions';
+
+import './AddGroup.scss';
 
 const AddGroup = props => {
   const {groupTitle, token} = props;
@@ -18,7 +20,7 @@ const AddGroup = props => {
 
   return (
     <PopUp>
-      <i onClick={props.closeAddCostGroup} className="fas fa-times close"></i>
+      <i onClick={() => props.setIsAddCostGroupOpen(false)} className="fas fa-times close"></i>
       <h3 className="addItem_header">Добавить группу расходов</h3>
       {
         props.errorMsg ?
@@ -44,7 +46,6 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    closeAddCostGroup: () => dispatch(closeAddCostGroup()),
     setCostGroupTitle: (title) => dispatch(setCostGroupTitle(title)),
     addGroupToDB: (data) => dispatch(addGroupToDB(data))
   }

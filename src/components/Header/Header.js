@@ -1,10 +1,8 @@
 import React from 'react';
-import './Header.scss';
-import { connect } from 'react-redux';
 import {NavLink} from 'react-router-dom';
-import { openProfile } from '../../store/Dashboard/dashboard.actions';
 import { useTranslation } from 'react-i18next';
 
+import './Header.scss';
 
 const Header = props => {
   const { t } = useTranslation();
@@ -28,10 +26,6 @@ const Header = props => {
   )
 }
 
-function mapDispatchFromPorps(dispatch) {
-  return {
-    openProfile: () => dispatch(openProfile())
-  }
-}
 
-export default connect(null, mapDispatchFromPorps)(Header)
+
+export default Header;

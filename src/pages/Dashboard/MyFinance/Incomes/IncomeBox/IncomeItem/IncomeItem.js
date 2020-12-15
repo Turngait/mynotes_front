@@ -1,7 +1,9 @@
 import React from 'react';
-import './IncomeItem.scss';
 import {connect} from 'react-redux';
+
 import {deleteIncome} from '../../../../../../store/Incomes/income.action';
+
+import './IncomeItem.scss';
 
 const IncomeItem = props => {
   return (

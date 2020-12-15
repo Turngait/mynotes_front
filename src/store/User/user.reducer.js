@@ -1,4 +1,3 @@
-
 const initialState = {
   token: false,
   email: '',

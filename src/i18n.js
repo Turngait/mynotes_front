@@ -33,7 +33,7 @@ const resources = {
         'noIncomes': 'Нет доходов за этот период'
       },
       "menu": {
-        'dashboard': 'Главная',
+        'dashboard': 'Финансы',
         'profile': 'Личный кабинет',
         'signout': 'Выход'
       },

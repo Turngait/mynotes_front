@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import './Statistics.scss';
-import {connect} from 'react-redux'; 
 
 const Statistics = props => {
   const total = props.incomes - props.costs;
