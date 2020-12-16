@@ -43,7 +43,6 @@ const Costs = props => {
         {
           costs.length > 0 ?
           costs.map((item, key) => {
-            console.log(item)
             return (
               <CostBox item={item} key={key} />
             )

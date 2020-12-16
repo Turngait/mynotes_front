@@ -7,7 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
 
-import { getToken, getSettings, logOut } from '../../store/User/user.actions';
+import { getToken, getSettings, logOut, getFinData } from '../../store/User/user.actions';
 import {getCostItems, getCostForPeriod} from '../../store/Costs/costs.actions';
 import {getIncomes} from '../../store/Incomes/income.action';
 
@@ -37,18 +37,17 @@ class Dashboard extends Component {
     })
   }
 
-  componentDidMount() {
-    const token = this.props.getToken();
+  async componentDidMount() {
+    const token = await this.props.getToken();
     this.props.getSettings();
     if (!token) {
       this.props.history.push('/')
       return null;
     }
-    this.props.getCostItems(token);
-    this.props.getIncomes(token);
+    await this.props.getFinData(token);
   }
 
-  componentDidUpdate() {
+  async componentDidUpdate() {
     const token = this.props.getToken();
     this.props.getSettings();
 
@@ -56,8 +55,7 @@ class Dashboard extends Component {
       this.props.history.push('/');
       return null;
     }
-    this.props.getCostForPeriod({period:this.props.costPeriod, token: token})
-    this.props.getIncomes(token)
+    await this.props.getFinData(token);
   }
 
   logOut = () => {
@@ -99,6 +97,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    getFinData: (token) => dispatch(getFinData(token)),
     getToken: () => dispatch(getToken()),
     getSettings: () => dispatch(getSettings()),
     logOut: () => dispatch(logOut()),

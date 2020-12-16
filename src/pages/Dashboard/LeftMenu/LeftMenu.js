@@ -5,7 +5,6 @@ import './LeftMenu.scss';
 
 const LeftMenu = (props) => {
   const { t } = useTranslation();
-  console.log(props)
 
   return (
     <ul className="LeftMenu_box">

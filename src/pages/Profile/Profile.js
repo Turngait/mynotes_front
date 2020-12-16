@@ -34,29 +34,29 @@ class Profile extends Component {
       myGroupsOpen: true
     })
   }
-  componentDidMount() {
-    const token = this.props.getToken();
+  async componentDidMount() {
+    const token = await this.props.getToken();
     this.props.getSettings();
     if (!token) {
       this.props.history.push('/');
       return null;
-    } else {
-      this.props.getUserInfo(token)
     }
+    await this.props.getUserInfo(token); 
   }
 
-  componentDidUpdate() {
-    const token = this.props.getToken();
+  async componentDidUpdate() {
+    const token = await this.props.getToken();
     this.props.getSettings();
     if (!token) {
       this.props.history.push('/');
       return null;
     }
+    await this.props.getUserInfo(token);
   }
 
   logOut = () => {
-    this.props.logOut()
-    this.props.history.push('/')
+    this.props.logOut();
+    this.props.history.push('/');
   }
 
   render() {

@@ -5,7 +5,7 @@ import PopUp from '../../../../components/PopUp/PopUp';
 import Input1 from '../../../../components/Input1/Input1';
 import Button from '../../../../components/ButtonPopUp/ButtonPopUp';
 
-import {setBalance, setUserName, setUserEmail, saveBalance, saveNewUserData,setPasswords, changePassword} from '../../../../store/User/user.actions';
+import {setUserName, setUserEmail, saveNewUserData,setPasswords, changePassword} from '../../../../store/User/user.actions';
 
 import './Settings.scss';
 
@@ -62,10 +62,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    setBalance: (data) => dispatch(setBalance(data)),
     setUserName: (name) => dispatch(setUserName(name)),
     setUserEmail: (email) => dispatch(setUserEmail(email)),
-    saveBalance: (data) => dispatch(saveBalance(data)),
     saveNewUserData: (data) => dispatch(saveNewUserData(data)),
     setPasswords: (data) => dispatch(setPasswords(data)),
     changePassword: (data) => dispatch(changePassword(data)),

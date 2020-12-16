@@ -89,6 +89,77 @@ export function signUp (email, name, pass) {
   }
 }
 
+export function getFinData(token) {
+  return async (dispatch) => {
+    const period = new Date().toISOString().slice(0,7);
+    const {costs, incomes, budget} = await fetch(API_URL + '/fin/getfindata', {
+      mode: 'cors',
+      method: 'POST',
+      body: JSON.stringify({token, period}),
+      headers: {'Content-Type': 'application/json;charset=utf-8'},
+    }).then(res => res.json());
+        
+    dispatch({
+      type: 'SET_COSTS_BY_PERIOD',
+      payload: costs.costs.spentByPeriod
+    });
+    dispatch({type: 'SET_INCOMES', payload: incomes});
+    dispatch({
+      type: 'SET_COSTS',
+      groups: costs.groups,
+      costs: costs.costs
+    });
+
+    dispatch({
+      type: 'SET_BUDGETS',
+      payload: budget.items
+    })
+  }
+}
+
+export function getSettings() {
+  return (dispatch) => {
+    const settings = {
+      currency: localStorage.getItem('currency'),
+      local: localStorage.getItem('local')
+    };
+    dispatch({
+      type: 'SET_SETTINGS',
+      payload: settings
+    });
+  }
+}
+
+export function getUserInfo(token) {
+  return (dispatch) => {
+    fetch(API_URL+'/auth/user/' + token)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      console.log(data.data)
+      if (data.status === 200) {
+        dispatch(setInfo(data.data))
+      };
+    })
+  }
+}
+
+export function setInfo(user) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_INFO',
+      email: user.email,
+      name: user.name,
+      balance: user.budget.balance
+    });
+    dispatch({
+      type: 'SET_BUDGETS',
+      payload: user.budget.items
+    })
+  }
+}
+
 export function logOut() {
   return(dispatch) => {
     localStorage.removeItem('token');
@@ -138,51 +209,6 @@ export function getToken() {
   }
 }
 
-export function getSettings() {
-  return (dispatch) => {
-    const settings = {
-      currency: localStorage.getItem('currency'),
-      local: localStorage.getItem('local')
-    };
-    dispatch({
-      type: 'SET_SETTINGS',
-      payload: settings
-    });
-  }
-}
-
-export function getUserInfo(token) {
-  return (dispatch) => {
-    fetch(API_URL+'/auth/user/' + token)
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      dispatch(setInfo(data.data))
-    })
-  }
-}
-
-export function setInfo(user) {
-  return (dispatch) => {
-    dispatch({
-      type: 'SET_INFO',
-      email: user.email,
-      name: user.name,
-      balance: user.balance
-    })
-  }
-}
-
-export function setBalance(balance) {
-  return (dispatch) => {
-    dispatch({
-      type: 'SET_USER_BALANCE',
-      payload: Number(balance)
-    })
-  }
-}
-
 export function setUserName(name) {
   return (dispatch) => {
     dispatch({
@@ -218,28 +244,6 @@ export function saveNewUserData(data) {
       } else if(res.status === 403) {
         dispatch(setErrorhMsg('Access denied'));
         setTimeout(() => dispatch(setErrorhMsg('')), 4000);
-      } else {
-        dispatch(setErrorhMsg('Server error'));
-        setTimeout(() => dispatch(setErrorhMsg('')), 4000);
-      }
-    })
-  }
-}
-
-export function saveBalance(data) {
-  return (dispatch) => {
-    fetch(API_URL + '/fin/balance', {
-      mode: 'cors',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(res => {
-      if(res.status === 204) {
-        dispatch(setSuccesshMsg('Balance saved'));
-        setTimeout(() => dispatch(setSuccesshMsg('')), 4000);
       } else {
         dispatch(setErrorhMsg('Server error'));
         setTimeout(() => dispatch(setErrorhMsg('')), 4000);

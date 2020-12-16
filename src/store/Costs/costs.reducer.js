@@ -13,13 +13,6 @@ const InitialState = {
   groupTitle: '',
   addGroupError: '',
   addCostError: '',
-  incomes: [],
-  income: {
-    title: '',
-    descrition: '',
-    amount: '',
-    date: new Date().toISOString().slice(0,10)
-  },
   isCostsFiltered: false
 }
 

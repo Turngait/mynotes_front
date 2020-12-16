@@ -9,6 +9,7 @@ const initialState = {
     locale: 'ru',
     currency: 'RUR'
   },
+  budgets: [],
   pass: {
     old: '',
     new: ''
@@ -52,6 +53,11 @@ export default function userReducer (state = initialState, action) {
         email: action.email,
         name: action.name,
         balance: action.balance
+      }
+    case 'SET_BUDGETS':
+      return {
+        ...state,
+        budgets: action.payload
       }
     case 'SET_USER_BALANCE':
       return {
