@@ -1,43 +1,5 @@
 import {API_URL} from '../../config/api';
 
-export function setCostTitle(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_TITLE', payload: data})
-  };
-}
-
-export function setCostAmmount(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_AMOUNT', payload: data})
-  };
-}
-
-export function setCostDescription(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_DESCRIPTION', payload: data})
-  };
-}
-
-export function setCostGroup(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_GROUP', payload: data})
-  };
-}
-
-
-export function setCostDate(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_DATE', payload: data})
-  };
-}
-
-export function setCostGroupTitle(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_GROUP_TITLE', payload: data})
-  };
-}
-
-
 export function getCostItems(token) {
   return async (dispatch) => {
     const period = new Date().toISOString().slice(0,7);
@@ -55,64 +17,6 @@ export function getCostItems(token) {
       costs: costs
     });
     dispatch(togleCostFiltered(false));
-  }
-}
-
-export function addGroupToDB(data) {
-  return (dispatch) => {
-    fetch(API_URL + '/fin/group/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      mode: 'cors',
-      body: JSON.stringify(data)
-    })
-    .then(async res => {
-      if (res.status === 204) {
-        dispatch({
-          type: 'SET_ADD_GROUP_ERROR',
-          payload: ''
-        })
-      } else if (res.status === 422) {
-        const data = await res.json();
-        if (data.errors) {
-          const {errors} = data.errors;
-          dispatch({
-            type: 'SET_ADD_GROUP_ERROR',
-            payload: errors[0].msg
-          })
-        }
-      }
-    })
-  }
-}
-
-export function addCostItem(data) {
-  return(dispatch) => {
-    const {token} =data;
-    fetch(API_URL + '/fin/cost/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      mode: 'cors',
-      body: JSON.stringify(data)
-    })
-    .then(async res => {
-      if (res.status === 204) {
-        dispatch(getCostItems(token))
-      } else if (res.status === 422) {
-        const data = await res.json();
-        if (data.errors) {
-          const {errors} = data.errors;
-          dispatch({
-            type: 'SET_ADD_COST_ERROR',
-            payload: errors[0].msg
-          })
-        }
-      }
-    })
   }
 }
 
