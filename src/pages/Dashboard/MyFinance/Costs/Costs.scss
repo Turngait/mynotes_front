@@ -12,8 +12,8 @@
   align-items: flex-start;
 
   &__btnBox {
-    min-width: 50rem;
-    max-width: 90rem;
+    min-width: 24rem;
+    flex-shrink: 1;
     display: flex;
     justify-content: space-between;
   }
@@ -33,6 +33,7 @@
 .myFin{
   &__noContent {
     font-size: 2rem;
+    color: #fff;
   }
 }
 

@@ -7,8 +7,8 @@ const LeftMenu = (props) => {
   const { t } = useTranslation();
 
   return (
-    <ul className="LeftMenu_box">
-      <li className="LeftMenu_box__item">
+    <div className="LeftMenu_box">
+      <div className="LeftMenu_box__item">
         {
           props.costOpen ?
             <button onClick={props.openCostHandler} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">{t("costs.header")}</button>
@@ -21,8 +21,14 @@ const LeftMenu = (props) => {
           :
             <button onClick={props.openIncomeHandler} className="LeftMenu_box__item_btn">{t("incomes.header")}</button>
         }
-      </li>
-    </ul>
+      </div>
+
+      <div className="LeftMenu_box__info">
+        Ваш баланс
+        <br/>
+        {props.currancy} {props.balance}
+      </div>
+    </div>
   )
 }
 

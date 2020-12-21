@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
-import Heading1 from '../../../../components/Heading1/Heading1';
 import Button from '../../../../components/Button1/Button1';
 import Input2 from '../../../../components/Input2/Input2';
 import IncomeBox from './IncomeBox/IncomeBox';
@@ -20,11 +19,14 @@ const Incomes = props => {
     <>
       {isAddIncomeOpen ? <AddIncome setIsAddIncomeOpen={setIsAddIncomeOpen}/> : null}
       <div className="myFin_headerBox">
-        <Heading1 title={t('incomes.header')} />
-          <div className="myFin_headerBox__btnBox">
-            <Input2 onChange={(event) => props.getIncomeForPeriod({period:event.target.value, token: props.token})} value={props.incomePeriod} type="month" name="date"/>
-            <Button onClick={setIsAddIncomeOpen} title={t('incomes.addIncome')} />
-          </div>
+        <div>
+          <Input2 onChange={(event) => props.getIncomeForPeriod({period:event.target.value, token: props.token})} value={props.incomePeriod} type="month" name="date"/>
+
+        </div>
+        <div className="myFin_headerBox__btnBox">
+          <Button onClick={setIsAddIncomeOpen} title={t('incomes.addIncome')} />
+          <Button onClick={setIsAddIncomeOpen} title={t('incomes.addIncome')} />
+        </div>
       </div>
       {
         props.incomeItems.length > 0 ?

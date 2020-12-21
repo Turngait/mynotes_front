@@ -20,20 +20,23 @@ import './Dashboard.scss';
 class Dashboard extends Component {
   state = {
     incomeOpen: false,
-    costOpen: true
+    costOpen: true,
+    pageName: 'Расходы'
   }
 
   openCostHandler = () => {
     this.setState({
       costOpen: true,
-      incomeOpen: false
+      incomeOpen: false,
+      pageName: 'Расходы'
     })
   }
 
   openIncomeHandler = () => {
     this.setState({
       incomeOpen: true,
-      costOpen: false
+      costOpen: false,
+      pageName: 'Доходы'
     })
   }
 
@@ -44,7 +47,7 @@ class Dashboard extends Component {
       this.props.history.push('/')
       return null;
     }
-    await this.props.getFinData(token);
+    await this.props.getFinData({token, date: this.props.costPeriod});
   }
 
   async componentDidUpdate() {
@@ -55,7 +58,7 @@ class Dashboard extends Component {
       this.props.history.push('/');
       return null;
     }
-    await this.props.getFinData(token);
+    await this.props.getFinData({token, date: this.props.costPeriod});
   }
 
   logOut = () => {
@@ -66,7 +69,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="flexbox">
-        <Header logOut={this.logOut} />
+        <Header logOut={this.logOut} pageName={this.state.pageName} periodAmount={this.props.balance || 0} />
         <main className="main_box">
           <aside className="main_box__menu">
             <LeftMenu 
@@ -74,6 +77,8 @@ class Dashboard extends Component {
               costOpen={this.state.costOpen}
               openCostHandler={this.openCostHandler}
               openIncomeHandler={this.openIncomeHandler}
+              balance={this.props.balance || 0}
+              currancy={this.props.currancy}
             />
           </aside>
           <section className="main_box__info">
@@ -91,7 +96,9 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    costPeriod: state.costs.costPeriod
+    costPeriod: state.costs.costPeriod,
+    balance: state.user.balance,
+    currancy: state.user.settings.currency
   }
 }
 

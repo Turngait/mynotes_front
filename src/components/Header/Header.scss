@@ -1,7 +1,7 @@
 @import '../../config/variable.scss';
 
 .header_box {
-  padding: 1.2vh 4vw 1.2vh;
+  padding: 1rem 2rem;
   background-color: $base-color;
   color: #fff;
   box-shadow: 0px 1px 4px #333;
@@ -13,11 +13,25 @@
   &__logo {
     font-size: 2rem;
     font-weight: 500;
+    width: 12rem;
+    align-self: center;
+
+    display: flex;
+    justify-content: space-between;
 
     &_link {
       color: #fff;
       text-decoration: none;
     }
+    &_pageName {
+      font-size: 1.6rem;
+      align-self: center;
+      margin-right: 1rem;
+    }
+  }
+
+  &__pageInfo {
+    flex-grow: 1;
   }
 
   &__btn_item {

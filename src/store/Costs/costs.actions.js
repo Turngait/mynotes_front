@@ -71,22 +71,20 @@ export function getGroupId (data) {
 }
 
 export function getCostForPeriod (data) {
-  return (dispatch) => {
+  return async (dispatch) => {
     const {period} = data;
-    fetch(API_URL + '/fin/cost/get/' + period + '/' + data.token)
-    .then(res => {return res.json()})
-    .then(data => {
-      const {groups, costs} = data.data.costs;
-      dispatch({
-        type: 'SET_COSTS',
-        groups,
-        costs
-      })
+    const res = await fetch(API_URL + '/fin/cost/get/' + period + '/' + data.token)
+    .then(res => res.json())
+    const {costs} = res.data;
 
-      dispatch({
+    dispatch({
+        type: 'SET_COSTS',
+        groups: costs.groups,
+        costs: costs.costs
+      })
+    dispatch({
         type: 'SET_COST_PERIOD',
         payload: period
-      })
     })
   }
 }

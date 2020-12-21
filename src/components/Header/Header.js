@@ -9,7 +9,19 @@ const Header = props => {
 
   return(
     <header className="header_box">
-      <h2 className="header_box__logo"><NavLink to="/" className="header_box__logo_link">{t('appname')}</NavLink></h2>
+      <h2 className="header_box__logo">
+        <NavLink to="/" className="header_box__logo_link">{t('appname')}</NavLink>
+      </h2>
+      {
+        props.pageName && props.pageName.length > 0 ?
+        <div className="header_box__pageInfo">
+          <span className="header_box__logo_pageName">{props.pageName}</span>
+          {props.periodAmount ? <span className="header_box__logo_pageName">В этом месяце: {props.periodAmount}</span> : null}
+          
+        </div>
+      : null
+      }
+
       <nav className="header_box__nav">
         {
           !props.mainPage ?

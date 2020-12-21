@@ -89,9 +89,9 @@ export function signUp (email, name, pass) {
   }
 }
 
-export function getFinData(token) {
+export function getFinData({token, date}) {
   return async (dispatch) => {
-    const period = new Date().toISOString().slice(0,7);
+    const period = date || new Date().toISOString().slice(0,7);
     const {costs, incomes, budget} = await fetch(API_URL + '/fin/getfindata', {
       mode: 'cors',
       method: 'POST',
@@ -113,6 +113,11 @@ export function getFinData(token) {
     dispatch({
       type: 'SET_BUDGETS',
       payload: budget.items
+    })
+
+    dispatch({
+      type: 'SET_USER_BALANCE',
+      payload: budget.balance
     })
   }
 }

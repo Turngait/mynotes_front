@@ -11,18 +11,26 @@ const Costitem = props => {
   const { t } = useTranslation();
 
   return (
-    <div className="myFin_mainBox__item">
-      <div className="myFin_mainBox__item_header">
-        <span className="myFin_mainBox__item_header__info">{props.currency} {props.item.amount}</span>
-        <span className="myFin_mainBox__item_header__info">{props.item.title}</span>
-        <span onClick={() => props.costGroupFilter({id_group: group_id, period: props.period, token: props.token})} className="myFin_mainBox__item_header__info filter_group">
-          {t("costs.group")}: {group_name}
+    <div className="CostItem">
+      <div className="CostItem_header">
+        <span className="CostItem_header__info">{props.item.title}</span>
+        <span 
+          onClick={() => props.costGroupFilter({id_group: group_id, period: props.period, token: props.token})} 
+          className="CostItem_header__info filter_group">
+          <b>{t("costs.group")}</b>: {group_name}
         </span>
-        <span className="myFin_mainBox__item_header__control"><i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={props.item._id} className="fas deleteCostItem fa-times-circle"></i></span>
+        <span className="CostItem_header__control">
+          <span className="CostItem_header__info">{props.currency} {props.item.amount}</span>
+          <i 
+            onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} 
+            data-item-id={props.item._id} 
+            className="fas deleteCostItem fa-times-circle">
+          </i>
+        </span>
       </div>
       {
         props.item.description ? 
-        <p className="myFin_mainBox__item_text">
+        <p className="CostItem_text">
           {props.item.description}
         </p>
         :
