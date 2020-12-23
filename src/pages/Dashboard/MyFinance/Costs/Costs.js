@@ -20,7 +20,7 @@ const Costs = props => {
   const [isAddCostGroupOpen, setIsAddCostGroupOpen] = React.useState(false);
 
   return (
-    <>
+    <div className="costs">
       { isAddCostOpen ? <AddCost setIsAddCostOpen={setIsAddCostOpen}/> : null }
       { isAddCostGroupOpen ? <AddGroup setIsAddCostGroupOpen={setIsAddCostGroupOpen}/> : null }
       <div className="myFin_headerBox">
@@ -33,6 +33,7 @@ const Costs = props => {
           <Button onClick={setIsAddCostGroupOpen} title={t('costs.addGroup')} />
         </div>
       </div>
+      <div className="allCosts">
         {
           costs.length > 0 ?
           costs.map((item, key) => {
@@ -43,7 +44,8 @@ const Costs = props => {
           :
           <p className="myFin__noContent">{t('costs.noCosts')}</p>
         }
-    </>
+      </div>
+    </div>
   );
 }
 

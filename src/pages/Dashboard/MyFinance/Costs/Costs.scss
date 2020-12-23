@@ -1,5 +1,12 @@
 @import "../../../../config/variable.scss";
+// .costs {
+//   height: 100vh;
+// }
 
+.allCosts {
+  height: 74vh;
+  overflow-y: auto;
+}
 .myFinance__logo {
   text-decoration: underline;
   letter-spacing: 1px;
@@ -35,10 +42,6 @@
     font-size: 2rem;
     color: #fff;
   }
-}
-
-.deleteCostItem {
-  cursor: pointer;
 }
 
 @media all and (min-width: 0) and (max-width: 1400px) {

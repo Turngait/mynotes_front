@@ -44,24 +44,24 @@ const AddCost = props => {
         <Textarea1 onChange={(event) => setDescription(event.target.value)} name="description" placeholder={t('costs.description') + "..."}></Textarea1>
         <div className="add_item_box__opt">
           <Select1 onChange={(event) => setGroup(event.target.value)}>
-            <option value='none'>None</option>
+            <option value='none'>Без группы</option>
             {
               props.groups.length > 0 ?
               props.groups.map((group, key) => {
                 return (
-                  <option key={key} value={group._id}>{group.title}</option>
+                  <option key={key} value={group._id}>Группа: {group.title}</option>
                 )
               })
               : 
               null
             }
-            <option value='0'>Other</option>
+            <option value='0'>Другое</option>
           </Select1>
           <Select1 onChange={(event) => setBudget(event.target.value)}>
             {
               props.budgets.map((budget, key) => {
                 return (
-                  <option key={key} value={budget._id}>{budget.title}</option>
+                  <option key={key} value={budget._id}>Счет: {budget.title}</option>
                 )
               })
             }

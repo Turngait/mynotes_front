@@ -5,13 +5,14 @@ import './Statistics.scss';
 
 const Statistics = props => {
   const total = props.incomes - props.costs;
+  console.log(props.incomes)
+  console.log(props.costs)
   return (
     <div className="stat_box">
-      <h3 className="stat_box__header">Статистика</h3>
+      <h3 className="stat_box__header">Статистика в этом месяце</h3>
       <p className="stat_box__item">Потрачено: {props.currency} {props.costs}</p>
       <p className="stat_box__item">Получено: {props.currency} {props.incomes}</p>
       <p className="stat_box__item">Разница: {props.currency} {total}</p>
-      <p className="stat_box__item">Баланс: {props.currency} {props.balance}</p>
     </div>
   )
 }

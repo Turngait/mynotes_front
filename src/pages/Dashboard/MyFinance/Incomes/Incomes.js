@@ -6,6 +6,7 @@ import Button from '../../../../components/Button1/Button1';
 import Input2 from '../../../../components/Input2/Input2';
 import IncomeBox from './IncomeBox/IncomeBox';
 import AddIncome from './AddIncomes/AddIncomes';
+import AddSource from './AddSource';
 
 import {getIncomeForPeriod} from '../../../../store/Incomes/income.action';
 
@@ -14,10 +15,12 @@ import './Incomes.scss';
 const Incomes = props => {
   const { t } = useTranslation();
   const [isAddIncomeOpen, setIsAddIncomeOpen] = React.useState(false);
+  const [isAddSourceOpen, setIsAddSourceOpen] = React.useState(false);
 
   return (
     <>
       {isAddIncomeOpen ? <AddIncome setIsAddIncomeOpen={setIsAddIncomeOpen}/> : null}
+      {isAddSourceOpen ? <AddSource setIsAddSourceOpen={setIsAddSourceOpen}/> : null}
       <div className="myFin_headerBox">
         <div>
           <Input2 onChange={(event) => props.getIncomeForPeriod({period:event.target.value, token: props.token})} value={props.incomePeriod} type="month" name="date"/>
@@ -25,7 +28,7 @@ const Incomes = props => {
         </div>
         <div className="myFin_headerBox__btnBox">
           <Button onClick={setIsAddIncomeOpen} title={t('incomes.addIncome')} />
-          <Button onClick={setIsAddIncomeOpen} title={t('incomes.addIncome')} />
+          <Button onClick={setIsAddSourceOpen} title={"Добавить источник"} />
         </div>
       </div>
       {

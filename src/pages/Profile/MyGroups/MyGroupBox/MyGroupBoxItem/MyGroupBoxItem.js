@@ -14,7 +14,7 @@ const MyGroupBoxItem = props => {
               )
             })
           :
-            <p>You did not create your own group.</p>
+            <p>У вас пока что отсутствуют группы.</p>
         }
       </div>
     </div>
