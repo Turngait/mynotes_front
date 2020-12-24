@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {getToken, auth, signUp} from '../../store/User/user.actions';
-import {signIn, signUp1} from './hooks';
+import {getToken, auth} from '../../store/User/user.actions';
+import {signIn, signUp} from './hooks';
 
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
@@ -22,21 +22,27 @@ class Index extends Component {
 
   auth = async () => {
     if(this.state.signUpActive) {
-      const {data, status} = await signUp1(this.state.email, this.state.name, this.state.pass, (msg) => {this.setState({msg})}, signIn);
-      if (status === 200) {
-        this.props.auth(data);
-      }
+      await signUp(
+        this.state.email, 
+        this.state.name, 
+        this.state.pass, 
+        (data) =>this.props.auth(data),
+        (msg) => {
+          this.setState({msg});
+          setTimeout(() => {this.setState({msg: null})}, 5000);
+        }
+      );
+
     } else {
-      const {data, status} = await signIn(this.state.email, this.state.pass);
-      if (status === 200) {
-        this.props.auth(data);
-      } else if(status === 403) {
-        this.setState({msg: 'Неверный пароль или email'});
-        setTimeout(() => {this.setState({msg: null})}, 3000);
-      } else {
-        this.setState({msg: 'Проблема с сервером. Попробуйте позже.'});
-        setTimeout(() => {this.setState({msg: null})}, 3000);
-      }
+      await signIn(
+        this.state.email, 
+        this.state.pass,
+        (data) =>this.props.auth(data),
+        (msg) => {
+          this.setState({msg});
+          setTimeout(() => {this.setState({msg: null})}, 3000);
+        }
+      );
     }
   }
 
@@ -63,7 +69,6 @@ class Index extends Component {
         break;
       default:
         return false;
-
     }
   }
 
@@ -115,7 +120,6 @@ class Index extends Component {
                 null
             }
 
-            
             {
             this.state.signUpActive 
             ? 
@@ -141,7 +145,6 @@ function mapDispatchToProps(dispatch) {
   return {
     getToken: () => dispatch(getToken()),
     auth: (data) => dispatch(auth(data)),
-    signUp: (email, name, pass) => dispatch(signUp(email, name, pass))
   }
 }
 

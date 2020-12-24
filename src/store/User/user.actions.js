@@ -22,49 +22,6 @@ export function auth(data) {
   }
 }
 
-export function signUp (email, name, pass) {
-  return (dispatch) => {
-    const auth = '/auth/signup'
-    const body = {
-      email: email,
-      pass: pass,
-      name: name
-    }
-    console.log(body)
-    fetch(API_URL+auth, {
-      mode: 'cors',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(body)
-    })
-    .then(res => {
-      return res.json()
-    })
-    .then(data => {
-      console.log(data)
-      if (data.errors) {
-        dispatch(setErrorhMsg(data.errors.errors[0].msg))
-      }
-      if(data.status === 202) {
-        dispatch(setSuccesshMsg('Registration is complete!'));
-        dispatch({
-          type: 'SET_INFO',
-          email: data.data.email,
-          name: data.data.name
-        });
-        setTimeout(() => dispatch(setSuccesshMsg('')), 3000);
-      } else if (data.status === 208) {
-        dispatch(setErrorhMsg('User already exist!'));
-        setTimeout(() => dispatch(setErrorhMsg('')), 3000);
-      } else {
-        console.log('Wrong')
-      }
-    })
-  }
-}
-
 export function setBudget(budget) {
   return (dispatch) => {
     dispatch({
@@ -160,23 +117,5 @@ export function getToken() {
     }
 
     return token
-  }
-}
-
-export function setSuccesshMsg(msg) {
-  return (dispatch) => {
-    dispatch({
-      type: 'SET_SUC_MSG',
-      payload: msg
-    })
-  }
-}
-
-export function setErrorhMsg(msg) {
-  return (dispatch) => {
-    dispatch({
-      type: 'SET_ERR_MSG',
-      payload: msg
-    })
   }
 }

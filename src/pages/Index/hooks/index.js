@@ -1,6 +1,6 @@
 import {API_URL} from '../../../config/api';
 
-export async function signIn(email, pass) {
+export async function signIn(email, pass, auth, setMsg) {
   const {data, status} = await fetch(API_URL + '/auth/signin', {
       mode: 'cors',
       method: 'POST',
@@ -10,10 +10,16 @@ export async function signIn(email, pass) {
       body: JSON.stringify({email, pass})
   }).then(res => res.json());
 
-  return {data, status};
+  if (status === 200) {
+    auth(data);
+  } else if(status === 403) {
+    setMsg('Неверный пароль или email');
+  } else {
+    setMsg('Проблема с сервером. Попробуйте позже.');
+  }
 }
 
-export async function signUp1(email, name, pass, setMsg, signIn) {
+export async function signUp(email, name, pass, auth, setMsg) {
   const data = await fetch(API_URL + '/auth/signup', {
     mode: 'cors',
     method: 'POST',
@@ -22,13 +28,9 @@ export async function signUp1(email, name, pass, setMsg, signIn) {
     },
     body: JSON.stringify({email, pass, name})
   }).then(res => res.json());
-  console.log(data)
-  if(data.status === 202) {
-    const {data, status} = await signIn(email,pass);
-    return {data, status, errors: null};
-  } else if(data.status === 208) {
-    setMsg('Такой email уже занят!');
-    return {data, status: 208, errors: null};
-  }
-  return {data: null, status: data.status};
+
+  if(data.errors) setMsg(data.errors.errors[0].msg);
+
+  if(data.status === 202) auth(data.data);
+  else if(data.status === 208) setMsg('Такой email уже занят!');
 }
