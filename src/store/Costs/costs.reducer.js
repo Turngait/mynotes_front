@@ -1,5 +1,4 @@
 const InitialState = {
-  costPeriod: new Date().toISOString().slice(0,7),
   costs: [],
   groups: [],
   costsByPeriod: 0,
@@ -13,11 +12,6 @@ export default function costsReducer (state = InitialState, action) {
         ...state,
         groups: action.groups,
         costs: action.costs
-      }
-    case 'SET_COST_PERIOD':
-      return {
-        ...state,
-        costPeriod: action.payload,
       }
     case 'SET_COSTS_BY_PERIOD':
       return {

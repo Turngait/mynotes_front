@@ -47,7 +47,7 @@ const Incomes = props => {
 
 function mapStateToprops(state) {
   return {
-    incomePeriod: state.income.incomePeriod,
+    incomePeriod: state.user.month,
     incomeItems: state.income.incomes,
     token: state.user.token
   }

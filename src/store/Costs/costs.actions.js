@@ -99,7 +99,7 @@ export function getCostForPeriod (data) {
         costs: costs.costs
       })
     dispatch({
-        type: 'SET_COST_PERIOD',
+        type: 'SET_MONTH',
         payload: period
     })
   }

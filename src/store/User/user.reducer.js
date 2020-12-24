@@ -15,6 +15,11 @@ const initialState = {
 
 export default function userReducer (state = initialState, action) {
   switch(action.type){
+    case 'SET_MONTH':
+      return {
+        ...state,
+        month: action.payload
+      }
     case 'SET_TOKEN':
       return {
         ...state,

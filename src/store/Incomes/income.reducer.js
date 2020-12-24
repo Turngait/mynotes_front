@@ -1,7 +1,6 @@
 const InitialState = {
   incomes: [],
   sources: [],
-  incomePeriod: new Date().toISOString().slice(0,7),
   incomesByPeriod: 0
 }
 
@@ -16,11 +15,6 @@ export default function incomeReducer(state = InitialState, action) {
       return {
         ...state,
         sources: action.payload
-      }
-    case 'SET_INCOME_PERIOD':
-      return {
-        ...state,
-        incomePeriod: action.payload
       }
     case 'SET_INCOMES_BY_PERIOD':
       return {

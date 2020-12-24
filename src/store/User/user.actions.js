@@ -1,50 +1,24 @@
-import {API_URL} from '../../config/api'
+import {API_URL} from '../../config/api';
 
-export function signIn(login, pass) {
+export function auth(data) {
   return (dispatch) => {
-    const auth = '/auth/signin'
-    const body = {
-      email: login,
-      pass: pass
-    }
-  
-    fetch(API_URL+auth, {
-      mode: 'cors',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(body)
-    })
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      if(data.status === 200) {
-        localStorage.setItem('token', data.data.token);
-        localStorage.setItem('local', data.data.settings.local);
-        localStorage.setItem('currency', data.data.settings.currency);
-        dispatch({
-          type: 'SET_TOKEN',
-          payload: data.data.token
-        });
-        dispatch({
-          type: 'SET_SETTINGS',
-          payload: data.data.settings
-        });
-        dispatch({
-          type: 'SET_INFO',
-          email: data.data.email,
-          name: data.data.name,
-          balance: data.data.balance
-        });
-        dispatch(setSuccesshMsg(''));
-        dispatch(setErrorhMsg(''));
-      } else {
-        dispatch(setErrorhMsg('Wrong email or password!'));
-        setTimeout(() => dispatch(setErrorhMsg(false)), 4000);
-      }
-    })
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('local', data.settings.local);
+    localStorage.setItem('currency', data.settings.currency);
+    dispatch({
+      type: 'SET_TOKEN',
+      payload: data.token
+    });
+    dispatch({
+      type: 'SET_SETTINGS',
+      payload: data.settings
+    });
+    dispatch({
+      type: 'SET_INFO',
+      email: data.email,
+      name: data.name,
+      balance: data.balance
+    });
   }
 }
 
@@ -56,6 +30,7 @@ export function signUp (email, name, pass) {
       pass: pass,
       name: name
     }
+    console.log(body)
     fetch(API_URL+auth, {
       mode: 'cors',
       method: 'POST',
@@ -68,6 +43,7 @@ export function signUp (email, name, pass) {
       return res.json()
     })
     .then(data => {
+      console.log(data)
       if (data.errors) {
         dispatch(setErrorhMsg(data.errors.errors[0].msg))
       }

@@ -57,7 +57,7 @@ export function getIncomeForPeriod (data) {
       dispatch({type: 'SET_INCOMES', payload: data.data.incomes})
 
       dispatch({
-        type: 'SET_INCOME_PERIOD',
+        type: 'SET_MONTH',
         payload: period
       })
     })

@@ -25,7 +25,7 @@ const Costs = props => {
       { isAddCostGroupOpen ? <AddGroup setIsAddCostGroupOpen={setIsAddCostGroupOpen}/> : null }
       <div className="myFin_headerBox">
         <div>
-          <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.costPeriod} type="month" name="date"/>
+          <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.period} type="month" name="date"/>
           {props.isCostsFiltered ? <Button onClick={() => props.getCostItems(props.token)} title="Сбросить фильтр" /> : null}
         </div>
         <div className="myFin_headerBox__btnBox">
@@ -53,7 +53,7 @@ function mapStateToProps (state) {
   return {
     costs: state.costs.costs,
     groups: state.costs.groups,
-    costPeriod: state.costs.costPeriod,
+    period: state.user.month,
     token: state.user.token,
     isCostsFiltered: state.costs.isCostsFiltered
   };
