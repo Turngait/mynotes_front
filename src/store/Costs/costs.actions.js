@@ -20,6 +20,22 @@ export function getCostItems(token) {
   }
 }
 
+export function setCosts(costs) {
+  return (dispatch) => {
+    let spentByThisMonth = 0;
+    if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
+    dispatch({
+      type: 'SET_COSTS_BY_PERIOD',
+      payload: spentByThisMonth
+    });
+    dispatch({
+      type: 'SET_COSTS',
+      groups: costs.groups,
+      costs: costs.costs
+    });
+  }
+}
+
 export function deleteCostItem(data) {
   return (dispatch) => {
     const {target, token} = data;

@@ -7,13 +7,24 @@ export function getIncomes(token) {
     .then(res => {return res.json()})
     .then(data => {
       if(data.status === 200) {
-        dispatch({type: 'SET_INCOMES', payload: data.data.incomes});
+        dispatch({type: 'SET_INCOMES', payload: data.data.incomes.incomes});
 
         if (data.data.incomes.length > 0) {
-          dispatch({type: 'SET_INCOMES_BY_PERIOD', payload: data.data.incomes[0].incomeByThisMonth});
+          dispatch({type: 'SET_INCOMES_BY_PERIOD', payload: data.data.incomes[0].gainByPeriod});
         }
       }
     })
+  }
+}
+
+export function setIncomes(data) {
+  return (dispatch) => {
+    const {incomes, sources} = data;
+    let gainByPeriod = 0;
+    if(incomes.length > 0) gainByPeriod = incomes[incomes.length - 1].gainByPeriod;
+    dispatch({type: 'SET_INCOMES_BY_PERIOD', payload: gainByPeriod});
+    dispatch({type: 'SET_INCOMES', payload: incomes});
+    dispatch({type: 'SET_SOURCES', payload: sources});
   }
 }
 

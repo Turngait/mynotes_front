@@ -10,6 +10,7 @@ const initialState = {
     currency: 'Руб'
   },
   budgets: [],
+  month: new Date().toISOString().slice(0,7)
 }
 
 export default function userReducer (state = initialState, action) {

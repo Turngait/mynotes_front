@@ -89,36 +89,17 @@ export function signUp (email, name, pass) {
   }
 }
 
-export function getFinData({token, date}) {
-  return async (dispatch) => {
-    const period = date || new Date().toISOString().slice(0,7);
-    const {costs, incomes, budget} = await fetch(API_URL + '/fin/getfindata', {
-      mode: 'cors',
-      method: 'POST',
-      body: JSON.stringify({token, period}),
-      headers: {'Content-Type': 'application/json;charset=utf-8'},
-    }).then(res => res.json());
-    console.log(costs.costs.spentByPeriod)
-    dispatch({
-      type: 'SET_COSTS_BY_PERIOD',
-      payload: costs.costs.spentByPeriod
-    });
-    dispatch({type: 'SET_INCOMES', payload: incomes});
-    dispatch({
-      type: 'SET_COSTS',
-      groups: costs.groups,
-      costs: costs.costs
-    });
-
+export function setBudget(budget) {
+  return (dispatch) => {
     dispatch({
       type: 'SET_BUDGETS',
       payload: budget.items
-    })
+    });
 
     dispatch({
       type: 'SET_USER_BALANCE',
       payload: budget.balance
-    })
+    });
   }
 }
 
@@ -167,7 +148,6 @@ export function logOut() {
     dispatch({type: 'REMOVE_SETTINGS'});
     dispatch({type: 'EMPTY_INCOMES'});
     dispatch({type: 'EMPTY_COSTS'});
-    dispatch({type: 'EMPTY_WLISTS'});
   }
 }
 

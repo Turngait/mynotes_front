@@ -7,9 +7,10 @@ import Footer from '../../components/Footer/Footer';
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
 
-import { getToken, getSettings, logOut, getFinData } from '../../store/User/user.actions';
-import {getCostItems, getCostForPeriod} from '../../store/Costs/costs.actions';
-import {getIncomes} from '../../store/Incomes/income.action';
+import { getToken, getSettings, logOut, setBudget } from '../../store/User/user.actions';
+import { setCosts} from '../../store/Costs/costs.actions';
+import {setIncomes} from '../../store/Incomes/income.action';
+import {getFinData} from './hooks';
 
 import './Dashboard.scss';
 
@@ -21,14 +22,16 @@ class Dashboard extends Component {
   state = {
     incomeOpen: false,
     costOpen: true,
-    pageName: 'Расходы'
+    pageName: 'Расходы',
+    periodAmount: this.props.costsByPeriod
   }
 
   openCostHandler = () => {
     this.setState({
       costOpen: true,
       incomeOpen: false,
-      pageName: 'Расходы'
+      pageName: 'Расходы',
+      periodAmount: this.props.costsByPeriod
     })
   }
 
@@ -36,18 +39,23 @@ class Dashboard extends Component {
     this.setState({
       incomeOpen: true,
       costOpen: false,
-      pageName: 'Доходы'
+      pageName: 'Доходы',
+      periodAmount: this.props.incomesByPeriod
     })
   }
 
   async componentDidMount() {
     const token = await this.props.getToken();
     this.props.getSettings();
+
     if (!token) {
       this.props.history.push('/')
       return null;
     }
-    await this.props.getFinData({token, date: this.props.costPeriod});
+    const {costs, incomes, budget} = await getFinData(token, this.props.period);
+    this.props.setCosts(costs);
+    this.props.setBudget(budget);
+    this.props.setIncomes(incomes);
   }
 
   async componentDidUpdate() {
@@ -58,7 +66,10 @@ class Dashboard extends Component {
       this.props.history.push('/');
       return null;
     }
-    await this.props.getFinData({token, date: this.props.costPeriod});
+    const {costs, incomes, budget} = await getFinData(token, this.props.period);
+    this.props.setCosts(costs);
+    this.props.setBudget(budget);
+    this.props.setIncomes(incomes);
   }
 
   logOut = () => {
@@ -69,7 +80,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="flexbox">
-        <Header logOut={this.logOut} pageName={this.state.pageName} periodAmount={this.props.balance || 0} />
+        <Header logOut={this.logOut} pageName={this.state.pageName} periodAmount={this.state.periodAmount} />
         <main className="main_box">
           <aside className="main_box__menu">
             <LeftMenu 
@@ -96,7 +107,9 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    costPeriod: state.costs.costPeriod,
+    costsByPeriod: state.costs.costsByPeriod,
+    incomesByPeriod: state.income.incomesByPeriod,
+    period: state.user.month,
     balance: state.user.balance,
     currancy: state.user.settings.currency
   }
@@ -104,13 +117,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getFinData: (token) => dispatch(getFinData(token)),
     getToken: () => dispatch(getToken()),
     getSettings: () => dispatch(getSettings()),
     logOut: () => dispatch(logOut()),
-    getCostItems: (token) => dispatch(getCostItems(token)),
-    getCostForPeriod: (data) => dispatch(getCostForPeriod(data)),
-    getIncomes: (token) => dispatch(getIncomes(token))
+    setCosts: (costs) => dispatch(setCosts(costs)),
+    setBudget: (budget) => dispatch(setBudget(budget)),
+    setIncomes: (incomes) => dispatch(setIncomes(incomes))
   }
 }
 

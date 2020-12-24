@@ -35,6 +35,7 @@ export default function costsReducer (state = InitialState, action) {
         ...state,
         costs: [],
         groups: [],
+        costsByPeriod: 0
       }
     default:
       return state
