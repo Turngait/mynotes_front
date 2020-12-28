@@ -91,7 +91,7 @@ class Index extends Component {
         <Header mainPage={true} />
         <div className="index__box">
           <div>
-            <h1 className="index__logo">MyNotes</h1>
+            <h1 className="index__logo">FinCloud</h1>
             <p className="index__box__text">
               Здесь Вы сможете легко вести статистику и учет своих личных финансов.
             </p>

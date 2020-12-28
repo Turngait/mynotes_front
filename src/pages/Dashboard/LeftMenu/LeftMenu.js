@@ -21,6 +21,12 @@ const LeftMenu = (props) => {
           :
             <button onClick={props.openIncomeHandler} className="LeftMenu_box__item_btn">{t("incomes.header")}</button>
         }
+        {
+          props.budgetsOpen ?
+            <button onClick={props.openBudgetsHandler} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">{t("budgets.header")}</button>
+          :
+            <button onClick={props.openBudgetsHandler} className="LeftMenu_box__item_btn">{t("budgets.header")}</button>
+        }
       </div>
 
       <div className="LeftMenu_box__info">

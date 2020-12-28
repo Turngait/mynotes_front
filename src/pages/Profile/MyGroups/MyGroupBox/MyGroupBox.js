@@ -9,7 +9,7 @@ import './MyGroupBox.scss';
 const MyGroupBox = props => {
   return (
     <div className="myGroupBox">
-      <MyGroupBoxItem groups={props.costGroups} token={props.token} onDelete={props.deleteCostGroup} title="Расходы"/>
+      <MyGroupBoxItem groups={props.costGroups} token={props.token} onDelete={props.deleteCostGroup} title="Группы расходов"/>
     </div>
   );
 }

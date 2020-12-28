@@ -22,6 +22,7 @@ class Dashboard extends Component {
   state = {
     incomeOpen: false,
     costOpen: true,
+    budgetsOpen: false,
     pageName: 'Расходы',
     periodAmount: this.props.costsByPeriod
   }
@@ -30,6 +31,7 @@ class Dashboard extends Component {
     this.setState({
       costOpen: true,
       incomeOpen: false,
+      budgetsOpen: false,
       pageName: 'Расходы',
       periodAmount: this.props.costsByPeriod
     })
@@ -39,8 +41,19 @@ class Dashboard extends Component {
     this.setState({
       incomeOpen: true,
       costOpen: false,
+      budgetsOpen: false,
       pageName: 'Доходы',
       periodAmount: this.props.incomesByPeriod
+    })
+  }
+
+  openBudgetsHandler = () => {
+    this.setState({
+      incomeOpen: false,
+      costOpen: false,
+      budgetsOpen: true,
+      pageName: 'Счета',
+      periodAmount: this.props.incomesByPeriod - this.props.costsByPeriod
     })
   }
 
@@ -86,8 +99,10 @@ class Dashboard extends Component {
             <LeftMenu 
               incomeOpen={this.state.incomeOpen} 
               costOpen={this.state.costOpen}
+              budgetsOpen={this.state.budgetsOpen}
               openCostHandler={this.openCostHandler}
               openIncomeHandler={this.openIncomeHandler}
+              openBudgetsHandler={this.openBudgetsHandler}
               balance={this.props.balance || 0}
               currancy={this.props.currancy}
             />
@@ -96,6 +111,7 @@ class Dashboard extends Component {
             <MyFinance
               incomeOpen={this.state.incomeOpen} 
               costOpen={this.state.costOpen}
+              budgetsOpen={this.state.budgetsOpen}
             />
           </section>
         </main>

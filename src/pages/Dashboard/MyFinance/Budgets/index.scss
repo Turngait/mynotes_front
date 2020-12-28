@@ -1,0 +1,24 @@
+.budgets {
+  &_headerBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    &__btnBox {
+      flex-shrink: 1;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__sorting {
+      flex: 1;
+      font-size: 1rem;
+      font-weight: 600;
+      display: none;
+    }
+    &__costsByPeriod {
+      margin-left: 1vw;
+      font-size: 1.3rem;
+    }
+  }
+}
