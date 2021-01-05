@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import {showGroupName, getGroupId, deleteCostItem, costGroupFilter} from '../../../../../../store/Costs/costs.actions';
+import {numberFormat} from '../../../../../../utils';
 
 const Costitem = props => {
   const group_name = props.showGroupName({item: props.item, groups:props.groups});
@@ -20,7 +21,7 @@ const Costitem = props => {
           <b>{t("costs.group")}</b>: {group_name}
         </span>
         <span className="CostItem_header__control">
-          <span className="CostItem_header__info">{props.currency} {props.item.amount}</span>
+          <span className="CostItem_header__info">{numberFormat(props.item.amount)} {props.currency}</span>
           <i 
             onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} 
             data-item-id={props.item._id} 

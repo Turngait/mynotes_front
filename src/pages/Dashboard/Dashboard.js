@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
 
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
 
-import { getToken, getSettings, logOut, setBudget } from '../../store/User/user.actions';
-import { setCosts} from '../../store/Costs/costs.actions';
-import {setIncomes} from '../../store/Incomes/income.action';
+import { getToken, getSettings, logOut, setBudget } from 'store/User/user.actions';
+import { setCosts} from 'store/Costs/costs.actions';
+import {setIncomes} from 'store/Incomes/income.action';
 import {getFinData} from './hooks';
+import {numberFormat} from 'utils';
 
 import './Dashboard.scss';
 
@@ -93,7 +94,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="flexbox">
-        <Header logOut={this.logOut} pageName={this.state.pageName} periodAmount={this.state.periodAmount} />
+        <Header logOut={this.logOut} pageName={this.state.pageName} periodAmount={numberFormat(this.state.periodAmount)} />
         <main className="main_box">
           <aside className="main_box__menu">
             <LeftMenu 
@@ -103,7 +104,7 @@ class Dashboard extends Component {
               openCostHandler={this.openCostHandler}
               openIncomeHandler={this.openIncomeHandler}
               openBudgetsHandler={this.openBudgetsHandler}
-              balance={this.props.balance || 0}
+              balance={numberFormat(this.props.balance) || 0}
               currancy={this.props.currancy}
             />
           </aside>

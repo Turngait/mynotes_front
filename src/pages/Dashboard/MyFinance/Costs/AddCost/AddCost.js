@@ -19,7 +19,7 @@ const AddCost = props => {
   const [title, setTitle] = React.useState('');
   const [amount, setAmount] = React.useState('');
   const [description, setDescription] = React.useState('');
-  const [group, setGroup] = React.useState('none');
+  const [group, setGroup] = React.useState(props.groups[0]._id);
   const [budget, setBudget] = React.useState(props.budgets[0]._id);
   const [date, setDate] = React.useState(new Date().toISOString().slice(0,10));
   const [error, setError] = React.useState('');

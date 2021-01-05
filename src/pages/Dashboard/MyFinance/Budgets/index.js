@@ -13,7 +13,7 @@ const Budgets = props => {
   const [isAddBudgetOpen, setIsAddBudgetOpen] = React.useState(false);
   return (
     <div className="budgets">
-      {isAddBudgetOpen ? <AddBudget setIsAddBudgetOpen={setIsAddBudgetOpen}/> : null}
+      {isAddBudgetOpen ? <AddBudget setIsAddBudgetOpen={setIsAddBudgetOpen} token={props.token}/> : null}
       <div className="budgets_headerBox">
         <div>
         </div>
@@ -29,7 +29,8 @@ const Budgets = props => {
 function mapStateToProps(state) {
   return {
     budget: state.user.budgets,
-    currancy: state.user.settings.currency
+    currancy: state.user.settings.currency,
+    token: state.user.token
   }
 }
 

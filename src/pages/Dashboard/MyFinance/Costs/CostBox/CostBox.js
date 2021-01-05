@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import CostItem from './CostItem/CostItem';
 
-import {formateDate} from '../../../../../helpers';
+import {numberFormat, formateDate} from 'utils';
 
 import './CostBox.scss';
 
@@ -15,7 +15,7 @@ const CostBox = props => {
     <div className="CostBox">
       <div className="CostBox__costInfo">
         <p className="CostBox__costInfo__date">{formateDate(props.item.period)}</p>
-        <p className="CostBox__costInfo__spentByDay">{t('costs.today')}: {props.currency} {props.item.spentByDay}</p>
+        <p className="CostBox__costInfo__spentByDay">{t('costs.today')}: {numberFormat(props.item.spentByDay)} {props.currency}</p>
       </div>
       <div className="CostBox__costItems">
         {

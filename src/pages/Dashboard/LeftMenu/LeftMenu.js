@@ -32,7 +32,7 @@ const LeftMenu = (props) => {
       <div className="LeftMenu_box__info">
         Ваш баланс
         <br/>
-        {props.currancy} {props.balance}
+        {props.balance} {props.currancy}
       </div>
     </div>
   )
