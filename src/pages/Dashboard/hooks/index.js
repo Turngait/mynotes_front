@@ -31,10 +31,35 @@ export async function saveBudget(budget, token, setErrors) {
       setErrors(res.status);
       return false;
     }
-    console.log(res)
     return true;
   });
 
   return status;
 
+}
+
+export async function editBudgetHook(budget, token, setErrors) {
+  const isEdit = await fetch(API_URL + '/budget/edit', {
+    mode: 'cors',
+    method: 'POST',
+    body: JSON.stringify({budget, token}),
+    headers: {'Content-Type': 'application/json;charset=utf-8'},
+  }).then(async res => {
+    if (res.status === 202) {
+      return true;
+    } else if (res.status === 422) {
+      const data = await res.json();
+      if (data.errors) {
+        const {errors} = data.errors;
+        setErrors(errors[0].msg);
+        return false;
+      }
+    } else {
+      setErrors(res.status);
+      return false;
+    }
+    return false;
+  });
+
+  return isEdit;
 }

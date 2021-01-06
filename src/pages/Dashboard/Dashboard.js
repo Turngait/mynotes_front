@@ -66,10 +66,15 @@ class Dashboard extends Component {
       this.props.history.push('/')
       return null;
     }
+    
     const {costs, incomes, budget} = await getFinData(token, this.props.period);
     this.props.setCosts(costs);
     this.props.setBudget(budget);
     this.props.setIncomes(incomes);
+
+    this.setState({
+      periodAmount: costs.costs[costs.costs.length - 1].spentByThisMonth
+    })
   }
 
   async componentDidUpdate() {

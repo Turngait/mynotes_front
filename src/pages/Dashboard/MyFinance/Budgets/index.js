@@ -2,18 +2,23 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
-import Button from '../../../../components/Button1/Button1';
+import Button from 'components/Button1/Button1';
 import BudgetsBox from './components/BudgetsBox';
 import AddBudget from './components/AddBudget';
+import EditBudget from './components/EditBudget';
 
 import './index.scss';
 
 const Budgets = props => {
   const { t } = useTranslation();
   const [isAddBudgetOpen, setIsAddBudgetOpen] = React.useState(false);
+  const [isEditBudgetOpen, setIsEditBudgetOpen] = React.useState(false);
+  const [editableItem, setEditableItem] = React.useState(null);
+
   return (
     <div className="budgets">
       {isAddBudgetOpen ? <AddBudget setIsAddBudgetOpen={setIsAddBudgetOpen} token={props.token}/> : null}
+      {isEditBudgetOpen ? <EditBudget token={props.token} editableItem={editableItem} setIsEditBudgetOpen={setIsEditBudgetOpen}/> : null}
       <div className="budgets_headerBox">
         <div>
         </div>
@@ -21,7 +26,7 @@ const Budgets = props => {
           <Button onClick={() => setIsAddBudgetOpen(true)} title={t('budgets.addBudget')} />
         </div>
       </div>
-      <BudgetsBox budget={props.budget} currancy={props.currancy}/>
+      <BudgetsBox setIsEditBudgetOpen={setIsEditBudgetOpen} setEditableItem={setEditableItem} budget={props.budget} currancy={props.currancy}/>
     </div>
   )
 }
