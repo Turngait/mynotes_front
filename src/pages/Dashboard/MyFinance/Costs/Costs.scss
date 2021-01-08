@@ -26,6 +26,16 @@
     display: flex;
     justify-content: space-between;
   }
+  &__dateBox {
+    flex-grow: 0;
+    min-width: 23rem;
+    flex-shrink: 1;
+  }
+  &__ctrlBox {
+    flex-grow: 1;
+    
+
+  }
 
   &__sorting {
     flex: 1;

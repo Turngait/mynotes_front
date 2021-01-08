@@ -14,6 +14,7 @@ const Budgets = props => {
   const [isAddBudgetOpen, setIsAddBudgetOpen] = React.useState(false);
   const [isEditBudgetOpen, setIsEditBudgetOpen] = React.useState(false);
   const [editableItem, setEditableItem] = React.useState(null);
+  const [error, setError] = React.useState('');
 
   return (
     <div className="budgets">
@@ -26,7 +27,15 @@ const Budgets = props => {
           <Button onClick={() => setIsAddBudgetOpen(true)} title={t('budgets.addBudget')} />
         </div>
       </div>
-      <BudgetsBox setIsEditBudgetOpen={setIsEditBudgetOpen} setEditableItem={setEditableItem} budget={props.budget} currancy={props.currancy}/>
+      {error.length > 0 ? <p className="budgets__error">{error}</p> : null}
+      <BudgetsBox 
+        setIsEditBudgetOpen={setIsEditBudgetOpen} 
+        setEditableItem={setEditableItem} 
+        budget={props.budget} 
+        currancy={props.currancy}
+        token={props.token}
+        setError={setError}
+      />
     </div>
   )
 }

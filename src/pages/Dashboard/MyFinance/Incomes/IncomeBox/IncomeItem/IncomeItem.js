@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {deleteIncome} from 'store/Incomes/income.action';
+import {deleteIncome, incomeSourceFilter} from 'store/Incomes/income.action';
 import {numberFormat} from 'utils';
+
 
 import './IncomeItem.scss';
 
@@ -13,7 +14,12 @@ const IncomeItem = props => {
     <div className="IncomeItem">
       <div className="IncomeItem_header">
         <span className="IncomeItem_header__info">{props.title}</span>
-        <span className="IncomeItem_header__info"><b>Источник:</b> {source_name}</span>
+        <span 
+          className="IncomeItem_header__info IncomeItem_header__source" 
+          onClick={() => props.incomeSourceFilter({id_source: props.id_source, period: props.period, token: props.token})}
+        >
+          <b>Источник:</b> {source_name}
+          </span>
         <span className="IncomeItem_header__control">
           <span className="IncomeItem_header__info">{numberFormat(props.amount)} {props.currency}</span>
           <i 
@@ -44,6 +50,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     deleteIncome: (data) => dispatch(deleteIncome(data)),
+    incomeSourceFilter: (data) => dispatch(incomeSourceFilter(data))
   }
 }
 

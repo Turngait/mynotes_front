@@ -35,6 +35,10 @@
         margin-right: 0;
       }
     }
+
+    &__source {
+      cursor: pointer;
+    }
   }
 
   &_text {

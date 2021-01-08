@@ -24,8 +24,10 @@ const Costs = props => {
       { isAddCostOpen ? <AddCost setIsAddCostOpen={setIsAddCostOpen}/> : null }
       { isAddCostGroupOpen ? <AddGroup setIsAddCostGroupOpen={setIsAddCostGroupOpen}/> : null }
       <div className="myFin_headerBox">
-        <div>
+        <div className="myFin_headerBox__dateBox">
           <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.period} type="month" name="date"/>
+        </div>
+        <div className="myFin_headerBox__ctrlBox">
           {props.isCostsFiltered ? <Button onClick={() => props.getCostItems(props.token)} title="Сбросить фильтр" /> : null}
         </div>
         <div className="myFin_headerBox__btnBox">

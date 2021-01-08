@@ -8,7 +8,9 @@ import IncomeBox from './IncomeBox/IncomeBox';
 import AddIncome from './AddIncomes/AddIncomes';
 import AddSource from './AddSource';
 
-import {getIncomeForPeriod} from '../../../../store/Incomes/income.action';
+import {getIncomeForPeriod, setIncomes} from '../../../../store/Incomes/income.action';
+
+// import {incomeSourceFilter} from '../../hooks';
 
 import './Incomes.scss';
 
@@ -16,6 +18,10 @@ const Incomes = props => {
   const { t } = useTranslation();
   const [isAddIncomeOpen, setIsAddIncomeOpen] = React.useState(false);
   const [isAddSourceOpen, setIsAddSourceOpen] = React.useState(false);
+
+  // async function filterBySource(id_source) {
+  //   await props.incomeSourceFilter({id_source, period: props.incomePeriod, token: props.token});
+  // }
 
   return (
     <>
@@ -55,7 +61,8 @@ function mapStateToprops(state) {
 
 function mapDispatchToprops (dispatch) {
   return {
-    getIncomeForPeriod: (data) => dispatch(getIncomeForPeriod(data))
+    getIncomeForPeriod: (data) => dispatch(getIncomeForPeriod(data)),
+    setIncomes: (data) => dispatch(setIncomes(data)),
   }
 }
 

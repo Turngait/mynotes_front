@@ -12,7 +12,7 @@ const resources = {
         "addCost": 'Добавить расход',
         "addGroup": 'Добавить группу',
         "group": 'Группа',
-        "today": 'Сегодня',
+        "today": 'За день',
         "inThisMounth": 'В этом месяце',
         "noCosts": 'Нет расходов за этот период',
         'titleofCost': 'Наименование расхода',
