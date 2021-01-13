@@ -16,7 +16,6 @@ export function getCostItems(token) {
       groups,
       costs: costs
     });
-    dispatch(togleCostFiltered(false));
   }
 }
 
@@ -121,31 +120,5 @@ export function deleteCostGroup(data) {
         dispatch(getCostItems(token))
       }
     })
-  }
-}
-
-export function costGroupFilter(data) {
-  return (dispatch) => {
-    fetch(API_URL + '/fin/cost/group/' + data.token + '/' + data.id_group + '/' + data.period)
-    .then(res => {return res.json()})
-    .then(data => {
-      const {groups, costs} = data.data.costs;
-      dispatch({
-        type: 'SET_COSTS',
-        groups,
-        costs
-      });
-      dispatch(togleCostFiltered(true))
-    })
-  }
-}
-
-
-export function togleCostFiltered(data) {
-  return (dispatch) => {
-    dispatch({
-      type: 'SET_ISFILTERED',
-      payload: Boolean(data)
-    });
   }
 }

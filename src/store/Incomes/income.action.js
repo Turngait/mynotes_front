@@ -63,15 +63,3 @@ export function getIncomeForPeriod (data) {
     })
   }
 }
-
-export function incomeSourceFilter({id_source, period, token}) {
-  return async (dispatch) => {
-    const {data} = await fetch(API_URL + '/fin/income/bysource', {
-      mode: 'cors',
-      method: 'POST',
-      body: JSON.stringify({id_source, token, period}),
-      headers: {'Content-Type': 'application/json;charset=utf-8'},
-    }).then(res => res.json());
-    dispatch(setIncomes(data.incomes))
-  }
-}

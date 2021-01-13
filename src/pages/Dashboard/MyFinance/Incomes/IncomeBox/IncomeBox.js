@@ -20,7 +20,7 @@ const IncomeBox = props => {
       <div className="IncomeBox__incomeItems">
         {
           props.items.length > 0 ? props.items.map((item, key) => {
-              return (<IncomeItem {...item} key={key}/>);
+              return (<IncomeItem filterIncomesHandler={props.filterIncomesHandler} {...item} key={key}/>);
             })
           :
             null

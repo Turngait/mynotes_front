@@ -2,7 +2,6 @@ const InitialState = {
   costs: [],
   groups: [],
   costsByPeriod: 0,
-  isCostsFiltered: false
 }
 
 export default function costsReducer (state = InitialState, action) {
@@ -18,12 +17,6 @@ export default function costsReducer (state = InitialState, action) {
         ...state,
         costsByPeriod: action.payload
       }
-    case 'SET_ISFILTERED':
-      return {
-        ...state,
-        isCostsFiltered: action.payload
-      }
-
     case 'EMPTY_COSTS':
       return {
         ...state,

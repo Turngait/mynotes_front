@@ -3,7 +3,7 @@ import './CostItem.scss';
 import {connect} from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import {showGroupName, getGroupId, deleteCostItem, costGroupFilter} from '../../../../../../store/Costs/costs.actions';
+import {showGroupName, getGroupId, deleteCostItem} from '../../../../../../store/Costs/costs.actions';
 import {numberFormat} from '../../../../../../utils';
 
 const Costitem = props => {
@@ -16,7 +16,7 @@ const Costitem = props => {
       <div className="CostItem_header">
         <span className="CostItem_header__info">{props.item.title}</span>
         <span 
-          onClick={() => props.costGroupFilter({id_group: group_id, period: props.period, token: props.token})} 
+          onClick={() => props.filterCostsHandler(group_name, group_id)}
           className="CostItem_header__info filter_group">
           <b>{t("costs.group")}</b>: {group_name}
         </span>
@@ -55,7 +55,6 @@ function mapDispatchToProps(dispatch) {
     showGroupName: (data) => dispatch(showGroupName(data)),
     getGroupId: (data) => dispatch(getGroupId(data)),
     deleteCostItem: (data) => dispatch(deleteCostItem(data)),
-    costGroupFilter: (data) => dispatch(costGroupFilter(data))
   };
 }
 

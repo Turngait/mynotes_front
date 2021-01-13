@@ -20,6 +20,30 @@ export async function incomeSourceFilter(id_source, period, token) {
   return data.incomes;
 }
 
+export function costsFilterHook(costs, group_id) {
+  let filteredCosts = [];
+  for (const cost of costs) {
+    for (const item of cost.items) {
+      if(item.id_group.toString() === group_id) {
+        filteredCosts.push(item);
+      }
+    }
+  }
+  return filteredCosts;
+}
+
+export function incomesFilterHook(incomes, source_id) {
+  let filteredIncomes = [];
+  for (const income of incomes) {
+    for (const item of income.items) {
+      if(item.id_source.toString() === source_id) {
+        filteredIncomes.push(item);
+      }
+    }
+  }
+  return filteredIncomes;
+}
+
 
 export async function saveBudget(budget, token, setErrors) {
   const status = await fetch(API_URL + '/budget/add', {

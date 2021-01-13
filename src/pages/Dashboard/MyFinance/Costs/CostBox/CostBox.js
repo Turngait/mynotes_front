@@ -14,13 +14,13 @@ const CostBox = props => {
   return (
     <div className="CostBox">
       <div className="CostBox__costInfo">
-        <p className="CostBox__costInfo__date">{formateDate(props.item.period)}</p>
+        <p className="CostBox__costInfo__date">{formateDate(props.item.period, 'long')}</p>
         <p className="CostBox__costInfo__spentByDay">{t('costs.today')}: {numberFormat(props.item.spentByDay)} {props.currency}</p>
       </div>
       <div className="CostBox__costItems">
         {
           props.item.items.length > 0 ? props.item.items.map((item, key) => {
-            return (<CostItem key={key} item={item} />);
+            return (<CostItem filterCostsHandler={props.filterCostsHandler} key={key} item={item} />);
           })
           : null
         }
