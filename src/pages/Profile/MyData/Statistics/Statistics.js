@@ -5,8 +5,7 @@ import './Statistics.scss';
 
 const Statistics = props => {
   const total = props.incomes - props.costs;
-  console.log(props.incomes)
-  console.log(props.costs)
+
   return (
     <div className="stat_box">
       <h3 className="stat_box__header">Статистика в этом месяце</h3>

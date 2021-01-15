@@ -12,6 +12,11 @@ export default function costsReducer (state = InitialState, action) {
         groups: action.groups,
         costs: action.costs
       }
+    case 'SET_GROUPS':
+      return {
+        ...state,
+        groups: action.payload
+      }
     case 'SET_COSTS_BY_PERIOD':
       return {
         ...state,

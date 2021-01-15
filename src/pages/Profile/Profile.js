@@ -56,7 +56,7 @@ class Profile extends Component {
       this.props.history.push('/');
       return null;
     }
-    await this.props.getUserInfo(token); 
+    await this.props.getUserInfo({token, period: this.props.period}); 
   }
 
   async componentDidUpdate() {
@@ -66,7 +66,7 @@ class Profile extends Component {
       this.props.history.push('/');
       return null;
     }
-    await this.props.getUserInfo(token);
+    await this.props.getUserInfo({token, period: this.props.period});
   }
 
   logOut = () => {
@@ -107,7 +107,8 @@ function mapStateToProps(state) {
   return {
     token: state.user.token,
     balance: state.user.balance,
-    currancy: state.user.settings.currency
+    currancy: state.user.settings.currency,
+    period: state.user.month
   }
 }
 

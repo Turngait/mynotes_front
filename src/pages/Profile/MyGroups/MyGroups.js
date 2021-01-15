@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
 import MyGroupBox from './MyGroupBox/MyGroupBox';
 
@@ -13,10 +12,4 @@ const MyGroups = props => {
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    costGroups: state.costs.groups
-  }
-}
-
-export default connect(mapStateToProps)(MyGroups);
+export default MyGroups;

@@ -48,6 +48,26 @@ export function deleteIncome(data) {
   }
 }
 
+export function deleteSource(data) {
+  return (dispatch) => {
+    const { token, target } = data;
+    const id = target.dataset.itemId;
+    console.log(id)
+    fetch(API_URL + '/fin/income/deletesource/' + id + '/' + token, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      mode: 'cors'
+    })
+    .then(res => {
+      if (res.status === 204) {
+        dispatch(getIncomes(token))
+      }
+    })
+  }
+}
+
 export function getIncomeForPeriod (data) {
   return (dispatch) => {
     const {period} = data;
