@@ -12,14 +12,14 @@
   justify-content: space-between;
 
   &__menu{
-    border-right: 1px solid #000;
     flex-grow: 0;
     background-color: $side-color;
   }
 
   &__info{
     flex-grow: 1;
-    padding: 5vh 4vw 0 4vw;
+    padding: 2rem 2rem 0;
+    background-color: $background-color;
   }
 }
 

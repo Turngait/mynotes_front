@@ -2,12 +2,14 @@
 
 .popup_box {
   top: 15%;
-  left: 27%;
+  left: 34%;
   color: #fff;
-  text-align: center;
-  min-width: 40%;
+  min-width: 20%;
+  max-width: 60%;
+  max-height: 60%;
+  overflow-y: auto;
   position: absolute;
-  padding: 2vh 3vw;
+  padding: 1rem 2rem;
   background-color: $base-color;
   border-radius: 3px;
 }

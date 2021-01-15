@@ -1,27 +1,48 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import './Index.scss';
-import {getToken, signIn, signUp} from '../../store/User/user.actions';
+
+import {getToken, auth} from '../../store/User/user.actions';
+import {signIn, signUp} from './hooks';
+
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
+import './Index.scss';
+
 class Index extends Component {
   state = {
     signUpActive: false,
-    signUpEmail:'',
-    signUpPass: '',
-    signUpName: '',
-    signInEmail:'',
-    signInPass:''
+    email:'',
+    pass: '',
+    name: '',
+    msg: ''
   }
 
   auth = async () => {
     if(this.state.signUpActive) {
-      await this.props.signUp(this.state.signUpEmail, this.state.signUpName, this.state.signUpPass)
+      await signUp(
+        this.state.email, 
+        this.state.name, 
+        this.state.pass, 
+        (data) =>this.props.auth(data),
+        (msg) => {
+          this.setState({msg});
+          setTimeout(() => {this.setState({msg: null})}, 5000);
+        }
+      );
+
     } else {
-      await this.props.signIn(this.state.signInEmail, this.state.signInPass)
+      await signIn(
+        this.state.email, 
+        this.state.pass,
+        (data) =>this.props.auth(data),
+        (msg) => {
+          this.setState({msg});
+          setTimeout(() => {this.setState({msg: null})}, 3000);
+        }
+      );
     }
   }
 
@@ -32,23 +53,22 @@ class Index extends Component {
   getUserInfo = (event) => {
     switch(event.target.id) {
       case 'signInEmail':
-        this.setState({ signInEmail: event.target.value})
+        this.setState({ email: event.target.value})
         break;
       case 'signInPass':
-          this.setState({ signInPass: event.target.value })
+          this.setState({ pass: event.target.value })
         break;
       case 'SignUpEmail':
-          this.setState({ signUpEmail: event.target.value})
+          this.setState({ email: event.target.value})
         break;
       case 'signUpPass':
-          this.setState({ signUpPass: event.target.value })
+          this.setState({ pass: event.target.value })
         break;
       case 'signUpName':
-          this.setState({ signUpName: event.target.value })
+          this.setState({ name: event.target.value })
         break;
       default:
         return false;
-
     }
   }
 
@@ -71,9 +91,9 @@ class Index extends Component {
         <Header mainPage={true} />
         <div className="index__box">
           <div>
-            <h1 className="index__logo">MyNotes</h1>
+            <h1 className="index__logo">FinCloud</h1>
             <p className="index__box__text">
-              Приложение по учету личным финансам. С ним Вы сможете легко вести статистику и учет своих личных финансов.
+              Здесь Вы сможете легко вести статистику и учет своих личных финансов.
             </p>
             <div className="index__box__iconsBox">
               <img className="index__box__iconsBox__item" src="/pic/main/main_1.png" alt="main promo"/>
@@ -88,21 +108,18 @@ class Index extends Component {
             <button onClick={() => this.signUpToggleHandler(false)} 
               className={`index__sign_btn ${!this.state.signUpActive ? 'index__sign_active' : null}`}
             >Войти</button>
-            |
             <button onClick={() => this.signUpToggleHandler(true)} 
               className={`index__sign_btn ${this.state.signUpActive ? 'index__sign_active' : null}`}
             >Создать</button>
             {
-              this.props.sucessMsg || this.props.errorMsg ?
+              this.state.msg ?
                 <div className="index__msg_box">
-                  <span className="sucMsg">{this.props.sucessMsg}</span>
-                  <span className="errorMsg">{this.props.errorMsg}</span>
+                  <span className="errorMsg">{this.state.msg}</span>
                 </div>
                 :
                 null
             }
 
-            
             {
             this.state.signUpActive 
             ? 
@@ -120,19 +137,14 @@ class Index extends Component {
 
 function mapStateToProps(state) {
   return {
-    token: state.user.token,
-    email: state.user.email,
-    name: state.user.name,
-    sucessMsg: state.user.successMsg,
-    errorMsg: state.user.errorMsg
+    token: state.user.token
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getToken: () => dispatch(getToken()),
-    signIn: (login, pass) => dispatch(signIn(login, pass)),
-    signUp: (email, name, pass) => dispatch(signUp(email, name, pass))
+    auth: (data) => dispatch(auth(data)),
   }
 }
 

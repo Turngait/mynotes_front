@@ -1,17 +1,27 @@
 import React from 'react';
-import './Header.scss';
-import { connect } from 'react-redux';
 import {NavLink} from 'react-router-dom';
-import { openProfile } from '../../store/Dashboard/dashboard.actions';
 import { useTranslation } from 'react-i18next';
 
+import './Header.scss';
 
 const Header = props => {
   const { t } = useTranslation();
 
   return(
     <header className="header_box">
-      <h2 className="header_box__logo"><NavLink to="/" className="header_box__logo_link">{t('appname')}</NavLink></h2>
+      <h2 className="header_box__logo">
+        <NavLink to="/" className="header_box__logo_link">{t('appname')}</NavLink>
+      </h2>
+      {
+        props.pageName && props.pageName.length > 0 ?
+        <div className="header_box__pageInfo">
+          <span className="header_box__logo_pageName">{props.pageName}</span>
+          {props.periodAmount ? <span className="header_box__logo_pageName">В этом месяце: {props.periodAmount}</span> : null}
+          
+        </div>
+      : null
+      }
+
       <nav className="header_box__nav">
         {
           !props.mainPage ?
@@ -28,10 +38,6 @@ const Header = props => {
   )
 }
 
-function mapDispatchFromPorps(dispatch) {
-  return {
-    openProfile: () => dispatch(openProfile())
-  }
-}
 
-export default connect(null, mapDispatchFromPorps)(Header)
+
+export default Header;

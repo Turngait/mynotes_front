@@ -1,5 +1,14 @@
 @import "../../../../config/variable.scss";
+// .costs {
+//   height: 100vh;
+// }
 
+.allCosts {
+  margin-top: 2rem;
+  height: 74vh;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
 .myFinance__logo {
   text-decoration: underline;
   letter-spacing: 1px;
@@ -10,6 +19,23 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
+  &__btnBox {
+    min-width: 24rem;
+    flex-shrink: 1;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__dateBox {
+    flex-grow: 0;
+    min-width: 23rem;
+    flex-shrink: 1;
+  }
+  &__ctrlBox {
+    flex-grow: 1;
+    
+
+  }
 
   &__sorting {
     flex: 1;
@@ -26,11 +52,8 @@
 .myFin{
   &__noContent {
     font-size: 2rem;
+    color: #fff;
   }
-}
-
-.deleteCostItem {
-  cursor: pointer;
 }
 
 @media all and (min-width: 0) and (max-width: 1400px) {

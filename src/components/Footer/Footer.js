@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer className="footer_box">
       <div className="footer_box__info">
-        2020. MyNotes.
+        2020. FinCloud.
         <br/>
         <NavLink target="_blank" to="/policy" className="footer_box__info_link">{t('footer.terms')}</NavLink>
       </div>

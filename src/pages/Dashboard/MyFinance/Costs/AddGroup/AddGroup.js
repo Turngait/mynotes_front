@@ -1,34 +1,39 @@
 import React from 'react';
-import './AddGroup.scss';
+import { useTranslation } from 'react-i18next';
+import {connect} from 'react-redux';
+
 import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
-import {connect} from 'react-redux';
-import {closeAddCostGroup, setCostGroupTitle, addGroupToDB} from '../../../../../store/Costs/costs.actions';
-import { useTranslation } from 'react-i18next';
 
+import {saveGroup} from './hooks';
+
+import {getCostItems} from '../../../../../store/Costs/costs.actions';
+
+import './AddGroup.scss';
 
 const AddGroup = props => {
-  const {groupTitle, token} = props;
-  const data = {
-    token,
-    groupTitle
-  };
-  const { t } = useTranslation();
+  const {token} = props;
 
+  const { t } = useTranslation();
+  const [group, setGroup] = React.useState('');
+  const [error, setError] = React.useState('');
+
+  async function addGroup() {
+    const isAdd = await saveGroup(group, token, setError);
+    if(isAdd) {
+      props.setIsAddCostGroupOpen(false);
+      props.getCostItems(token);
+    }
+  }
   return (
     <PopUp>
-      <i onClick={props.closeAddCostGroup} className="fas fa-times close"></i>
-      <h3 className="add_wlist__header">Добавить группу расходов</h3>
-      {
-        props.errorMsg ?
-          <span className="errorsMsg">{props.errorMsg}</span>
-          : 
-          null
-      }
-      <form className="add_wlist_item_box">
-        <Input2 onChange={(event) => props.setCostGroupTitle(event.target.value)} type="text" name="name" placeholder={t('costs.groupName') + "..."} />
-        <ButtonPopUp onClick={() => props.addGroupToDB(data)} type="button" title={t('costs.addBtn')} />
+      <i onClick={() => props.setIsAddCostGroupOpen(false)} className="fas fa-times close"></i>
+      <h3 className="addItem_header">Добавить группу расходов</h3>
+      <span className="errorsMsg">{error}</span>
+      <form className="addItem_box">
+        <Input2 onChange={(event) => setGroup(event.target.value)} type="text" name="name" placeholder={t('costs.groupName') + "..."} />
+        <ButtonPopUp onClick={addGroup} type="button" title={t('costs.addBtn')} />
       </form>
     </PopUp>
   );
@@ -36,17 +41,13 @@ const AddGroup = props => {
 
 function mapStateToProps (state) {
   return {
-    groupTitle: state.costs.groupTitle,
-    token: state.user.token,
-    errorMsg: state.costs.addGroupError
+    token: state.user.token
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    closeAddCostGroup: () => dispatch(closeAddCostGroup()),
-    setCostGroupTitle: (title) => dispatch(setCostGroupTitle(title)),
-    addGroupToDB: (data) => dispatch(addGroupToDB(data))
+    getCostItems: (token) => dispatch(getCostItems(token))
   }
 }
 

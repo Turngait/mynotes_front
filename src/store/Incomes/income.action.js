@@ -1,41 +1,5 @@
 import {API_URL} from '../../config/api';
 
-export function openAddIncome() {
-  return (dispatch) => {
-    dispatch({type: 'OPEN_ADD_INCOME'})
-  }
-}
-
-export function closeAddIncome() {
-  return (dispatch) => {
-    dispatch({type: 'CLOSE_ADD_INCOME'})
-  }
-}
-
-export function setIncomeTitle(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_INCOME_TITLE', payload: data})
-  };
-}
-
-export function setIncomeAmmount(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_INCOME_AMOUNT', payload: data})
-  };
-}
-
-export function setIncomeDescription(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_INCOME_DESCRIPTION', payload: data})
-  };
-}
-
-export function setIncomeDate(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_INCOME_DATE', payload: data})
-  };
-}
-
 export function getIncomes(token) {
   return (dispatch) => {
     const period = new Date().toISOString().slice(0,7);
@@ -43,42 +7,24 @@ export function getIncomes(token) {
     .then(res => {return res.json()})
     .then(data => {
       if(data.status === 200) {
-        dispatch({type: 'SET_INCOMES', payload: data.data.incomes});
+        dispatch({type: 'SET_INCOMES', payload: data.data.incomes.incomes});
 
         if (data.data.incomes.length > 0) {
-          dispatch({type: 'SET_INCOMES_BY_PERIOD', payload: data.data.incomes[0].incomeByThisMonth});
+          dispatch({type: 'SET_INCOMES_BY_PERIOD', payload: data.data.incomes[0].gainByPeriod});
         }
       }
     })
   }
 }
 
-export function addIncomeItem(data) {
+export function setIncomes(data) {
   return (dispatch) => {
-    const {token} = data;
-
-    fetch(API_URL + '/fin/income/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      mode: 'cors',
-      body: JSON.stringify(data)
-    })
-    .then(async res => {
-      if(res.status === 204) {
-        dispatch({type: 'CLOSE_ADD_INCOME'});
-        dispatch({type: 'CLEAR_INCOME'});
-        dispatch(getIncomes(token));
-        return;
-      } else if(res.status === 422) {
-        const data = await res.json()
-        if(data.errors) {
-          const {errors} = data.errors
-          dispatch({type:'SET_ADD_INCOME_ERROR', payload: errors[0].msg})
-        }
-      }
-    })
+    const {incomes, sources} = data;
+    let gainByPeriod = 0;
+    if(incomes.length > 0) gainByPeriod = incomes[incomes.length - 1].gainByPeriod;
+    dispatch({type: 'SET_INCOMES_BY_PERIOD', payload: gainByPeriod});
+    dispatch({type: 'SET_INCOMES', payload: incomes});
+    dispatch({type: 'SET_SOURCES', payload: sources});
   }
 }
 
@@ -102,6 +48,26 @@ export function deleteIncome(data) {
   }
 }
 
+export function deleteSource(data) {
+  return (dispatch) => {
+    const { token, target } = data;
+    const id = target.dataset.itemId;
+    console.log(id)
+    fetch(API_URL + '/fin/income/deletesource/' + id + '/' + token, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      mode: 'cors'
+    })
+    .then(res => {
+      if (res.status === 204) {
+        dispatch(getIncomes(token))
+      }
+    })
+  }
+}
+
 export function getIncomeForPeriod (data) {
   return (dispatch) => {
     const {period} = data;
@@ -111,7 +77,7 @@ export function getIncomeForPeriod (data) {
       dispatch({type: 'SET_INCOMES', payload: data.data.incomes})
 
       dispatch({
-        type: 'SET_INCOME_PERIOD',
+        type: 'SET_MONTH',
         payload: period
       })
     })

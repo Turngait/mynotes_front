@@ -1,8 +1,9 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
+
 import './SignUp.scss';
 import Input2 from '../../../components/Input2/Input2';
 import Button from '../../../components/ButtonPopUp/ButtonPopUp';
-import {NavLink} from 'react-router-dom';
 
 const SignUp = props => {
   return (

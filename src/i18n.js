@@ -6,13 +6,13 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   ru: {
     translation: {
-      "appname": 'MyNotes',
+      "appname": 'FinCloud',
       "costs": {
         "header": 'Расходы',
         "addCost": 'Добавить расход',
         "addGroup": 'Добавить группу',
         "group": 'Группа',
-        "today": 'Сегодня',
+        "today": 'За день',
         "inThisMounth": 'В этом месяце',
         "noCosts": 'Нет расходов за этот период',
         'titleofCost': 'Наименование расхода',
@@ -32,8 +32,15 @@ const resources = {
         'addBtn': 'Добавить',
         'noIncomes': 'Нет доходов за этот период'
       },
+      'budgets': {
+        'header': 'Счета',
+        'addBudget': 'Добавить счет',
+        "today": 'Сегодня',
+        "inThisMounth": 'В этом месяце',
+        'balance': 'Баланс'
+      },
       "menu": {
-        'dashboard': 'Главная',
+        'dashboard': 'Финансы',
         'profile': 'Личный кабинет',
         'signout': 'Выход'
       },

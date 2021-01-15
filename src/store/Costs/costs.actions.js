@@ -1,169 +1,37 @@
 import {API_URL} from '../../config/api';
 
-export function openAddCost() {
-  return (dispatch) => {
-    dispatch({type: 'OPEN_ADD_COST'})
-  };
-}
-
-export function closeAddCost() {
-  return (dispatch) => {
-    dispatch({type: 'CLOSE_ADD_COST'})
-    dispatch({
-      type: 'SET_ADD_COST_ERROR',
-      payload: ''
-    })
-  };
-}
-
-export function openAddCostGroup() {
-  return (dispatch) => {
-    dispatch({type: 'OPEN_ADD_COST_GROUP'})
-  };
-}
-
-export function closeAddCostGroup() {
-  return (dispatch) => {
-    dispatch({type: 'CLOSE_ADD_COST_GROUP'})
-  };
-}
-
-export function openCosts() {
-  return(dispatch) => {
-    dispatch({type: 'OPEN_COSTS_SUBSCREEN'})
-  }
-}
-
-export function openIncomes() {
-  return(dispatch) => {
-    dispatch({type: 'OPEN_INCOMES_SUBSCREEN'})
-  }
-}
-
-export function setCostTitle(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_TITLE', payload: data})
-  };
-}
-
-export function setCostAmmount(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_AMOUNT', payload: data})
-  };
-}
-
-export function setCostDescription(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_DESCRIPTION', payload: data})
-  };
-}
-
-export function setCostGroup(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_GROUP', payload: data})
-  };
-}
-
-export function setCostWlistItem(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_WLIST_ITEM', payload: data})
-  };
-}
-
-export function setCostDate(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_DATE', payload: data})
-  };
-}
-
-export function setCostGroupTitle(data) {
-  return (dispatch) => {
-    dispatch({type: 'SET_COST_GROUP_TITLE', payload: data})
-  };
-}
-
-
 export function getCostItems(token) {
-  return (dispatch) => {
+  return async (dispatch) => {
     const period = new Date().toISOString().slice(0,7);
-    fetch(API_URL + '/fin/cost/get/' + period + '/' + token)
-    .then(res => {return res.json()})
-    .then(data => {
-      const {groups, items} = data.data.costs;
-      if (items.length > 0) {
-        dispatch({
-          type: 'SET_COSTS_BY_PERIOD',
-          payload: items[0].spentByThisMonth
-        });
-      } 
-      dispatch({
-        type: 'SET_COSTS',
-        groups,
-        costs: items
-      });
-
-      dispatch(togleCostFiltered(false));
-    })
+    const {data} = await fetch(API_URL + '/fin/cost/get/' + period + '/' + token)
+    .then(res => res.json())
+    if (data && data.length < 0) return;
+    const {groups, costs} = data.costs;
+    dispatch({
+      type: 'SET_COSTS_BY_PERIOD',
+      payload: costs.spentByPeriod
+    });
+    dispatch({
+      type: 'SET_COSTS',
+      groups,
+      costs: costs
+    });
   }
 }
 
-export function addGroupToDB(data) {
+export function setCosts(costs) {
   return (dispatch) => {
-    fetch(API_URL + '/fin/group/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      mode: 'cors',
-      body: JSON.stringify(data)
-    })
-    .then(async res => {
-      if (res.status === 204) {
-        dispatch(closeAddCostGroup())
-        dispatch({
-          type: 'SET_ADD_GROUP_ERROR',
-          payload: ''
-        })
-      } else if (res.status === 422) {
-        const data = await res.json();
-        if (data.errors) {
-          const {errors} = data.errors;
-          dispatch({
-            type: 'SET_ADD_GROUP_ERROR',
-            payload: errors[0].msg
-          })
-        }
-      }
-    })
-  }
-}
-
-export function addCostItem(data) {
-  return(dispatch) => {
-    const {token} =data;
-    fetch(API_URL + '/fin/cost/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      mode: 'cors',
-      body: JSON.stringify(data)
-    })
-    .then(async res => {
-      if (res.status === 204) {
-        dispatch(closeAddCost())
-        dispatch(getCostItems(token))
-      } else if (res.status === 422) {
-        const data = await res.json();
-        if (data.errors) {
-          const {errors} = data.errors;
-          dispatch({
-            type: 'SET_ADD_COST_ERROR',
-            payload: errors[0].msg
-          })
-        }
-      }
-    })
+    let spentByThisMonth = 0;
+    if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
+    dispatch({
+      type: 'SET_COSTS_BY_PERIOD',
+      payload: spentByThisMonth
+    });
+    dispatch({
+      type: 'SET_COSTS',
+      groups: costs.groups,
+      costs: costs.costs
+    });
   }
 }
 
@@ -218,22 +86,20 @@ export function getGroupId (data) {
 }
 
 export function getCostForPeriod (data) {
-  return (dispatch) => {
+  return async (dispatch) => {
     const {period} = data;
-    fetch(API_URL + '/fin/cost/get/' + period + '/' + data.token)
-    .then(res => {return res.json()})
-    .then(data => {
-      const {groups, items} = data.data.costs;
-      dispatch({
-        type: 'SET_COSTS',
-        groups,
-        costs: items
-      })
+    const res = await fetch(API_URL + '/fin/cost/get/' + period + '/' + data.token)
+    .then(res => res.json())
+    const {costs} = res.data;
 
-      dispatch({
-        type: 'SET_COST_PERIOD',
-        payload: period
+    dispatch({
+        type: 'SET_COSTS',
+        groups: costs.groups,
+        costs: costs.costs
       })
+    dispatch({
+        type: 'SET_MONTH',
+        payload: period
     })
   }
 }
@@ -254,31 +120,5 @@ export function deleteCostGroup(data) {
         dispatch(getCostItems(token))
       }
     })
-  }
-}
-
-export function costGroupFilter(data) {
-  return (dispatch) => {
-    fetch(API_URL + '/fin/cost/group/' + data.token + '/' + data.id_group + '/' + data.period)
-    .then(res => {return res.json()})
-    .then(data => {
-      const {groups, items} = data.data.costs;
-      dispatch({
-        type: 'SET_COSTS',
-        groups,
-        costs: items
-      });
-      dispatch(togleCostFiltered(true))
-    })
-  }
-}
-
-
-export function togleCostFiltered(data) {
-  return (dispatch) => {
-    dispatch({
-      type: 'SET_ISFILTERED',
-      payload: Boolean(data)
-    });
   }
 }

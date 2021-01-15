@@ -16,10 +16,10 @@
     padding: 6px 4vw 7px;
 
     &__signBox {
-      flex-basis: 30vw;
-      height: 50vh;
-      margin-top:10vh;
-      background-color: #00A6CB;
+      flex-basis: 30rem;
+      height: 26rem;
+      margin-top:7rem;
+      background-color: $base-color;
       text-align: center;
       border-radius: 3px;
       padding: 5vh 0;
@@ -27,7 +27,7 @@
 
     &__text {
       color: #fff;
-      font-size: 1.4rem;
+      font-size: 2rem;
       width: 80%;
     }
 
@@ -58,9 +58,8 @@
     background: none;
     border: none;
     font-family: 'Franklin';
-    text-decoration: underline;
-    font-size: 24px;
-    color: $dark-color;
+    font-size: 2rem;
+    color: $side-color;
     cursor: pointer;
 
     &:focus {
@@ -125,5 +124,8 @@
   }
   .index__logo {
     font-size: 4rem;
+  }
+  .index__box__signBox {
+    height: auto;
   }
 }

@@ -1,32 +1,39 @@
 import React from 'react';
-import './IncomeBox.scss';
-import IncomeItem from './IncomeItem/IncomeItem';
-import {formateDate} from '../../../../../helpers';
 import { useTranslation } from 'react-i18next';
+import {connect} from 'react-redux';
 
+import IncomeItem from './IncomeItem/IncomeItem';
+
+import {numberFormat, formateDate} from 'utils';
+
+import './IncomeBox.scss';
 
 const IncomeBox = props => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <div className="myFin_mainBox">
-        <span className="myFin_mainBox__date">{formateDate(props.period)}</span>
-        <span className="myFin_mainBox__spentByMonth">{t('incomes.inThisMounth')}: {props.incomeByThisMonth}</span>
-        <span className="myFin_mainBox__spentByDay">{t('incomes.today')}: {props.incomeByDay}</span>
+    <div className="IncomeBox">
+      <div className="IncomeBox__infoBox">
+        <p className="IncomeBox__infoBox__date">{formateDate(props.period)}</p>
+        <p className="IncomeBox__infoBox__spentByDay">{t('incomes.today')}: {numberFormat(props.gainByDay)} {props.currency}</p>
       </div>
-      {
-        props.items.length > 0 ?
-          props.items.map((item, key) => {
-            return (
-              <IncomeItem {...item} key={key}/>
-            )
-          })
-        :
-          null
-      }
-    </>
+      <div className="IncomeBox__incomeItems">
+        {
+          props.items.length > 0 ? props.items.map((item, key) => {
+              return (<IncomeItem filterIncomesHandler={props.filterIncomesHandler} {...item} key={key}/>);
+            })
+          :
+            null
+        }
+      </div>
+    </div>
   );
 };
 
-export default IncomeBox;
+function mapStateToProps(state) {
+  return {
+    currency: state.user.settings.currency
+  }
+}
+
+export default connect(mapStateToProps, null)(IncomeBox);

@@ -1,45 +1,42 @@
 import React from 'react';
+
 import './LeftMenu.scss';
-import { connect } from 'react-redux';
-import { openMyData, openMyGroups } from '../../../store/Profile/profile.action';
 
 const LeftMenu = (props) => {
   return (
-    <ul className="LeftMenu_box">
-      <li className="LeftMenu_box__item">
+    <div className="PRLeftMenu_box">
+      <div className="PRLeftMenu_box__item">
         {
-          props.isMyDataOpen ? 
-          <button onClick={props.openMyData} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">MyData</button>
+          props.myDataOpen ? 
+          <button onClick={props.openMyDataHandler} className="PRLeftMenu_box__item_btn PRLeftMenu_box__item_btn_active">Статистика</button>
           :
-          <button onClick={props.openMyData} className="LeftMenu_box__item_btn">MyData</button>
+          <button onClick={props.openMyDataHandler} className="PRLeftMenu_box__item_btn">Статистика</button>
         }
-        
-      </li>
-      <li className="LeftMenu_box__item">
         {
-          props.isMyGroupsOpen
+          props.myGroupsOpen
           ?
-          <button onClick={props.openMyGroups} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">MyGroups</button>
+          <button onClick={props.openMyGroupsHandler} className="PRLeftMenu_box__item_btn PRLeftMenu_box__item_btn_active">Группы</button>
           :
-          <button onClick={props.openMyGroups} className="LeftMenu_box__item_btn">MyGroups</button>
+          <button onClick={props.openMyGroupsHandler} className="PRLeftMenu_box__item_btn">Группы</button>
         }
-      </li>
-    </ul>
+        {
+          props.settingsOpen
+          ?
+          <button onClick={props.openSettingsHandler} className="PRLeftMenu_box__item_btn PRLeftMenu_box__item_btn_active">Настройки</button>
+          :
+          <button onClick={props.openSettingsHandler} className="PRLeftMenu_box__item_btn">Настройки</button>
+        }
+      </div>
+      <div className="LeftMenu_box__info">
+        Ваш баланс
+        <br/>
+        {props.currancy} {props.balance}
+      </div>
+    </div>
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    isMyDataOpen: state.profile.isMyDataOpen,
-    isMyGroupsOpen: state.profile.isMyGroupsOpen
-  }
-}
 
-function mapDispatchToPRops(dispatch) {
-  return {
-    openMyData: () => dispatch(openMyData()),
-    openMyGroups: () => dispatch(openMyGroups())
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToPRops)(LeftMenu)
+
+export default LeftMenu;

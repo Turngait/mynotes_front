@@ -1,11 +1,12 @@
 .signIn {
   margin: auto;
-  margin-top: 30px;
+  margin-top: 2rem;
   width: 60%;
-  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
 
   &__recovery_link {
     margin-top:1vh;

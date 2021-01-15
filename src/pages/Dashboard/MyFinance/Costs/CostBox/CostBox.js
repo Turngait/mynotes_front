@@ -1,29 +1,39 @@
 import React from 'react';
-import './CostBox.scss';
-import CostItem from './CostItem/CostItem';
-import {formateDate} from '../../../../../helpers';
 import { useTranslation } from 'react-i18next';
+import {connect} from 'react-redux';
 
+import CostItem from './CostItem/CostItem';
+
+import {numberFormat, formateDate} from 'utils';
+
+import './CostBox.scss';
 
 const CostBox = props => {
   const { t } = useTranslation();
 
   return (
-    <div className="myFin_mainBox">
-      <span className="myFin_mainBox__date">{formateDate(props.item.period)}</span>
-      <span className="myFin_mainBox__spentByMonth">{t('costs.inThisMounth')}: {props.item.spentByThisMonth}</span>
-      <span className="myFin_mainBox__spentByDay">{t('costs.today')}: {props.item.spentByDay}</span>
-      {
-        props.item.items.length > 0 ?
-        props.item.items.map((item, key) => {
-          return (
-            <CostItem key={key} item={item} />
-          );
-        })
-        : null
-      }
+    <div className="CostBox">
+      <div className="CostBox__costInfo">
+        <p className="CostBox__costInfo__date">{formateDate(props.item.period, 'long')}</p>
+        <p className="CostBox__costInfo__spentByDay">{t('costs.today')}: {numberFormat(props.item.spentByDay)} {props.currency}</p>
+      </div>
+      <div className="CostBox__costItems">
+        {
+          props.item.items.length > 0 ? props.item.items.map((item, key) => {
+            return (<CostItem filterCostsHandler={props.filterCostsHandler} key={key} item={item} />);
+          })
+          : null
+        }
+      </div>
+
     </div>
   );
 }
 
-export default CostBox;
+function mapStateToProps(state) {
+  return {
+    currency: state.user.settings.currency
+  }
+}
+
+export default connect(mapStateToProps, null)(CostBox);

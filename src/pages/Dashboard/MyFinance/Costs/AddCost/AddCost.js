@@ -1,63 +1,72 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './AddCost.scss';
+import { useTranslation } from 'react-i18next';
+
+import {saveCost} from './hooks';
+
 import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import Select1 from '../../../../../components/Select1/Select1';
 import Textarea1 from '../../../../../components/Textarea1/Textarea1';
-import {closeAddCost, addCostItem, setCostTitle, setCostAmmount, setCostDescription, setCostGroup, setCostWlistItem, setCostDate} from '../../../../../store/Costs/costs.actions'
-import { useTranslation } from 'react-i18next';
+
+import {getCostItems} from '../../../../../store/Costs/costs.actions'
+
+import './AddCost.scss';
 
 const AddCost = props => {
   const { t } = useTranslation();
+  const [title, setTitle] = React.useState('');
+  const [amount, setAmount] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [group, setGroup] = React.useState(props.groups[0]._id);
+  const [budget, setBudget] = React.useState(props.budgets[0]._id);
+  const [date, setDate] = React.useState(new Date().toISOString().slice(0,10));
+  const [error, setError] = React.useState('');
+
+  async function addCost() {
+    const isAdd = await saveCost({title, amount, description, group, budget, date}, props.token, setError);
+    if(isAdd) {
+      props.setIsAddCostOpen(false);
+      props.getCostItems(props.token);
+    } 
+  }
 
   return (
     <PopUp>
-      <i onClick={props.closeAddCost} className="fas fa-times close"></i>
-      <h3 className="add_wlist__header">Добавить расход</h3>
-      {
-        props.errorMsg ?
-          <span className="errorsMsg">{props.errorMsg}</span>
-          : 
-          null
-      }
-      <form className="add_wlist_item_box">
-        <Input2 onChange={(event) => props.setCostDate(event.target.value)} value={props.cost.date} type="date" name="date"/>
-        <Input2 onChange={(event) => props.setCostTitle(event.target.value)} type="text" name="title" placeholder={t('costs.titleofCost') + '...'}/>
-        <Input2 onChange={(event) => props.setCostAmmount(event.target.value)} type="text" name="amount" placeholder={t('costs.amount') + "..."}/>
-        <Textarea1 onChange={(event) => props.setCostDescription(event.target.value)} name="description" placeholder={t('costs.description') + "..."}></Textarea1>
-        <div className="add_wlist_item_box__opt">
-          <Select1 onChange={(event) => props.setCostGroup(event.target.value)}>
-            <option value='none'>None</option>
+      <i onClick={() => props.setIsAddCostOpen(false)} className="fas fa-times close"></i>
+      <h3 className="addItem_header">Добавить расход</h3>
+      <span className="errorsMsg">{error}</span>
+      <form className="addItem_box">
+        <Input2 onChange={(event) => setDate(event.target.value)} value={date} type="date" name="date"/>
+        <Input2 onChange={(event) => setTitle(event.target.value)} type="text" name="title" placeholder={t('costs.titleofCost') + '...'}/>
+        <Input2 onChange={(event) => setAmount(event.target.value)} type="text" name="amount" placeholder={t('costs.amount') + "..."}/>
+        <Textarea1 onChange={(event) => setDescription(event.target.value)} name="description" placeholder={t('costs.description') + "..."}></Textarea1>
+        <div className="add_item_box__opt">
+          <Select1 onChange={(event) => setGroup(event.target.value)}>
             {
               props.groups.length > 0 ?
               props.groups.map((group, key) => {
                 return (
-                  <option key={key} value={group._id}>{group.title}</option>
+                  <option key={key} value={group._id}>Группа: {group.title}</option>
                 )
               })
               : 
               null
             }
-            <option value='0'>Other</option>
           </Select1>
-          <Select1 onChange={(event) => {props.setCostWlistItem(event.target.value)}}>
-            <option value="0">None</option>
+          <Select1 onChange={(event) => setBudget(event.target.value)}>
             {
-              props.wlist.length > 0 ?
-              props.wlist.map((item, key) => {
+              props.budgets.map((budget, key) => {
                 return (
-                  <option key={key} value={item._id}>{item.name}</option>
+                  <option key={key} value={budget._id}>Счет: {budget.title}</option>
                 )
               })
-              :
-              null
             }
           </Select1>
         </div>
 
-        <ButtonPopUp onClick={() => props.addCostItem({cost: props.cost, token: props.token})} title={t('costs.addBtn')} />
+        <ButtonPopUp onClick={addCost} title={t('costs.addBtn')} />
       </form>
     </PopUp>
   )
@@ -65,24 +74,15 @@ const AddCost = props => {
 
 function mapStateToProps (state) {
   return {
-    cost: state.costs.cost,
     groups: state.costs.groups,
-    wlist: state.wlist.wlist,
     token: state.user.token,
-    errorMsg: state.costs.addCostError
+    budgets: state.user.budgets
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    closeAddCost: () => dispatch(closeAddCost()),
-    addCostItem: (data) => dispatch(addCostItem(data)),
-    setCostTitle: (title) => dispatch(setCostTitle(title)),
-    setCostAmmount: (amount) => dispatch(setCostAmmount(amount)),
-    setCostDescription: (description) => dispatch(setCostDescription(description)),
-    setCostGroup: (data) => dispatch(setCostGroup(data)),
-    setCostWlistItem: (data) => dispatch(setCostWlistItem(data)),
-    setCostDate: (data) => dispatch(setCostDate(data))
+    getCostItems: (token) => dispatch(getCostItems(token))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddCost);

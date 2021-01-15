@@ -1,9 +1,10 @@
 import React from 'react';
 import './CostItem.scss';
 import {connect} from 'react-redux';
-import {showGroupName, getGroupId, deleteCostItem, costGroupFilter} from '../../../../../../store/Costs/costs.actions';
 import { useTranslation } from 'react-i18next';
 
+import {showGroupName, getGroupId, deleteCostItem} from '../../../../../../store/Costs/costs.actions';
+import {numberFormat} from '../../../../../../utils';
 
 const Costitem = props => {
   const group_name = props.showGroupName({item: props.item, groups:props.groups});
@@ -11,19 +12,27 @@ const Costitem = props => {
   const { t } = useTranslation();
 
   return (
-    <div className="myFin_mainBox__item">
-      <div className="myFin_mainBox__item_header">
-        <span className="myFin_mainBox__item_header__info">{props.currency} {props.item.amount}</span>
-        <span className="myFin_mainBox__item_header__info">{props.item.title}</span>
-        <span onClick={() => props.costGroupFilter({id_group: group_id, period: props.period, token: props.token})} className="myFin_mainBox__item_header__info filter_group">
-          {t("costs.group")}: {group_name}
+    <div className="CostItem">
+      <div className="CostItem_header">
+        <span className="CostItem_header__info">{props.item.title}</span>
+        <span 
+          onClick={() => props.filterCostsHandler(group_name, group_id)}
+          className="CostItem_header__info filter_group">
+          <b>{t("costs.group")}</b>: {group_name}
         </span>
-        <span className="myFin_mainBox__item_header__control"><i onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} data-item-id={props.item._id} className="fas deleteCostItem fa-times-circle"></i></span>
+        <span className="CostItem_header__control">
+          <span className="CostItem_header__info">{numberFormat(props.item.amount)} {props.currency}</span>
+          <i 
+            onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} 
+            data-item-id={props.item._id} 
+            className="fas deleteCostItem fa-times-circle">
+          </i>
+        </span>
       </div>
       {
-        props.item.descrition ? 
-        <p className="myFin_mainBox__item_text">
-          {props.item.descrition}
+        props.item.description ? 
+        <p className="CostItem_text">
+          {props.item.description}
         </p>
         :
         null
@@ -36,7 +45,7 @@ function mapStateToProps (state) {
   return {
     groups: state.costs.groups,
     token: state.user.token,
-    period: state.costs.costPeriod,
+    period: state.user.month,
     currency: state.user.settings.currency
   };
 }
@@ -46,7 +55,6 @@ function mapDispatchToProps(dispatch) {
     showGroupName: (data) => dispatch(showGroupName(data)),
     getGroupId: (data) => dispatch(getGroupId(data)),
     deleteCostItem: (data) => dispatch(deleteCostItem(data)),
-    costGroupFilter: (data) => dispatch(costGroupFilter(data))
   };
 }
 

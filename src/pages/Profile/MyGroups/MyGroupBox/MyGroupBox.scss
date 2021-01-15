@@ -1,10 +1,10 @@
 .myGroupBox {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-top: 1rem;
 
   &__item {
-    flex-basis: 40%;
+    width: 20rem;
   }
 }
 
