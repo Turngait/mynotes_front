@@ -25,6 +25,7 @@ export function auth(data) {
 export function setBudget(budget) {
   return (dispatch) => {
     if(!budget) return
+    // console.log(budget)
     dispatch({
       type: 'SET_BUDGETS',
       payload: budget.items

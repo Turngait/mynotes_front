@@ -10,7 +10,7 @@ import Select1 from '../../../../../components/Select1/Select1';
 
 import {saveIncome} from './hooks';
 
-import {getIncomes} from '../../../../../store/Incomes/income.action';
+import {setIncomes} from '../../../../../store/Incomes/income.action';
 
 import './AddIncomes.scss';
 
@@ -25,10 +25,9 @@ const AddIncome = props => {
   const [source, setSource] = React.useState(props.sources[0]._id);
 
   async function addIncome() {
-    const isAdd = await saveIncome({date, title, budget, source, amount, description}, props.token, setError);
+    const isAdd = await saveIncome({date, title, budget, source, amount, description}, props.token, props.setIncomes, setError);
     if(isAdd) {
       props.setIsAddIncomeOpen(false);
-      props.getIncomes(props.token);
     } 
   }
 
@@ -81,7 +80,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    getIncomes: (token) => dispatch(getIncomes(token))
+    setIncomes: (data) => dispatch(setIncomes(data))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddIncome);

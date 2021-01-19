@@ -14,9 +14,9 @@ const EditBudget = props => {
   const [error, setError] = React.useState('');
 
   async function editBudget() {
-    const isEdit = await editBudgetHook({title, balance, _id: props.editableItem._id}, props.token, setError);
+    const isEdit = await editBudgetHook({title, balance, _id: props.editableItem._id}, props.token, props.setBudget, setError);
     if(isEdit) {
-      props.setIsEditBudgetOpen(false)
+      props.setIsEditBudgetOpen(false);
     };
   }
 

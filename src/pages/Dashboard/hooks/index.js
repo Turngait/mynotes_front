@@ -1,4 +1,5 @@
-import {API_URL} from '../../../config/api';
+import {API_URL} from 'config/api';
+
 export async function getFinData(token, period) {
   const {costs, incomes, budget} = await fetch(API_URL + '/fin/getfindata', {
     mode: 'cors',
@@ -45,14 +46,17 @@ export function incomesFilterHook(incomes, source_id) {
 }
 
 
-export async function saveBudget(budget, token, setErrors) {
+export async function saveBudget(budget, token, setBudget, setErrors) {
   const status = await fetch(API_URL + '/budget/add', {
     mode: 'cors',
     method: 'POST',
     body: JSON.stringify({budget, token}),
     headers: {'Content-Type': 'application/json;charset=utf-8'},
   }).then(async res => {
-    if (res.status === 204) {
+    if (res.status === 201) {
+      const data = await res.json();
+      const {budgets} = data.data;
+      setBudget(budgets);
       return true;
     } else if (res.status === 422) {
       const data = await res.json();
@@ -72,7 +76,7 @@ export async function saveBudget(budget, token, setErrors) {
 
 }
 
-export async function editBudgetHook(budget, token, setErrors) {
+export async function editBudgetHook(budget, token, setBudget, setErrors) {
   const isEdit = await fetch(API_URL + '/budget/edit', {
     mode: 'cors',
     method: 'POST',
@@ -80,6 +84,10 @@ export async function editBudgetHook(budget, token, setErrors) {
     headers: {'Content-Type': 'application/json;charset=utf-8'},
   }).then(async res => {
     if (res.status === 202) {
+      const data = await res.json();
+      const {budgets} = data.data;
+      setBudget(budgets);
+
       return true;
     } else if (res.status === 422) {
       const data = await res.json();
@@ -98,7 +106,7 @@ export async function editBudgetHook(budget, token, setErrors) {
   return isEdit;
 }
 
-export async function deleteBudgetHook(id_budget, token, setErrors) {
+export async function deleteBudgetHook(id_budget, token, setBudget, setErrors) {
   await fetch(API_URL + '/budget/delete', {
     mode: 'cors',
     method: 'POST',
@@ -106,6 +114,10 @@ export async function deleteBudgetHook(id_budget, token, setErrors) {
     headers: {'Content-Type': 'application/json;charset=utf-8'},
   }).then(async res => {
     if (res.status === 202) {
+      const data = await res.json();
+      const {budgets} = data.data;
+      setBudget(budgets);
+
       return true;
     } else if (res.status === 422) {
       const data = await res.json();

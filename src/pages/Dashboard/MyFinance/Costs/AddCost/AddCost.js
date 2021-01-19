@@ -10,7 +10,7 @@ import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import Select1 from '../../../../../components/Select1/Select1';
 import Textarea1 from '../../../../../components/Textarea1/Textarea1';
 
-import {getCostItems} from '../../../../../store/Costs/costs.actions'
+import {setCosts} from '../../../../../store/Costs/costs.actions'
 
 import './AddCost.scss';
 
@@ -25,10 +25,9 @@ const AddCost = props => {
   const [error, setError] = React.useState('');
 
   async function addCost() {
-    const isAdd = await saveCost({title, amount, description, group, budget, date}, props.token, setError);
+    const isAdd = await saveCost({title, amount, description, group, budget, date}, props.token, props.setCosts, setError);
     if(isAdd) {
       props.setIsAddCostOpen(false);
-      props.getCostItems(props.token);
     } 
   }
 
@@ -82,7 +81,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    getCostItems: (token) => dispatch(getCostItems(token))
+    setCosts: (costs) => dispatch(setCosts(costs))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddCost);

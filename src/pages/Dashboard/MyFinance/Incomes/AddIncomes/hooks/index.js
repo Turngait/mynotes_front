@@ -1,6 +1,6 @@
 import {API_URL} from '../../../../../../config/api';
 
-export async function saveIncome(income, token, setError) {
+export async function saveIncome(income, token, setIncomes, setError) {
   const status = await fetch(API_URL + '/fin/income/add', {
     method: 'POST',
     headers: {
@@ -9,7 +9,10 @@ export async function saveIncome(income, token, setError) {
     mode: 'cors',
     body: JSON.stringify({income, token})
   }).then(async res => {
-    if (res.status === 204) {
+    if (res.status === 201) {
+      const data = await res.json();
+      const {incomes} = data.data;
+      setIncomes(incomes);
       return true;
     } else if (res.status === 422) {
       const data = await res.json();

@@ -14,8 +14,8 @@ const AddBudget = props => {
   const [error, setError] = React.useState('');
 
   async function addBudget () {
-    const isAdd = await saveBudget({title, balance, created_at: new Date()}, props.token, setError);
-    if(isAdd) props.setIsAddBudgetOpen(false)
+    const isAdd = await saveBudget({title, balance, created_at: new Date()}, props.token, props.setBudget, setError);
+    if(isAdd) props.setIsAddBudgetOpen(false);
   }
 
   return (
