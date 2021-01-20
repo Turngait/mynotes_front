@@ -4,7 +4,7 @@ import PopUp from 'components/PopUp/PopUp';
 import Input from 'components/Input2/Input2';
 import Button from 'components/ButtonPopUp/ButtonPopUp';
 
-import {saveBudget} from '../../../../hooks';
+import {saveBudget} from '../../hooks';
 
 import './index.scss';
 

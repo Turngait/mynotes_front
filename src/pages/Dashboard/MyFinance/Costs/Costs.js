@@ -5,13 +5,12 @@ import { useTranslation } from 'react-i18next';
 import AddCost from './AddCost/AddCost';
 import AddGroup from './AddGroup/AddGroup';
 import CostBox from './CostBox/CostBox';
-import FilteredCosts from '../../../../components/FilteredItems';
+import FilteredCosts from 'components/FilteredItems';
+import Button from 'components/Button1/Button1';
+import Input2 from 'components/Input2/Input2';
 
-import Button from '../../../../components/Button1/Button1';
-import Input2 from '../../../../components/Input2/Input2';
-
-import {getCostForPeriod, getCostItems} from '../../../../store/Costs/costs.actions';
-import {costsFilterHook} from '../../hooks';
+import {getCostForPeriod} from 'store/Costs/costs.actions';
+import {costsFilterHook} from './hooks';
 
 import './Costs.scss';
 
@@ -73,8 +72,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getCostForPeriod: (period) => dispatch(getCostForPeriod(period)),
-    getCostItems: (data) => dispatch(getCostItems(data))
+    getCostForPeriod: (period) => dispatch(getCostForPeriod(period))
   };
 }
 

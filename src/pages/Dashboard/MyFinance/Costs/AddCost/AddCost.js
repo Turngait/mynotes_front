@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import {saveCost} from './hooks';
+import {saveCost} from '../hooks';
 
 import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
@@ -10,7 +10,7 @@ import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 import Select1 from '../../../../../components/Select1/Select1';
 import Textarea1 from '../../../../../components/Textarea1/Textarea1';
 
-import {setCosts} from '../../../../../store/Costs/costs.actions'
+import {setCosts} from 'store/Costs/costs.actions'
 
 import './AddCost.scss';
 

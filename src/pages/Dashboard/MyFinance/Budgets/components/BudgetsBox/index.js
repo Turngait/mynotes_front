@@ -2,7 +2,7 @@ import React from 'react';
 
 import {numberFormat} from 'utils';
 
-import {deleteBudgetHook} from '../../../../hooks'
+import {deleteBudgetHook} from '../../hooks'
 
 import './index.scss';
 

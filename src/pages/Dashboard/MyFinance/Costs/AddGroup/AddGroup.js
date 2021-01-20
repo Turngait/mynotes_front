@@ -6,7 +6,7 @@ import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 
-import {saveGroup} from './hooks';
+import {saveGroup} from '../hooks';
 
 import {setCosts} from 'store/Costs/costs.actions';
 

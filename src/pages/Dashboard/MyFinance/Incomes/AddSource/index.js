@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import PopUp from '../../../../../components/PopUp/PopUp';
-import Input from '../../../../../components/Input2/Input2';
-import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
+import PopUp from 'components/PopUp/PopUp';
+import Input from 'components/Input2/Input2';
+import ButtonPopUp from 'components/ButtonPopUp/ButtonPopUp';
 
-import {saveSource} from './hooks';
+import {saveSource} from '../hooks';
 import {setIncomes} from 'store/Incomes/income.action';
 
 import './index.scss';

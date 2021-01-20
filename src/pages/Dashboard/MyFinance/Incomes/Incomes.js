@@ -2,15 +2,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
-import Button from '../../../../components/Button1/Button1';
-import Input2 from '../../../../components/Input2/Input2';
+import Button from 'components/Button1/Button1';
+import Input2 from 'components/Input2/Input2';
 import IncomeBox from './IncomeBox/IncomeBox';
 import AddIncome from './AddIncomes/AddIncomes';
 import AddSource from './AddSource';
 import FilteredCosts from 'components/FilteredItems';
 
-import {getIncomeForPeriod, setIncomes} from '../../../../store/Incomes/income.action';
-import {incomesFilterHook} from '../../hooks';
+import {getIncomeForPeriod} from 'store/Incomes/income.action';
+import {incomesFilterHook} from './hooks';
 
 import './Incomes.scss';
 
@@ -69,8 +69,7 @@ function mapStateToprops(state) {
 
 function mapDispatchToprops (dispatch) {
   return {
-    getIncomeForPeriod: (data) => dispatch(getIncomeForPeriod(data)),
-    setIncomes: (data) => dispatch(setIncomes(data)),
+    getIncomeForPeriod: (data) => dispatch(getIncomeForPeriod(data))
   }
 }
 

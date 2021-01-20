@@ -6,16 +6,7 @@ export function getCostItems(token) {
     const {data} = await fetch(API_URL + '/fin/cost/get/' + period + '/' + token)
     .then(res => res.json())
     if (data && data.length < 0) return;
-    const {groups, costs} = data.costs;
-    dispatch({
-      type: 'SET_COSTS_BY_PERIOD',
-      payload: costs.spentByPeriod
-    });
-    dispatch({
-      type: 'SET_COSTS',
-      groups,
-      costs: costs
-    });
+    dispatch(setCosts(data.costs));
   }
 }
 
@@ -35,56 +26,6 @@ export function setCosts(costs) {
   }
 }
 
-export function deleteCostItem(data) {
-  return (dispatch) => {
-    const {target, token} = data;
-    const id = target.dataset.itemId;
-
-    fetch(API_URL + '/fin/cost/' + id + '/' + token, {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      mode: 'cors'
-    })
-    .then(res => {
-      if(res.status === 204) {
-        dispatch(getCostItems(token))
-      }
-    })
-  }
-}
-
-export function showGroupName (data) {
-  return (dispatch) => {
-    const {id_group} = data.item;
-    if (data.groups) {
-      for(let group of data.groups) {
-        if (group._id === id_group) {
-          return group.title
-        }
-      }
-    }
-
-    return 'None'
-  }
-}
-
-export function getGroupId (data) {
-  return (dispatch) => {
-    const {id_group} = data.item;
-    if (data.groups) {
-      for(let group of data.groups) {
-        if (group._id === id_group) {
-          return group._id
-        }
-      }
-    }
-
-    return 'None'
-  }
-}
-
 export function getCostForPeriod (data) {
   return async (dispatch) => {
     const {period} = data;
@@ -92,11 +33,8 @@ export function getCostForPeriod (data) {
     .then(res => res.json())
     const {costs} = res.data;
 
-    dispatch({
-        type: 'SET_COSTS',
-        groups: costs.groups,
-        costs: costs.costs
-      })
+    dispatch(setCosts(costs));
+
     dispatch({
         type: 'SET_MONTH',
         payload: period
