@@ -9,7 +9,7 @@ import MyGroups from './MyGroups/MyGroups';
 import Settings from './Settings';
 
 import { getToken, getSettings, logOut } from '../../store/User/user.actions';
-import {getUserInfo} from '../../store/User/user.actions';
+import { getUserInfo } from '../../store/User/user.actions';
 
 import './Profile.scss';
 

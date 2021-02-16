@@ -1,4 +1,7 @@
 import React from 'react';
+
+import GrouptTitle from './MyGroupBoxItemTitle';
+
 import './MyGroupBoxItem.scss';
 
 const MyGroupBoxItem = props => {
@@ -11,8 +14,14 @@ const MyGroupBoxItem = props => {
             props.groups.map((item, key) => {
               return (
                 <p className="myGroupBoxItem__group" key={key}>
-                  <span className="myGroupBoxItem__group__title">{item.title}</span> <span className="myGroupBoxItem__group__amount">{item.sum} {props.currancy}</span> 
-                  <i onClick={(event) => props.onDelete({token: props.token, target: event.target})} data-item-id={item._id} className="fas deleteGroup fa-times"></i></p>
+                  <GrouptTitle title={item.title}/>
+                  <span className="myGroupBoxItem__group__amount">{item.sum} {props.currancy}</span> 
+                  <i 
+                    onClick={(event) => props.onDelete({token: props.token, target: event.target})}
+                    data-item-id={item._id} 
+                    className="fas deleteGroup fa-times myGroupBoxItem__group__control"
+                  ></i>
+                </p>
               )
             })
           :
