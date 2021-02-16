@@ -6,9 +6,9 @@ import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
 
-import {saveGroup} from './hooks';
+import {saveGroup} from '../hooks';
 
-import {getCostItems} from '../../../../../store/Costs/costs.actions';
+import {setCosts} from 'store/Costs/costs.actions';
 
 import './AddGroup.scss';
 
@@ -20,10 +20,9 @@ const AddGroup = props => {
   const [error, setError] = React.useState('');
 
   async function addGroup() {
-    const isAdd = await saveGroup(group, token, setError);
+    const isAdd = await saveGroup(group, token, props.setCosts, setError);
     if(isAdd) {
       props.setIsAddCostGroupOpen(false);
-      props.getCostItems(token);
     }
   }
   return (
@@ -47,7 +46,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    getCostItems: (token) => dispatch(getCostItems(token))
+    setCosts: (data) => dispatch(setCosts(data))
   }
 }
 

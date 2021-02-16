@@ -8,10 +8,10 @@ import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
 
 import { getToken, getSettings, logOut, setBudget } from 'store/User/user.actions';
-import { setCosts} from 'store/Costs/costs.actions';
-import {setIncomes} from 'store/Incomes/income.action';
-import {getFinData} from './hooks';
-import {numberFormat} from 'utils';
+import { setCosts } from 'store/Costs/costs.actions';
+import { setIncomes } from 'store/Incomes/income.action';
+import { getFinData } from './hooks';
+import { numberFormat } from 'utils';
 
 import './Dashboard.scss';
 
@@ -72,8 +72,11 @@ class Dashboard extends Component {
     this.props.setBudget(budget);
     this.props.setIncomes(incomes);
 
+    let spentByThisMonth = 0;
+    if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
+
     this.setState({
-      periodAmount: costs.costs[costs.costs.length - 1].spentByThisMonth
+      periodAmount: spentByThisMonth
     })
   }
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {deleteIncome} from 'store/Incomes/income.action';
+import {getIncomes} from 'store/Incomes/income.action';
 import {numberFormat} from 'utils';
-
+import {deleteIncome, showSourceName} from '../../hooks';
 
 import './IncomeItem.scss';
 
@@ -23,7 +23,7 @@ const IncomeItem = props => {
         <span className="IncomeItem_header__control">
           <span className="IncomeItem_header__info">{numberFormat(props.amount)} {props.currency}</span>
           <i 
-            onClick={(event) => props.deleteIncome({target: event.target, token: props.token})} 
+            onClick={(event) => deleteIncome({target: event.target, token: props.token}, props.getIncomes)} 
             data-item-id={props._id} 
             className="fas deleteCostItem fa-times-circle">
           </i>
@@ -49,21 +49,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteIncome: (data) => dispatch(deleteIncome(data)),
+    getIncomes: (token) => dispatch(getIncomes(token))
   }
-}
-
-function showSourceName(data) {
-  const {id_source} = data;
-  if (data.sourses) {
-    for(let source of data.sourses) {
-      if (source._id === id_source) {
-        return source.title
-      }
-    }
-  }
-
-  return 'None'
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IncomeItem);

@@ -7,6 +7,8 @@ import BudgetsBox from './components/BudgetsBox';
 import AddBudget from './components/AddBudget';
 import EditBudget from './components/EditBudget';
 
+import {setBudget} from 'store/User/user.actions';
+
 import './index.scss';
 
 const Budgets = props => {
@@ -18,8 +20,8 @@ const Budgets = props => {
 
   return (
     <div className="budgets">
-      {isAddBudgetOpen ? <AddBudget setIsAddBudgetOpen={setIsAddBudgetOpen} token={props.token}/> : null}
-      {isEditBudgetOpen ? <EditBudget token={props.token} editableItem={editableItem} setIsEditBudgetOpen={setIsEditBudgetOpen}/> : null}
+      {isAddBudgetOpen ? <AddBudget setIsAddBudgetOpen={setIsAddBudgetOpen} setBudget={props.setBudget} token={props.token}/> : null}
+      {isEditBudgetOpen ? <EditBudget token={props.token} setBudget={props.setBudget} editableItem={editableItem} setIsEditBudgetOpen={setIsEditBudgetOpen}/> : null}
       <div className="budgets_headerBox">
         <div>
         </div>
@@ -35,6 +37,7 @@ const Budgets = props => {
         currancy={props.currancy}
         token={props.token}
         setError={setError}
+        setBudget={props.setBudget}
       />
     </div>
   )
@@ -48,4 +51,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, null)(Budgets);
+function mapDispatchToProps(dispatch) {
+  return {
+    setBudget: (data) => dispatch(setBudget(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Budgets);

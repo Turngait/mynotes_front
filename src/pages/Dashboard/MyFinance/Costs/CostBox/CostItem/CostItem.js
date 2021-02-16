@@ -1,14 +1,16 @@
 import React from 'react';
-import './CostItem.scss';
 import {connect} from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import {showGroupName, getGroupId, deleteCostItem} from '../../../../../../store/Costs/costs.actions';
-import {numberFormat} from '../../../../../../utils';
+import {getCostItems} from 'store/Costs/costs.actions';
+import {numberFormat} from 'utils';
+import {deleteCostItemHook, getGroupId, showGroupName} from '../../hooks';
+
+import './CostItem.scss';
 
 const Costitem = props => {
-  const group_name = props.showGroupName({item: props.item, groups:props.groups});
-  const group_id = props.getGroupId({item: props.item, groups:props.groups});
+  const group_name = showGroupName({item: props.item, groups:props.groups});
+  const group_id = getGroupId({item: props.item, groups:props.groups});
   const { t } = useTranslation();
 
   return (
@@ -23,7 +25,7 @@ const Costitem = props => {
         <span className="CostItem_header__control">
           <span className="CostItem_header__info">{numberFormat(props.item.amount)} {props.currency}</span>
           <i 
-            onClick={(event) => props.deleteCostItem({target: event.target, token: props.token})} 
+            onClick={(event) => deleteCostItemHook({target: event.target, token: props.token}, props.getCostItems)} 
             data-item-id={props.item._id} 
             className="fas deleteCostItem fa-times-circle">
           </i>
@@ -52,9 +54,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    showGroupName: (data) => dispatch(showGroupName(data)),
-    getGroupId: (data) => dispatch(getGroupId(data)),
-    deleteCostItem: (data) => dispatch(deleteCostItem(data)),
+    getCostItems: (token) => dispatch(getCostItems(token)),
   };
 }
 

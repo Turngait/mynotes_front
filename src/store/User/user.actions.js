@@ -52,9 +52,9 @@ export function getSettings() {
 
 export function getUserInfo({token, period}) {
   return async (dispatch) => {
-    const {data} = await fetch(API_URL+'/auth/user/' + token + '/' + period)
-    .then(res => res.json())
-    dispatch(setInfo(data))
+    const { data } = await fetch(API_URL+'/auth/user/' + token + '/' + period)
+    .then(res => res.json());
+    dispatch(setInfo(data));
   }
 }
 
@@ -77,7 +77,15 @@ export function setInfo(user) {
     dispatch({
       type: 'SET_GROUPS',
       payload: user.groups
-    })
+    });
+    dispatch({
+      type: 'SET_COSTS_BY_PERIOD',
+      payload: user.stat.costsAmount
+    });
+    dispatch({
+      type: 'SET_INCOMES_BY_PERIOD',
+      payload: user.stat.incomesAmount
+    });
   }
 }
 
