@@ -1,4 +1,4 @@
-# Frontend of MyNotes Project.
+# Frontend of FinCloud Project.
 
 ## Moqup
 https://www.figma.com/file/3DWbCoW6H7RjfeRt5J0HJf/MyNotes?node-id=25%3A73
