@@ -11,10 +11,11 @@ const MyGroupBoxItem = props => {
       <div className="myGroupBoxItem__boxGroups">
         {
           props.groups.length > 0 ?
-            props.groups.map((item, key) => {
+            props.groups.map((item) => {
+
               return (
-                <p className="myGroupBoxItem__group" key={key}>
-                  <GrouptTitle title={item.title}/>
+                <p className="myGroupBoxItem__group" key={item._id}>
+                  <GrouptTitle type={props.type} title={item.title} id_group={item._id} token={props.token}/>
                   <span className="myGroupBoxItem__group__amount">{item.sum} {props.currancy}</span> 
                   <i 
                     onClick={(event) => props.onDelete({token: props.token, target: event.target})}
