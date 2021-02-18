@@ -1,4 +1,4 @@
-@import "../../../../../config/variable.scss";
+@import "../../../../../styles/colors.scss";
 
 .CostBox {
   margin: 0 0 2rem;
@@ -40,21 +40,42 @@
     }
 }
 
-@media all and (min-width: 0) and (max-width: 500px) {
-  .myFin_mainBox__spentByDay,
-  .myFin_mainBox__spentByMonth {
-    float: none;
+@media all and (min-width: 0) and (max-width: 1300px) {
+  .CostBox__costItems {
+    width: 70%;
+  }
+  .CostBox__costInfo {
+    width: 24%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 1000px) {
+  .CostBox__costItems {
+    width: 60%;
+  }
+  .CostBox__costInfo {
+    width: 34%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 900px) {
+  .CostBox {
     display: block;
-    line-height: normal;
   }
-  .myFin_mainBox__item_header__control {
-    float: none;
+
+  .CostBox__costItems {
+    width: 100%;
+    margin-top:1rem;
   }
-  .myFin_mainBox__item_header {
-    display: flex;
-    justify-content: space-between;
+  .CostBox__costInfo {
+    width: 52%;
   }
-  .myFin_mainBox__item_header__info {
-    margin-right: 5px;
+  .CostBox__costInfo__date,
+  .CostBox__costInfo__spentByDay {
+    font-size: 1rem;
+  }
+
+  .myFin_headerBox {
+    display: block !important;
   }
 }

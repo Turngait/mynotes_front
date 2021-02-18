@@ -10,6 +10,7 @@ import Settings from './Settings';
 
 import { getToken, getSettings, logOut } from '../../store/User/user.actions';
 import { getUserInfo } from '../../store/User/user.actions';
+import {numberFormat} from '../../utils';
 
 import './Profile.scss';
 
@@ -87,7 +88,7 @@ class Profile extends Component {
               openMyDataHandler={this.openMyDataHandler}
               openMyGroupsHandler={this.openMyGroupsHandler}
               openSettingsHandler={this.openSettingsHandler}
-              balance={this.props.balance || 0}
+              balance={numberFormat(this.props.balance) || 0}
               currancy={this.props.currancy}
             />
           </aside>

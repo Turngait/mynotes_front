@@ -1,8 +1,8 @@
 .IncomeBox {
   display: flex;
   justify-content: space-between;
-  margin: 2rem 0;
   width: 100%;
+  overflow-x: auto;
   
   &__infoBox {
     width: 18%;
@@ -30,3 +30,42 @@
   }
 }
 
+@media all and (min-width: 0) and (max-width: 1300px) {
+  .IncomeBox__incomeItems {
+    width: 70%;
+  }
+  .IncomeBox__infoBox {
+    width: 24%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 1000px) {
+  .IncomeBox__incomeItems {
+    width: 60%;
+  }
+  .IncomeBox__infoBox {
+    width: 34%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 900px) {
+  .IncomeBox {
+    display: block;
+  }
+
+  .IncomeBox__incomeItems {
+    width: 100%;
+    margin-top:1rem;
+  }
+  .IncomeBox__infoBox {
+    width: 52%;
+  }
+  .IncomeBox__infoBox__date,
+  .IncomeBox__infoBox__spentByDay {
+    font-size: 1rem;
+  }
+
+  .myFin_headerBox {
+    display: block !important;
+  }
+}

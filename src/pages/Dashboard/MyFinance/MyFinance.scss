@@ -1,4 +1,4 @@
-@import "../../../config/variable.scss";
+@import "../../../styles/colors.scss";
 
 .myFinance__logo {
   text-decoration: underline;
@@ -20,5 +20,16 @@
   &__costsByPeriod {
     margin-left: 1vw;
     font-size: 1.3rem;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 400px) {
+  .myFin_headerBox__btnBox {
+    flex-direction: column;
+    min-width: 100%;
+    margin-top: 0.6rem;
+  }
+  .myFin_headerBox__dateBox {
+    min-width: 100%;
   }
 }

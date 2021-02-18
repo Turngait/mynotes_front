@@ -1,4 +1,4 @@
-@import "../../config/variable.scss";
+@import "../../styles/colors.scss";
 
 .index {
   display: flex;
@@ -86,6 +86,13 @@
 
 }
 
+@media all and (min-width: 0) and (max-width: 1400px) {
+  .index__box {
+    background: $side-color;
+    background-image: none;
+  }
+}
+
 @media all and (min-width: 0) and (max-width: 1200px) {
   .index__box__signBox {
     flex-basis: 50vw;
@@ -95,6 +102,10 @@
 @media all and (min-width: 0) and (max-width: 1000px) {
   .index__box {
     display: block;
+  }
+
+  .index__logo {
+    margin-top:1rem;
   }
 
   .index__box__signBox {
@@ -107,13 +118,12 @@
 }
 
 @media all and (min-width: 0) and (max-width: 800px) {
-  .index__box {
-    background-image: none;
-    background-color: $side-color;
-  }
-
   .index__box__signBox {
     width: 80vw;
+  }
+  .index__box__text {
+    width: auto;
+    font-size: 1.4rem;
   }
 }
 

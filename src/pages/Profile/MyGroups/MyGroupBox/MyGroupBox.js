@@ -2,17 +2,57 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import MyGroupBoxItem from './MyGroupBoxItem/MyGroupBoxItem';
-import {deleteCostGroup} from '../../../../store/Costs/costs.actions';
-import {deleteSource} from '../../../../store/Incomes/income.action';
+import { deleteGroup, deleteSource } from '../../services';
 
 import './MyGroupBox.scss';
 
 const MyGroupBox = props => {
+  const [msg, setMsg] = React.useState('');
+
+  async function deleteGroupCost(target) {
+    const is_delete = await deleteGroup(target.dataset.itemId, props.token, setMsg);
+    if (is_delete) {
+      target.parentNode.style = "text-decoration: line-through";
+      target.remove();
+    }
+  }
+
+  async function deleteSourceIncome(target) {
+    const is_delete = await deleteSource(target.dataset.itemId, props.token, setMsg);
+    if (is_delete) {
+      target.parentNode.style = "text-decoration: line-through";
+      target.remove();
+    }
+  }
+
   return (
-    <div className="myGroupBox">
-      <MyGroupBoxItem type="costs" groups={props.costGroups} token={props.token} currancy={props.currancy} onDelete={props.deleteCostGroup} title="Группы расходов"/>
-      <MyGroupBoxItem type="incomes" groups={props.incomeSources} token={props.token} currancy={props.currancy} onDelete={props.deleteSource} title="Источники доходов"/>
-    </div>
+    <>
+      {
+        msg.length > 0 ?
+          <p className="myGroupBox__msg">{msg}</p>
+        : 
+          null
+      }
+      <div className="myGroupBox">
+        <MyGroupBoxItem
+          type="costs"
+          setMsg={setMsg}
+          groups={props.costGroups}
+          token={props.token}
+          currancy={props.currency}
+          onDelete={deleteGroupCost}
+          title="Группы расходов"
+        />
+        <MyGroupBoxItem
+          type="incomes"
+          groups={props.incomeSources}
+          token={props.token}
+          currancy={props.currency}
+          onDelete={deleteSourceIncome}
+          title="Источники доходов"
+        />
+      </div>
+    </>
   );
 }
 
@@ -20,16 +60,10 @@ function mapStateToProps(state) {
   return {
     costGroups: state.costs.groups,
     incomeSources: state.income.sources,
-    currancy: state.user.settings.currency,
+    currency: state.user.settings.currency,
     token: state.user.token
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    deleteCostGroup: (data) => dispatch(deleteCostGroup(data)),
-    deleteSource: (data) => dispatch(deleteSource(data))
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyGroupBox);
+export default connect(mapStateToProps)(MyGroupBox);

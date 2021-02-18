@@ -31,7 +31,7 @@ const Incomes = props => {
 
 
   return (
-    <>
+    <div className="incomes">
       {isAddIncomeOpen ? <AddIncome setIsAddIncomeOpen={setIsAddIncomeOpen}/> : null}
       {isAddSourceOpen ? <AddSource setIsAddSourceOpen={setIsAddSourceOpen}/> : null}
       {isFilteredIncomesOpen ? <FilteredCosts items={filteredIncomes} currancy={props.currency} period={props.incomePeriod} groupName={filteredSource} setIsFilteredItemsOpen={setIsFilteredIncomesOpen}/> : null}
@@ -44,6 +44,7 @@ const Incomes = props => {
           <Button onClick={setIsAddSourceOpen} title={"Добавить источник"} />
         </div>
       </div>
+      <div className="allIncomes">
       {
         props.incomeItems.length > 0 ?
         props.incomeItems.map((income, key) => {
@@ -54,7 +55,8 @@ const Incomes = props => {
         :
           <p className="myFin__noContent">{t('incomes.noIncomes')}</p>
       }
-    </>
+      </div>
+    </div>
   );
 };
 

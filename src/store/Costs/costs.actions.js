@@ -41,22 +41,3 @@ export function getCostForPeriod (data) {
     })
   }
 }
-
-export function deleteCostGroup(data) {
-  return (dispatch) => {
-    const { token, target } = data;
-    const id = target.dataset.itemId;
-    fetch(API_URL + '/fin/group/delete/' + id + '/' + token, {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      mode: 'cors'
-    })
-    .then(res => {
-      if (res.status === 204) {
-        dispatch(getCostItems(token))
-      }
-    })
-  }
-}
