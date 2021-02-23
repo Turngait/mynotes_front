@@ -11,15 +11,15 @@
   justify-content: space-between;
   align-items: flex-start;
 
-  &__sorting {
-    flex: 1;
-    font-size: 1rem;
-    font-weight: 600;
-    display: none;
+  &__dateBox {
+    flex-grow: 0;
+    flex-shrink: 1;
   }
-  &__costsByPeriod {
-    margin-left: 1vw;
-    font-size: 1.3rem;
+
+  &__periodAmount {
+    color: #fff;
+    font-size: 1.6rem;
+    font-family: 'Roboto';
   }
 }
 

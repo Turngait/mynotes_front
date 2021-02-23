@@ -13,7 +13,7 @@ const IncomeItem = props => {
   return (
     <div className="IncomeItem">
       <div className="IncomeItem_header">
-        <span className="IncomeItem_header__info">{props.title}</span>
+        <span className="IncomeItem_header__info IncomeItem_header__info__title">{props.title}</span>
         <span 
           className="IncomeItem_header__info IncomeItem_header__source" 
           onClick={() => props.filterIncomesHandler(source_name, props.id_source)}

@@ -22,7 +22,7 @@
     padding: 1vh 1vw;
     background-color: $base-color;
     color: #fff;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 
     &__control {
       float: right;
@@ -33,6 +33,11 @@
 
       &:last-child {
         margin-right: 0;
+      }
+
+      &__title {
+        display: inline-block;
+        min-width: 12rem;
       }
     }
 

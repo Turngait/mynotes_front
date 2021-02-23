@@ -42,18 +42,21 @@ const AddIncome = props => {
         <Input2 onChange={(event) => setAmount(event.target.value)} type="text" name="amount" placeholder={t('incomes.amount') + "..."}/>
         <Textarea1 onChange={(event) => setDescription(event.target.value)} name="description" placeholder={t('incomes.description') + "..."}></Textarea1>
         <div className="add_item_box__opt">
-          <Select1 onChange={(event) => setSource(event.target.value)}>
-            {
-              props.sources.length > 0 ?
-              props.sources.map((group, key) => {
-                return (
-                  <option key={key} value={group._id}>Источник: {group.title}</option>
-                )
-              })
-              : 
-              null
-            }
-          </Select1>
+          <div className="add_item_box__opt__group">
+            <Select1 onChange={(event) => setSource(event.target.value)}>
+              {
+                props.sources.length > 0 ?
+                props.sources.map((group, key) => {
+                  return (
+                    <option key={key} value={group._id}>Источник: {group.title}</option>
+                  )
+                })
+                : 
+                null
+              }
+            </Select1>
+            <button onClick={() => props.openAddSource(true)} type="button" className="add_item_box__opt__group__openAddGroup">+</button>
+          </div>
           <Select1 onChange={(event) => setBudget(event.target.value)}>
             {
               props.budgets.map((budget, key) => {

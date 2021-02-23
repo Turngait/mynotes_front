@@ -6,6 +6,11 @@ import Budgets from './Budgets';
 
 import './MyFinance.scss';
 
-const MyFinance = props => <> { props.costOpen ? <Costs/> : null } { props.incomeOpen ? <Incomes/> : null} {props.budgetsOpen ? <Budgets /> : null}</>
+const MyFinance = props => 
+  <> 
+    { props.costOpen ? <Costs periodAmount={props.periodAmount}/> : null } 
+    { props.incomeOpen ? <Incomes periodAmount={props.periodAmount} /> : null} 
+    {props.budgetsOpen ? <Budgets periodAmount={props.periodAmount} /> : null}
+  </>
 
 export default MyFinance;

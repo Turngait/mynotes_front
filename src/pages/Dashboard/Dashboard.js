@@ -24,7 +24,6 @@ class Dashboard extends Component {
     incomeOpen: false,
     costOpen: true,
     budgetsOpen: false,
-    pageName: 'Расходы',
     periodAmount: this.props.costsByPeriod
   }
 
@@ -33,7 +32,6 @@ class Dashboard extends Component {
       costOpen: true,
       incomeOpen: false,
       budgetsOpen: false,
-      pageName: 'Расходы',
       periodAmount: this.props.costsByPeriod
     })
   }
@@ -43,7 +41,6 @@ class Dashboard extends Component {
       incomeOpen: true,
       costOpen: false,
       budgetsOpen: false,
-      pageName: 'Доходы',
       periodAmount: this.props.incomesByPeriod
     })
   }
@@ -53,7 +50,6 @@ class Dashboard extends Component {
       incomeOpen: false,
       costOpen: false,
       budgetsOpen: true,
-      pageName: 'Счета',
       periodAmount: this.props.incomesByPeriod - this.props.costsByPeriod
     })
   }
@@ -102,7 +98,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="flexbox">
-        <Header logOut={this.logOut} pageName={this.state.pageName} periodAmount={numberFormat(this.state.periodAmount)} />
+        <Header logOut={this.logOut} />
         <main className="main_box">
           <aside className="main_box__menu">
             <LeftMenu 
@@ -118,6 +114,7 @@ class Dashboard extends Component {
           </aside>
           <section className="main_box__info">
             <MyFinance
+              periodAmount={numberFormat(this.state.periodAmount)}
               incomeOpen={this.state.incomeOpen} 
               costOpen={this.state.costOpen}
               budgetsOpen={this.state.budgetsOpen}

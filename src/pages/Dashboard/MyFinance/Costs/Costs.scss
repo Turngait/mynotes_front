@@ -1,11 +1,37 @@
 @import "../../../../styles/colors.scss";
-// .costs {
-//   height: 100vh;
-// }
+
+.costs {
+  &__openAddCostBtn {
+    position: absolute;
+    margin-top: -4rem;
+    display: block;
+    z-index: 1;
+    right: 2rem;
+    border: 2px solid $dark-color;
+    border-radius: 200px;
+    background-color: $base-color;
+    box-sizing: border-box;
+    height: 5rem;
+    width: 5rem;
+    color: #fff;
+    font-size: 2.4rem;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
 
 .allCosts {
   margin-top: 2rem;
   height: 43rem;
+  max-width: 94rem;
   overflow-y: auto;
   padding-right: 1rem;
 }
@@ -15,39 +41,7 @@
   font-size: 2.3rem;
 }
 
-.myFin_headerBox {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
 
-  &__btnBox {
-    min-width: 24rem;
-    flex-shrink: 1;
-    display: flex;
-    justify-content: space-between;
-  }
-  &__dateBox {
-    flex-grow: 0;
-    min-width: 23rem;
-    flex-shrink: 1;
-  }
-  &__ctrlBox {
-    flex-grow: 1;
-    
-
-  }
-
-  &__sorting {
-    flex: 1;
-    font-size: 1rem;
-    font-weight: 600;
-    display: none;
-  }
-  &__costsByPeriod {
-    margin-left: 1vw;
-    font-size: 1.3rem;
-  }
-}
 
 .myFin{
   &__noContent {

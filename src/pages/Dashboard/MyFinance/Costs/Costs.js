@@ -6,7 +6,6 @@ import AddCost from './AddCost/AddCost';
 import AddGroup from './AddGroup/AddGroup';
 import CostBox from './CostBox/CostBox';
 import FilteredCosts from 'components/FilteredItems';
-import Button from 'components/Button1/Button1';
 import Input2 from 'components/Input2/Input2';
 
 import {getCostForPeriod} from 'store/Costs/costs.actions';
@@ -32,16 +31,15 @@ const Costs = props => {
 
   return (
     <div className="costs">
-      { isAddCostOpen ? <AddCost setIsAddCostOpen={setIsAddCostOpen}/> : null }
+      { isAddCostOpen ? <AddCost openAddGroup={setIsAddCostGroupOpen} setIsAddCostOpen={setIsAddCostOpen}/> : null }
       { isAddCostGroupOpen ? <AddGroup setIsAddCostGroupOpen={setIsAddCostGroupOpen}/> : null }
       { isFilteredCostsOpen ? <FilteredCosts currancy={props.currency} items={filteredCosts} period={props.period} groupName={filteredGroup} setIsFilteredItemsOpen={setIsFilteredCostsOpen}/> : null }
       <div className="myFin_headerBox">
+        <div className="myFin_headerBox__periodAmount">
+          В этом месяце: {props.periodAmount} {props.currency}
+        </div>
         <div className="myFin_headerBox__dateBox">
           <Input2 onChange={(event) => props.getCostForPeriod({period:event.target.value, token: props.token})} value={props.period} type="month" name="date"/>
-        </div>
-        <div className="myFin_headerBox__btnBox">
-          <Button onClick={setIsAddCostOpen} title={t('costs.addCost')} />
-          <Button onClick={setIsAddCostGroupOpen} title={t('costs.addGroup')} />
         </div>
       </div>
       <div className="allCosts">
@@ -56,6 +54,7 @@ const Costs = props => {
           <p className="myFin__noContent">{t('costs.noCosts')}</p>
         }
       </div>
+      <button onClick={setIsAddCostOpen} className="costs__openAddCostBtn">+</button>
     </div>
   );
 }

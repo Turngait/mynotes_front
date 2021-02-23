@@ -23,7 +23,6 @@ class Profile extends Component {
     myDataOpen: true,
     myGroupsOpen: false,
     settingsOpen: false,
-    pageTitle: 'Статистика'
   }
 
   openMyDataHandler = () => {
@@ -31,7 +30,6 @@ class Profile extends Component {
       myDataOpen: true,
       myGroupsOpen: false,
       settingsOpen: false,
-      pageTitle: 'Статистика'
     })
   }
   openMyGroupsHandler = () => {
@@ -39,7 +37,6 @@ class Profile extends Component {
       myDataOpen: false,
       myGroupsOpen: true,
       settingsOpen: false,
-      pageTitle: 'Группы'
     })
   }
   openSettingsHandler = () => {
@@ -47,7 +44,6 @@ class Profile extends Component {
       myDataOpen: false,
       myGroupsOpen: false,
       settingsOpen: true,
-      pageTitle: 'Настройки'
     })
   }
   async componentDidMount() {
@@ -78,7 +74,7 @@ class Profile extends Component {
   render() {
     return (
       <div className="flexbox">
-        <Header logOut={this.logOut} pageName={this.state.pageTitle}/>
+        <Header logOut={this.logOut} />
         <main className="profile">
           <aside className="profile__menu">
             <LeftMenu 
