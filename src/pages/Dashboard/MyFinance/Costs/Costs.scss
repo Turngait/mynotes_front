@@ -3,8 +3,8 @@
 .costs {
   &__openAddCostBtn {
     position: absolute;
-    margin-top: -4rem;
     display: block;
+    bottom: 2rem;
     z-index: 1;
     right: 2rem;
     border: 2px solid $dark-color;
@@ -30,17 +30,11 @@
 
 .allCosts {
   margin-top: 2rem;
-  height: 43rem;
+  height: 48rem;
   max-width: 94rem;
   overflow-y: auto;
   padding-right: 1rem;
 }
-.myFinance__logo {
-  text-decoration: underline;
-  letter-spacing: 1px;
-  font-size: 2.3rem;
-}
-
 
 
 .myFin{
@@ -73,23 +67,45 @@
 @media all and (min-width: 0) and (max-width: 800px) {
   .costs {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .myFin_headerBox__dateBox {
     margin-top:1rem;
   }
   .allCosts {
-    height: 30rem;
+    height: 39rem;
     margin-top: 0.4rem;
     flex-grow: 1;
   }
   .myFin_headerBox {
     flex: 0 1;
   }
+  .CostBox__costInfo {
+    width: 70%;
+  }
+  .costs__openAddCostBtn {
+    bottom: 6rem;
+    height: 4rem;
+    width: 4rem;
+  }
 }
 
 @media all and (min-width: 0) and (max-width: 500px) {
   .allCosts {
-    height: 28rem;
+    height: 39rem;
   }
+  .CostItem_header__info__title {
+    min-width: auto;
+  }
+  .costs__openAddCostBtn {
+    height: 4rem;
+    width: 4rem;
+  }
+  .CostBox__costInfo {
+    width: 90%;
+  }
+  .CostBox__costInfo__date, 
+  .CostBox__costInfo__spentByDay {
+    font-size: 0.8rem;
+}
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Header from 'components/Header/Header';
-import Footer from 'components/Footer/Footer';
 
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
@@ -121,7 +120,6 @@ class Dashboard extends Component {
             />
           </section>
         </main>
-        <Footer/>
       </div>
     )
   }

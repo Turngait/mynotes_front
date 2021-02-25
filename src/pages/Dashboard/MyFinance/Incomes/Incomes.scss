@@ -10,7 +10,7 @@
 .incomes {
   &__openAddCostBtn {
     position: absolute;
-    margin-top: -4rem;
+    bottom: 2rem;
     display: block;
     z-index: 1;
     right: 2rem;
@@ -44,17 +44,31 @@
 @media all and (min-width: 0) and (max-width: 800px) {
   .incomes {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .allIncomes {
-    height: 30rem;
+    height: 39rem;
     margin-top: 0.4rem;
     flex-grow: 1;
+  }
+  .IncomeBox__infoBox {
+    width: 70%;
+  }
+  .incomes__openAddCostBtn {
+    bottom: 6rem;
+    height: 4rem;
+    width: 4rem;
   }
 }
 
 @media all and (min-width: 0) and (max-width: 500px) {
   .allIncomes {
-    height: 28rem;
+    height: 39rem;
+  }
+  .IncomeItem_header__info__title {
+    min-width: auto;
+  }
+  .IncomeBox__infoBox {
+    width: 90%;
   }
 }

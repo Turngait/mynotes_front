@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyData from './MyData/MyData';
 import MyGroups from './MyGroups/MyGroups';
@@ -94,7 +93,6 @@ class Profile extends Component {
             {this.state.settingsOpen ? <Settings /> : null }
           </section>
         </main>
-        <Footer/>
       </div>
     )
   }

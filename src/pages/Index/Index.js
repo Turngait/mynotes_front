@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import {getToken, auth} from '../../store/User/user.actions';
 import {signIn, signUp} from './hooks';
 
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+
+import VkIco from './img/vk-ico.png';
+import InstIco from './img/insta-ico.png';
+import TgIco from './img/tg-ico.png';
 
 import './Index.scss';
 
@@ -88,20 +91,20 @@ class Index extends Component {
   render() {
     return (
       <div className="index">
-        <Header mainPage={true} />
+        <nav className="index__nav">
+          <NavLink to="/contacts" className="index__nav__item">Контакты</NavLink>
+        </nav>
         <div className="index__box">
+          <div className="index__box__socioBox">
+            <img src={VkIco} alt="VK" />
+            <img src={InstIco} alt="IG" />
+            <img src={TgIco} alt="TG" />
+          </div>
           <div>
             <h1 className="index__logo">FinCloud</h1>
             <p className="index__box__text">
               Здесь Вы сможете легко вести статистику и учет своих личных финансов.
             </p>
-            <div className="index__box__iconsBox">
-              <img className="index__box__iconsBox__item" src="/pic/main/main_1.png" alt="main promo"/>
-              <img className="index__box__iconsBox__item" src="/pic/main/main_2.png" alt="main promo"/>
-              <img className="index__box__iconsBox__item" src="/pic/main/main_3.png" alt="main promo"/>
-              <img className="index__box__iconsBox__item" src="/pic/main/main_4.png" alt="main promo"/>
-              <img className="index__box__iconsBox__item" src="/pic/main/main_5.png" alt="main promo"/>
-            </div>
           </div>
 
           <div className="index__box__signBox">
@@ -129,7 +132,9 @@ class Index extends Component {
             }
           </div>
         </div>
-        <Footer />
+        <div className="index__footer">
+          2020 © MyNotes <NavLink target="_blank" className="index__footer__link" to="/policy">"Политикой обработки конфеденциальных данных"</NavLink>
+        </div>
       </div>
     )
   }

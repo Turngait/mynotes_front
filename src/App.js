@@ -18,6 +18,7 @@ function App() {
       <Route path='/policy' exact component={Policy} />
       <Route path='/recovery' exact component={Recovery} />
       <Route path='/setnewpass/:email/:hash' exact component={NewPass} />
+      <Route path='/contacts' exact component={Index} />
     </Switch>
     </>
   )
