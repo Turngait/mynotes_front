@@ -4,8 +4,6 @@ import PopUp from 'components/PopUp/PopUp';
 import Input from 'components/Input2/Input2';
 import Button from 'components/ButtonPopUp/ButtonPopUp';
 
-import {editBudgetHook} from '../../hooks';
-
 import './index.scss';
 
 const EditBudget = props => {
@@ -13,8 +11,9 @@ const EditBudget = props => {
   const [balance, setBalance] = React.useState(props.editableItem.balance || 0);
   const [error, setError] = React.useState('');
 
+
   async function editBudget() {
-    const isEdit = await editBudgetHook({title, balance, _id: props.editableItem._id}, props.token, props.setBudget, setError);
+    const isEdit = await props.editBudgetService({title, balance, _id: props.editableItem._id}, props.token, props.setBudget, setError);
     if(isEdit) {
       props.setIsEditBudgetOpen(false);
     };

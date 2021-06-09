@@ -9,7 +9,7 @@ import MyFinance from './MyFinance/MyFinance';
 import { getToken, getSettings, logOut, setBudget } from 'store/User/user.actions';
 import { setCosts } from 'store/Costs/costs.actions';
 import { setIncomes } from 'store/Incomes/income.action';
-import { getFinData } from './hooks';
+import { getFinData } from './services';
 import { numberFormat } from 'utils';
 
 import './Dashboard.scss';

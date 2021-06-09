@@ -2,8 +2,6 @@ import React from 'react';
 
 import {numberFormat} from 'utils';
 
-import {deleteBudgetHook} from '../../hooks'
-
 import './index.scss';
 
 const BudgetsBox = props => {
@@ -27,7 +25,7 @@ const BudgetsBox = props => {
                       className="fas controlBudgetItem fa-pen">
                     </i>
                     <i 
-                      onClick={(event) => deleteBudgetHook(event.target.dataset.itemId, props.token, props.setBudget, props.setError)}
+                      onClick={(event) => props.deleteBudgetService(event.target.dataset.itemId, props.token, props.setBudget, props.setError)}
                       data-item-id={budget._id} 
                       className="fas controlBudgetItem fa-times-circle">
                     </i>

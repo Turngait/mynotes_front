@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {getIncomes} from 'store/Incomes/income.action';
 import {numberFormat} from 'utils';
-import {deleteIncome, showSourceName} from '../../hooks';
+import {showSourceName} from '../../services';
 
 import './IncomeItem.scss';
 
@@ -23,7 +23,7 @@ const IncomeItem = props => {
         <span className="IncomeItem_header__control">
           <span className="IncomeItem_header__info">{numberFormat(props.amount)} {props.currency}</span>
           <i 
-            onClick={(event) => deleteIncome({target: event.target, token: props.token}, props.getIncomes)} 
+            onClick={(event) => props.deleteIncome({target: event.target, token: props.token}, props.getIncomes)} 
             data-item-id={props._id} 
             className="fas deleteCostItem fa-times-circle">
           </i>

@@ -7,6 +7,7 @@ import AddBudget from './components/AddBudget';
 import EditBudget from './components/EditBudget';
 
 import {setBudget} from 'store/User/user.actions';
+import {saveBudget, editBudgetService, deleteBudgetService} from './services';
 
 import './index.scss';
 
@@ -19,15 +20,16 @@ const Budgets = props => {
 
   return (
     <div className="budgets">
-      {isAddBudgetOpen ? <AddBudget setIsAddBudgetOpen={setIsAddBudgetOpen} setBudget={props.setBudget} token={props.token}/> : null}
-      {isEditBudgetOpen ? <EditBudget token={props.token} setBudget={props.setBudget} editableItem={editableItem} setIsEditBudgetOpen={setIsEditBudgetOpen}/> : null}
+      {isAddBudgetOpen ? <AddBudget saveBudget={saveBudget} setIsAddBudgetOpen={setIsAddBudgetOpen} setBudget={props.setBudget} token={props.token}/> : null}
+      {isEditBudgetOpen ? <EditBudget editBudgetService={editBudgetService} token={props.token} setBudget={props.setBudget} editableItem={editableItem} setIsEditBudgetOpen={setIsEditBudgetOpen}/> : null}
       <div className="budgets_headerBox">
         <div className="budgets_headerBox__info">
-          Итого: {props.total} {props.currency}
+          Сальдо: {props.total} {props.currency}
         </div>
       </div>
       {error.length > 0 ? <p className="budgets__error">{error}</p> : null}
-      <BudgetsBox 
+      <BudgetsBox
+        deleteBudgetService={deleteBudgetService}
         setIsEditBudgetOpen={setIsEditBudgetOpen} 
         setEditableItem={setEditableItem} 
         budget={props.budget} 
@@ -45,13 +47,13 @@ function mapStateToProps(state) {
   return {
     budget: state.user.budgets,
     currency: state.user.settings.currency,
-    token: state.user.token
+    token: state.user.token,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    setBudget: (data) => dispatch(setBudget(data))
+    setBudget: (data) => dispatch(setBudget(data)),
   }
 }
 

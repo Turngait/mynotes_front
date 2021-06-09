@@ -57,7 +57,7 @@ export async function saveGroup(group, token, setCosts, setError) {
   return status;
 } 
 
-export async function deleteCostItemHook(data, getCostItems) {
+export async function deleteCostItemService(data, getCostItems) {
   const {target, token} = data;
   const id = target.dataset.itemId;
 
@@ -101,7 +101,7 @@ export function showGroupName (data) {
   return 'None'
 }
 
-export function costsFilterHook(costs, group_id) {
+export function costsFilterService (costs, group_id) {
   let filteredCosts = [];
   for (const cost of costs) {
     for (const item of cost.items) {
@@ -111,4 +111,14 @@ export function costsFilterHook(costs, group_id) {
     }
   }
   return filteredCosts;
+}
+
+export function getCostsByPeriodService (period, token, dispatcher) {
+  fetch(API_URL + '/fin/cost/get/' + period + '/' + token)
+    .then(res => res.json())
+    .then(data => {
+      const {costs} = data.data;
+      dispatcher(costs, period);
+    });
+
 }

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import {getToken, auth} from '../../store/User/user.actions';
-import {signIn, signUp} from './hooks';
+import {signIn, signUp} from './services';
 
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';

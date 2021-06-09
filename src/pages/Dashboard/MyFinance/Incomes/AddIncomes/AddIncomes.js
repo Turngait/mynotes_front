@@ -8,8 +8,6 @@ import ButtonPopUp from 'components/ButtonPopUp/ButtonPopUp';
 import Textarea1 from 'components/Textarea1/Textarea1';
 import Select1 from 'components/Select1/Select1';
 
-import {saveIncome} from '../hooks';
-
 import {setIncomes} from 'store/Incomes/income.action';
 
 import './AddIncomes.scss';
@@ -25,7 +23,7 @@ const AddIncome = props => {
   const [source, setSource] = React.useState(props.sources[0]._id);
 
   async function addIncome() {
-    const isAdd = await saveIncome({date, title, budget, source, amount, description}, props.token, props.setIncomes, setError);
+    const isAdd = await props.saveIncome({date, title, budget, source, amount, description}, props.token, props.setIncomes, setError);
     if(isAdd) {
       props.setIsAddIncomeOpen(false);
     } 

@@ -6,7 +6,6 @@ import PopUp from 'components/PopUp/PopUp';
 import Input from 'components/Input2/Input2';
 import ButtonPopUp from 'components/ButtonPopUp/ButtonPopUp';
 
-import {saveSource} from '../hooks';
 import {setIncomes} from 'store/Incomes/income.action';
 
 import './index.scss';
@@ -17,7 +16,7 @@ const AddSource = props => {
   const [error, setError] = React.useState('');
 
   async function addSource() {
-    const isAdd = await saveSource(source, props.token, props.setIncomes, setError);
+    const isAdd = await props.saveSource(source, props.token, props.setIncomes, setError);
     if(isAdd) {
       props.setIsAddSourceOpen(false);
     }

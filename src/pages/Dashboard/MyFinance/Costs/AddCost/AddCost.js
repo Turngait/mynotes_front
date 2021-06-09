@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import {saveCost} from '../hooks';
-
 import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
@@ -25,7 +23,7 @@ const AddCost = props => {
   const [error, setError] = React.useState('');
 
   async function addCost() {
-    const isAdd = await saveCost({title, amount, description, group, budget, date}, props.token, props.setCosts, setError);
+    const isAdd = await props.saveCost({title, amount, description, group, budget, date}, props.token, props.setCosts, setError);
     if(isAdd) {
       props.setIsAddCostOpen(false);
     } 

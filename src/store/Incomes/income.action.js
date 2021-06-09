@@ -24,18 +24,15 @@ export function setIncomes(data) {
   }
 }
 
-export function getIncomeForPeriod (data) {
+export function setIncomesForPeriod (incomes, period) {
   return (dispatch) => {
-    const {period} = data;
-    fetch(API_URL + '/fin/income/get/' + period + '/' + data.token)
-    .then(res => {return res.json()})
-    .then(data => {
-      dispatch({type: 'SET_INCOMES', payload: data.data.incomes})
+    console.log(incomes);
+    console.log(period);
+    dispatch({type: 'SET_INCOMES', payload: incomes});
 
-      dispatch({
-        type: 'SET_MONTH',
-        payload: period
-      })
-    })
+    dispatch({
+      type: 'SET_MONTH',
+      payload: period
+    });
   }
 }

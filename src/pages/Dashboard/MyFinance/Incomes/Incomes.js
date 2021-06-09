@@ -2,14 +2,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
-import Input2 from 'components/Input2/Input2';
+import InputDataPicker from 'components/Input2/Input2';
 import IncomeBox from './IncomeBox/IncomeBox';
 import AddIncome from './AddIncomes/AddIncomes';
 import AddSource from './AddSource';
 import FilteredCosts from 'components/FilteredItems';
 
-import {getIncomeForPeriod} from 'store/Incomes/income.action';
-import {incomesFilterHook} from './hooks';
+import {setIncomesForPeriod} from 'store/Incomes/income.action';
+import {incomesFilterHook, saveIncome, saveSource, deleteIncome, getIncomesByPeriodService} from './services';
 
 import './Incomes.scss';
 
@@ -31,15 +31,20 @@ const Incomes = props => {
 
   return (
     <div className="incomes">
-      {isAddIncomeOpen ? <AddIncome openAddSource={setIsAddSourceOpen} setIsAddIncomeOpen={setIsAddIncomeOpen}/> : null}
-      {isAddSourceOpen ? <AddSource setIsAddSourceOpen={setIsAddSourceOpen}/> : null}
+      {isAddIncomeOpen ? <AddIncome saveIncome={saveIncome} openAddSource={setIsAddSourceOpen} setIsAddIncomeOpen={setIsAddIncomeOpen}/> : null}
+      {isAddSourceOpen ? <AddSource saveSource={saveSource} setIsAddSourceOpen={setIsAddSourceOpen}/> : null}
       {isFilteredIncomesOpen ? <FilteredCosts items={filteredIncomes} currancy={props.currency} period={props.incomePeriod} groupName={filteredSource} setIsFilteredItemsOpen={setIsFilteredIncomesOpen}/> : null}
       <div className="myFin_headerBox">
         <div className="myFin_headerBox__periodAmount">
           В этом месяце: {props.periodAmount} {props.currency}
         </div>
         <div>
-          <Input2 onChange={(event) => props.getIncomeForPeriod({period:event.target.value, token: props.token})} value={props.incomePeriod} type="month" name="date"/>
+          <InputDataPicker 
+            onChange={(event) => getIncomesByPeriodService(event.target.value, props.token, props.setIncomesForPeriod)}
+            value={props.incomePeriod}
+            type="month"
+            name="date"
+          />
         </div>
       </div>
       <div className="allIncomes">
@@ -47,7 +52,7 @@ const Incomes = props => {
         props.incomeItems.length > 0 ?
         props.incomeItems.map((income, key) => {
           return (
-            <IncomeBox filterIncomesHandler={filterIncomesHandler} {...income} key={key} />
+            <IncomeBox deleteIncome={deleteIncome} filterIncomesHandler={filterIncomesHandler} {...income} key={key} />
           )
         })
         :
@@ -70,7 +75,7 @@ function mapStateToprops(state) {
 
 function mapDispatchToprops (dispatch) {
   return {
-    getIncomeForPeriod: (data) => dispatch(getIncomeForPeriod(data))
+    setIncomesForPeriod: (incomes, period) => dispatch(setIncomesForPeriod(incomes, period))
   }
 }
 

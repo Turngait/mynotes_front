@@ -4,8 +4,6 @@ import PopUp from 'components/PopUp/PopUp';
 import Input from 'components/Input2/Input2';
 import Button from 'components/ButtonPopUp/ButtonPopUp';
 
-import {saveBudget} from '../../hooks';
-
 import './index.scss';
 
 const AddBudget = props => {
@@ -14,7 +12,7 @@ const AddBudget = props => {
   const [error, setError] = React.useState('');
 
   async function addBudget () {
-    const isAdd = await saveBudget({title, balance, created_at: new Date()}, props.token, props.setBudget, setError);
+    const isAdd = await props.saveBudget({title, balance, created_at: new Date()}, props.token, props.setBudget, setError);
     if(isAdd) props.setIsAddBudgetOpen(false);
   }
 
