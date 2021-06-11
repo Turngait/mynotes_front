@@ -1,6 +1,6 @@
 import {API_URL} from 'config/api';
 
-export async function saveCost(cost, token, setCosts,setErrors) {
+export async function saveCost(cost, token, setCosts, setErrors) {
   const status = await fetch(API_URL + '/fin/cost/add', {
     method: 'POST',
     headers: {
@@ -120,5 +120,4 @@ export function getCostsByPeriodService (period, token, dispatcher) {
       const {costs} = data.data;
       dispatcher(costs, period);
     });
-
 }

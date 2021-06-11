@@ -22,3 +22,9 @@
     background-color: $background-color;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .profile {
+    flex-direction: column-reverse;
+  }
+}

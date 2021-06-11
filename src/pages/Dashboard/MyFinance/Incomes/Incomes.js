@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
+import Loader from 'components/Loader';
 import InputDataPicker from 'components/Input2/Input2';
 import IncomeBox from './IncomeBox/IncomeBox';
 import AddIncome from './AddIncomes/AddIncomes';
@@ -31,35 +32,39 @@ const Incomes = props => {
 
   return (
     <div className="incomes">
-      {isAddIncomeOpen ? <AddIncome saveIncome={saveIncome} openAddSource={setIsAddSourceOpen} setIsAddIncomeOpen={setIsAddIncomeOpen}/> : null}
-      {isAddSourceOpen ? <AddSource saveSource={saveSource} setIsAddSourceOpen={setIsAddSourceOpen}/> : null}
-      {isFilteredIncomesOpen ? <FilteredCosts items={filteredIncomes} currancy={props.currency} period={props.incomePeriod} groupName={filteredSource} setIsFilteredItemsOpen={setIsFilteredIncomesOpen}/> : null}
-      <div className="myFin_headerBox">
-        <div className="myFin_headerBox__periodAmount">
-          В этом месяце: {props.periodAmount} {props.currency}
-        </div>
-        <div>
-          <InputDataPicker 
-            onChange={(event) => getIncomesByPeriodService(event.target.value, props.token, props.setIncomesForPeriod)}
-            value={props.incomePeriod}
-            type="month"
-            name="date"
-          />
-        </div>
-      </div>
-      <div className="allIncomes">
-      {
-        props.incomeItems.length > 0 ?
-        props.incomeItems.map((income, key) => {
-          return (
-            <IncomeBox deleteIncome={deleteIncome} filterIncomesHandler={filterIncomesHandler} {...income} key={key} />
-          )
-        })
-        :
-          <p className="myFin__noContent">{t('incomes.noIncomes')}</p>
-      }
-      </div>
-      <button onClick={() => setIsAddIncomeOpen(true)} className="incomes__openAddCostBtn">+</button>
+      {props.isLoading ? <Loader /> : (
+        <>
+          {isAddIncomeOpen ? <AddIncome saveIncome={saveIncome} openAddSource={setIsAddSourceOpen} setIsAddIncomeOpen={setIsAddIncomeOpen}/> : null}
+          {isAddSourceOpen ? <AddSource saveSource={saveSource} setIsAddSourceOpen={setIsAddSourceOpen}/> : null}
+          {isFilteredIncomesOpen ? <FilteredCosts items={filteredIncomes} currancy={props.currency} period={props.incomePeriod} groupName={filteredSource} setIsFilteredItemsOpen={setIsFilteredIncomesOpen}/> : null}
+          <div className="myFin_headerBox">
+            <div className="myFin_headerBox__periodAmount">
+              В этом месяце: {props.periodAmount} {props.currency}
+            </div>
+            <div>
+              <InputDataPicker 
+                onChange={(event) => getIncomesByPeriodService(event.target.value, props.token, props.setIncomesForPeriod)}
+                value={props.incomePeriod}
+                type="month"
+                name="date"
+              />
+            </div>
+          </div>
+          <div className="allIncomes">
+          {
+            props.incomeItems.length > 0 ?
+            props.incomeItems.map((income, key) => {
+              return (
+                <IncomeBox deleteIncome={deleteIncome} filterIncomesHandler={filterIncomesHandler} {...income} key={key} />
+              )
+            })
+            :
+              <p className="myFin__noContent">{t('incomes.noIncomes')}</p>
+          }
+          </div>
+          <button onClick={() => setIsAddIncomeOpen(true)} className="incomes__openAddCostBtn">+</button>
+        </>
+      )}
     </div>
   );
 };

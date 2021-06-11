@@ -92,7 +92,7 @@ class Index extends Component {
     return (
       <div className="index">
         <nav className="index__nav">
-          <NavLink to="/contacts" className="index__nav__item">Контакты</NavLink>
+          <NavLink to="/about" className="index__nav__item">Подробнее</NavLink>
         </nav>
         <div className="index__box">
           <div className="index__box__socioBox">
@@ -133,7 +133,7 @@ class Index extends Component {
           </div>
         </div>
         <div className="index__footer">
-          2020 © MyNotes <NavLink target="_blank" className="index__footer__link" to="/policy">"Политикой обработки конфеденциальных данных"</NavLink>
+          {new Date().getFullYear()} © MyNotes <NavLink target="_blank" className="index__footer__link" to="/policy">"Политикой обработки конфеденциальных данных"</NavLink>
         </div>
       </div>
     )

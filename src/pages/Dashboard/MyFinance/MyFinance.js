@@ -8,9 +8,9 @@ import './MyFinance.scss';
 
 const MyFinance = props => 
   <> 
-    { props.costOpen ? <Costs periodAmount={props.periodAmount}/> : null } 
-    { props.incomeOpen ? <Incomes periodAmount={props.periodAmount} /> : null } 
-    { props.budgetsOpen ? <Budgets total={props.periodAmount} /> : null }
+    { props.costOpen ? <Costs isLoading={props.isLoading} periodAmount={props.periodAmount}/> : null } 
+    { props.incomeOpen ? <Incomes isLoading={props.isLoading} periodAmount={props.periodAmount} /> : null } 
+    { props.budgetsOpen ? <Budgets isLoading={props.isLoading} total={props.periodAmount} /> : null }
   </>
 
 export default MyFinance;

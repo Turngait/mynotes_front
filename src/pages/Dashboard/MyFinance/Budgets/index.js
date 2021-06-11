@@ -2,6 +2,8 @@ import React from 'react';
 // import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
+import Loader from 'components/Loader';
+
 import BudgetsBox from './components/BudgetsBox';
 import AddBudget from './components/AddBudget';
 import EditBudget from './components/EditBudget';
@@ -20,25 +22,29 @@ const Budgets = props => {
 
   return (
     <div className="budgets">
-      {isAddBudgetOpen ? <AddBudget saveBudget={saveBudget} setIsAddBudgetOpen={setIsAddBudgetOpen} setBudget={props.setBudget} token={props.token}/> : null}
-      {isEditBudgetOpen ? <EditBudget editBudgetService={editBudgetService} token={props.token} setBudget={props.setBudget} editableItem={editableItem} setIsEditBudgetOpen={setIsEditBudgetOpen}/> : null}
-      <div className="budgets_headerBox">
-        <div className="budgets_headerBox__info">
-          Сальдо: {props.total} {props.currency}
-        </div>
-      </div>
-      {error.length > 0 ? <p className="budgets__error">{error}</p> : null}
-      <BudgetsBox
-        deleteBudgetService={deleteBudgetService}
-        setIsEditBudgetOpen={setIsEditBudgetOpen} 
-        setEditableItem={setEditableItem} 
-        budget={props.budget} 
-        currancy={props.currency}
-        token={props.token}
-        setError={setError}
-        setBudget={props.setBudget}
-      />
-      <button onClick={setIsAddBudgetOpen} className="budgets__openAddCostBtn">+</button>
+      {props.isLoading ? <Loader /> : (
+        <>
+          {isAddBudgetOpen ? <AddBudget saveBudget={saveBudget} setIsAddBudgetOpen={setIsAddBudgetOpen} setBudget={props.setBudget} token={props.token}/> : null}
+          {isEditBudgetOpen ? <EditBudget editBudgetService={editBudgetService} token={props.token} setBudget={props.setBudget} editableItem={editableItem} setIsEditBudgetOpen={setIsEditBudgetOpen}/> : null}
+          <div className="budgets_headerBox">
+            <div className="budgets_headerBox__info">
+              Сальдо: {props.total} {props.currency}
+            </div>
+          </div>
+          {error.length > 0 ? <p className="budgets__error">{error}</p> : null}
+          <BudgetsBox
+            deleteBudgetService={deleteBudgetService}
+            setIsEditBudgetOpen={setIsEditBudgetOpen} 
+            setEditableItem={setEditableItem} 
+            budget={props.budget} 
+            currancy={props.currency}
+            token={props.token}
+            setError={setError}
+            setBudget={props.setBudget}
+          />
+          <button onClick={setIsAddBudgetOpen} className="budgets__openAddCostBtn">+</button>
+        </>
+      )}
     </div>
   )
 }

@@ -14,7 +14,7 @@ const IncomeBox = props => {
   return (
     <div className="IncomeBox">
       <div className="IncomeBox__infoBox">
-        <p className="IncomeBox__infoBox__date">{formateDate(props.period)}</p>
+        <p className="IncomeBox__infoBox__date">{formateDate(props.period, 'long')}</p>
         <p className="IncomeBox__infoBox__spentByDay">{t('incomes.today')}: {numberFormat(props.gainByDay)} {props.currency}</p>
       </div>
       <div className="IncomeBox__incomeItems">
