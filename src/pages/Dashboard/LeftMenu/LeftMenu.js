@@ -10,6 +10,12 @@ const LeftMenu = (props) => {
     <div className="LeftMenu_box">
       <div className="LeftMenu_box__item">
         {
+          props.dataOpen ?
+            <button onClick={props.openDataHandler} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">Статистика</button>
+          :
+            <button onClick={props.openDataHandler} className="LeftMenu_box__item_btn">Статистика</button>
+        }
+        {
           props.costOpen ?
             <button onClick={props.openCostHandler} className="LeftMenu_box__item_btn LeftMenu_box__item_btn_active">{t("costs.header")}</button>
           :

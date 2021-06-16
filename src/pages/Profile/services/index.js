@@ -70,3 +70,12 @@ export async function deleteSource(id_group, token, setMsg) {
 
   return is_delete;
 }
+
+export async function getInitialData (token, period, setInfo) {
+  const { data, error } = await fetch(API_URL+'/auth/user/' + token + '/' + period)
+  .then(res => res.json());
+  if (error) {
+    return;
+  }
+  if (data) setInfo(data);
+}

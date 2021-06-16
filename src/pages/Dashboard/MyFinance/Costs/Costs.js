@@ -9,8 +9,7 @@ import CostBox from './CostBox/CostBox';
 import FilteredCosts from 'components/FilteredItems';
 import InputDataPicker from 'components/Input2/Input2';
 
-import {setCostsForPeriod} from 'store/Costs/costs.actions';
-import {costsFilterService, getCostsByPeriodService, saveCost, saveGroup, deleteCostItemService} from './services';
+import {costsFilterService, saveCost, saveGroup, deleteCostItemService} from './services';
 
 import './Costs.scss';
 
@@ -53,7 +52,7 @@ const Costs = props => {
             </div>
             <div className="myFin_headerBox__dateBox">
               <InputDataPicker 
-                onChange={(event) => getCostsByPeriodService(event.target.value, props.token, props.setCostsForPeriod)}
+                onChange={(event) => props.getFinDataByPeriod(event.target.value)}
                 value={props.period}
                 type="month"
                 name="date"
@@ -90,10 +89,4 @@ function mapStateToProps (state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    setCostsForPeriod: (costs, period) => dispatch(setCostsForPeriod(costs, period))
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Costs);
+export default connect(mapStateToProps, null)(Costs);

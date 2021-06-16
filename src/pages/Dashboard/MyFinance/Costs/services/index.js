@@ -112,12 +112,3 @@ export function costsFilterService (costs, group_id) {
   }
   return filteredCosts;
 }
-
-export function getCostsByPeriodService (period, token, dispatcher) {
-  fetch(API_URL + '/fin/cost/get/' + period + '/' + token)
-    .then(res => res.json())
-    .then(data => {
-      const {costs} = data.data;
-      dispatcher(costs, period);
-    });
-}

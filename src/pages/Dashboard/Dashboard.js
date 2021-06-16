@@ -6,7 +6,7 @@ import Header from 'components/Header/Header';
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
 
-import { getToken, getSettings, logOut, setBudget } from 'store/User/user.actions';
+import { getToken, getSettings, logOut, setBudget, setPeriod } from 'store/User/user.actions';
 import { setCosts } from 'store/Costs/costs.actions';
 import { setIncomes } from 'store/Incomes/income.action';
 import { getFinData } from './services';
@@ -20,8 +20,9 @@ import './Dashboard.scss';
 
 const Dashboard = (props) => {
   const [incomeOpen, setIncomeOpen] = useState(false);
-  const [costOpen, setCostOpen] = useState(true);
+  const [costOpen, setCostOpen] = useState(false);
   const [budgetsOpen, setBudgetsOpen] = useState(false);
+  const [dataOpen, setDataOpen] = useState(true);
   const [periodAmount, setPeriodAmount] = useState(props.costsByPeriod);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -29,6 +30,7 @@ const Dashboard = (props) => {
     setIncomeOpen(false);
     setCostOpen(true);
     setBudgetsOpen(false);
+    setDataOpen(false);
     setPeriodAmount(props.costsByPeriod);
   }
 
@@ -36,6 +38,7 @@ const Dashboard = (props) => {
     setIncomeOpen(true);
     setCostOpen(false);
     setBudgetsOpen(false);
+    setDataOpen(false);
     setPeriodAmount(props.incomesByPeriod);
   }
 
@@ -43,8 +46,31 @@ const Dashboard = (props) => {
     setIncomeOpen(false);
     setCostOpen(false);
     setBudgetsOpen(true);
+    setDataOpen(false);
     setPeriodAmount(props.incomesByPeriod - props.costsByPeriod);
   }
+  const openDataHandler = () => {
+    setIncomeOpen(false);
+    setCostOpen(false);
+    setBudgetsOpen(false);
+    setDataOpen(true);
+    setPeriodAmount(props.incomesByPeriod - props.costsByPeriod);
+  }
+  const getDataForPeriod = async (period) => {
+    setIsLoading(true);
+
+    const {costs, incomes, budget} = await getFinData(props.token, period);
+
+    props.setCosts(costs);
+    props.setBudget(budget);
+    props.setIncomes(incomes);
+    let spentByThisMonth = 0;
+    if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
+    setPeriodAmount(spentByThisMonth);
+    props.setPeriod(period);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     async function getData () {
       const token = await props.getToken();
@@ -83,19 +109,23 @@ const Dashboard = (props) => {
             incomeOpen={incomeOpen} 
             costOpen={costOpen}
             budgetsOpen={budgetsOpen}
+            dataOpen={dataOpen}
             openCostHandler={openCostHandler}
             openIncomeHandler={openIncomeHandler}
             openBudgetsHandler={openBudgetsHandler}
+            openDataHandler={openDataHandler}
             balance={numberFormat(props.balance) || 0}
             currancy={props.currancy}
           />
         </aside>
         <section className="main_box__info">
           <MyFinance
+            getFinDataByPeriod={getDataForPeriod}
             periodAmount={numberFormat(periodAmount)}
             incomeOpen={incomeOpen} 
             costOpen={costOpen}
             budgetsOpen={budgetsOpen}
+            dataOpen={dataOpen}
             isLoading={isLoading}
           />
         </section>
@@ -106,6 +136,7 @@ const Dashboard = (props) => {
 
 function mapStateToProps(state) {
   return {
+    token: state.user.token,
     costsByPeriod: state.costs.costsByPeriod,
     incomesByPeriod: state.income.incomesByPeriod,
     period: state.user.month,
@@ -121,7 +152,8 @@ function mapDispatchToProps(dispatch) {
     logOut: () => dispatch(logOut()),
     setCosts: (costs) => dispatch(setCosts(costs)),
     setBudget: (budget) => dispatch(setBudget(budget)),
-    setIncomes: (incomes) => dispatch(setIncomes(incomes))
+    setIncomes: (incomes) => dispatch(setIncomes(incomes)),
+    setPeriod: (period) => dispatch(setPeriod(period))
   }
 }
 

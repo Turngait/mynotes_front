@@ -1,5 +1,3 @@
-import {API_URL} from '../../config/api';
-
 export function auth(data) {
   return (dispatch) => {
     localStorage.setItem('token', data.token);
@@ -22,6 +20,14 @@ export function auth(data) {
   }
 }
 
+export function setPeriod (period) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_MONTH',
+      payload: period
+    });
+  }
+}
 export function setBudget(budget) {
   return (dispatch) => {
     if(!budget) return
@@ -47,14 +53,6 @@ export function getSettings() {
       type: 'SET_SETTINGS',
       payload: settings
     });
-  }
-}
-
-export function getUserInfo({token, period}) {
-  return async (dispatch) => {
-    const { data } = await fetch(API_URL+'/auth/user/' + token + '/' + period)
-    .then(res => res.json());
-    dispatch(setInfo(data));
   }
 }
 

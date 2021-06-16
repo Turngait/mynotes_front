@@ -37,7 +37,7 @@ const MyGroupBox = props => {
         <MyGroupBoxItem
           type="costs"
           setMsg={setMsg}
-          groups={props.costGroups}
+          groups={props.costGroups || []}
           token={props.token}
           currancy={props.currency}
           onDelete={deleteGroupCost}
@@ -45,7 +45,7 @@ const MyGroupBox = props => {
         />
         <MyGroupBoxItem
           type="incomes"
-          groups={props.incomeSources}
+          groups={props.incomeSources || []}
           token={props.token}
           currancy={props.currency}
           onDelete={deleteSourceIncome}

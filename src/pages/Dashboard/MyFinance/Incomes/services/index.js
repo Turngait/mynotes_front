@@ -97,12 +97,3 @@ export function showSourceName(data) {
 
   return 'None'
 }
-
-export function getIncomesByPeriodService(period, token, dispathcer) {
-  fetch(API_URL + '/fin/income/get/' + period + '/' + token)
-  .then(res => {return res.json()})
-  .then(data => {
-    const {incomes} = data.data;
-    dispathcer(incomes, period);
-  })
-}

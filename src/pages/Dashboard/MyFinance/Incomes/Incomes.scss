@@ -47,7 +47,7 @@
     flex-direction: column;
   }
   .allIncomes {
-    height: 39rem;
+    height: 55vh;
     margin-top: 0.4rem;
     flex-grow: 1;
   }
@@ -63,7 +63,7 @@
 
 @media all and (min-width: 0) and (max-width: 500px) {
   .allIncomes {
-    height: 39rem;
+    height: auto;
   }
   .IncomeItem_header__info__title {
     min-width: auto;

@@ -26,9 +26,7 @@ export function setIncomes(data) {
 
 export function setIncomesForPeriod (incomes, period) {
   return (dispatch) => {
-    console.log(incomes);
-    console.log(period);
-    dispatch({type: 'SET_INCOMES', payload: incomes});
+    dispatch({type: 'SET_INCOMES', payload: incomes.incomes});
 
     dispatch({
       type: 'SET_MONTH',
