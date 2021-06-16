@@ -1,4 +1,4 @@
-@import "../../config/variable.scss";
+@import "../../styles/colors.scss";
 .flexbox {
   height: 100%;
   display: flex;
@@ -23,8 +23,14 @@
   }
 }
 
-@media all and (min-width: 0) and (max-width: 720px) {
+@media all and (min-width: 0) and (max-width: 800px) {
   .main_box {
-    display: block !important;
+    flex-direction: column-reverse;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 600px) {
+  .main_box__info {
+    padding: 1rem 0.6rem 0;
   }
 }

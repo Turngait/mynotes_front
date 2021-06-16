@@ -1,8 +1,18 @@
-# Frontend of MyNotes Project.
+# Frontend of FinCloud Project.
 
 ## Moqup
 https://www.figma.com/file/3DWbCoW6H7RjfeRt5J0HJf/MyNotes?node-id=25%3A73
 
+This is frontend of a project.
+Backend you can get here.
+```
+https://github.com/Turngait/mynotes_api
+```
+
+To start working you need clone this project and make:
+```
+yarn install
+```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

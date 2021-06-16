@@ -1,32 +1,71 @@
 .IncomeBox {
   display: flex;
   justify-content: space-between;
-  margin: 2rem 0;
   width: 100%;
+  margin: 0 0 2rem;
   
   &__infoBox {
-    width: 18%;
+    width: 24%;
     height: 100%;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding: 1rem;
+    display: flex;
+    justify-content: space-between;
 
     &__date {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       margin: 0;
     }
 
     &__spentByDay {
       font-size: 1.2rem;
-      font-weight: 600;
       margin: 0;
-      margin-top: 0.3rem;
     }
   }
 
   &__incomeItems {
-    width: 76%;
+    width: 70%;
   }
 }
 
+@media all and (min-width: 0) and (max-width: 1300px) {
+  .IncomeBox__incomeItems {
+    width: 70%;
+  }
+  .IncomeBox__infoBox {
+    width: 24%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 1000px) {
+  .IncomeBox__incomeItems {
+    width: 60%;
+  }
+  .IncomeBox__infoBox {
+    width: 34%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 900px) {
+  .IncomeBox {
+    display: block;
+  }
+
+  .IncomeBox__incomeItems {
+    width: 100%;
+    margin-top:1rem;
+  }
+  .IncomeBox__infoBox {
+    width: 52%;
+  }
+  .IncomeBox__infoBox__date,
+  .IncomeBox__infoBox__spentByDay {
+    font-size: 1rem;
+  }
+
+  .myFin_headerBox {
+    display: block !important;
+  }
+}

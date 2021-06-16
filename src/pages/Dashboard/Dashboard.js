@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Header from 'components/Header/Header';
-import Footer from 'components/Footer/Footer';
 
 import LeftMenu from './LeftMenu/LeftMenu';
 import MyFinance from './MyFinance/MyFinance';
 
-import { getToken, getSettings, logOut, setBudget } from 'store/User/user.actions';
+import { getToken, getSettings, logOut, setBudget, setPeriod } from 'store/User/user.actions';
 import { setCosts } from 'store/Costs/costs.actions';
 import { setIncomes } from 'store/Incomes/income.action';
-import { getFinData } from './hooks';
+import { getFinData } from './services';
 import { numberFormat } from 'utils';
 
 import './Dashboard.scss';
@@ -19,119 +18,125 @@ import './Dashboard.scss';
   Dashboard component which render all section
 */
 
-class Dashboard extends Component {
-  state = {
-    incomeOpen: false,
-    costOpen: true,
-    budgetsOpen: false,
-    pageName: 'Расходы',
-    periodAmount: this.props.costsByPeriod
+const Dashboard = (props) => {
+  const [incomeOpen, setIncomeOpen] = useState(false);
+  const [costOpen, setCostOpen] = useState(false);
+  const [budgetsOpen, setBudgetsOpen] = useState(false);
+  const [dataOpen, setDataOpen] = useState(true);
+  const [periodAmount, setPeriodAmount] = useState(props.costsByPeriod);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const openCostHandler = () => {
+    setIncomeOpen(false);
+    setCostOpen(true);
+    setBudgetsOpen(false);
+    setDataOpen(false);
+    setPeriodAmount(props.costsByPeriod);
   }
 
-  openCostHandler = () => {
-    this.setState({
-      costOpen: true,
-      incomeOpen: false,
-      budgetsOpen: false,
-      pageName: 'Расходы',
-      periodAmount: this.props.costsByPeriod
-    })
+  const openIncomeHandler = () => {
+    setIncomeOpen(true);
+    setCostOpen(false);
+    setBudgetsOpen(false);
+    setDataOpen(false);
+    setPeriodAmount(props.incomesByPeriod);
   }
 
-  openIncomeHandler = () => {
-    this.setState({
-      incomeOpen: true,
-      costOpen: false,
-      budgetsOpen: false,
-      pageName: 'Доходы',
-      periodAmount: this.props.incomesByPeriod
-    })
+  const openBudgetsHandler = () => {
+    setIncomeOpen(false);
+    setCostOpen(false);
+    setBudgetsOpen(true);
+    setDataOpen(false);
+    setPeriodAmount(props.incomesByPeriod - props.costsByPeriod);
   }
-
-  openBudgetsHandler = () => {
-    this.setState({
-      incomeOpen: false,
-      costOpen: false,
-      budgetsOpen: true,
-      pageName: 'Счета',
-      periodAmount: this.props.incomesByPeriod - this.props.costsByPeriod
-    })
+  const openDataHandler = () => {
+    setIncomeOpen(false);
+    setCostOpen(false);
+    setBudgetsOpen(false);
+    setDataOpen(true);
+    setPeriodAmount(props.incomesByPeriod - props.costsByPeriod);
   }
+  const getDataForPeriod = async (period) => {
+    setIsLoading(true);
 
-  async componentDidMount() {
-    const token = await this.props.getToken();
-    this.props.getSettings();
+    const {costs, incomes, budget} = await getFinData(props.token, period);
 
-    if (!token) {
-      this.props.history.push('/')
-      return null;
-    }
-    
-    const {costs, incomes, budget} = await getFinData(token, this.props.period);
-    this.props.setCosts(costs);
-    this.props.setBudget(budget);
-    this.props.setIncomes(incomes);
-
+    props.setCosts(costs);
+    props.setBudget(budget);
+    props.setIncomes(incomes);
     let spentByThisMonth = 0;
     if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
-
-    this.setState({
-      periodAmount: spentByThisMonth
-    })
+    setPeriodAmount(spentByThisMonth);
+    props.setPeriod(period);
+    setIsLoading(false);
   }
 
-  async componentDidUpdate() {
-    const token = this.props.getToken();
-    this.props.getSettings();
-
-    if (!token) {
-      this.props.history.push('/');
-      return null;
+  useEffect(() => {
+    async function getData () {
+      const token = await props.getToken();
+      props.getSettings();
+  
+      if (!token) {
+        props.history.push('/')
+        return null;
+      }
+      
+      const {costs, incomes, budget} = await getFinData(token, props.period);
+      props.setCosts(costs);
+      props.setBudget(budget);
+      props.setIncomes(incomes);
+  
+      let spentByThisMonth = 0;
+      if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
+      setPeriodAmount(spentByThisMonth);
+      setIsLoading(false);
     }
-    const {costs, incomes, budget} = await getFinData(token, this.props.period);
-    this.props.setCosts(costs);
-    this.props.setBudget(budget);
-    this.props.setIncomes(incomes);
+
+    getData();
+  }, []);
+
+  const logOut = () => {
+    props.logOut()
+    props.history.push('/')
   }
 
-  logOut = () => {
-    this.props.logOut()
-    this.props.history.push('/')
-  }
-
-  render() {
-    return (
-      <div className="flexbox">
-        <Header logOut={this.logOut} pageName={this.state.pageName} periodAmount={numberFormat(this.state.periodAmount)} />
-        <main className="main_box">
-          <aside className="main_box__menu">
-            <LeftMenu 
-              incomeOpen={this.state.incomeOpen} 
-              costOpen={this.state.costOpen}
-              budgetsOpen={this.state.budgetsOpen}
-              openCostHandler={this.openCostHandler}
-              openIncomeHandler={this.openIncomeHandler}
-              openBudgetsHandler={this.openBudgetsHandler}
-              balance={numberFormat(this.props.balance) || 0}
-              currancy={this.props.currancy}
-            />
-          </aside>
-          <section className="main_box__info">
-            <MyFinance
-              incomeOpen={this.state.incomeOpen} 
-              costOpen={this.state.costOpen}
-              budgetsOpen={this.state.budgetsOpen}
-            />
-          </section>
-        </main>
-        <Footer/>
-      </div>
-    )
-  }
+  return (
+    <div className="flexbox">
+      <Header logOut={logOut} />
+      <main className="main_box">
+        <aside className="main_box__menu">
+          <LeftMenu 
+            incomeOpen={incomeOpen} 
+            costOpen={costOpen}
+            budgetsOpen={budgetsOpen}
+            dataOpen={dataOpen}
+            openCostHandler={openCostHandler}
+            openIncomeHandler={openIncomeHandler}
+            openBudgetsHandler={openBudgetsHandler}
+            openDataHandler={openDataHandler}
+            balance={numberFormat(props.balance) || 0}
+            currancy={props.currancy}
+          />
+        </aside>
+        <section className="main_box__info">
+          <MyFinance
+            getFinDataByPeriod={getDataForPeriod}
+            periodAmount={numberFormat(periodAmount)}
+            incomeOpen={incomeOpen} 
+            costOpen={costOpen}
+            budgetsOpen={budgetsOpen}
+            dataOpen={dataOpen}
+            isLoading={isLoading}
+          />
+        </section>
+      </main>
+     </div>
+   )
 }
 
 function mapStateToProps(state) {
   return {
+    token: state.user.token,
     costsByPeriod: state.costs.costsByPeriod,
     incomesByPeriod: state.income.incomesByPeriod,
     period: state.user.month,
@@ -147,7 +152,8 @@ function mapDispatchToProps(dispatch) {
     logOut: () => dispatch(logOut()),
     setCosts: (costs) => dispatch(setCosts(costs)),
     setBudget: (budget) => dispatch(setBudget(budget)),
-    setIncomes: (incomes) => dispatch(setIncomes(incomes))
+    setIncomes: (incomes) => dispatch(setIncomes(incomes)),
+    setPeriod: (period) => dispatch(setPeriod(period))
   }
 }
 

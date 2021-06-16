@@ -1,4 +1,4 @@
-@import '../../config/variable.scss';
+@import '../../styles/colors.scss';
 
 .header_box {
   padding: 0.5rem 2rem;
@@ -56,25 +56,32 @@
   }
 }
 
-@media all and (min-width: 0) and (max-width: 560px) {
+@media all and (min-width: 0) and (max-width: 1000px) {
   .header_box {
-  display: block;
+    flex-direction: column;
   }
-  .header_box__btn_item {
-    margin-right: 0.3rem;
+  .header_box__nav {
+    margin: auto;
   }
 
 }
 
-@media all and (min-width: 0) and (max-width: 400px) {
+@media all and (min-width: 0) and (max-width: 460px) {
+  .header_box__logo {
+    width: auto;
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+  }
+  .header_box__logo_pageName {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
   .header_box__nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    margin-top: 0.6rem;
   }
   .header_box__btn_item {
-    margin-top: 1vh;
+    margin-right: 0.5rem;
+    font-size: 1rem;
   }
 
 }

@@ -20,7 +20,7 @@ const CostBox = props => {
       <div className="CostBox__costItems">
         {
           props.item.items.length > 0 ? props.item.items.map((item, key) => {
-            return (<CostItem filterCostsHandler={props.filterCostsHandler} key={key} item={item} />);
+            return (<CostItem deleteCostItemService={props.deleteCostItemService} filterCostsHandler={props.filterCostsHandler} key={key} item={item} />);
           })
           : null
         }

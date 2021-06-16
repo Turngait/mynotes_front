@@ -25,3 +25,11 @@
     }
   }
 }
+@media all and (min-width: 0) and (max-width: 800px) {
+  .settingsBox {
+    flex-wrap: wrap;
+  }
+  .settingsBox__item__form {
+    width: auto;
+  }
+}

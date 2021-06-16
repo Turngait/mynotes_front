@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import Input from '../../../components/Input2/Input2';
 import Button from '../../../components/Button1/Button1';
 
-import {saveUserData, changePass} from './hooks';
+import {saveUserData, changePass} from './services';
 
 import './index.scss';
 

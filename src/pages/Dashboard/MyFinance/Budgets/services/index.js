@@ -29,7 +29,7 @@ export async function saveBudget(budget, token, setBudget, setErrors) {
   return status;
 }
 
-export async function editBudgetHook(budget, token, setBudget, setErrors) {
+export async function editBudgetService(budget, token, setBudget, setErrors) {
   const isEdit = await fetch(API_URL + '/budget/edit', {
     mode: 'cors',
     method: 'POST',
@@ -59,7 +59,7 @@ export async function editBudgetHook(budget, token, setBudget, setErrors) {
   return isEdit;
 }
 
-export async function deleteBudgetHook(id_budget, token, setBudget, setErrors) {
+export async function deleteBudgetService(id_budget, token, setBudget, setErrors) {
   await fetch(API_URL + '/budget/delete', {
     mode: 'cors',
     method: 'POST',

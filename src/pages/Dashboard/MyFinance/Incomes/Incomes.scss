@@ -1,0 +1,74 @@
+@import "../../../../styles/colors.scss";
+
+.allIncomes {
+  margin-top: 2rem;
+  height: 43rem;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.incomes {
+  &__openAddCostBtn {
+    position: absolute;
+    bottom: 2rem;
+    display: block;
+    z-index: 1;
+    right: 2rem;
+    border: 2px solid $dark-color;
+    border-radius: 200px;
+    background-color: $base-color;
+    box-sizing: border-box;
+    height: 5rem;
+    width: 5rem;
+    color: #fff;
+    font-size: 2.4rem;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 1000px) {
+  .allIncomes {
+    margin-top: 1rem;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .incomes {
+    display: flex;
+    flex-direction: column;
+  }
+  .allIncomes {
+    height: 55vh;
+    margin-top: 0.4rem;
+    flex-grow: 1;
+  }
+  .IncomeBox__infoBox {
+    width: 70%;
+  }
+  .incomes__openAddCostBtn {
+    bottom: 6rem;
+    height: 4rem;
+    width: 4rem;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 500px) {
+  .allIncomes {
+    height: auto;
+  }
+  .IncomeItem_header__info__title {
+    min-width: auto;
+  }
+  .IncomeBox__infoBox {
+    width: 90%;
+  }
+}

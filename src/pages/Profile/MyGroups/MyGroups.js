@@ -4,7 +4,7 @@ import MyGroupBox from './MyGroupBox/MyGroupBox';
 
 import './MyGroups.scss';
 
-const MyGroups = props => {
+const MyGroups = () => {
   return (
     <>
       <MyGroupBox />

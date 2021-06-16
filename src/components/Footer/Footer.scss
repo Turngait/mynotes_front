@@ -1,4 +1,4 @@
-@import "../../config/variable.scss";
+@import "../../styles/colors.scss";
 
 .footer_box {
   background-color: $base-color;
@@ -49,9 +49,13 @@
   }
   .footer_box__socio {
     text-align: center;
-    margin-top: 3vh;
+    margin-top: 0.7rem;
+  }
+  .footer_box__info {
+    font-size: 0.8rem;
+    line-height: normal;
   }
   .footer_box__socio__item {
-    width: 10%;
+    width: 7%;
   }
 }

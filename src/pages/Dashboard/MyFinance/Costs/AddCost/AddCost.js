@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import {saveCost} from '../hooks';
-
 import PopUp from '../../../../../components/PopUp/PopUp';
 import Input2 from '../../../../../components/Input2/Input2';
 import ButtonPopUp from '../../../../../components/ButtonPopUp/ButtonPopUp';
@@ -25,7 +23,7 @@ const AddCost = props => {
   const [error, setError] = React.useState('');
 
   async function addCost() {
-    const isAdd = await saveCost({title, amount, description, group, budget, date}, props.token, props.setCosts, setError);
+    const isAdd = await props.saveCost({title, amount, description, group, budget, date}, props.token, props.setCosts, setError);
     if(isAdd) {
       props.setIsAddCostOpen(false);
     } 
@@ -42,18 +40,21 @@ const AddCost = props => {
         <Input2 onChange={(event) => setAmount(event.target.value)} type="text" name="amount" placeholder={t('costs.amount') + "..."}/>
         <Textarea1 onChange={(event) => setDescription(event.target.value)} name="description" placeholder={t('costs.description') + "..."}></Textarea1>
         <div className="add_item_box__opt">
-          <Select1 onChange={(event) => setGroup(event.target.value)}>
-            {
-              props.groups.length > 0 ?
-              props.groups.map((group, key) => {
-                return (
-                  <option key={key} value={group._id}>Группа: {group.title}</option>
-                )
-              })
-              : 
-              null
-            }
-          </Select1>
+          <div className="add_item_box__opt__group">
+            <Select1 onChange={(event) => setGroup(event.target.value)}>
+              {
+                props.groups.length > 0 ?
+                props.groups.map((group, key) => {
+                  return (
+                    <option key={key} value={group._id}>Группа: {group.title}</option>
+                  )
+                })
+                : 
+                null
+              }
+            </Select1>
+            <button onClick={() => props.openAddGroup(true)} type="button" className="add_item_box__opt__group__openAddGroup">+</button>
+          </div>
           <Select1 onChange={(event) => setBudget(event.target.value)}>
             {
               props.budgets.map((budget, key) => {

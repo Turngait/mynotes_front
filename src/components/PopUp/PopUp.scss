@@ -1,4 +1,4 @@
-@import "../../config/variable.scss";
+@import "../../styles/colors.scss";
 
 .popup_box {
   top: 15%;
@@ -33,8 +33,14 @@
 
 @media all and (min-width: 0) and (max-width: 720px) {
   .popup_box {
-    min-width: 90%;
-    left: 1%;
+    min-width: 88%;
+    left: 0;
     top: 5%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 500px) {
+  .popup_box {
+    padding: 1rem 1rem;
   }
 }

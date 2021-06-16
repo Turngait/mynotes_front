@@ -1,13 +1,14 @@
+@import "styles/colors.scss";
+
 .budgets {
   &_headerBox {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 
-    &__btnBox {
-      flex-shrink: 1;
-      display: flex;
-      justify-content: space-between;
+    &__info {
+      color: #fff;
+      font-size: 1.6rem;
     }
 
     &__sorting {
@@ -27,5 +28,39 @@
     font-size: 1.6rem;
     margin:0;
     text-align: center;
+  }
+
+  &__openAddCostBtn {
+    position: absolute;
+    display: block;
+    z-index: 1;
+    bottom: 2rem;
+    right: 2rem;
+    border: 2px solid $dark-color;
+    border-radius: 200px;
+    background-color: $base-color;
+    box-sizing: border-box;
+    height: 5rem;
+    width: 5rem;
+    color: #fff;
+    font-size: 2.4rem;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .budgets__openAddCostBtn {
+    bottom: 6rem;
+    height: 4rem;
+    width: 4rem;
   }
 }

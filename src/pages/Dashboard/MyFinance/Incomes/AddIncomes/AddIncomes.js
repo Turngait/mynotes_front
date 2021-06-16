@@ -8,8 +8,6 @@ import ButtonPopUp from 'components/ButtonPopUp/ButtonPopUp';
 import Textarea1 from 'components/Textarea1/Textarea1';
 import Select1 from 'components/Select1/Select1';
 
-import {saveIncome} from '../hooks';
-
 import {setIncomes} from 'store/Incomes/income.action';
 
 import './AddIncomes.scss';
@@ -25,7 +23,7 @@ const AddIncome = props => {
   const [source, setSource] = React.useState(props.sources[0]._id);
 
   async function addIncome() {
-    const isAdd = await saveIncome({date, title, budget, source, amount, description}, props.token, props.setIncomes, setError);
+    const isAdd = await props.saveIncome({date, title, budget, source, amount, description}, props.token, props.setIncomes, setError);
     if(isAdd) {
       props.setIsAddIncomeOpen(false);
     } 
@@ -42,18 +40,21 @@ const AddIncome = props => {
         <Input2 onChange={(event) => setAmount(event.target.value)} type="text" name="amount" placeholder={t('incomes.amount') + "..."}/>
         <Textarea1 onChange={(event) => setDescription(event.target.value)} name="description" placeholder={t('incomes.description') + "..."}></Textarea1>
         <div className="add_item_box__opt">
-          <Select1 onChange={(event) => setSource(event.target.value)}>
-            {
-              props.sources.length > 0 ?
-              props.sources.map((group, key) => {
-                return (
-                  <option key={key} value={group._id}>Источник: {group.title}</option>
-                )
-              })
-              : 
-              null
-            }
-          </Select1>
+          <div className="add_item_box__opt__group">
+            <Select1 onChange={(event) => setSource(event.target.value)}>
+              {
+                props.sources.length > 0 ?
+                props.sources.map((group, key) => {
+                  return (
+                    <option key={key} value={group._id}>Источник: {group.title}</option>
+                  )
+                })
+                : 
+                null
+              }
+            </Select1>
+            <button onClick={() => props.openAddSource(true)} type="button" className="add_item_box__opt__group__openAddGroup">+</button>
+          </div>
           <Select1 onChange={(event) => setBudget(event.target.value)}>
             {
               props.budgets.map((budget, key) => {

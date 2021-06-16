@@ -1,6 +1,6 @@
 import {API_URL} from 'config/api';
 
-export async function saveCost(cost, token, setCosts,setErrors) {
+export async function saveCost(cost, token, setCosts, setErrors) {
   const status = await fetch(API_URL + '/fin/cost/add', {
     method: 'POST',
     headers: {
@@ -57,7 +57,7 @@ export async function saveGroup(group, token, setCosts, setError) {
   return status;
 } 
 
-export async function deleteCostItemHook(data, getCostItems) {
+export async function deleteCostItemService(data, getCostItems) {
   const {target, token} = data;
   const id = target.dataset.itemId;
 
@@ -101,7 +101,7 @@ export function showGroupName (data) {
   return 'None'
 }
 
-export function costsFilterHook(costs, group_id) {
+export function costsFilterService (costs, group_id) {
   let filteredCosts = [];
   for (const cost of costs) {
     for (const item of cost.items) {

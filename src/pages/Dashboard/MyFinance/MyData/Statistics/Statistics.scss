@@ -1,4 +1,4 @@
-@import '../../../../config/variable.scss';
+@import 'styles/colors.scss';
 
 .stat_box {
   background-color: #fff;
@@ -20,4 +20,11 @@
     margin-bottom: 1vh;
     font-size: 1.3rem;
   }
+}
+
+@media all and (min-width: 0) and (max-width: 1100px) {
+  .stat_box {
+    width: auto;
+  }
+
 }

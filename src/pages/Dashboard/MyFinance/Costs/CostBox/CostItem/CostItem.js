@@ -4,19 +4,19 @@ import { useTranslation } from 'react-i18next';
 
 import {getCostItems} from 'store/Costs/costs.actions';
 import {numberFormat} from 'utils';
-import {deleteCostItemHook, getGroupId, showGroupName} from '../../hooks';
+import {getGroupId, showGroupName} from '../../services';
 
 import './CostItem.scss';
 
 const Costitem = props => {
-  const group_name = showGroupName({item: props.item, groups:props.groups});
+  const group_name = showGroupName({item: props.item, groups: props.groups});
   const group_id = getGroupId({item: props.item, groups:props.groups});
   const { t } = useTranslation();
 
   return (
     <div className="CostItem">
       <div className="CostItem_header">
-        <span className="CostItem_header__info">{props.item.title}</span>
+        <span className="CostItem_header__info CostItem_header__info__title">{props.item.title}</span>
         <span 
           onClick={() => props.filterCostsHandler(group_name, group_id)}
           className="CostItem_header__info filter_group">
@@ -25,7 +25,7 @@ const Costitem = props => {
         <span className="CostItem_header__control">
           <span className="CostItem_header__info">{numberFormat(props.item.amount)} {props.currency}</span>
           <i 
-            onClick={(event) => deleteCostItemHook({target: event.target, token: props.token}, props.getCostItems)} 
+            onClick={(event) => props.deleteCostItemService({target: event.target, token: props.token}, props.getCostItems)} 
             data-item-id={props.item._id} 
             className="fas deleteCostItem fa-times-circle">
           </i>

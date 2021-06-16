@@ -14,49 +14,26 @@ export function setCosts(costs) {
   return (dispatch) => {
     let spentByThisMonth = 0;
     if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
-    dispatch({
-      type: 'SET_COSTS_BY_PERIOD',
-      payload: spentByThisMonth
-    });
+
     dispatch({
       type: 'SET_COSTS',
       groups: costs.groups,
       costs: costs.costs
     });
+    dispatch({
+      type: 'SET_COSTS_BY_PERIOD',
+      payload: spentByThisMonth
+    });
   }
 }
 
-export function getCostForPeriod (data) {
-  return async (dispatch) => {
-    const {period} = data;
-    const res = await fetch(API_URL + '/fin/cost/get/' + period + '/' + data.token)
-    .then(res => res.json())
-    const {costs} = res.data;
-
+export function setCostsForPeriod (costs, period) {
+  return (dispatch) => {
     dispatch(setCosts(costs));
 
     dispatch({
         type: 'SET_MONTH',
         payload: period
-    })
-  }
-}
-
-export function deleteCostGroup(data) {
-  return (dispatch) => {
-    const { token, target } = data;
-    const id = target.dataset.itemId;
-    fetch(API_URL + '/fin/group/delete/' + id + '/' + token, {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      mode: 'cors'
-    })
-    .then(res => {
-      if (res.status === 204) {
-        dispatch(getCostItems(token))
-      }
-    })
+    });
   }
 }

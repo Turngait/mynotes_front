@@ -7,10 +7,11 @@ const LeftMenu = (props) => {
     <div className="PRLeftMenu_box">
       <div className="PRLeftMenu_box__item">
         {
-          props.myDataOpen ? 
-          <button onClick={props.openMyDataHandler} className="PRLeftMenu_box__item_btn PRLeftMenu_box__item_btn_active">Статистика</button>
+          props.settingsOpen
+          ?
+          <button onClick={props.openSettingsHandler} className="PRLeftMenu_box__item_btn PRLeftMenu_box__item_btn_active">Настройки</button>
           :
-          <button onClick={props.openMyDataHandler} className="PRLeftMenu_box__item_btn">Статистика</button>
+          <button onClick={props.openSettingsHandler} className="PRLeftMenu_box__item_btn">Настройки</button>
         }
         {
           props.myGroupsOpen
@@ -19,18 +20,11 @@ const LeftMenu = (props) => {
           :
           <button onClick={props.openMyGroupsHandler} className="PRLeftMenu_box__item_btn">Группы</button>
         }
-        {
-          props.settingsOpen
-          ?
-          <button onClick={props.openSettingsHandler} className="PRLeftMenu_box__item_btn PRLeftMenu_box__item_btn_active">Настройки</button>
-          :
-          <button onClick={props.openSettingsHandler} className="PRLeftMenu_box__item_btn">Настройки</button>
-        }
       </div>
       <div className="LeftMenu_box__info">
         Ваш баланс
         <br/>
-        {props.currancy} {props.balance}
+        {props.balance} {props.currancy}
       </div>
     </div>
   )

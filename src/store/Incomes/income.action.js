@@ -24,38 +24,13 @@ export function setIncomes(data) {
   }
 }
 
-export function deleteSource(data) {
+export function setIncomesForPeriod (incomes, period) {
   return (dispatch) => {
-    const { token, target } = data;
-    const id = target.dataset.itemId;
-    console.log(id)
-    fetch(API_URL + '/fin/income/deletesource/' + id + '/' + token, {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      mode: 'cors'
-    })
-    .then(res => {
-      if (res.status === 204) {
-        dispatch(getIncomes(token))
-      }
-    })
-  }
-}
+    dispatch({type: 'SET_INCOMES', payload: incomes.incomes});
 
-export function getIncomeForPeriod (data) {
-  return (dispatch) => {
-    const {period} = data;
-    fetch(API_URL + '/fin/income/get/' + period + '/' + data.token)
-    .then(res => {return res.json()})
-    .then(data => {
-      dispatch({type: 'SET_INCOMES', payload: data.data.incomes})
-
-      dispatch({
-        type: 'SET_MONTH',
-        payload: period
-      })
-    })
+    dispatch({
+      type: 'SET_MONTH',
+      payload: period
+    });
   }
 }

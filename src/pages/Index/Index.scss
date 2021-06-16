@@ -1,40 +1,60 @@
-@import "../../config/variable.scss";
+@import "../../styles/colors.scss";
 
 .index {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  background: url('/pic/bcg_main.png') no-repeat;
+  background-size: cover;
+
+  &__nav {
+    padding: 1rem 8rem;
+
+    &__item {
+      color:#fff;
+      font-size: 1.4rem;
+    }
+  }
 
   &__box {
     flex-grow: 1;
-    background: url('/pic/bcg_main.png') no-repeat;
-    background-size: 100%;
-    background-position-y: -20vh;
     display: flex;
     justify-content: space-between;
-    padding: 6px 4vw 7px;
+    padding: 14rem 5rem 0 3rem;
+
+    &__socioBox {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 24rem;
+
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+        height: 4rem;
+        border-left: 2px solid #fff;
+        margin: 1rem 0 1rem 1.4rem;
+        box-sizing: border-box;
+      }
+
+    }
 
     &__signBox {
-      flex-basis: 30rem;
-      height: 26rem;
-      margin-top:7rem;
+      width: 26rem;
+      height: 20rem;
       background-color: $base-color;
       text-align: center;
-      border-radius: 3px;
-      padding: 5vh 0;
+      border-radius: 5px;
+      padding: 2rem 0;
+      margin-right: 10rem;
     }
 
     &__text {
       color: #fff;
-      font-size: 2rem;
-      width: 80%;
-    }
-
-    &__iconsBox {
-      display: flex;
-      width: 40vw;
-      justify-content: space-between;
+      font-size: 1.4rem;
+      width: 90%;
     }
   }
 
@@ -48,9 +68,7 @@
   
   &__logo{
     color: #fff;
-    font-size: 90px;
-    margin-top: 10vh;
-    margin-bottom: 20px;
+    font-size: 5rem;
     text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
   }
 
@@ -73,6 +91,16 @@
   &__sign_active {
     color: #fff;
   }
+
+  &__footer {
+    padding: 1rem 8rem;
+    color:#fff;
+    font-size: 1.2rem;
+
+    &__link {
+      color:#fff;
+    }
+  }
 }
 
 .sucMsg {
@@ -86,6 +114,13 @@
 
 }
 
+@media all and (min-width: 0) and (max-width: 1400px) {
+  .index__box {
+    background: $side-color;
+    background-image: none;
+  }
+}
+
 @media all and (min-width: 0) and (max-width: 1200px) {
   .index__box__signBox {
     flex-basis: 50vw;
@@ -95,6 +130,10 @@
 @media all and (min-width: 0) and (max-width: 1000px) {
   .index__box {
     display: block;
+  }
+
+  .index__logo {
+    margin-top:1rem;
   }
 
   .index__box__signBox {
@@ -107,13 +146,12 @@
 }
 
 @media all and (min-width: 0) and (max-width: 800px) {
-  .index__box {
-    background-image: none;
-    background-color: $side-color;
-  }
-
   .index__box__signBox {
     width: 80vw;
+  }
+  .index__box__text {
+    width: auto;
+    font-size: 1.4rem;
   }
 }
 

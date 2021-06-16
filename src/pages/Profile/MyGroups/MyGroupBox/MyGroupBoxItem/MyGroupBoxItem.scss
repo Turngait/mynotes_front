@@ -5,7 +5,7 @@
   box-sizing: border-box;
   border-radius: 5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-right: 10rem;
+  margin-top: 1rem;
 
 
   &__title {
@@ -65,4 +65,19 @@
 
 .deleteGroup {
   cursor: pointer;
+}
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .myGroupBoxItem {
+    width: 100%;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 400px) {
+  .myGroupBoxItem {
+    padding: 0.5rem 0.6rem;
+  }
+  .myGroupBoxItem__group__title {
+    width: 5rem;
+  }
 }

@@ -1,7 +1,20 @@
 .myGroupBox {
   display: flex;
   justify-content: flex-start;
-  padding-top: 1rem;
+  flex-wrap: wrap;
+  column-gap: 10rem;
+
+  &__msg {
+    width: 20rem;
+    margin: auto;
+    background-color: #fff;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: green;
+    border-radius: 5px;
+  }
 
   &__item {
     width: 20rem;
