@@ -11,7 +11,8 @@ export async function saveCost(cost, token, setCosts, setErrors) {
   }).then(async res => {
     if (res.status === 201) {
       const data = await res.json();
-      const {costs} = data.data;
+      const { costs } = data.data;
+      console.log(costs);
       setCosts(costs);
     } else if (res.status === 422) {
       const data = await res.json();
