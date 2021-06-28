@@ -85,7 +85,8 @@ function mapStateToProps (state) {
     groups: state.costs.groups,
     period: state.user.month,
     token: state.user.token,
-    currency: state.user.settings.currency
+    currency: state.user.settings.currency,
+    periodAmount: state.costs.costsByPeriod
   };
 }
 

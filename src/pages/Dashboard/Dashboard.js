@@ -23,7 +23,6 @@ const Dashboard = (props) => {
   const [costOpen, setCostOpen] = useState(false);
   const [budgetsOpen, setBudgetsOpen] = useState(false);
   const [dataOpen, setDataOpen] = useState(true);
-  const [periodAmount, setPeriodAmount] = useState(props.costsByPeriod);
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState(null);
 
@@ -32,7 +31,6 @@ const Dashboard = (props) => {
     setCostOpen(true);
     setBudgetsOpen(false);
     setDataOpen(false);
-    setPeriodAmount(props.costsByPeriod);
   }
 
   const openIncomeHandler = () => {
@@ -40,7 +38,6 @@ const Dashboard = (props) => {
     setCostOpen(false);
     setBudgetsOpen(false);
     setDataOpen(false);
-    setPeriodAmount(props.incomesByPeriod);
   }
 
   const openBudgetsHandler = () => {
@@ -48,14 +45,12 @@ const Dashboard = (props) => {
     setCostOpen(false);
     setBudgetsOpen(true);
     setDataOpen(false);
-    setPeriodAmount(props.incomesByPeriod - props.costsByPeriod);
   }
   const openDataHandler = () => {
     setIncomeOpen(false);
     setCostOpen(false);
     setBudgetsOpen(false);
     setDataOpen(true);
-    setPeriodAmount(props.incomesByPeriod - props.costsByPeriod);
   }
 
   const logOut = () => {
@@ -74,9 +69,7 @@ const Dashboard = (props) => {
       props.setCosts(costs);
       props.setBudget(budget);
       props.setIncomes(incomes);
-      let spentByThisMonth = 0;
-      if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
-      setPeriodAmount(spentByThisMonth);
+
       props.setPeriod(period);
       setIsLoading(false);
     }
@@ -101,10 +94,7 @@ const Dashboard = (props) => {
         props.setCosts(costs);
         props.setBudget(budget);
         props.setIncomes(incomes);
-    
-        let spentByThisMonth = 0;
-        if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
-        setPeriodAmount(spentByThisMonth);
+  
         setIsLoading(false);
       }
     }
@@ -133,7 +123,7 @@ const Dashboard = (props) => {
         <section className="main_box__info">
           <MyFinance
             getFinDataByPeriod={getDataForPeriod}
-            periodAmount={numberFormat(periodAmount)}
+            periodAmount={numberFormat(props.incomesByPeriod - props.costsByPeriod)}
             incomeOpen={incomeOpen} 
             costOpen={costOpen}
             budgetsOpen={budgetsOpen}

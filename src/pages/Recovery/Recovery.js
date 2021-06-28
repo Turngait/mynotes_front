@@ -1,32 +1,24 @@
 import React, {useState} from 'react';
-import './Recovery.scss';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-import Input1 from '../../components/Input1/Input1';
-import Button1 from '../../components/Button1/Button1';
-import {API_URL} from '../../config/api';
 
-const Recovery = props => {
+import Header from '../../components/Header/Header';
+import Input from '../../components/Input1/Input1';
+import Button from '../../components/Button1/Button1';
+
+import { sendMessage } from './services';
+
+import './Recovery.scss';
+
+const Recovery = ({history}) => {
   const [email, setEmail] = useState('');
   const [isSend, setIsSend] = useState(false);
 
-  function sendMessage() {
-    fetch(API_URL + '/auth/recovery', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({email})
-    })
-    .then(res => {
-      return res.json(); 
-    })
-    .then(data => {
-      if(data.send) {
-        setIsSend(true);
-      }
-    })
+  async function recover() {
+    const isSend = await sendMessage(email);
+    setIsSend(isSend);
+  }
+
+  function goToMain () {
+    history.push('/');
   }
 
   return (
@@ -48,12 +40,13 @@ const Recovery = props => {
             </p>
           }
 
-          <Input1 value={email} type="email" onChange={(event) => setEmail(event.target.value)} placeholder="Введите ваш e-mail..." name="email"/>
-          <br></br>
-          <Button1 onClick={sendMessage} title="Восстановить" />
+          <Input value={email} type="email" onChange={(event) => setEmail(event.target.value)} placeholder="Введите ваш e-mail..." name="email"/>
+          <div className="recovery_main__form__btnsBox">
+            <Button onClick={recover} title="Восстановить" />
+            <Button onClick={goToMain} title="Назад" />
+          </div>
         </form>
       </main>
-      <Footer />
     </div>
   );
 }

@@ -111,6 +111,7 @@ function mapStateToprops(state) {
     incomeItems: state.income.incomes,
     token: state.user.token,
     currency: state.user.settings.currency,
+    periodAmount: state.income.incomesByPeriod
   };
 }
 

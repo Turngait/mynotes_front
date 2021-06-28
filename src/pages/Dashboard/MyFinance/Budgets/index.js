@@ -26,11 +26,6 @@ const Budgets = props => {
         <>
           {isAddBudgetOpen ? <AddBudget saveBudget={saveBudget} setIsAddBudgetOpen={setIsAddBudgetOpen} setBudget={props.setBudget} token={props.token}/> : null}
           {isEditBudgetOpen ? <EditBudget editBudgetService={editBudgetService} token={props.token} setBudget={props.setBudget} editableItem={editableItem} setIsEditBudgetOpen={setIsEditBudgetOpen}/> : null}
-          <div className="budgets_headerBox">
-            <div className="budgets_headerBox__info">
-              Сальдо: {props.total} {props.currency}
-            </div>
-          </div>
           {error.length > 0 ? <p className="budgets__error">{error}</p> : null}
           <BudgetsBox
             deleteBudgetService={deleteBudgetService}

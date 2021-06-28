@@ -21,11 +21,11 @@ const LeftMenu = (props) => {
           <button onClick={props.openMyGroupsHandler} className="PRLeftMenu_box__item_btn">Группы</button>
         }
       </div>
-      <div className="LeftMenu_box__info">
+      {/* <div className="LeftMenu_box__info">
         Ваш баланс
         <br/>
         {props.balance} {props.currancy}
-      </div>
+      </div> */}
     </div>
   )
 }

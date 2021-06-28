@@ -10,8 +10,8 @@ import './MyFinance.scss';
 const MyFinance = props => 
   <> 
     { props.dataOpen ? <MyData isLoading={props.isLoading} total={props.periodAmount} getFinDataByPeriod={props.getFinDataByPeriod}/> : null }
-    { props.costOpen ? <Costs isLoading={props.isLoading} periodAmount={props.periodAmount} getFinDataByPeriod={props.getFinDataByPeriod}/> : null }
-    { props.incomeOpen ? <Incomes isLoading={props.isLoading} periodAmount={props.periodAmount} getFinDataByPeriod={props.getFinDataByPeriod}/> : null } 
+    { props.costOpen ? <Costs isLoading={props.isLoading} getFinDataByPeriod={props.getFinDataByPeriod}/> : null }
+    { props.incomeOpen ? <Incomes isLoading={props.isLoading} getFinDataByPeriod={props.getFinDataByPeriod}/> : null } 
     { props.budgetsOpen ? <Budgets isLoading={props.isLoading} total={props.periodAmount} /> : null }
   </>
 
