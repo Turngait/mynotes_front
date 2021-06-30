@@ -32,7 +32,7 @@ const AddIncome = props => {
   return (
     <PopUp>
       <i onClick={() => props.setIsAddIncomeOpen(false)} className="fas fa-times close"></i>
-      <h3 className="addItem_header">Добавить доход</h3>
+      <h3 className="addItem_header">{t('incomes.addIncome')}</h3>
       {error.length > 0 ? <span className="errorsMsg">{error}</span> : null}
       <form className="addItem_box">
         <Input2 onChange={(event) => setDate(event.target.value)} value={date} type="date" name="date"/>
@@ -46,7 +46,7 @@ const AddIncome = props => {
                 props.sources.length > 0 ?
                 props.sources.map((group, key) => {
                   return (
-                    <option key={key} value={group._id}>Источник: {group.title}</option>
+                    <option key={key} value={group._id}>{t('incomes.source')}: {group.title}</option>
                   )
                 })
                 : 
@@ -59,7 +59,7 @@ const AddIncome = props => {
             {
               props.budgets.map((budget, key) => {
                 return (
-                  <option key={key} value={budget._id}>Счет: {budget.title}</option>
+                  <option key={key} value={budget._id}>{t('incomes.budget')}: {budget.title}</option>
                 )
               })
             }

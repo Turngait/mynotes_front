@@ -48,7 +48,7 @@ const Costs = props => {
           }
           <div className="myFin_headerBox">
             <div className="myFin_headerBox__periodAmount">
-              В этом месяце: {props.periodAmount} {props.currency}
+              {t('common.inThisMonth')}: {props.periodAmount} {props.currency}
             </div>
             <div className="myFin_headerBox__dateBox">
               <InputDataPicker 

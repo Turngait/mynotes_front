@@ -26,7 +26,7 @@ const AddGroup = props => {
   return (
     <PopUp>
       <i onClick={() => props.setIsAddCostGroupOpen(false)} className="fas fa-times close"></i>
-      <h3 className="addItem_header">Добавить группу расходов</h3>
+      <h3 className="addItem_header">{t('costs.addGroup')}</h3>
       <span className="errorsMsg">{error}</span>
       <form className="addItem_box">
         <Input2 onChange={(event) => setGroup(event.target.value)} type="text" name="name" placeholder={t('costs.groupName') + "..."} />

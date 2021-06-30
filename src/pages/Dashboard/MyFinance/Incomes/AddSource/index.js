@@ -24,10 +24,10 @@ const AddSource = props => {
   return (
     <PopUp>
       <i onClick={() => props.setIsAddSourceOpen(false)} className="fas fa-times close"></i>
-      <h3 className="addItem_header">Добавить источник дохода</h3>
+      <h3 className="addItem_header">{t('incomes.addSource')}</h3>
       <span className="errorsMsg">{error}</span>
       <form className="addItem_box">
-        <Input onChange={(event) => setSource(event.target.value)} type="text" name="name" placeholder={"Наименование источника дохода..."} />
+        <Input onChange={(event) => setSource(event.target.value)} type="text" name="name" placeholder={t('incomes.nameOfSource')} />
         <ButtonPopUp onClick={addSource} type="button" title={t('costs.addBtn')} />
       </form>
     </PopUp>

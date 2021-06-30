@@ -32,7 +32,7 @@ const AddCost = props => {
   return (
     <PopUp>
       <i onClick={() => props.setIsAddCostOpen(false)} className="fas fa-times close"></i>
-      <h3 className="addItem_header">Добавить расход</h3>
+      <h3 className="addItem_header">{t('costs.addCost')}</h3>
       <span className="errorsMsg">{error}</span>
       <form className="addItem_box">
         <Input2 onChange={(event) => setDate(event.target.value)} value={date} type="date" name="date"/>
@@ -46,7 +46,7 @@ const AddCost = props => {
                 props.groups.length > 0 ?
                 props.groups.map((group, key) => {
                   return (
-                    <option key={key} value={group._id}>Группа: {group.title}</option>
+                    <option key={key} value={group._id}>{t('costs.group')}: {group.title}</option>
                   )
                 })
                 : 
@@ -59,7 +59,7 @@ const AddCost = props => {
             {
               props.budgets.map((budget, key) => {
                 return (
-                  <option key={key} value={budget._id}>Счет: {budget.title}</option>
+                  <option key={key} value={budget._id}>{t('costs.budget')}: {budget.title}</option>
                 )
               })
             }

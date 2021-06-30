@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 import {getIncomes} from 'store/Incomes/income.action';
 import {numberFormat} from 'utils';
@@ -8,6 +9,8 @@ import {showSourceName} from '../../services';
 import './IncomeItem.scss';
 
 const IncomeItem = props => {
+  const { t } = useTranslation();
+
   const source_name = showSourceName({id_source: props.id_source, sourses:props.sourses});
 
   return (
@@ -18,7 +21,7 @@ const IncomeItem = props => {
           className="IncomeItem_header__info IncomeItem_header__source" 
           onClick={() => props.filterIncomesHandler(source_name, props.id_source)}
         >
-          <b>Источник:</b> {source_name}
+          <b>{t('incomes.source')}:</b> {source_name}
           </span>
         <span className="IncomeItem_header__control">
           <span className="IncomeItem_header__info">{numberFormat(props.amount)} {props.currency}</span>

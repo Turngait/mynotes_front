@@ -1,17 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import './Statistics.scss';
 
 const Statistics = props => {
+  const { t } = useTranslation();
   const total = props.incomes - props.costs;
 
   return (
     <div className="stat_box">
-      <h3 className="stat_box__header">Статистика в этом месяце</h3>
-      <p className="stat_box__item">Потрачено: {props.currency} {props.costs}</p>
-      <p className="stat_box__item">Получено: {props.currency} {props.incomes}</p>
-      <p className="stat_box__item">Разница: {props.currency} {total}</p>
+      <h3 className="stat_box__header">{t('data.statInThisMonth')}</h3>
+      <p className="stat_box__item">{t('data.spend')}: {props.currency} {props.costs}</p>
+      <p className="stat_box__item">{t('data.recive')}: {props.currency} {props.incomes}</p>
+      <p className="stat_box__item">{t('data.diff')}: {props.currency} {total}</p>
     </div>
   )
 }

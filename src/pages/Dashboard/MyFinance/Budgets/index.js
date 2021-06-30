@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
 import Loader from 'components/Loader';
@@ -14,7 +13,6 @@ import {saveBudget, editBudgetService, deleteBudgetService} from './services';
 import './index.scss';
 
 const Budgets = props => {
-  // const { t } = useTranslation();
   const [isAddBudgetOpen, setIsAddBudgetOpen] = React.useState(false);
   const [isEditBudgetOpen, setIsEditBudgetOpen] = React.useState(false);
   const [editableItem, setEditableItem] = React.useState(null);
