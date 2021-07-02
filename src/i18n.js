@@ -75,7 +75,21 @@ const resources = {
       "menu": {
         'dashboard': 'Финансы',
         'profile': 'Личный кабинет',
-        'signout': 'Выход'
+        'signout': 'Выход',
+        'settings': 'Настройки',
+        'groups': 'Группы'
+      },
+      "settings": {
+        'yourData': 'Ваши данные',
+        'changePwd': 'Сменить пароль',
+        'yourName': 'Ваше имя',
+        'yourEmail': 'Ваш email',
+        'oldPwd': 'Старый пароль',
+        'newPwd': 'Новый пароль',
+        'costGroups': 'Группы расходов',
+        'incomeSrc': 'Источники доходов',
+        'noGroup': 'У вас пока что отсутствуют группы'
+
       },
       "footer": {
         'terms': 'Политика обработки конфеденциальных данных'

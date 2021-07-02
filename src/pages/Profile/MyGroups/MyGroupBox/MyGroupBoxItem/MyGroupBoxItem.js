@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import GrouptTitle from './MyGroupBoxItemTitle';
 
 import './MyGroupBoxItem.scss';
 
 const MyGroupBoxItem = props => {
+  const { t } = useTranslation();
+
   return (
     <div className="myGroupBoxItem">
       <h3 className="myGroupBoxItem__title">{props.title}</h3>
@@ -25,7 +28,7 @@ const MyGroupBoxItem = props => {
               )
             })
           :
-            <p>У вас пока что отсутствуют группы.</p>
+            <p>{t('settings.noGroup')}</p>
         }
       </div>
     </div>

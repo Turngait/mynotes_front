@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import MyGroupBoxItem from './MyGroupBoxItem/MyGroupBoxItem';
 import { deleteGroup, deleteSource } from '../../services';
@@ -7,6 +8,8 @@ import { deleteGroup, deleteSource } from '../../services';
 import './MyGroupBox.scss';
 
 const MyGroupBox = props => {
+  const { t } = useTranslation();
+
   const [msg, setMsg] = React.useState('');
 
   async function deleteGroupCost(target) {
@@ -41,7 +44,7 @@ const MyGroupBox = props => {
           token={props.token}
           currancy={props.currency}
           onDelete={deleteGroupCost}
-          title="Группы расходов"
+          title={t('settings.costGroups')}
         />
         <MyGroupBoxItem
           type="incomes"
@@ -49,7 +52,7 @@ const MyGroupBox = props => {
           token={props.token}
           currancy={props.currency}
           onDelete={deleteSourceIncome}
-          title="Источники доходов"
+          title={t('settings.incomeSrc')}
         />
       </div>
     </>
