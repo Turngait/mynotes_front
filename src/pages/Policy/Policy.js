@@ -1,7 +1,6 @@
 import React from 'react';
 import './Policy.scss';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 
 const Policy = props => {
   return (
@@ -142,7 +141,6 @@ const Policy = props => {
           http://mynotes.ru/policy.html.
         </p>
       </main>
-      <Footer />
     </div>
   );
 }

@@ -34,3 +34,12 @@ export function setIncomesForPeriod (incomes, period) {
     });
   }
 }
+
+export function setSources(sources) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_SOURCES',
+      payload: sources
+    });
+  }
+}

@@ -39,9 +39,9 @@ const Index = ({auth, getToken, token, history}) => {
 
   return (
     <div className="index">
-      <nav className="index__nav">
+      {/* <nav className="index__nav">
         <NavLink to="/about" className="index__nav__item">{t('common.learnMore')}</NavLink>
-      </nav>
+      </nav> */}
       <div className="index__box">
         <div className="index__box__socioBox">
           <img src={VkIco} alt="VK" />
