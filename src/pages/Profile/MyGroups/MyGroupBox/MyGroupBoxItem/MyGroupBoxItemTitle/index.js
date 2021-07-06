@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {changeGroupName} from '../../../../services';
 
 import './index.scss';
 
 const GroupTitle = ({title, id_group, type, token}) => {
+  const { t } = useTranslation();
+
   const [isEditable, setIsEditable] = React.useState(false);
   const [newTitle, setNewTitle] = React.useState(title);
   const [msg, setMsg] = React.useState('');
@@ -18,7 +21,7 @@ const GroupTitle = ({title, id_group, type, token}) => {
               className="myGroupBoxItem__group__title__edit" 
               onChange={(event) => setNewTitle(event.target.value)} 
               value={newTitle} 
-              placeholder="Название группы..."
+              placeholder={t('costs.groupName')}
             />
             <i 
               onClick={() => changeGroupName(newTitle, id_group, type, token, setMsg, setIsEditable)} 

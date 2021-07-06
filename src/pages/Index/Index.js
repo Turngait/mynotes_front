@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { getToken, auth } from '../../store/User/user.actions';
 import { signIn, signUp } from './services';
@@ -15,6 +16,8 @@ import TgIco from './img/tg-ico.png';
 import './Index.scss';
 
 const Index = ({auth, getToken, token, history}) => {
+  const { t } = useTranslation();
+
   const [signUpActive, setSignUpActive] = useState(false);
   const [msg, setMsg] = useState(null);
 
@@ -36,9 +39,9 @@ const Index = ({auth, getToken, token, history}) => {
 
   return (
     <div className="index">
-      <nav className="index__nav">
-        <NavLink to="/about" className="index__nav__item">Подробнее</NavLink>
-      </nav>
+      {/* <nav className="index__nav">
+        <NavLink to="/about" className="index__nav__item">{t('common.learnMore')}</NavLink>
+      </nav> */}
       <div className="index__box">
         <div className="index__box__socioBox">
           <img src={VkIco} alt="VK" />
@@ -46,19 +49,19 @@ const Index = ({auth, getToken, token, history}) => {
           <img src={TgIco} alt="TG" />
         </div>
         <div>
-          <h1 className="index__logo">FinCloud</h1>
+          <h1 className="index__logo">{t('appname')}</h1>
           <p className="index__box__text">
-            Здесь Вы сможете легко вести статистику и учет своих личных финансов.
+            {t('index.about')}
           </p>
         </div>
 
         <div className="index__box__signBox">
           <button onClick={() => signUpToggleHandler(false)} 
             className={`index__sign_btn ${!signUpActive ? 'index__sign_active' : null}`}
-          >Войти</button>
+          >{t('index.signIn')}</button>
           <button onClick={() => signUpToggleHandler(true)} 
             className={`index__sign_btn ${signUpActive ? 'index__sign_active' : null}`}
-          >Создать</button>
+          >{t('index.signUp')}</button>
           {
             msg ?
               <div className="index__msg_box">
@@ -78,7 +81,7 @@ const Index = ({auth, getToken, token, history}) => {
         </div>
       </div>
       <div className="index__footer">
-        {new Date().getFullYear()} © MyNotes <NavLink target="_blank" className="index__footer__link" to="/policy">"Политикой обработки конфеденциальных данных"</NavLink>
+        {new Date().getFullYear()} © {t('appname')} <NavLink target="_blank" className="index__footer__link" to="/policy">"{t('index.policy')}"</NavLink>
       </div>
     </div>
   )

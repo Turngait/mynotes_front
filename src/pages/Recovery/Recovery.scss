@@ -1,3 +1,5 @@
+@import "../../styles/colors.scss";
+
 .recovery {
   display: flex;
   flex-direction: column;
@@ -7,6 +9,8 @@
   &_main {
     flex-grow: 1;
     padding: 2vh 4vw;
+    background-color: $background-color;
+    color: #fff;
 
     &__header1 {
       font-size: 2rem;
@@ -15,6 +19,13 @@
     &__form {
       margin-top: 4vh;
       font-size: 1.3rem;
+
+      &__btnsBox {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        width: 22rem;
+      }
     }
   }
 }

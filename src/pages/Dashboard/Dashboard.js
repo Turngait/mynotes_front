@@ -23,15 +23,14 @@ const Dashboard = (props) => {
   const [costOpen, setCostOpen] = useState(false);
   const [budgetsOpen, setBudgetsOpen] = useState(false);
   const [dataOpen, setDataOpen] = useState(true);
-  const [periodAmount, setPeriodAmount] = useState(props.costsByPeriod);
   const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState(null);
 
   const openCostHandler = () => {
     setIncomeOpen(false);
     setCostOpen(true);
     setBudgetsOpen(false);
     setDataOpen(false);
-    setPeriodAmount(props.costsByPeriod);
   }
 
   const openIncomeHandler = () => {
@@ -39,7 +38,6 @@ const Dashboard = (props) => {
     setCostOpen(false);
     setBudgetsOpen(false);
     setDataOpen(false);
-    setPeriodAmount(props.incomesByPeriod);
   }
 
   const openBudgetsHandler = () => {
@@ -47,58 +45,62 @@ const Dashboard = (props) => {
     setCostOpen(false);
     setBudgetsOpen(true);
     setDataOpen(false);
-    setPeriodAmount(props.incomesByPeriod - props.costsByPeriod);
   }
   const openDataHandler = () => {
     setIncomeOpen(false);
     setCostOpen(false);
     setBudgetsOpen(false);
     setDataOpen(true);
-    setPeriodAmount(props.incomesByPeriod - props.costsByPeriod);
   }
+
+  const logOut = () => {
+    props.logOut();
+    props.history.push('/');
+  }
+
   const getDataForPeriod = async (period) => {
     setIsLoading(true);
 
-    const {costs, incomes, budget} = await getFinData(props.token, period);
+    const {costs, incomes, budget, status} = await getFinData(token, period);
+    if (status === 403 || status === 400 || status === 500) {
+      // TODO Переделать в будущем логику в зависимости от статуса
+      logOut();
+    } else {
+      props.setCosts(costs);
+      props.setBudget(budget);
+      props.setIncomes(incomes);
 
-    props.setCosts(costs);
-    props.setBudget(budget);
-    props.setIncomes(incomes);
-    let spentByThisMonth = 0;
-    if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
-    setPeriodAmount(spentByThisMonth);
-    props.setPeriod(period);
-    setIsLoading(false);
+      props.setPeriod(period);
+      setIsLoading(false);
+    }
   }
 
   useEffect(() => {
     async function getData () {
-      const token = await props.getToken();
+      const tokenFromLS = await props.getToken();
       props.getSettings();
   
-      if (!token) {
-        props.history.push('/')
+      if (!tokenFromLS) {
+        props.history.push('/');
         return null;
       }
+      setToken(tokenFromLS);
       
-      const {costs, incomes, budget} = await getFinData(token, props.period);
-      props.setCosts(costs);
-      props.setBudget(budget);
-      props.setIncomes(incomes);
+      const {costs, incomes, budget, status} = await getFinData(tokenFromLS, props.period);
+      // TODO Переделать в будущем логику в зависимости от статуса
+      if (status === 403 || status === 400 || status === 500) {
+        logOut();
+      } else {
+        props.setCosts(costs);
+        props.setBudget(budget);
+        props.setIncomes(incomes);
   
-      let spentByThisMonth = 0;
-      if (costs.costs.length > 0) spentByThisMonth = costs.costs[costs.costs.length - 1].spentByThisMonth;
-      setPeriodAmount(spentByThisMonth);
-      setIsLoading(false);
+        setIsLoading(false);
+      }
     }
 
     getData();
   }, []);
-
-  const logOut = () => {
-    props.logOut()
-    props.history.push('/')
-  }
 
   return (
     <div className="flexbox">
@@ -121,7 +123,7 @@ const Dashboard = (props) => {
         <section className="main_box__info">
           <MyFinance
             getFinDataByPeriod={getDataForPeriod}
-            periodAmount={numberFormat(periodAmount)}
+            periodAmount={numberFormat(props.incomesByPeriod - props.costsByPeriod)}
             incomeOpen={incomeOpen} 
             costOpen={costOpen}
             budgetsOpen={budgetsOpen}
@@ -136,7 +138,6 @@ const Dashboard = (props) => {
 
 function mapStateToProps(state) {
   return {
-    token: state.user.token,
     costsByPeriod: state.costs.costsByPeriod,
     incomesByPeriod: state.income.incomesByPeriod,
     period: state.user.month,

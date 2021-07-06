@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Statistics from "./Statistics/Statistics";
 import InputDataPicker from "components/Input2/Input2";
@@ -7,12 +8,13 @@ import InputDataPicker from "components/Input2/Input2";
 import "./index.scss";
 
 const MyData = props => {
+  const { t } = useTranslation();
 
   return (
     <>
       <div className="myFin_headerBox">
         <div className="myFin_headerBox__periodAmount">
-          Сальдо: {props.total} {props.currency}
+          {t('budgets.balance')}: {props.total} {props.currency}
         </div>
         <div>
           <InputDataPicker

@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {numberFormat} from 'utils';
 
 import './index.scss';
 
 const BudgetsBox = props => {
+  const { t } = useTranslation();
+
   function editBudget (itemId) {
     const item = props.budget.filter(budget => budget._id.toString() === itemId);
     props.setIsEditBudgetOpen(true);
@@ -30,8 +33,8 @@ const BudgetsBox = props => {
                       className="fas controlBudgetItem fa-times-circle">
                     </i>
                   </div>
-                  <p className="budgetBox__stat__header">Счет: {budget.title}</p>
-                  <p className="budgetBox__stat__info">Баланс: {numberFormat(budget.balance)} {props.currancy}</p>
+                  <p className="budgetBox__stat__header">{t('budgets.budget')}: {budget.title}</p>
+                  <p className="budgetBox__stat__info">{t('budgets.balance')}: {numberFormat(budget.balance)} {props.currancy}</p>
                 </div>
               )
             })

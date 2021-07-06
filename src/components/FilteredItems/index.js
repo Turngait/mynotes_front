@@ -7,7 +7,6 @@ import {numberFormat, formatMonth} from 'utils';
 import './index.scss';
 
 const FilteredItems = ({items, period, groupName, currancy, setIsFilteredItemsOpen}) => {
-  console.log(period)
   return (
     <PopUp>
       <i onClick={() => setIsFilteredItemsOpen(false)} className="fas fa-times close"></i>

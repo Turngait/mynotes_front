@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
 import Loader from 'components/Loader';
@@ -14,7 +13,6 @@ import {saveBudget, editBudgetService, deleteBudgetService} from './services';
 import './index.scss';
 
 const Budgets = props => {
-  // const { t } = useTranslation();
   const [isAddBudgetOpen, setIsAddBudgetOpen] = React.useState(false);
   const [isEditBudgetOpen, setIsEditBudgetOpen] = React.useState(false);
   const [editableItem, setEditableItem] = React.useState(null);
@@ -26,11 +24,6 @@ const Budgets = props => {
         <>
           {isAddBudgetOpen ? <AddBudget saveBudget={saveBudget} setIsAddBudgetOpen={setIsAddBudgetOpen} setBudget={props.setBudget} token={props.token}/> : null}
           {isEditBudgetOpen ? <EditBudget editBudgetService={editBudgetService} token={props.token} setBudget={props.setBudget} editableItem={editableItem} setIsEditBudgetOpen={setIsEditBudgetOpen}/> : null}
-          <div className="budgets_headerBox">
-            <div className="budgets_headerBox__info">
-              Сальдо: {props.total} {props.currency}
-            </div>
-          </div>
           {error.length > 0 ? <p className="budgets__error">{error}</p> : null}
           <BudgetsBox
             deleteBudgetService={deleteBudgetService}

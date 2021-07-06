@@ -64,7 +64,7 @@ const Incomes = (props) => {
           ) : null}
           <div className="myFin_headerBox">
             <div className="myFin_headerBox__periodAmount">
-              В этом месяце: {props.periodAmount} {props.currency}
+              {t('common.inThisMonth')}: {props.periodAmount} {props.currency}
             </div>
             <div>
               <InputDataPicker
@@ -111,6 +111,7 @@ function mapStateToprops(state) {
     incomeItems: state.income.incomes,
     token: state.user.token,
     currency: state.user.settings.currency,
+    periodAmount: state.income.incomesByPeriod
   };
 }
 

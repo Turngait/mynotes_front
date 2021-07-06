@@ -37,3 +37,12 @@ export function setCostsForPeriod (costs, period) {
     });
   }
 }
+
+export function setGroups(groups) {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_GROUPS',
+      payload: groups
+    });
+  }
+}

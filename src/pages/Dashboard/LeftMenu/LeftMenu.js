@@ -35,11 +35,11 @@ const LeftMenu = (props) => {
         }
       </div>
 
-      <div className="LeftMenu_box__info">
+      {/* <div className="LeftMenu_box__info">
         Ваш баланс
         <br/>
         {props.balance} {props.currancy}
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -1,12 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import '../Recovery.scss';
+import { useTranslation } from 'react-i18next';
+
 import Header from '../../../components/Header/Header';
-import Footer from '../../../components/Footer/Footer';
-import Input1 from '../../../components/Input1/Input1';
-import Button1 from '../../../components/Button1/Button1';
-import {API_URL} from '../../../config/api';
+import Input from '../../../components/Input1/Input1';
+import Button from '../../../components/Button1/Button1';
+
+import { setNewPassword } from '../services';
+
+import '../Recovery.scss';
 
 const NewPass = props => {
+  const { t } = useTranslation();
+
   const [newPass, setNewPass] = useState('');
   const [repeatPass, setRepeatPass] = useState('');
   const [isValid, setIsValid] = useState(true);
@@ -20,27 +25,12 @@ const NewPass = props => {
     }
   }, [repeatPass, newPass])
 
-  function changePass() {
+  async function changePass() {
     const {email, hash} = props.match.params;
 
     if(isValid && newPass) {
-      fetch(API_URL + '/auth/setnewpass', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({
-          pass: newPass,
-          email,
-          hash
-        })
-      })
-      .then(res => {
-        if(res.status === 204) {
-          setIsChange(true);
-        }
-      })
+      const isSaved = await setNewPassword(newPass, email, hash);
+      setIsChange(isSaved);
     }
 
   }
@@ -49,42 +39,36 @@ const NewPass = props => {
     <div className="recovery">
       <Header mainPage={true} />
       <main className="recovery_main">
-        <h2 className="recovery_main__header1">Введите новый пароль</h2>
+        <h2 className="recovery_main__header1">{t('recovery.newPass')}</h2>
         {
             isChange ?
             <>
               <p>
-                Ваш пароль успешно изменен.
+                {t('recovery.passChanged')}
               </p>
-              <Button1 onClick={() => props.history.push('/')} title="На главную" />
+              <Button onClick={() => props.history.push('/')} title={t('recovery.toMainBtn')} />
             </>
             :
               <form className="recovery_main__form">
-
-                <p>
-                  Введите свой новый пароль.
-                </p>
-                <Input1 value={newPass} type="password" onChange={(event) => setNewPass(event.target.value)} placeholder="Введите ваш новый пароль..." name="pass"/>
+                <Input value={newPass} type="password" onChange={(event) => setNewPass(event.target.value)} placeholder={t('recovery.newPass') + "..."} name="pass"/>
                 <br></br>
                 {
                   isValid ? 
-                    <Input1 value={repeatPass} type="password" onChange={(event) => setRepeatPass(event.target.value)} placeholder="Введите ваш новый пароль..." name="pass"/>
+                    <Input value={repeatPass} type="password" onChange={(event) => setRepeatPass(event.target.value)} placeholder={t('recovery.repeatPass')} name="pass"/>
                   :
                   <>
                     <p className="wrong_pass">
-                      Пароли должны совпадать
+                      {t('recovery.passEror')}
                       <br />
-                    <Input1 value={repeatPass} type="password" onChange={(event) => setRepeatPass(event.target.value)} placeholder="Введите ваш новый пароль..." name="pass"/>
+                    <Input value={repeatPass} type="password" onChange={(event) => setRepeatPass(event.target.value)} placeholder={t('recovery.repeatPass')} name="pass"/>
                     </p>
                   </>
                 }      
                 <br></br>
-                <Button1 onClick={changePass} title="Сохранить" />
+                <Button onClick={changePass} title={t('common.saveBtn')} />
               </form>
           }
-        
       </main>
-      <Footer />
     </div>
   );
 }
