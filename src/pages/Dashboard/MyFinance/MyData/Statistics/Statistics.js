@@ -10,10 +10,10 @@ const Statistics = props => {
 
   return (
     <div className="stat_box">
-      <h3 className="stat_box__header">{t('data.statInThisMonth')}</h3>
-      <p className="stat_box__item">{t('data.spend')}: {props.currency} {props.costs}</p>
-      <p className="stat_box__item">{t('data.recive')}: {props.currency} {props.incomes}</p>
-      <p className="stat_box__item">{t('data.diff')}: {props.currency} {total}</p>
+      {/* <h3 className="stat_box__header">{t('data.statInThisMonth')}</h3> */}
+      <p className="stat_box__item">{t('data.spend')}: {props.currency} {Number(props.costs).toFixed(2)}</p>
+      <p className="stat_box__item">{t('data.recive')}: {props.currency} {Number(props.incomes).toFixed(2)}</p>
+      <p className="stat_box__item">{t('data.diff')}: {props.currency} {Number(total).toFixed(2)}</p>
     </div>
   )
 }

@@ -1,10 +1,11 @@
-import {API_URL} from 'config/api';
+import {API_URL, API_KEY} from 'config/api';
 
 export async function saveCost(cost, token, setCosts, setErrors) {
   const status = await fetch(API_URL + '/fin/cost/add', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     mode: 'cors',
     body: JSON.stringify({cost, token})
@@ -33,7 +34,8 @@ export async function saveGroup(group, token, setCosts, setError) {
   const status = await fetch(API_URL + '/fin/group/add', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     mode: 'cors',
     body: JSON.stringify({groupTitle: group, token})
@@ -65,7 +67,8 @@ export async function deleteCostItemService(data, getCostItems) {
   fetch(API_URL + '/fin/cost/' + id + '/' + token, {
     method: 'delete',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     mode: 'cors'
   })
@@ -104,12 +107,15 @@ export function showGroupName (data) {
 
 export function costsFilterService (costs, group_id) {
   let filteredCosts = [];
+  let sum = 0;
   for (const cost of costs) {
     for (const item of cost.items) {
       if(item.id_group.toString() === group_id) {
+        sum += item.amount
         filteredCosts.push(item);
       }
     }
   }
-  return filteredCosts;
+
+  return { filteredCosts, sum };
 }

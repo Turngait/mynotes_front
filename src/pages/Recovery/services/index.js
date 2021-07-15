@@ -1,11 +1,12 @@
-import {API_URL} from '../../../config/api';
+import {API_URL, API_KEY} from '../../../config/api';
 
 export async function sendMessage(email) {
   return await fetch(API_URL + '/auth/recovery', {
     method: 'POST',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     body: JSON.stringify({email})
   })
@@ -26,7 +27,8 @@ export async function setNewPassword (newPass, email, hash) {
     method: 'POST',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     body: JSON.stringify({
       pass: newPass,

@@ -22,10 +22,13 @@ const Costs = props => {
 
   const [filteredCosts, setFilteredCosts] = React.useState([]);
   const [filteredGroup, setFilteredGroup] = React.useState('');
+  const [filteredGroupSum, setFilteredGroupSum] = React.useState(0);
 
   function filterCostsHandler(groupName, groupId) {
     setFilteredGroup(groupName);
-    setFilteredCosts(costsFilterService(costs, groupId));
+    const {filteredCosts, sum} = costsFilterService(costs, groupId);
+    setFilteredCosts(filteredCosts);
+    setFilteredGroupSum(sum);
     setIsFilteredCostsOpen(true);
   }
 
@@ -43,6 +46,7 @@ const Costs = props => {
                 period={props.period} 
                 groupName={filteredGroup} 
                 setIsFilteredItemsOpen={setIsFilteredCostsOpen}
+                sum={filteredGroupSum}
               /> 
             : null 
           }

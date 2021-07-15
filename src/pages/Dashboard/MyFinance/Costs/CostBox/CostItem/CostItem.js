@@ -15,7 +15,7 @@ const Costitem = props => {
 
   return (
     <div className="CostItem">
-      <div className="CostItem_header">
+      <div className={props.item.description ? "CostItem_header" : "CostItem_header CostItem_header__roundBorder"}>
         <span className="CostItem_header__info CostItem_header__info__title">{props.item.title}</span>
         <span 
           onClick={() => props.filterCostsHandler(group_name, group_id)}

@@ -28,6 +28,10 @@
     color: #fff;
     font-size: 1.2rem;
 
+    &__roundBorder {
+      border-radius: 5px;
+    }
+
     &__control {
       float: right;
     }

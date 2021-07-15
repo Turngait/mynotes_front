@@ -29,7 +29,7 @@ const resources = {
         "statInThisMonth": "Статистика в этом месяце",
         "spend": "Потрачено",
         "recive": "Получено",
-        "diff": "Разница"
+        "diff": "Баланс"
       },
       "costs": {
         "header": 'Расходы',

@@ -1,11 +1,12 @@
-import {API_URL} from '../../../../config/api';
+import {API_URL, API_KEY} from '../../../../config/api';
 
 export async function saveUserData(name, email, token, setMsg) {
   const status = await fetch(API_URL + '/auth/user/setdata', {
     mode: 'cors',
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     body: JSON.stringify({name, email, token})
   }).then(res => {return res.status});
@@ -22,7 +23,8 @@ export async function changePass(oldPass, newPass, token, setMsg) {
     mode: 'cors',
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     body: JSON.stringify({pass: {old: oldPass, new: newPass}, token})
   }).then(res => {return res.status});

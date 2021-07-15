@@ -1,10 +1,11 @@
-import {API_URL} from 'config/api';
+import {API_URL, API_KEY} from 'config/api';
 
 export async function saveIncome(income, token, setIncomes, setError) {
   const status = await fetch(API_URL + '/fin/income/add', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     mode: 'cors',
     body: JSON.stringify({income, token})
@@ -34,7 +35,8 @@ export async function saveSource(source, token, setIncomes, setError) {
   const status = await fetch(API_URL + '/fin/income/addsource', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     mode: 'cors',
     body: JSON.stringify({source, token})
@@ -62,7 +64,8 @@ export function deleteIncome(data, getIncomesItems) {
   fetch(API_URL + '/fin/income/delete/' + token + '/' + id, {
     method: 'delete',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     mode: 'cors'
     })
@@ -73,16 +76,19 @@ export function deleteIncome(data, getIncomesItems) {
   })
 }
 
-export function incomesFilterHook(incomes, source_id) {
+export function incomesFilterService(incomes, source_id) {
   let filteredIncomes = [];
+  let sum = 0;
+
   for (const income of incomes) {
     for (const item of income.items) {
       if(item.id_source.toString() === source_id) {
+        sum += item.amount
         filteredIncomes.push(item);
       }
     }
   }
-  return filteredIncomes;
+  return {filteredIncomes, sum};
 }
 
 export function showSourceName(data) {

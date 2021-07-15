@@ -1,11 +1,12 @@
-import {API_URL} from '../../../config/api';
+import {API_URL, API_KEY} from '../../../config/api';
 
 export async function signIn(email, pass, auth, setMsg) {
   const {data, status} = await fetch(API_URL + '/auth/signin', {
       mode: 'cors',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+        'Content-Type': 'application/json;charset=utf-8',
+        'API-KEY': API_KEY
       },
       body: JSON.stringify({email, pass})
   }).then(res => res.json());
@@ -24,7 +25,8 @@ export async function signUp(email, name, pass, auth, setMsg) {
     mode: 'cors',
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     body: JSON.stringify({email, pass, name})
   }).then(res => res.json());

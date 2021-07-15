@@ -10,7 +10,7 @@ import AddSource from "./AddSource";
 import FilteredCosts from "components/FilteredItems";
 
 import {
-  incomesFilterHook,
+  incomesFilterService,
   saveIncome,
   saveSource,
   deleteIncome,
@@ -27,10 +27,13 @@ const Incomes = (props) => {
 
   const [filteredIncomes, setFilteredIncomes] = React.useState([]);
   const [filteredSource, setFilteredSource] = React.useState("");
+  const [filteredSum, setFilteredSum] = React.useState(0);
 
   function filterIncomesHandler(sourceName, sourceId) {
     setFilteredSource(sourceName);
-    setFilteredIncomes(incomesFilterHook(props.incomeItems, sourceId));
+    const {filteredIncomes, sum} = incomesFilterService(props.incomeItems, sourceId);
+    setFilteredSum(sum);
+    setFilteredIncomes(filteredIncomes);
     setIsFilteredIncomesOpen(true);
   }
 
@@ -60,6 +63,7 @@ const Incomes = (props) => {
               period={props.incomePeriod}
               groupName={filteredSource}
               setIsFilteredItemsOpen={setIsFilteredIncomesOpen}
+              sum={filteredSum}
             />
           ) : null}
           <div className="myFin_headerBox">

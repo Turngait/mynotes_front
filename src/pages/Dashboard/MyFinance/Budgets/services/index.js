@@ -1,11 +1,14 @@
-import {API_URL} from 'config/api';
+import {API_URL, API_KEY} from 'config/api';
 
 export async function saveBudget(budget, token, setBudget, setErrors) {
   const status = await fetch(API_URL + '/budget/add', {
     mode: 'cors',
     method: 'POST',
     body: JSON.stringify({budget, token}),
-    headers: {'Content-Type': 'application/json;charset=utf-8'},
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
+    },
   }).then(async res => {
     if (res.status === 201) {
       const data = await res.json();
@@ -34,7 +37,10 @@ export async function editBudgetService(budget, token, setBudget, setErrors) {
     mode: 'cors',
     method: 'POST',
     body: JSON.stringify({budget, token}),
-    headers: {'Content-Type': 'application/json;charset=utf-8'},
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
+    },
   }).then(async res => {
     if (res.status === 202) {
       const data = await res.json();
@@ -64,7 +70,10 @@ export async function deleteBudgetService(id_budget, token, setBudget, setErrors
     mode: 'cors',
     method: 'POST',
     body: JSON.stringify({id_budget, token}),
-    headers: {'Content-Type': 'application/json;charset=utf-8'},
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
+    },
   }).then(async res => {
     if (res.status === 202) {
       const data = await res.json();

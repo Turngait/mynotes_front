@@ -1,11 +1,12 @@
-import {API_URL} from '../../../config/api';
+import {API_URL, API_KEY} from '../../../config/api';
 
 export async function changeGroupName(title, id_group, type, token, setMsg, setIsEditable) {
   await fetch (API_URL + '/fin/group/edit', {
     mode: 'cors',
     method: 'PATCH',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     body: JSON.stringify({title, id_group, type, token})
   }).then(res => {
@@ -25,7 +26,8 @@ export async function deleteGroup(id_group, token, setMsg) {
   const is_delete = await fetch(API_URL + '/fin/group/delete/' + id_group + '/' + token, {
     method: 'delete',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     mode: 'cors'
   })
@@ -50,7 +52,8 @@ export async function deleteSource(id_group, token, setMsg) {
   const is_delete = await fetch(API_URL + '/fin/income/deletesource/' + id_group + '/' + token, {
     method: 'delete',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
     },
     mode: 'cors'
   })
@@ -72,7 +75,14 @@ export async function deleteSource(id_group, token, setMsg) {
 }
 
 export async function getInitialData (token, period, setInfo) {
-  const { data, error } = await fetch(API_URL+'/auth/user/' + token + '/' + period)
+  const { data, error } = await fetch(API_URL+'/auth/user/' + token + '/' + period, {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'API-KEY': API_KEY
+    },
+    mode: 'cors'
+  })
   .then(res => res.json());
   if (error) {
     return;
